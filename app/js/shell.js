@@ -55,8 +55,10 @@
     nav.setAttribute("aria-label", "This module");
     var items = P.inModule(modId);
     var navHtml = "<h2>" + (modLabel || "This module") + "</h2><ol>";
+    var hereFolder = here.indexOf("/") >= 0 ? here.split("/")[0] : "";
     items.forEach(function (item) {
-      var cls = item.href === here ? " class=\"current\"" : "";
+      var on = item.href === here || (item.folder && item.folder === hereFolder);
+      var cls = on ? " class=\"current\"" : "";
       navHtml += "<li><a" + cls + " href=\"" + href(item.href) + "\">" + item.title + "</a></li>";
     });
     navHtml += "</ol>";

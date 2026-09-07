@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAG (Medium) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>08-RAG/03-logical.md</code></p>
+    <h1>RAG (Medium)</h1>
+<p>Same topic as <a href="02-simple.html">Naive RAG</a>. This page is <strong>why retrieve is a system</strong>, not a top-K demo.</p>
+<h2>The pipeline, with failure points</h2>
+<pre class="mermaid">flowchart TB
+  S[Source] --&gt; P[Parse + malware scan]
+  P --&gt; C[Chunk + ACL metadata]
+  C --&gt; E[Embed]
+  E --&gt; I[Index]
+  Q[Question + principal] --&gt; R[Hybrid retrieve IN the query]
+  I --&gt; R
+  R --&gt; RR[Optional rerank]
+  RR --&gt; G[Generate + cite]
+  G --&gt; D[Output DLP]
+  D --&gt; O[Answer or refuse]
+</pre>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What goes wrong</th>
+<th>Durable control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chunk</td>
+<td>Split a policy mid-sentence</td>
+<td>Grain that matches questions</td>
+</tr>
+<tr>
+<td>Embed</td>
+<td>Stale vectors after an edit</td>
+<td>Rebuild job + freshness SLO</td>
+</tr>
+<tr>
+<td>Retrieve</td>
+<td>Keyword miss or neighbor-that-sounds-right</td>
+<td>Hybrid lexical + vector (<code>SRC-DATABRICKS-AI-SEARCH</code>)</td>
+</tr>
+<tr>
+<td>ACL</td>
+<td>Tenant B in Tenant A’s prompt</td>
+<td>Filter <strong>in</strong> the similarity query (OWASP <strong>LLM09</strong>, <code>SRC-OWASP-LLM-TOP10-2026-GH</code>)</td>
+</tr>
+<tr>
+<td>Generate</td>
+<td>Empty retrieve → fluent fiction</td>
+<td>Refuse; score retrieve <strong>separately</strong> from generate</td>
+</tr>
+<tr>
+<td>Egress</td>
+<td>Secret in the citation</td>
+<td>Output DLP</td>
+</tr>
+</tbody>
+</table>
+<h2>Evaluate two systems</h2>
+<ol>
+<li><strong>Retrieve:</strong> gold question → gold chunk ids (hit / miss / leak).</li>
+<li><strong>Generate:</strong> given the <em>right</em> chunks, is the answer faithful?</li>
+</ol>
+<p>NIST AI 600-1 names confabulation as a generative risk (<code>SRC-NIST-AI-600-1</code>). A pretty answer with the wrong chunk is a retrieve bug.</p>
+<h2>When this is still not an agent</h2>
+<p>If the next hop is always “search this corpus, then write,” that is <strong>RAG</strong>. A loop that <em>decides</em> whether to search, SQL, or refund is <a href="../09-AGENTIC-RAG/01-overview.html">agentic RAG</a> — later, after this pipeline is honest.</p>
+<h2>What should I remember?</h2>
+<p>Hybrid without ACL is still a leak. ACL without gold chunk ids is still unmeasured.</p>
+<h2>What should I learn next?</h2>
+<p><a href="15-real-world-example.html">Complex — Azure / AWS / Google / Databricks products</a> · <a href="19-comparison.html">Naive / hybrid / ACL</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

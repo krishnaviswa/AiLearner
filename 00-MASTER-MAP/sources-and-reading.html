@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sources and further reading — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/sources-and-reading.md</code></p>
+    <h1>Sources and further reading</h1>
+<p>This lab is built from a <strong>local registry</strong>, not from a chat model’s memory. Machine file: <a href="../99-META/sources.yaml"><code>99-META/sources.yaml</code></a>.</p>
+<p>On a concept page, the <strong>Sources used</strong> box lists <code>SRC-…</code> ids that appear in that lesson. <strong>Further reading</strong> lists other registry rows for the same topic.</p>
+<h2>How to read a source row</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trust_level</code> 1</td>
+<td>Official cloud / framework / SDK / standards</td>
+</tr>
+<tr>
+<td><code>trust_level</code> 2</td>
+<td>OWASP, NIST, CNCF, papers, established orgs</td>
+</tr>
+<tr>
+<td><code>last_verified</code></td>
+<td>Date we fetched the URL</td>
+</tr>
+<tr>
+<td><code>fetch_note</code></td>
+<td>What the page actually supported vs what we refused to invent</td>
+</tr>
+<tr>
+<td><strong>UNVERIFIED</strong></td>
+<td>We could not confirm — do not treat as fact</td>
+</tr>
+</tbody>
+</table>
+<p>Volatile facts (SKU names, preview flags, prices, context-window integers) must be re-read on the vendor page. This lab does <strong>not</strong> copy dollar rates.</p>
+<h2>Built from (spine)</h2>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Start here</th>
+<th>Then read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tokens</td>
+<td><a href="https://github.com/openai/tiktoken">tiktoken README</a> (<code>SRC-TIKTOKEN</code>)</td>
+<td><a href="https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb">Count tokens cookbook</a></td>
+</tr>
+<tr>
+<td>Function vs agent</td>
+<td><a href="https://learn.microsoft.com/en-us/agent-framework/overview/">Microsoft Agent Framework</a></td>
+<td><a href="https://openai.github.io/openai-agents-python/">OpenAI Agents SDK</a> · <a href="https://google.github.io/adk-docs/">Google ADK</a></td>
+</tr>
+<tr>
+<td>RAG products</td>
+<td><a href="https://cloud.google.com/vertex-ai/generative-ai/docs/rag-overview">Google RAG Engine overview</a></td>
+<td><a href="https://learn.microsoft.com/en-us/azure/search/agentic-retrieval-overview">Azure agentic retrieval</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-how-retrieval.html">Bedrock KB retrieve</a> · <a href="https://docs.databricks.com/gcp/en/agents/mcp-tools/ai-search">Databricks AI Search</a></td>
+</tr>
+<tr>
+<td>Security</td>
+<td><a href="https://github.com/GenAI-Security-Project/GenAI-LLM-Top10/tree/main/2026/final">OWASP LLM Top 10 2026</a></td>
+<td><a href="https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10">NIST AI RMF 1.0</a> · <a href="https://doi.org/10.6028/NIST.AI.600-1">NIST AI 600-1</a></td>
+</tr>
+<tr>
+<td>Eval</td>
+<td><a href="https://github.com/openai/evals">openai/evals</a></td>
+<td>Gold sets first — judge later</td>
+</tr>
+<tr>
+<td>MCP</td>
+<td><a href="https://modelcontextprotocol.io/docs/getting-started/intro">MCP intro</a></td>
+<td><a href="https://modelcontextprotocol.io/docs/learn/architecture">Architecture</a></td>
+</tr>
+<tr>
+<td>Recent agentic assignments (2026)</td>
+<td><a href="../41-REAL-WORLD-USE-CASES/recent-agentic-assignments.html">This lab’s digest</a></td>
+<td><a href="https://blog.duolingo.com/production-ready-ai-agent-platform/">Duolingo platform</a> · <a href="https://aws.amazon.com/blogs/machine-learning/how-mobileye-transformed-support-operations-using-amazon-bedrock-agentcore/">Mobileye / AgentCore</a> · <a href="https://aws.amazon.com/blogs/machine-learning/how-ktern-ai-built-agentic-ai-for-sap-on-amazon-bedrock-agentcore/">KTern SAP</a> · <a href="https://devblogs.microsoft.com/agent-framework/agent-harness-making-your-claw-production-ready/">Microsoft claw harness</a> · <a href="https://www.anthropic.com/news/claude-opus-4-7">Claude Opus 4.7</a> · <a href="https://openai.com/index/introducing-gpt-5-5/">GPT-5.5</a></td>
+</tr>
+</tbody>
+</table>
+<h2>Depth on the same topic</h2>
+<p>On Foundations, RAG, and Agents the pills are <strong>Simple → Medium → Complex</strong>. Complex is the vendor map for that topic. Other domains still have Overview / Simple / When not / Do until the same three files are written — we do not scaffold empty Medium/Complex pages.</p>
+<h2>What should I learn next?</h2>
+<p><a href="learning-sequence.html">Learning sequence</a> · <a href="../01-FOUNDATIONS/02-simple.html">Foundations Simple</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

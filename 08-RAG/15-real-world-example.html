@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAG (Complex) — official products, same pipeline — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>08-RAG/15-real-world-example.md</code></p>
+    <h1>RAG (Complex) — official products, same pipeline</h1>
+<p>Same topic as Simple / Medium. These are <strong>documented cloud products</strong>, not unofficial “how FAANG runs RAG internally” stories. No invented company case studies. Prices and SKU limits are <strong>volatile</strong> — not copied here.</p>
+<h2>Vendor map (fetched 2026-09-07)</h2>
+<table>
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Official object</th>
+<th>What the docs actually say</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Microsoft</strong></td>
+<td>Azure AI Search + Foundry IQ</td>
+<td>Search underpins Foundry IQ: a managed, <strong>permission-aware</strong> knowledge layer. <strong>Agentic retrieval</strong> = multi-query plan → parallel keyword / vector / hybrid + semantic rerank → merged grounding. Some REST features GA (<code>2026-04-01</code>); portal and several capabilities remain <strong>preview</strong>.</td>
+<td><code>SRC-AZURE-AGENTIC-RETRIEVAL</code>, <code>SRC-AZURE-AI-SEARCH-SKU</code></td>
+</tr>
+<tr>
+<td><strong>Amazon</strong></td>
+<td>Bedrock Knowledge Bases</td>
+<td><code>Retrieve</code> returns chunks. <code>RetrieveAndGenerate</code> = retrieve + <code>InvokeModel</code> + <strong>citations</strong>. <code>GenerateQuery</code> for structured stores. <code>AgenticRetrieveStream</code> decomposes and iterates. Page recommends a <strong>Managed Knowledge Base</strong>.</td>
+<td><code>SRC-AWS-BEDROCK-KB-RETRIEVE</code></td>
+</tr>
+<tr>
+<td><strong>Google</strong></td>
+<td>Vertex / Gemini RAG Engine</td>
+<td>Official process: ingest → chunk → embed → <strong>corpus</strong> (index) → retrieve → generate. Purpose: add <strong>private</strong> context so the model is less likely to hallucinate.</td>
+<td><code>SRC-GCP-RAG-ENGINE</code></td>
+</tr>
+<tr>
+<td><strong>Databricks</strong></td>
+<td>AI Search (formerly Vector Search) MCP</td>
+<td>Hybrid search as a managed retrieve surface; Unity Catalog / grants for lakehouse identity. Feature status is <strong>Public Preview</strong> on the MCP page we registered.</td>
+<td><code>SRC-DATABRICKS-AI-SEARCH</code>, <code>SRC-DATABRICKS-MCP</code></td>
+</tr>
+<tr>
+<td><strong>DIY</strong></td>
+<td>pgvector on Postgres</td>
+<td>Open-source vector similarity in Postgres. Operator/index names <strong>UNVERIFIED</strong> (README fetch timed out).</td>
+<td><code>SRC-PGVECTOR</code></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TB
+  Dur[Durable RAG: ingest chunk embed retrieve generate cite] --&gt; MS[Azure: knowledge base + ranker]
+  Dur --&gt; AWS[Bedrock: Retrieve or RetrieveAndGenerate]
+  Dur --&gt; GCP[Google: RAG corpus]
+  Dur --&gt; DBX[Databricks: AI Search + UC]
+  Dur --&gt; DIY[pgvector: you own ACL]
+</pre>
+<h2>What maps to <em>this</em> lab’s flavors</h2>
+<table>
+<thead>
+<tr>
+<th>Lab flavor</th>
+<th>Closest official knob (do not treat as 1:1)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Naive top-K</td>
+<td>Any <code>Retrieve</code> / corpus query without hybrid or ACL</td>
+</tr>
+<tr>
+<td>Hybrid</td>
+<td>Azure keyword+vector+semantic rerank; Databricks hybrid; Bedrock retrieve + optional rerank model</td>
+</tr>
+<tr>
+<td>Permission-aware</td>
+<td>Foundry IQ / Azure docs: permission-aware knowledge; Databricks UC grants; you still must put the <strong>principal in the query</strong> (LLM09)</td>
+</tr>
+<tr>
+<td>Agentic retrieve</td>
+<td>Azure agentic retrieval; Bedrock <code>AgenticRetrieveStream</code> — only after naive retrieve is measured</td>
+</tr>
+</tbody>
+</table>
+<p>A managed SKU does <strong>not</strong> automatically implement LLM09. Shared index + polite filter-after-scan is still the failure mode (<code>SRC-OWASP-LLM-TOP10-2026-GH</code>).</p>
+<h2>What we are not claiming</h2>
+<ul>
+<li>Internal architecture of Bing, Google Search, or ChatGPT browsing.</li>
+<li>Latency percentiles, recall@k numbers, or dollar rates (Azure’s own page uses a <strong>hypothetical</strong> cost walkthrough — ignored here).</li>
+<li>That Agents Classic on Bedrock is the green-field default (<code>SRC-AWS-BEDROCK-AGENTS</code>: new customers directed to AgentCore).</li>
+</ul>
+<h2>Architect challenge</h2>
+<p>Pick one vendor. Draw <strong>toy</strong> (PDF → embed → top-K) vs <strong>their</strong> object (knowledge base / corpus / AI Search). Mark where ACL is enforced. If you cannot point to a filter <strong>in</strong> retrieve, you do not have Architecture A (<a href="../40-REFERENCE-ARCHITECTURES/A-enterprise-rag.html">enterprise RAG</a>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="../40-REFERENCE-ARCHITECTURES/A-enterprise-rag.html">Architecture A</a> · <a href="19-comparison.html">When not / flavors</a> · <a href="../00-MASTER-MAP/sources-and-reading.html">Sources catalog</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

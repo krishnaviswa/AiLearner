@@ -12,7 +12,7 @@
   <article class="lab-article">
     <div class="lab-hero">
       <h1>Learn the path. Do not browse a dump.</h1>
-      <p>This is a static course: one lesson per page, Previous / Next at the bottom, modules across the top. Markdown stays the source of truth. HTML is generated.</p>
+      <p>This is a static course. <strong>Previous / Next walks every HTML page that already exists</strong> — we do not invent empty Advanced or Architecture files. The sidebar lists topics in this module (one row per folder). Depth pills change the URL on the same topic.</p>
       <p><a class="lab-cta" href="00-MASTER-MAP/master-mindmap.html">Start the path</a></p>
     </div>
     <h2>How this site flows</h2>
@@ -25,10 +25,12 @@
       <li><strong>Eval</strong> — gold first; LLM-as-judge is a helper</li>
       <li><strong>Security</strong> — guardrails, DLP, governance</li>
       <li><strong>Production</strong> — reference architectures and cloud maps</li>
-      <li><strong>Labs</strong> — hands-on ladder and small simulations</li>
+      <li><strong>Labs</strong> — <a href="41-REAL-WORLD-USE-CASES/recent-agentic-assignments.html">recent agentic assignments</a>, hands-on ladder, simulations</li>
       <li><strong>Reference</strong> — glossary, cheat-sheets, anti-patterns, interviews</li>
     </ol>
-    <p>On a concept, the pills under the title are <em>other HTML files</em> (Overview / Simple / When not / Do). They change the URL. They are not a depth dropdown that hides headings on the same page.</p>
+    <p>On a concept, the pills under the title are <em>other HTML files</em>. Click <strong>Simple</strong>, then <strong>Medium</strong>, then <strong>Complex</strong> for the same idea (mental model → mechanism → official Microsoft / Google / AWS / Databricks maps). <strong>When not</strong> and <strong>Do</strong> stay beside those. The URL changes. This is not a dropdown that hides headings.</p>
+    <p>Every lesson lists <strong>Sources used</strong> and <strong>Further reading</strong> from <code>99-META/sources.yaml</code>. Catalog: <a href="00-MASTER-MAP/sources-and-reading.html">Sources and further reading</a>.</p>
+    <p>Missing Medium/Complex/Architecture pages are skipped, not stubbed. Observability, cost, cloud maps, ref-arch A–E, the L1–L10 ladder, and cheat-sheets are on the path <em>because those HTML files exist</em>.</p>
     <h2>Open this lab</h2>
     <p>Port <strong>8000</strong> is often another API on this machine (<code>{"detail":"Not Found"}</code>). Serve the lab from the repo root on <strong>8766</strong>:</p>
     <pre><code>python -m http.server 8766</code></pre>
@@ -37,7 +39,9 @@
   </article>
   <script src="app/js/learn-path.js"></script>
   <script src="app/js/page-index.js"></script>
+  <script src="app/js/sources-index.js"></script>
   <script src="app/js/shell.js"></script>
   <script src="app/js/depth.js"></script>
+  <script src="app/js/refs.js"></script>
 </body>
 </html>

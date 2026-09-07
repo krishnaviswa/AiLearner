@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recent challenging agentic assignments (mid–2026) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>41-REAL-WORLD-USE-CASES/recent-agentic-assignments.md</code></p>
+    <h1>Recent challenging agentic assignments (mid–2026)</h1>
+<p>Reference list for <strong>you to read</strong>, not a claim that this lab reproduced the systems. Window: roughly <strong>June–September 2026</strong>, plus the current official coding-agent evals those posts sit on.</p>
+<p><strong>Rules on this page</strong></p>
+<ul>
+<li>Only <strong>fetched</strong> company or cloud blogs, or official lab posts.</li>
+<li>Outcome percentages are <strong>publisher-reported</strong>. Independently <strong>UNVERIFIED</strong>. Do not paste them into a slide as lab-measured truth.</li>
+<li>No invented “Netflix / Uber internally does X.” If there is no URL, it is not here.</li>
+<li>A hard assignment is still often a <strong>workflow</strong> with an LLM node. Microsoft’s function-over-agent rule still applies (<code>SRC-MS-AGENT-FRAMEWORK</code>).</li>
+</ul>
+<pre class="mermaid">flowchart TD
+  A[Hard assignment] --&gt; B{Next hop unknown?}
+  B --&gt;|no| W[Workflow / SQL / playbook]
+  B --&gt;|yes| C[Agent + tools + eval]
+  C --&gt; D[Durable runtime]
+  C --&gt; E[Gold / diff graders]
+  C --&gt; F[Identity on the tool]
+</pre>
+<h2>Production assignments (what teams actually shipped)</h2>
+<table>
+<thead>
+<tr>
+<th>When</th>
+<th>Who published</th>
+<th>The hard assignment</th>
+<th>Why it is agentic (not a chat UI)</th>
+<th>What they say they used</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-08-04</td>
+<td>Duolingo engineering</td>
+<td>Shared <strong>agent platform</strong>: define once (prompt, MCPs, repos), run from Slack / CLI / site / other workflows. Agents that <strong>fix CI</strong>, address review comments, and a <strong>release-manager Slack bot</strong> (crash investigate → relevant diffs → summary).</td>
+<td>Minutes-long runs, tool calls, human wait, retries. Eval grades <strong>git diffs</strong>, not prose.</td>
+<td>Temporal <code>AgentWorkflow</code>; MCP; Claude Agents SDK + Codex CLI + OpenAI Agents SDK; deterministic graders + optional judge</td>
+<td><code>SRC-DUOLINGO-AGENT-PLATFORM</code></td>
+</tr>
+<tr>
+<td>2026-08-05</td>
+<td>AWS + Mobileye</td>
+<td><strong>Drive-data support agent</strong>: tickets about thousands of daily drive-recording sessions. Was “15 clicks / many systems.” Agent classifies, queries live pipeline via <strong>MCP</strong>, writes a ticket reply.</td>
+<td>Context varies; static scripts failed. Hybrid: <strong>on-prem ticket bus</strong> + cloud runtime (tickets not reachable from AWS).</td>
+<td>Amazon Bedrock AgentCore Runtime + Observability; Secrets Manager; internal LLM gateway to Claude on Bedrock</td>
+<td><code>SRC-AWS-MOBILEYE-AGENTCORE</code></td>
+</tr>
+<tr>
+<td>2026 (AWS ML blog, fetched 2026-09-07)</td>
+<td>AWS + KTern.AI</td>
+<td><strong>SAP S/4HANA transformation fleet</strong>: reverse-engineer custom ABAP, fit-to-standard, code analysis, test-case generation, process/exception mining. They describe <strong>20+</strong> specialized agents, months-long project memory.</td>
+<td>Long-horizon context, SAP APIs, multi-tenant isolation, consultant-scale analysis.</td>
+<td>AgentCore runtime / memory / gateway (MCP) / identity / observability / evaluations; Strands swarm / workflow / graph</td>
+<td><code>SRC-AWS-KTERN-AGENTCORE</code></td>
+</tr>
+<tr>
+<td>2026-08-27</td>
+<td>Microsoft Agent Framework</td>
+<td><strong>“Claw” finance assistant</strong> taken from one tool to a <strong>production harness</strong>: one agent factory, three hosts (console, hosted, eval CI).</td>
+<td>Same agent must run interactively, hosted, and in evals. Governance + traces without rewriting the loop.</td>
+<td>OpenTelemetry traces; Microsoft Purview screening (they frame a regulated-finance context); Foundry Hosted Agent; local + hosted evals</td>
+<td><code>SRC-MS-AGENT-HARNESS-CLAW</code></td>
+</tr>
+<tr>
+<td>2026-09-03</td>
+<td>AWS</td>
+<td><strong>Migrate an existing agent</strong> onto AgentCore in stages: Runtime + Gateway + Memory first (graph unchanged), then optional model-driven loop / harness.</td>
+<td>The hard part they name is <strong>shedding infra</strong> (compute, tool auth, checkpoints) without losing the reasoning graph.</td>
+<td>AgentCore Runtime, Gateway, Memory; optional Strands / harness</td>
+<td><code>SRC-AWS-AGENTCORE-MIGRATE</code></td>
+</tr>
+</tbody>
+</table>
+<p>Publisher-reported outcomes (do not treat as this lab’s measurements):</p>
+<ul>
+<li>Duolingo: new agent “about 10 minutes” vs “several weeks” of per-team infra (<code>SRC-DUOLINGO-AGENT-PLATFORM</code>).</li>
+<li>Mobileye / AWS: 66% of tickets were routine status; they report ~1 minute replies, 98% success vs a 95% PoC target, 90% response-time cut (<code>SRC-AWS-MOBILEYE-AGENTCORE</code>).</li>
+<li>KTern.AI / AWS: they report 45% shorter SAP timelines, 60–70% less discovery time, 90% of named Finance/Sales exceptions surfaced, 82% first-pass generated tests, 480 eng hours/month reclaimed (<code>SRC-AWS-KTERN-AGENTCORE</code>). All <strong>UNVERIFIED</strong> here.</li>
+</ul>
+<h2>Frontier <em>assignments</em> (benchmarks, not your production)</h2>
+<p>These are the <strong>hard tasks labs score agents on</strong> in 2026. Harness and contamination matter more than a single percentage.</p>
+<table>
+<thead>
+<tr>
+<th>Assignment</th>
+<th>What the agent must do</th>
+<th>Official note</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SWE-bench / SWE-Bench Pro</strong></td>
+<td>Resolve real GitHub-style issues: implement a change that passes new tests without breaking old ones.</td>
+<td>OpenAI later <strong>retracted</strong> recommending SWE-Bench Pro after contamination / design issues (<code>SRC-OPENAI-SWE-EVALS</code> — page fetch <strong>timed out</strong> 2026-09-07; title/URL from search — treat details <strong>UNVERIFIED</strong> until re-fetched).</td>
+<td><code>SRC-OPENAI-GPT-55</code>, <code>SRC-OPENAI-SWE-EVALS</code></td>
+</tr>
+<tr>
+<td><strong>Terminal-Bench 2.x</strong></td>
+<td>Multi-step CLI: plan, iterate, coordinate tools.</td>
+<td>Anthropic documents Terminus-2 harness, resource caps, and that scores are not always comparable across labs (<code>SRC-ANTHROPIC-OPUS-47</code>).</td>
+<td><code>SRC-ANTHROPIC-OPUS-47</code></td>
+</tr>
+<tr>
+<td><strong>Long-horizon / Expert-SWE style</strong></td>
+<td>Hours-scale implementation, not a one-shot patch.</td>
+<td>OpenAI describes Expert-SWE as an <em>internal</em> eval (median human time they state: 20 hours). Internal = not a public gold set you can copy.</td>
+<td><code>SRC-OPENAI-GPT-55</code></td>
+</tr>
+<tr>
+<td><strong>MCP / tool-using office work</strong></td>
+<td>MCP-Atlas, finance/legal agent benches, computer-use.</td>
+<td>Anthropic system cards list these as capability evals, not your SLA.</td>
+<td><code>SRC-ANTHROPIC-OPUS-47</code></td>
+</tr>
+</tbody>
+</table>
+<p>Do <strong>not</strong> bake GPT / Claude leaderboard numbers into architecture reviews. They move with harness, effort level, and contamination screens.</p>
+<h2>What is actually hard (durable)</h2>
+<table>
+<thead>
+<tr>
+<th>Hard part</th>
+<th>Seen in</th>
+<th>Durable control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Minutes-to-months runtime</td>
+<td>Duolingo Temporal; KTern 12–18 month SAP memory</td>
+<td>Durable workflow / checkpointed memory</td>
+</tr>
+<tr>
+<td>Tools that mutate the world</td>
+<td>CI fix + git diff; SAP write paths</td>
+<td>Identity on the tool; eval the <strong>diff</strong>, not the essay</td>
+</tr>
+<tr>
+<td>Hybrid networks</td>
+<td>Mobileye on-prem tickets</td>
+<td>Principal and secrets stay off the model</td>
+</tr>
+<tr>
+<td>Eval that lies</td>
+<td>SWE-bench contamination</td>
+<td>Gold + deterministic graders; judge is optional (<code>SRC-DUOLINGO-AGENT-PLATFORM</code>)</td>
+</tr>
+<tr>
+<td>Platform vs one agent</td>
+<td>Duolingo registry; Mobileye <code>agentcore deploy</code></td>
+<td>Definition ≠ runtime</td>
+</tr>
+</tbody>
+</table>
+<h2>When these are still the wrong pattern</h2>
+<table>
+<thead>
+<tr>
+<th>Assignment looks agentic</th>
+<th>Prefer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ticket is “what is session X status?” and the API is stable</td>
+<td>Workflow + MCP read + template</td>
+</tr>
+<tr>
+<td>SAP “exception” is a known FI match rule</td>
+<td>Job + allow-listed query</td>
+</tr>
+<tr>
+<td>Finance claw can be a form + Purview + human</td>
+<td>Workflow (<code>SRC-MS-AGENT-FRAMEWORK</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2>Architect challenge</h2>
+<p>Pick <strong>one</strong> row. Draw: caller → durable runtime → tools → eval artifact (ticket text, git diff, SAP object). Mark where a <strong>human</strong> must approve a write. If you cannot name the artifact you grade, you do not have an assignment — you have a demo.</p>
+<h2>What should I remember?</h2>
+<p>Recent hard work is <strong>platform + eval + identity</strong>, not a new model name.</p>
+<h2>What should I learn next?</h2>
+<p><a href="01-overview.html">Use-case map</a> · <a href="../10-AGENTS/15-real-world-example.html">Agents Complex</a> · <a href="../00-MASTER-MAP/sources-and-reading.html">Sources catalog</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>
