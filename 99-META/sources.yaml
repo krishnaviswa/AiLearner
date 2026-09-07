@@ -503,3 +503,173 @@ sources:
     last_verified: 2026-09-07
     topics: [vector-search, postgres]
     fetch_note: Official GitHub repo page fetched 2026-09-07 — describes open-source vector similarity search for Postgres. README (index types, operators) fetch timed out; do not teach current operator/index names from memory.
+
+  - source_id: SRC-GCP-RAG-ENGINE
+    title: RAG Engine on Gemini Enterprise Agent Platform overview
+    URL: https://cloud.google.com/vertex-ai/generative-ai/docs/rag-overview
+    publisher: Google Cloud
+    date: null
+    technology: vertex-rag-engine
+    version: "docs-as-of-2026-09-07"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [rag, embeddings, retrieval, corpus, grounding]
+    fetch_note: >
+      Fetched 2026-09-07. Official process: ingest → transform/chunk → embed → index (corpus)
+      → retrieve → generate. Positions RAG Engine as context augmentation for private data.
+      Region/GA vs Preview table is volatile — do not pin region lists in curriculum.
+      Dollar rates not on this page.
+
+  - source_id: SRC-AWS-BEDROCK-KB-RETRIEVE
+    title: Retrieving information from data sources using Amazon Bedrock Knowledge Bases
+    URL: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-how-retrieval.html
+    publisher: Amazon Web Services
+    date: null
+    technology: bedrock-knowledge-bases
+    version: "docs-as-of-2026-09-07"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [rag, retrieval, citations, rerank]
+    fetch_note: >
+      Fetched 2026-09-07. Documents Retrieve, RetrieveAndGenerate (Retrieve + InvokeModel +
+      citations), GenerateQuery for structured stores, and AgenticRetrieveStream (decompose
+      + iterate). Page recommends Managed Knowledge Base for accuracy/managed experience.
+      Do not copy SDK method names beyond these operation names.
+
+  - source_id: SRC-AZURE-AGENTIC-RETRIEVAL
+    title: Agentic Retrieval Overview — Azure AI Search
+    URL: https://learn.microsoft.com/en-us/azure/search/agentic-retrieval-overview
+    publisher: Microsoft Learn
+    date: null
+    technology: azure-ai-search
+    version: "docs-as-of-2026-09-07"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [rag, retrieval, hybrid-search, rerank, foundry-iq, permissions]
+    fetch_note: >
+      Fetched 2026-09-07. Azure AI Search underpins Foundry IQ as a managed, permission-aware
+      knowledge layer. Agentic retrieval is a multi-query pipeline (plan → parallel keyword/
+      vector/hybrid + semantic rerank → merge). Some features GA in 2026-04-01 REST; portal
+      and several capabilities remain preview (2026-08-01-preview). Page includes a hypothetical
+      cost walkthrough — do not copy dollar figures. Rates live on official pricing pages.
+
+  - source_id: SRC-DUOLINGO-AGENT-PLATFORM
+    title: Making production-ready agents the default — Duolingo agent platform
+    URL: https://blog.duolingo.com/production-ready-ai-agent-platform/
+    publisher: Duolingo
+    date: 2026-08-04
+    technology: agent-platform
+    version: "post-2026-08-04"
+    trust_level: 3
+    last_verified: 2026-09-07
+    topics: [agents, mcp, evaluation, workflows, temporal]
+    fetch_note: >
+      Fetched 2026-09-07. Official engineering post. Temporal AgentWorkflow; MCP; Claude Agents
+      SDK, Codex CLI, OpenAI Agents SDK; evals grade structured output + git diffs; agents used
+      for CI fix, review comments, release-manager Slack composition. “10 minutes” vs weeks is
+      their claim — not independently verified.
+
+  - source_id: SRC-AWS-MOBILEYE-AGENTCORE
+    title: How Mobileye transformed support operations using Amazon Bedrock AgentCore
+    URL: https://aws.amazon.com/blogs/machine-learning/how-mobileye-transformed-support-operations-using-amazon-bedrock-agentcore/
+    publisher: Amazon Web Services
+    date: 2026-08-05
+    technology: bedrock-agentcore
+    version: "blog-2026-08-05"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, mcp, observability, support]
+    fetch_note: >
+      Fetched 2026-09-07. AWS customer blog with Mobileye authors. Hybrid on-prem orchestrator +
+      AgentCore Runtime; MCP to drive-data APIs; 66% tickets routine; publisher-reported 90%
+      faster replies, 98% success, ~1 minute. Metrics UNVERIFIED independently.
+
+  - source_id: SRC-AWS-KTERN-AGENTCORE
+    title: How KTern.AI built agentic AI for SAP on Amazon Bedrock AgentCore
+    URL: https://aws.amazon.com/blogs/machine-learning/how-ktern-ai-built-agentic-ai-for-sap-on-amazon-bedrock-agentcore/
+    publisher: Amazon Web Services
+    date: null
+    technology: bedrock-agentcore
+    version: "blog-as-of-2026-09-07"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, sap, mcp, evaluation, memory]
+    fetch_note: >
+      Fetched 2026-09-07. AWS + KTern.AI. 20+ specialized SAP agents; Strands swarm/workflow/graph;
+      AgentCore memory/gateway/identity/evals. Outcome percentages are KTern internal measurements
+      as quoted on the blog — UNVERIFIED here. Do not copy dollar or uptime figures as lab SLAs.
+
+  - source_id: SRC-MS-AGENT-HARNESS-CLAW
+    title: Agent Harness — making your claw production-ready
+    URL: https://devblogs.microsoft.com/agent-framework/agent-harness-making-your-claw-production-ready/
+    publisher: Microsoft
+    date: 2026-08-27
+    technology: microsoft-agent-framework
+    version: "devblog-2026-08-27"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, evaluation, observability, hosted-agents]
+    fetch_note: >
+      Fetched 2026-09-07. Part 4 of a tutorial series. Shared agent factory + console / hosted /
+      eval hosts. Names OpenTelemetry, Purview, Foundry Hosted Agent. Teaching sample, not a
+      named bank production attestation.
+
+  - source_id: SRC-AWS-AGENTCORE-MIGRATE
+    title: Migrate agentic workloads to Amazon Bedrock AgentCore
+    URL: https://aws.amazon.com/blogs/machine-learning/migrate-agentic-workloads-to-amazon-bedrock-agentcore/
+    publisher: Amazon Web Services
+    date: 2026-09-03
+    technology: bedrock-agentcore
+    version: "blog-2026-09-03"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, runtime, gateway, memory]
+    fetch_note: >
+      Fetched 2026-09-07. How-to: stage 1 Runtime+Gateway+Memory; later optional Strands loop /
+      harness. Not a customer ROI study.
+
+  - source_id: SRC-OPENAI-GPT-55
+    title: Introducing GPT-5.5
+    URL: https://openai.com/index/introducing-gpt-5-5/
+    publisher: OpenAI
+    date: null
+    technology: openai-models
+    version: "page-as-of-2026-09-07"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, coding, swe-bench, terminal-bench]
+    fetch_note: >
+      Official announcement fetched via search/extract 2026-09-07. Positions GPT-5.5 as an
+      agentic coding model; names Terminal-Bench 2.0, SWE-Bench Pro, internal Expert-SWE.
+      Leaderboard percentages are vendor-reported and volatile — do not pin in architecture
+      reviews.
+
+  - source_id: SRC-ANTHROPIC-OPUS-47
+    title: Introducing Claude Opus 4.7
+    URL: https://www.anthropic.com/news/claude-opus-4-7
+    publisher: Anthropic
+    date: null
+    technology: anthropic-models
+    version: "page-as-of-2026-09-07"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, coding, terminal-bench, mcp]
+    fetch_note: >
+      Fetched 2026-09-07. Documents effort levels, Claude Code defaults, Terminal-Bench 2.0
+      harness notes, memorization screens on SWE-bench families, Rakuten-SWE-Bench quote from
+      a named customer. Scores are harness-specific.
+
+  - source_id: SRC-OPENAI-SWE-EVALS
+    title: Separating signal from noise in coding evaluations
+    URL: https://openai.com/index/separating-signal-from-noise-coding-evaluations/
+    publisher: OpenAI
+    date: null
+    technology: llm-evaluation
+    version: "url-as-of-2026-09-07"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [evals, swe-bench, contamination]
+    fetch_note: >
+      HTTP fetch timed out 2026-09-07. Search snippet indicates they found SWE-bench Verified
+      contamination and later retracted recommending SWE-Bench Pro. Do not teach that argument
+      beyond “eval harnesses rot; re-read the page.” Re-fetch before quoting numbers.

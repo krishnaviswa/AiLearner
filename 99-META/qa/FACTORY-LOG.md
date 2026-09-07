@@ -183,3 +183,17 @@ Restart-safe human log. Machine resume: [`factory-state.json`](factory-state.jso
 - **Files:** `99-META/qa/gate-10-scorecard.md`, `99-META/GATE-STATUS.md`
 - **UNVERIFIED:** live IDE-browser hops; file:// Why-chains; mermaid CDN; carry-forward
 - **Next if interrupted:** `factory-complete`
+
+## 2026-09-07T18:15Z — post-gate-10 — recent-agentic-assignments
+
+- **Status:** authored
+- **Files:** `41-REAL-WORLD-USE-CASES/recent-agentic-assignments.md`, sources.yaml rows SRC-DUOLINGO-AGENT-PLATFORM, SRC-AWS-MOBILEYE-AGENTCORE, SRC-AWS-KTERN-AGENTCORE, SRC-MS-AGENT-HARNESS-CLAW, SRC-AWS-AGENTCORE-MIGRATE, SRC-OPENAI-GPT-55, SRC-ANTHROPIC-OPUS-47, SRC-OPENAI-SWE-EVALS (timeout), knowledge-graph v1.10.1
+- **UNVERIFIED:** all publisher ROI/accuracy percentages; OpenAI SWE-evals page fetch timeout
+- **Next if interrupted:** re-render HTML; re-fetch SRC-OPENAI-SWE-EVALS
+
+## 2026-09-07T18:45Z — post-gate-10 — seamless-existing-html-path
+
+- **Status:** authored
+- **Files:** `app/tools/render-pages.py` `write_learn_path()` generates `learn-path.js` from Markdown/HTML that exists; sidebar is one topic per folder; no empty Advanced/Architecture stubs
+- **UNVERIFIED:** none
+- **Next if interrupted:** run `python app/tools/render-pages.py`

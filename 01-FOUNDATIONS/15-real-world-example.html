@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foundations (Complex) — how vendors document the same idea — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>01-FOUNDATIONS/15-real-world-example.md</code></p>
+    <h1>Foundations (Complex) — how vendors document the same idea</h1>
+<p>Same topic as Simple / Medium. This is <strong>not</strong> an internal leak of how Google Search or ChatGPT are built. It is what <strong>official docs</strong> say you should ship.</p>
+<p>We do <strong>not</strong> invent “Netflix / Uber / Meta internally does X.” If there is no fetchable Tier 1/2 URL, the claim is <strong>UNVERIFIED</strong> and omitted.</p>
+<h2>Mapping: durable idea → official page</h2>
+<table>
+<thead>
+<tr>
+<th>Durable idea</th>
+<th>What a vendor publishes</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tokens are integers; count before you send</td>
+<td>OpenAI <code>tiktoken</code>: BPE, <code>get_encoding</code> / <code>encoding_for_model</code>, ~4 bytes/token average</td>
+<td><code>SRC-TIKTOKEN</code>, <code>SRC-TIKTOKEN-COOKBOOK</code></td>
+</tr>
+<tr>
+<td>Typed output + local validate</td>
+<td>OpenAI structured-outputs guide (official path). Request field names <strong>UNVERIFIED</strong> (fetch timed out)</td>
+<td><code>SRC-OPENAI-STRUCTURED-OUTPUTS</code></td>
+</tr>
+<tr>
+<td>Prefer a function / workflow over an agent</td>
+<td>Microsoft Agent Framework: function when you can write one; workflow when steps are known</td>
+<td><code>SRC-MS-AGENT-FRAMEWORK</code></td>
+</tr>
+<tr>
+<td>Hosted agent runtime is a product, not the default</td>
+<td>Microsoft Foundry Agent Service / hosted agents (<strong>preview</strong> — do not treat as GA)</td>
+<td><code>SRC-MS-FOUNDRY-AGENTS</code>, <code>SRC-MS-HOSTED-AGENTS</code></td>
+</tr>
+<tr>
+<td>If you do need an agent toolkit</td>
+<td>Google Agent Development Kit (ADK) docs</td>
+<td><code>SRC-GOOGLE-ADK</code></td>
+</tr>
+<tr>
+<td>Eval is a registry + harness, not vibes</td>
+<td>OpenAI <code>evals</code> GitHub</td>
+<td><code>SRC-OPENAI-EVALS</code></td>
+</tr>
+<tr>
+<td>Confabulation and privacy are named risks</td>
+<td>NIST AI 600-1 generative profile</td>
+<td><code>SRC-NIST-AI-600-1</code></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  D[Durable: one call + contract] --&gt; OAI[OpenAI: tokens + schema]
+  D --&gt; MS[Microsoft: function over agent]
+  D --&gt; G[Google ADK: only if agency is required]
+  D --&gt; N[NIST: refuse / measure risk]
+</pre>
+<h2>What a production architect actually copies</h2>
+<p><strong>Toy:</strong> paste a prompt in a chat UI.</p>
+<p><strong>Production-oriented (still not an agent):</strong></p>
+<ol>
+<li>Version the prompt and the model id.</li>
+<li>Count tokens (<code>SRC-TIKTOKEN</code>).</li>
+<li>Validate output locally.</li>
+<li>Keep a gold CSV (<code>SRC-OPENAI-EVALS</code> is a framework, not your gold).</li>
+<li>Do not log real PII (<code>SRC-NIST-AI-600-1</code>).</li>
+</ol>
+<p>SKU names, prices, and context-window integers are <strong>volatile</strong>. Read the vendor page at implement time. This lab does not bake dollar rates.</p>
+<h2>What a principal would challenge</h2>
+<ul>
+<li>“We used Azure / Bedrock / Vertex, so we are production.” A SKU is not a contract.</li>
+<li>“The model will remember our handbook.” That is RAG or a database — next module.</li>
+<li>“We need an agent for classification.” Microsoft’s own overview says write the function (<code>SRC-MS-AGENT-FRAMEWORK</code>).</li>
+</ul>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">When not an agent</a> · <a href="../05-LLM-APPLICATION-ENGINEERING/01-overview.html">LLM apps, not agents</a> · <a href="../00-MASTER-MAP/sources-and-reading.html">Sources catalog</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

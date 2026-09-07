@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foundations (Medium) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>01-FOUNDATIONS/03-logical.md</code></p>
+    <h1>Foundations (Medium)</h1>
+<p>Same topic as <a href="02-simple.html">Simple</a>: one model call, a token budget, and a contract. This page is the <strong>mechanism</strong> — not a new product.</p>
+<h2>How a call actually spends the budget</h2>
+<ol>
+<li><strong>Tokenize</strong> the prompt (and later the completion). Official <code>tiktoken</code> docs: BPE is reversible and lossless; they state about <strong>4 bytes per token on average</strong> (<code>SRC-TIKTOKEN</code>). That average is not a capacity SLA.</li>
+<li><strong>Fit the working set.</strong> Prompt + completion must stay inside the context window. Overflow is vendor-specific (error vs silent drop) — <strong>volatile</strong>.</li>
+<li><strong>Constrain the output.</strong> Prefer a schema the runtime can validate locally (<code>SRC-OPENAI-STRUCTURED-OUTPUTS</code> — wire-format field names <strong>UNVERIFIED</strong> after fetch timeout; the durable idea is schema + local check).</li>
+<li><strong>Score the call.</strong> Gold cases first. An LLM-as-judge is a helper, not ground truth (<code>SRC-OPENAI-EVALS</code>, <code>SRC-NIST-AI-600-1</code>).</li>
+</ol>
+<pre class="mermaid">flowchart TD
+  In[Caller + contract] --&gt; Tok[Count / encode]
+  Tok --&gt; Fit{Fits window?}
+  Fit --&gt;|no| Refuse[Refuse or shrink]
+  Fit --&gt;|yes| Call[One model call]
+  Call --&gt; Val[Validate schema]
+  Val --&gt;|fail| Retry[Retry or human]
+  Val --&gt;|ok| Rec[Record ids + tokens]
+</pre>
+<h2>Agency is a later branch</h2>
+<p>Microsoft’s Agent Framework overview: if you can write a function, do that; use a <strong>workflow</strong> when steps are known; use an <strong>agent</strong> when the next tool is not (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<table>
+<thead>
+<tr>
+<th>You already know</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input → label / JSON</td>
+<td>One call + validate</td>
+</tr>
+<tr>
+<td>Fixed three API hops</td>
+<td>Workflow / DAG</td>
+</tr>
+<tr>
+<td>Unknown next hop</td>
+<td>Agent — <a href="../10-AGENTS/01-overview.html">10</a> after <a href="19-comparison.html">when not</a></td>
+</tr>
+</tbody>
+</table>
+<h2>How it fails at this depth</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Durable control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt grows; completion is cut</td>
+<td>Count before send; cap max tokens</td>
+</tr>
+<tr>
+<td>Fluent wrong fact</td>
+<td>Ground or refuse (<code>SRC-NIST-AI-600-1</code> confabulation)</td>
+</tr>
+<tr>
+<td>Schema-looking garbage</td>
+<td>Constrained decode <strong>and</strong> local parse</td>
+</tr>
+<tr>
+<td>Logs contain real PII</td>
+<td>Synthetic ids only; privacy theme in <code>SRC-NIST-AI-600-1</code></td>
+</tr>
+</tbody>
+</table>
+<h2>What should I remember?</h2>
+<p>Medium is still <strong>one hop</strong>. Complexity here is contracts, budgets, and eval — not a tool loop.</p>
+<h2>What should I learn next?</h2>
+<p><a href="15-real-world-example.html">Complex — how vendors document this</a> · <a href="19-comparison.html">When not an agent</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

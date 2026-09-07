@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agents (Complex) — official runtimes, same decision — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>10-AGENTS/15-real-world-example.md</code></p>
+    <h1>Agents (Complex) — official runtimes, same decision</h1>
+<p>Same topic as <a href="01-overview.html">Overview</a> and <a href="03-logical.html">Medium flavors</a>. This page compares <strong>what vendors document</strong>, not unofficial “how Amazon runs Alexa internally” stories.</p>
+<p>Microsoft’s own overview still wins the first question: <strong>if you can write a function, do that</strong> (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<h2>Official primitives (fetched / registered 2026-09-07)</h2>
+<table>
+<thead>
+<tr>
+<th>Publisher</th>
+<th>Product (docs)</th>
+<th>What they name</th>
+<th>Lab flavor</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microsoft</td>
+<td>Agent Framework</td>
+<td>Agent vs <strong>workflow</strong>; function-first</td>
+<td>When-not + workflow</td>
+<td><code>SRC-MS-AGENT-FRAMEWORK</code></td>
+</tr>
+<tr>
+<td>Microsoft</td>
+<td>Foundry Agent Service / hosted agents</td>
+<td>Hosted container agents; A2A <strong>preview</strong></td>
+<td>Long-running / hosted</td>
+<td><code>SRC-MS-FOUNDRY-AGENTS</code>, <code>SRC-MS-HOSTED-AGENTS</code></td>
+</tr>
+<tr>
+<td>OpenAI</td>
+<td>Agents SDK</td>
+<td>Agent + tools + loop; handoffs, guardrails, sessions, HITL, MCP</td>
+<td>ReAct / HITL / handoff</td>
+<td><code>SRC-OPENAI-AGENTS-SDK</code></td>
+</tr>
+<tr>
+<td>Google</td>
+<td>Agent Development Kit (ADK)</td>
+<td>Agents, workflows, evaluation, deployment</td>
+<td>Toolkit</td>
+<td><code>SRC-GOOGLE-ADK</code></td>
+</tr>
+<tr>
+<td>Amazon</td>
+<td>Bedrock AgentCore</td>
+<td>Modular runtime, gateway, identity, policy, memory, observability</td>
+<td>Hosted control plane</td>
+<td><code>SRC-AWS-BEDROCK-AGENTCORE</code></td>
+</tr>
+<tr>
+<td>Amazon</td>
+<td>Bedrock Agents <em>Classic</em></td>
+<td>Action groups + knowledge bases — <strong>not</strong> green-field for new customers</td>
+<td>Legacy</td>
+<td><code>SRC-AWS-BEDROCK-AGENTS</code></td>
+</tr>
+<tr>
+<td>LangChain</td>
+<td>LangGraph</td>
+<td>Durable execution, HITL, persistence / checkpointers</td>
+<td>Stateful / durable</td>
+<td><code>SRC-LANGGRAPH-OVERVIEW</code>, <code>SRC-LANGGRAPH-PERSISTENCE</code></td>
+</tr>
+<tr>
+<td>CrewAI</td>
+<td>Crews / flows</td>
+<td>Multi-agent crews vs explicit flows</td>
+<td>Multi-agent vs workflow</td>
+<td><code>SRC-CREWAI-INTRO</code></td>
+</tr>
+<tr>
+<td>LlamaIndex</td>
+<td>Agents + workflows</td>
+<td>Agents that can use retrieve as a tool</td>
+<td>Agentic RAG</td>
+<td><code>SRC-LLAMAINDEX-AGENTS</code></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  Q{Next action known?} --&gt;|yes| W[Workflow / function]
+  Q --&gt;|no| V[Pick a documented runtime]
+  V --&gt; Id[Identity on the tool]
+  V --&gt; Obs[Spans / traces]
+  V --&gt; Stop[HITL / policy stop]
+</pre>
+<h2>What every vendor still leaves to you</h2>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Why a SKU does not finish it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tool identity</td>
+<td>Hidden system-prompt “you may not refund” is LLM08-shaped (<code>SRC-OWASP-LLM-TOP10-2026-GH</code>)</td>
+</tr>
+<tr>
+<td>Excessive agency</td>
+<td>OWASP LLM03 — cap tools, not adjectives</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td>OpenTelemetry GenAI conventions are <strong>development</strong> status (<code>SRC-OTEL-GENAI-SEMCONV</code>, <code>SRC-OTEL-DOCUMENT-STATUS</code>)</td>
+</tr>
+<tr>
+<td>Price</td>
+<td>AgentCore and Azure pages point at consumption / pricing sites — dollar rates <strong>UNVERIFIED</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>Architect challenge</h2>
+<p>Take a refund that is already a state machine. Implement it as a workflow. Then list the <strong>one</strong> uncertainty that would justify an agent. If you cannot name it, do not pick a vendor agent SKU.</p>
+<p>Recent shipped assignments (Duolingo, Mobileye, KTern SAP, Microsoft claw): <a href="../41-REAL-WORLD-USE-CASES/recent-agentic-assignments.html">41 — recent agentic assignments</a>.</p>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">When not</a> · <a href="../41-REAL-WORLD-USE-CASES/recent-agentic-assignments.html">Recent assignments</a> · <a href="../00-MASTER-MAP/sources-and-reading.html">Sources catalog</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -45,7 +45,7 @@ def depth_prefix(rel: Path) -> str:
 STEM_META = {
     "01-overview": (1, "Overview"),
     "02-simple": (2, "Simple"),
-    "03-logical": (3, "Logical"),
+    "03-logical": (3, "Medium"),
     "04-mechanical": (3, "Mechanical"),
     "05-implementation": (4, "Implement"),
     "06-engineering": (5, "Engineering"),
@@ -54,18 +54,40 @@ STEM_META = {
     "09-security": (6, "Security"),
     "10-evaluation": (5, "Evaluation"),
     "14-failure-modes": (5, "Failures"),
+    "15-real-world-example": (6, "Complex"),
     "16-hands-on": (4, "Do"),
     "17-break-lab": (4, "Break"),
     "19-comparison": (2, "When not"),
+    "recent-agentic-assignments": (6, "Recent"),
+    "A-enterprise-rag": (6, "A — RAG"),
+    "B-enterprise-agent": (6, "B — Agent"),
+    "C-nl2sql": (6, "C — NL2SQL"),
+    "D-data-engineering-agent": (6, "D — Data agent"),
+    "E-multi-agent": (6, "E — Multi-agent"),
+    "L01": (4, "L1"),
+    "L02": (4, "L2"),
+    "L03": (4, "L3"),
+    "L04": (4, "L4"),
+    "L05": (4, "L5"),
+    "L06": (4, "L6"),
+    "L07": (4, "L7"),
+    "L08": (4, "L8"),
+    "L09": (4, "L9"),
+    "L10": (4, "L10"),
+    "eval": (2, "Eval sheet"),
+    "mcp-vs-tools": (2, "MCP vs tools"),
+    "rag-vs-agent": (2, "RAG vs agent"),
+    "security-top10": (2, "OWASP map"),
 }
 
-# Overview | Simple | When not | Do, then other concept files.
+# Same topic: Overview | Simple | Medium | Complex, then When not | Do.
 PILL_ORDER = [
     "01-overview",
     "02-simple",
+    "03-logical",
+    "15-real-world-example",
     "19-comparison",
     "16-hands-on",
-    "03-logical",
     "04-mechanical",
     "05-implementation",
     "06-engineering",
@@ -75,6 +97,26 @@ PILL_ORDER = [
     "10-evaluation",
     "14-failure-modes",
     "17-break-lab",
+    "recent-agentic-assignments",
+    "A-enterprise-rag",
+    "B-enterprise-agent",
+    "C-nl2sql",
+    "D-data-engineering-agent",
+    "E-multi-agent",
+    "L01",
+    "L02",
+    "L03",
+    "L04",
+    "L05",
+    "L06",
+    "L07",
+    "L08",
+    "L09",
+    "L10",
+    "rag-vs-agent",
+    "mcp-vs-tools",
+    "eval",
+    "security-top10",
 ]
 
 
@@ -169,9 +211,11 @@ def page_shell(title: str, body: str, rel: Path, source_md: str) -> str:
   </article>
   <script src="{prefix}app/js/learn-path.js"></script>
   <script src="{prefix}app/js/page-index.js"></script>
+  <script src="{prefix}app/js/sources-index.js"></script>
   <script src="{prefix}app/js/shell.js"></script>
   <script src="{prefix}app/js/depth.js"></script>
   <script src="{prefix}app/js/why-chain.js"></script>
+  <script src="{prefix}app/js/refs.js"></script>
   <script src="{prefix}app/js/mermaid-boot.js"></script>
 </body>
 </html>
@@ -247,8 +291,407 @@ def collect_targets() -> list[Path]:
     return files
 
 
+FOLDER_TOPICS = {
+    "01-FOUNDATIONS": ["tokens", "token-counting", "structured-output", "workflows"],
+    "05-LLM-APPLICATION-ENGINEERING": ["structured-output", "evals"],
+    "06-EMBEDDINGS": ["embeddings", "vector-search"],
+    "07-VECTOR-DATABASES": ["vector-search", "postgres", "hybrid-search"],
+    "08-RAG": ["rag", "embeddings", "retrieval", "hybrid-search", "search", "citations"],
+    "09-AGENTIC-RAG": ["rag", "agents", "retrieval"],
+    "10-AGENTS": ["agents", "workflows", "handoffs", "hitl", "mcp"],
+    "12-TOOLS-FUNCTION-CALLING": ["agents", "mcp"],
+    "13-MCP": ["mcp", "tools"],
+    "14-MULTI-AGENT-SYSTEMS": ["agents", "crews"],
+    "18-EVALUATION": ["evals", "benchmarks"],
+    "21-AI-SECURITY": ["prompt-injection", "excessive-agency", "llm01", "llm09"],
+    "22-GUARDRAILS": ["guardrails", "content-filters"],
+    "23-PHI-PII-DLP": ["pii", "anonymization"],
+    "24-AI-GOVERNANCE": ["govern", "ai-rmf"],
+    "26-AI-CLOUD-ARCHITECTURE": ["rag", "agents"],
+    "41-REAL-WORLD-USE-CASES": ["agents", "mcp", "evaluation", "workflows", "support"],
+}
+
+
+def parse_sources_yaml(text: str) -> list[dict]:
+    entries: list[dict] = []
+    current: dict | None = None
+    for raw in text.splitlines():
+        if re.match(r"\s+- source_id:", raw):
+            if current:
+                entries.append(current)
+            current = {
+                "id": raw.split(":", 1)[1].strip(),
+                "title": "",
+                "url": "",
+                "publisher": "",
+                "topics": [],
+            }
+            continue
+        if current is None:
+            continue
+        if re.match(r"\s+title:", raw):
+            current["title"] = raw.split(":", 1)[1].strip()
+        elif re.match(r"\s+URL:", raw):
+            current["url"] = raw.split(":", 1)[1].strip()
+        elif re.match(r"\s+publisher:", raw):
+            current["publisher"] = raw.split(":", 1)[1].strip()
+        elif re.match(r"\s+topics:", raw):
+            inner = raw.split(":", 1)[1].strip().strip("[]")
+            current["topics"] = [t.strip() for t in inner.split(",") if t.strip()]
+    if current:
+        entries.append(current)
+    return entries
+
+
+def write_sources_index() -> Path:
+    import json
+
+    src = META_DIR / "sources.yaml"
+    entries = parse_sources_yaml(src.read_text(encoding="utf-8")) if src.is_file() else []
+    by_id = {e["id"]: e for e in entries if e.get("id")}
+    out = ROOT / "app" / "js" / "sources-index.js"
+    payload = {
+        "sources": by_id,
+        "folder_topics": FOLDER_TOPICS,
+    }
+    out.write_text(
+        "/* Generated from 99-META/sources.yaml — do not edit by hand. */\n"
+        f"window.LAB_SOURCES = {json.dumps(payload, indent=2)};\n",
+        encoding="utf-8",
+    )
+    return out
+
+
+FOLDER_MODULE = {
+    "00-MASTER-MAP": "map",
+    "01-FOUNDATIONS": "foundations",
+    "02-PYTHON-FOR-AI": "foundations",
+    "03-LLM-ENGINEERING": "foundations",
+    "04-PROMPT-ENGINEERING": "foundations",
+    "05-LLM-APPLICATION-ENGINEERING": "foundations",
+    "06-EMBEDDINGS": "rag",
+    "07-VECTOR-DATABASES": "rag",
+    "08-RAG": "rag",
+    "09-AGENTIC-RAG": "rag",
+    "10-AGENTS": "agents",
+    "12-TOOLS-FUNCTION-CALLING": "agents",
+    "13-MCP": "agents",
+    "11-AGENT-ORCHESTRATION": "agents",
+    "14-MULTI-AGENT-SYSTEMS": "agents",
+    "15-NL2SQL": "agents",
+    "16-AI-DATA-ENGINEERING": "agents",
+    "17-LLM-DATA-PIPELINES": "agents",
+    "18-EVALUATION": "eval",
+    "21-AI-SECURITY": "security",
+    "22-GUARDRAILS": "security",
+    "23-PHI-PII-DLP": "security",
+    "24-AI-GOVERNANCE": "security",
+    "25-RESPONSIBLE-AI": "security",
+    "19-OBSERVABILITY": "production",
+    "20-LLMOPS": "production",
+    "36-AI-TESTING": "production",
+    "37-AI-PERFORMANCE": "production",
+    "38-AI-COST": "production",
+    "39-AI-PRODUCTION-OPERATIONS": "production",
+    "26-AI-CLOUD-ARCHITECTURE": "production",
+    "40-REFERENCE-ARCHITECTURES": "production",
+    "27-AZURE-AI": "production",
+    "28-AWS-AI": "production",
+    "29-GCP-AI": "production",
+    "30-DATABRICKS-AI": "production",
+    "41-REAL-WORLD-USE-CASES": "labs",
+    "42-CAPSTONE-PROJECTS": "labs",
+    "43-EXPERIMENTS": "labs",
+    "48-GLOSSARY": "reference",
+    "50-CHEAT-SHEETS": "reference",
+    "46-DESIGN-PATTERNS": "reference",
+    "47-ANTI-PATTERNS": "reference",
+    "44-ARCHITECTURE-INTERVIEWS": "reference",
+}
+
+# Teaching order. Empty 31–35, 45, 49 stay off the path.
+FOLDER_ORDER = [
+    "00-MASTER-MAP",
+    "01-FOUNDATIONS",
+    "02-PYTHON-FOR-AI",
+    "03-LLM-ENGINEERING",
+    "04-PROMPT-ENGINEERING",
+    "05-LLM-APPLICATION-ENGINEERING",
+    "06-EMBEDDINGS",
+    "07-VECTOR-DATABASES",
+    "08-RAG",
+    "09-AGENTIC-RAG",
+    "10-AGENTS",
+    "12-TOOLS-FUNCTION-CALLING",
+    "13-MCP",
+    "11-AGENT-ORCHESTRATION",
+    "14-MULTI-AGENT-SYSTEMS",
+    "15-NL2SQL",
+    "16-AI-DATA-ENGINEERING",
+    "17-LLM-DATA-PIPELINES",
+    "18-EVALUATION",
+    "21-AI-SECURITY",
+    "22-GUARDRAILS",
+    "23-PHI-PII-DLP",
+    "24-AI-GOVERNANCE",
+    "25-RESPONSIBLE-AI",
+    "19-OBSERVABILITY",
+    "20-LLMOPS",
+    "36-AI-TESTING",
+    "37-AI-PERFORMANCE",
+    "38-AI-COST",
+    "39-AI-PRODUCTION-OPERATIONS",
+    "26-AI-CLOUD-ARCHITECTURE",
+    "40-REFERENCE-ARCHITECTURES",
+    "27-AZURE-AI",
+    "28-AWS-AI",
+    "29-GCP-AI",
+    "30-DATABRICKS-AI",
+    "41-REAL-WORLD-USE-CASES",
+    "42-CAPSTONE-PROJECTS",
+    "43-EXPERIMENTS",
+    "48-GLOSSARY",
+    "50-CHEAT-SHEETS",
+    "46-DESIGN-PATTERNS",
+    "47-ANTI-PATTERNS",
+    "44-ARCHITECTURE-INTERVIEWS",
+]
+
+MAP_COURSE = [
+    "master-mindmap",
+    "hybrid-knowledge-architecture",
+    "reference-architecture",
+    "learning-sequence",
+    "sources-and-reading",
+]
+
+
+def md_title(md_path: Path, fallback: str) -> str:
+    if not md_path.is_file():
+        return fallback
+    return title_from_md(strip_frontmatter(md_path.read_text(encoding="utf-8")), fallback)
+
+
+def write_learn_path() -> Path:
+    """Linear path = HTML that already exists. Do not invent missing Advanced pages."""
+    import json
+
+    rank = {stem: i for i, stem in enumerate(PILL_ORDER)}
+    lessons: list[dict] = [
+        {
+            "href": "index.html",
+            "title": "Start",
+            "module": "start",
+            "folder": "",
+            "section": "Start",
+        }
+    ]
+
+    for folder in FOLDER_ORDER:
+        module = FOLDER_MODULE.get(folder)
+        if not module:
+            continue
+        d = ROOT / folder
+        if not d.is_dir():
+            continue
+        mds = [p for p in d.glob("*.md") if p.stem != "README"]
+        if folder == "00-MASTER-MAP":
+            allowed = set(MAP_COURSE)
+            mds = [p for p in mds if p.stem in allowed]
+            mds.sort(key=lambda p: MAP_COURSE.index(p.stem) if p.stem in allowed else 99)
+        else:
+            mds.sort(key=lambda p: (rank.get(p.stem, 100), p.stem))
+        if not mds:
+            continue
+        section = md_title(d / "01-overview.md", folder.split("-", 1)[-1].replace("-", " "))
+        if folder == "00-MASTER-MAP":
+            section = "Map"
+        for md_path in mds:
+            html_rel = f"{folder}/{md_path.stem}.html"
+            title = md_title(md_path, md_path.stem.replace("-", " "))
+            lessons.append(
+                {
+                    "href": html_rel,
+                    "title": title,
+                    "module": module,
+                    "folder": folder,
+                    "section": section,
+                }
+            )
+        if folder == "00-MASTER-MAP" and (ROOT / "why-chains.md").is_file():
+            lessons.append(
+                {
+                    "href": "why-chains.html",
+                    "title": md_title(ROOT / "why-chains.md", "Why-chains"),
+                    "module": "map",
+                    "folder": "00-MASTER-MAP",
+                    "section": "Map",
+                }
+            )
+        if folder == "43-EXPERIMENTS":
+            lessons.append(
+                {
+                    "href": "simulations.html",
+                    "title": "Simulations",
+                    "module": "labs",
+                    "folder": "",
+                    "section": "Simulations",
+                }
+            )
+
+    modules = [
+        {"id": "start", "label": "Start"},
+        {"id": "map", "label": "Map"},
+        {"id": "foundations", "label": "Foundations"},
+        {"id": "rag", "label": "RAG"},
+        {"id": "agents", "label": "Agents"},
+        {"id": "eval", "label": "Eval"},
+        {"id": "security", "label": "Security"},
+        {"id": "production", "label": "Production"},
+        {"id": "labs", "label": "Labs"},
+        {"id": "reference", "label": "Reference"},
+    ]
+
+    out = ROOT / "app" / "js" / "learn-path.js"
+    payload_lessons = json.dumps(lessons, indent=2)
+    payload_mods = json.dumps(modules, indent=2)
+    out.write_text(
+        "/* Generated by app/tools/render-pages.py from HTML/Markdown that exists. */\n"
+        "(function () {\n"
+        f"  var L = {payload_lessons};\n"
+        f"  var MODULES = {payload_mods};\n"
+        r"""
+  function relPath() {
+    var path = window.location.pathname.replace(/\\/g, "/");
+    var parts = path.split("/").filter(Boolean);
+    var file = parts[parts.length - 1] || "index.html";
+    if (!/\.html$/i.test(file) && file.indexOf(".") === -1) file = "index.html";
+    var parent = parts.length >= 2 ? parts[parts.length - 2] : "";
+    if (parent === "00-MASTER-MAP") return "00-MASTER-MAP/" + file;
+    if (parent === "99-META") return "99-META/" + file;
+    if (/^\d{2}-/.test(parent)) return parent + "/" + file;
+    return file;
+  }
+
+  function folderOf(href) {
+    var i = href.lastIndexOf("/");
+    return i === -1 ? "" : href.slice(0, i);
+  }
+
+  function moduleOf(href) {
+    var i;
+    for (i = 0; i < L.length; i++) {
+      if (L[i].href === href) return L[i].module;
+    }
+    if (href === "simulations.html") return "labs";
+    if (href === "progress.html" || href === "index.html") return "start";
+    var folder = folderOf(href);
+    if (!folder) return "start";
+    for (i = 0; i < L.length; i++) {
+      if ((L[i].folder || folderOf(L[i].href)) === folder) return L[i].module;
+    }
+    if (folder === "00-MASTER-MAP") return "map";
+    return "start";
+  }
+
+  function indexOfHere() {
+    var here = relPath();
+    for (var i = 0; i < L.length; i++) {
+      if (L[i].href === here) return i;
+    }
+    return -1;
+  }
+
+  function pageTitle() {
+    var h1 = document.querySelector(".lab-article h1");
+    if (h1 && h1.textContent) return h1.textContent.trim();
+    return document.title.replace(/\s+—\s+AI Engineering Knowledge Lab$/, "") || relPath();
+  }
+
+  function firstInFolder(folder) {
+    for (var i = 0; i < L.length; i++) {
+      if ((L[i].folder || folderOf(L[i].href)) === folder) return L[i];
+    }
+    return null;
+  }
+
+  window.LabPath = {
+    lessons: L,
+    modules: MODULES,
+    relPath: relPath,
+    indexOfHere: indexOfHere,
+    moduleOf: moduleOf,
+    current: function () {
+      var i = indexOfHere();
+      if (i >= 0) return L[i];
+      var here = relPath();
+      var folder = folderOf(here);
+      var first = folder ? firstInFolder(folder) : null;
+      return {
+        href: here,
+        title: pageTitle(),
+        module: (first && first.module) || moduleOf(here),
+        folder: folder,
+        section: first ? first.section : pageTitle()
+      };
+    },
+    prev: function () {
+      var i = indexOfHere();
+      if (i > 0) return L[i - 1];
+      if (i === 0) return null;
+      var folder = folderOf(relPath());
+      var first = folder ? firstInFolder(folder) : null;
+      if (first) {
+        var fi = -1;
+        for (var n = 0; n < L.length; n++) {
+          if (L[n].href === first.href) { fi = n; break; }
+        }
+        return fi > 0 ? L[fi - 1] : first;
+      }
+      return L[0];
+    },
+    next: function () {
+      var i = indexOfHere();
+      if (i >= 0 && i < L.length - 1) return L[i + 1];
+      if (i === L.length - 1) return null;
+      var folder = folderOf(relPath());
+      var first = folder ? firstInFolder(folder) : null;
+      if (first) {
+        var fi = -1;
+        for (var n = 0; n < L.length; n++) {
+          if (L[n].href === first.href) { fi = n; break; }
+        }
+        return fi >= 0 && fi < L.length - 1 ? L[fi + 1] : L[1];
+      }
+      return L[1];
+    },
+    inModule: function (id) {
+      var seen = {};
+      var out = [];
+      L.forEach(function (x) {
+        if (x.module !== id) return;
+        var key = x.folder || folderOf(x.href) || x.href;
+        if (seen[key]) return;
+        seen[key] = true;
+        out.push({
+          href: x.href,
+          title: x.section || x.title,
+          module: id,
+          folder: key
+        });
+      });
+      return out;
+    }
+  };
+})();
+""",
+        encoding="utf-8",
+    )
+    return out
+
+
 def write_page_index(md_files: list[Path]) -> Path:
-    """Concept HTML siblings only (Overview / Simple / When not / Do). Generated."""
+    """Concept HTML siblings: Overview | Simple | Medium | Complex | When not | Do."""
     import json
     from collections import defaultdict
 
@@ -289,7 +732,9 @@ def write_page_index(md_files: list[Path]) -> Path:
 def main() -> int:
     written: list[Path] = []
     targets = collect_targets()
+    written.append(write_sources_index())
     written.append(write_page_index(targets))
+    written.append(write_learn_path())
     for md_path in targets:
         written.append(render_one(md_path))
     written.append(write_master_map_index())

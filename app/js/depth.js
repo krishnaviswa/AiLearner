@@ -28,7 +28,7 @@
     nav.setAttribute("aria-label", "Pages in this concept");
     var label = document.createElement("p");
     label.className = "lab-steps-caption";
-    label.textContent = "This concept";
+    label.textContent = "Same topic — go deeper";
     nav.appendChild(label);
     var row = document.createElement("div");
     row.className = "lab-steps";

@@ -11,9 +11,9 @@ status: verified
 related_nodes: [agent, react-agent, router-agent, planner-executor, multi-agent]
 ---
 
-# Agent flavors map
+# Agent flavors map (Medium)
 
-Taxonomy list from [master-taxonomy.md](../00-MASTER-MAP/master-taxonomy.md). This is a **map**, not 21 files per flavor.
+Same topic as the [overview](01-overview.md). Taxonomy list from [master-taxonomy.md](../00-MASTER-MAP/master-taxonomy.md). This is a **map**, not 21 files per flavor. Next depth: [Complex — vendor runtimes](15-real-world-example.md).
 
 | Flavor | Kind | This lab |
 |---|---|---|

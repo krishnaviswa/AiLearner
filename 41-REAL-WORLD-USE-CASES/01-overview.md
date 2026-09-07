@@ -42,6 +42,8 @@ flowchart LR
 
 Full outlines remain in [projects.md](../00-MASTER-MAP/projects.md). Implementations: [42](../42-CAPSTONE-PROJECTS/01-overview.md).
 
+**Recent (2026) assignments people actually published:** [Recent challenging agentic assignments](recent-agentic-assignments.md) — Duolingo platform, Mobileye support, KTern SAP fleet, Microsoft claw harness, current coding-agent benches. Publisher metrics stay UNVERIFIED.
+
 ## What should I learn next?
 
 [Ladder](../42-CAPSTONE-PROJECTS/01-overview.md) · [Architect interviews](../44-ARCHITECTURE-INTERVIEWS/01-overview.md)

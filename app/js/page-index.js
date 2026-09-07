@@ -14,6 +14,18 @@ window.LAB_PAGE_INDEX = {
       "stem": "02-simple"
     },
     {
+      "file": "03-logical.html",
+      "level": 3,
+      "label": "Medium",
+      "stem": "03-logical"
+    },
+    {
+      "file": "15-real-world-example.html",
+      "level": 6,
+      "label": "Complex",
+      "stem": "15-real-world-example"
+    },
+    {
       "file": "19-comparison.html",
       "level": 2,
       "label": "When not",
@@ -196,6 +208,18 @@ window.LAB_PAGE_INDEX = {
       "stem": "02-simple"
     },
     {
+      "file": "03-logical.html",
+      "level": 3,
+      "label": "Medium",
+      "stem": "03-logical"
+    },
+    {
+      "file": "15-real-world-example.html",
+      "level": 6,
+      "label": "Complex",
+      "stem": "15-real-world-example"
+    },
+    {
       "file": "19-comparison.html",
       "level": 2,
       "label": "When not",
@@ -248,6 +272,18 @@ window.LAB_PAGE_INDEX = {
       "stem": "02-simple"
     },
     {
+      "file": "03-logical.html",
+      "level": 3,
+      "label": "Medium",
+      "stem": "03-logical"
+    },
+    {
+      "file": "15-real-world-example.html",
+      "level": 6,
+      "label": "Complex",
+      "stem": "15-real-world-example"
+    },
+    {
       "file": "19-comparison.html",
       "level": 2,
       "label": "When not",
@@ -258,12 +294,6 @@ window.LAB_PAGE_INDEX = {
       "level": 4,
       "label": "Do",
       "stem": "16-hands-on"
-    },
-    {
-      "file": "03-logical.html",
-      "level": 3,
-      "label": "Logical",
-      "stem": "03-logical"
     }
   ],
   "11-AGENT-ORCHESTRATION": [
@@ -426,6 +456,12 @@ window.LAB_PAGE_INDEX = {
       "stem": "02-simple"
     },
     {
+      "file": "03-logical.html",
+      "level": 3,
+      "label": "Medium",
+      "stem": "03-logical"
+    },
+    {
       "file": "19-comparison.html",
       "level": 2,
       "label": "When not",
@@ -436,12 +472,6 @@ window.LAB_PAGE_INDEX = {
       "level": 4,
       "label": "Do",
       "stem": "16-hands-on"
-    },
-    {
-      "file": "03-logical.html",
-      "level": 3,
-      "label": "Logical",
-      "stem": "03-logical"
     },
     {
       "file": "14-failure-modes.html",
@@ -482,7 +512,7 @@ window.LAB_PAGE_INDEX = {
     {
       "file": "03-logical.html",
       "level": 3,
-      "label": "Logical",
+      "label": "Medium",
       "stem": "03-logical"
     }
   ],
@@ -528,16 +558,16 @@ window.LAB_PAGE_INDEX = {
       "stem": "01-overview"
     },
     {
+      "file": "03-logical.html",
+      "level": 3,
+      "label": "Medium",
+      "stem": "03-logical"
+    },
+    {
       "file": "19-comparison.html",
       "level": 2,
       "label": "When not",
       "stem": "19-comparison"
-    },
-    {
-      "file": "03-logical.html",
-      "level": 3,
-      "label": "Logical",
-      "stem": "03-logical"
     }
   ],
   "25-RESPONSIBLE-AI": [
@@ -638,6 +668,36 @@ window.LAB_PAGE_INDEX = {
       "level": 1,
       "label": "Overview",
       "stem": "01-overview"
+    },
+    {
+      "file": "A-enterprise-rag.html",
+      "level": 6,
+      "label": "A \u2014 RAG",
+      "stem": "A-enterprise-rag"
+    },
+    {
+      "file": "B-enterprise-agent.html",
+      "level": 6,
+      "label": "B \u2014 Agent",
+      "stem": "B-enterprise-agent"
+    },
+    {
+      "file": "C-nl2sql.html",
+      "level": 6,
+      "label": "C \u2014 NL2SQL",
+      "stem": "C-nl2sql"
+    },
+    {
+      "file": "D-data-engineering-agent.html",
+      "level": 6,
+      "label": "D \u2014 Data agent",
+      "stem": "D-data-engineering-agent"
+    },
+    {
+      "file": "E-multi-agent.html",
+      "level": 6,
+      "label": "E \u2014 Multi-agent",
+      "stem": "E-multi-agent"
     }
   ],
   "41-REAL-WORLD-USE-CASES": [
@@ -646,6 +706,12 @@ window.LAB_PAGE_INDEX = {
       "level": 1,
       "label": "Overview",
       "stem": "01-overview"
+    },
+    {
+      "file": "recent-agentic-assignments.html",
+      "level": 6,
+      "label": "Recent",
+      "stem": "recent-agentic-assignments"
     }
   ],
   "42-CAPSTONE-PROJECTS": [
@@ -654,6 +720,66 @@ window.LAB_PAGE_INDEX = {
       "level": 1,
       "label": "Overview",
       "stem": "01-overview"
+    },
+    {
+      "file": "L01.html",
+      "level": 4,
+      "label": "L1",
+      "stem": "L01"
+    },
+    {
+      "file": "L02.html",
+      "level": 4,
+      "label": "L2",
+      "stem": "L02"
+    },
+    {
+      "file": "L03.html",
+      "level": 4,
+      "label": "L3",
+      "stem": "L03"
+    },
+    {
+      "file": "L04.html",
+      "level": 4,
+      "label": "L4",
+      "stem": "L04"
+    },
+    {
+      "file": "L05.html",
+      "level": 4,
+      "label": "L5",
+      "stem": "L05"
+    },
+    {
+      "file": "L06.html",
+      "level": 4,
+      "label": "L6",
+      "stem": "L06"
+    },
+    {
+      "file": "L07.html",
+      "level": 4,
+      "label": "L7",
+      "stem": "L07"
+    },
+    {
+      "file": "L08.html",
+      "level": 4,
+      "label": "L8",
+      "stem": "L08"
+    },
+    {
+      "file": "L09.html",
+      "level": 4,
+      "label": "L9",
+      "stem": "L09"
+    },
+    {
+      "file": "L10.html",
+      "level": 4,
+      "label": "L10",
+      "stem": "L10"
     }
   ],
   "43-EXPERIMENTS": [
@@ -702,6 +828,30 @@ window.LAB_PAGE_INDEX = {
       "level": 1,
       "label": "Overview",
       "stem": "01-overview"
+    },
+    {
+      "file": "rag-vs-agent.html",
+      "level": 2,
+      "label": "RAG vs agent",
+      "stem": "rag-vs-agent"
+    },
+    {
+      "file": "mcp-vs-tools.html",
+      "level": 2,
+      "label": "MCP vs tools",
+      "stem": "mcp-vs-tools"
+    },
+    {
+      "file": "eval.html",
+      "level": 2,
+      "label": "Eval sheet",
+      "stem": "eval"
+    },
+    {
+      "file": "security-top10.html",
+      "level": 2,
+      "label": "OWASP map",
+      "stem": "security-top10"
     }
   ]
 };

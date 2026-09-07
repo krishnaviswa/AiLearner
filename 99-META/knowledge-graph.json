@@ -1,8 +1,8 @@
 {
-  "version": "1.10.0",
+  "version": "1.10.1",
   "status": "gate-10-integration",
   "last_updated": "2026-09-07",
-  "notes": "Gate 10 catalogs: glossary, cheat-sheets, interviews, taught patterns/anti-patterns. Taught folders 17/27-30/36/39 now have nodes.",
+  "notes": "v1.10.1 adds recent-agentic-assignments (fetched 2026 production posts + official coding-agent evals).",
   "nodes": [
     {"id": "business-problem", "label": "Business problem", "folder": "00-MASTER-MAP", "kind": "context"},
     {"id": "data", "label": "Data", "folder": "16-AI-DATA-ENGINEERING", "kind": "layer"},
@@ -87,7 +87,8 @@
     {"id": "cheat-sheets", "label": "Cheat-sheets", "folder": "50-CHEAT-SHEETS", "kind": "index"},
     {"id": "interviews", "label": "Architect interviews", "folder": "44-ARCHITECTURE-INTERVIEWS", "kind": "index"},
     {"id": "design-patterns", "label": "Taught design patterns", "folder": "46-DESIGN-PATTERNS", "kind": "index"},
-    {"id": "anti-patterns", "label": "Taught anti-patterns", "folder": "47-ANTI-PATTERNS", "kind": "index"}
+    {"id": "anti-patterns", "label": "Taught anti-patterns", "folder": "47-ANTI-PATTERNS", "kind": "index"},
+    {"id": "recent-agentic-assignments", "label": "Recent agentic assignments (2026)", "folder": "41-REAL-WORLD-USE-CASES", "kind": "map"}
   ],
   "edges": [
     {"from": "business-problem", "rel": "requires", "to": "data"},
@@ -271,6 +272,10 @@
     {"from": "anti-patterns", "rel": "warns", "to": "when-not-agent"},
     {"from": "anti-patterns", "rel": "warns", "to": "permission-aware-rag"},
     {"from": "anti-patterns", "rel": "warns", "to": "llm-judge"},
-    {"from": "use-case-map", "rel": "points-to", "to": "arch-enterprise-rag"}
+    {"from": "use-case-map", "rel": "points-to", "to": "arch-enterprise-rag"},
+    {"from": "use-case-map", "rel": "points-to", "to": "recent-agentic-assignments"},
+    {"from": "recent-agentic-assignments", "rel": "illustrates", "to": "agent"},
+    {"from": "recent-agentic-assignments", "rel": "requires", "to": "evaluation"},
+    {"from": "recent-agentic-assignments", "rel": "points-to", "to": "when-not-agent"}
   ]
 }

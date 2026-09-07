@@ -514,13 +514,18 @@ html[data-theme="dark"] .lab-cta {
   background: var(--code-bg);
 }
 
-.lab-why {
+.lab-why,
+.lab-refs {
   margin: 0 0 1.25rem;
   padding: 0.75rem 1rem;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--bg-elev);
 }
+
+.lab-refs h2 { margin-top: 0; font-size: 1.05rem; }
+.lab-refs h3 { font-size: 0.92rem; margin: 0.85rem 0 0.35rem; }
+.lab-refs ul { margin: 0.25rem 0 0.5rem; }
 
 .lab-why h2 { margin-top: 0; font-size: 1.05rem; }
 .lab-why-note { color: var(--muted); font-size: 0.85rem; }
