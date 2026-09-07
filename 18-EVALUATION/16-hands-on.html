@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — a golden-set loop (no fake score) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>18-EVALUATION/16-hands-on.md</code></p>
+    <h1>DO — a golden-set loop (no fake score)</h1>
+<p>Do not print “92%.” Print <strong>which cases failed</strong>.</p>
+<pre><code class="language-python">GOLD = {
+    &quot;t1&quot;: &quot;shipping&quot;,
+    &quot;t2&quot;: &quot;refund&quot;,
+    &quot;t3&quot;: &quot;other&quot;,
+}
+
+def predict(case_id: str) -&gt; str:
+    # Stub the system. Replace with a real call later — SDK names UNVERIFIED here.
+    return {&quot;t1&quot;: &quot;shipping&quot;, &quot;t2&quot;: &quot;refund&quot;, &quot;t3&quot;: &quot;refund&quot;}[case_id]
+
+def run() -&gt; list[str]:
+    failed = []
+    for cid, want in GOLD.items():
+        got = predict(cid)
+        if got != want:
+            failed.append(f&quot;{cid}: got {got} want {want}&quot;)
+    return failed
+
+print(run() or &quot;all gold passed&quot;)
+</code></pre>
+<h2>Experiment</h2>
+<ol>
+<li>Change gold <code>t3</code> and watch the harness catch it.</li>
+<li>Add a case with no gold — the harness must <strong>skip or fail closed</strong>, not invent a judge score.</li>
+<li>Optional later: wrap the same loop in CI (<a href="../36-AI-TESTING/01-overview.html">36 light note</a>).</li>
+</ol>
+<p><code>openai/evals</code> exists if you want a registry later (<code>SRC-OPENAI-EVALS</code>). This loop is enough to fail a PR.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

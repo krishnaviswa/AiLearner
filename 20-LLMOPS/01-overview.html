@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLMOps (release the behavior) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>20-LLMOPS/01-overview.md</code></p>
+    <h1>LLMOps (release the behavior)</h1>
+<p>CI/CD for <strong>prompts, indexes, tools, and models</strong> — not only containers.</p>
+<h2>What is it?</h2>
+<p>A change is a versioned artifact. The <strong>harness</strong> from Gate 5 is the unit test analog (<code>SRC-NIST-AI-RMF-LANDING</code> ties RMF to evaluation). No gold → no promote.</p>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>What “release” means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt / agent config</td>
+<td>Git + eval on gold</td>
+</tr>
+<tr>
+<td>Index / ACL metadata</td>
+<td>Rebuild + retrieve@k cases</td>
+</tr>
+<tr>
+<td>Tool schema</td>
+<td>Contract test + deny-by-default</td>
+</tr>
+<tr>
+<td>Model id</td>
+<td>Shadow or canary; never silent swap</td>
+</tr>
+<tr>
+<td>Guardrail policy</td>
+<td>Fail closed on parse error</td>
+</tr>
+</tbody>
+</table>
+<p>Foundry’s own lifecycle list is create → test → trace → evaluate → publish → monitor (<code>SRC-MS-FOUNDRY-AGENTS</code>). Portable version: <strong>your</strong> pipeline, not the portal.</p>
+<pre class="mermaid">flowchart TD
+  Ch[Change] --&gt; Ev[Eval harness]
+  Ev --&gt;|fail| Block[Do not promote]
+  Ev --&gt;|pass| Can[Canary]
+  Can --&gt; Mon[Observe]
+</pre>
+<h2>When not</h2>
+<p>Weekly prompt edits in a GUI with no version. “We’ll eval in prod.”</p>
+<h2>What should I learn next?</h2>
+<p><a href="../38-AI-COST/01-overview.html">Cost</a> · <a href="../37-AI-PERFORMANCE/01-overview.html">Performance</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

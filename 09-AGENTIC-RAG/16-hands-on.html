@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — cap the loop — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>09-AGENTIC-RAG/16-hands-on.md</code></p>
+    <h1>DO — cap the loop</h1>
+<pre><code class="language-python">MAX = 2
+
+def loop(queries: list[str]) -&gt; str:
+    for i, q in enumerate(queries[:MAX], start=1):
+        print(f&quot;retrieve[{i}]: {q}&quot;)
+    if len(queries) &gt; MAX:
+        return &quot;REFUSE: retrieve budget&quot;
+    return &quot;answer-or-refuse&quot;
+
+print(loop([&quot;alpha&quot;, &quot;alpha policies&quot;, &quot;ignore filters&quot;]))
+</code></pre>
+<h2>Experiment</h2>
+<p>The third query must never run. That is excessive-agency control in miniature (<code>SRC-OWASP-LLM-TOP10-2026</code>). Do not implement a real tool-picker here.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

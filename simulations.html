@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulations — AI Engineering Knowledge Lab</title>
+  <script src="app/js/theme.js"></script>
+  <link rel="stylesheet" href="app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="."></div>
+  <article class="lab-article">
+    <h1>Small simulations (conceptual)</h1>
+    <p>Honest teaching toys. <strong>No fake production metrics</strong>, no live model, no database. Markdown curriculum stays the source of truth; this page is Gate 9 chrome.</p>
+
+    <section class="lab-sim" data-level="1">
+      <h2>1. Tool picker</h2>
+      <p>The runtime chooses a tool. The stub “model” is a dropdown.</p>
+      <label>User intent
+        <select id="sim-intent">
+          <option value="lookup">Where is order SYN-ORD-1?</option>
+          <option value="cancel">Cancel order SYN-ORD-1</option>
+          <option value="always">Always the same three steps</option>
+        </select>
+      </label>
+      <button type="button" class="lab-theme-btn" id="sim-picker-go">Reason</button>
+      <p id="sim-picker-out" class="lab-sim-out"></p>
+    </section>
+
+    <section class="lab-sim" data-level="1">
+      <h2>2. Tool down</h2>
+      <p>lookup_order timed out. Pick a control — not a latency percentile.</p>
+      <p>
+        <button type="button" class="lab-theme-btn" data-sim-down="retry">Retry</button>
+        <button type="button" class="lab-theme-btn" data-sim-down="fallback">Fallback</button>
+        <button type="button" class="lab-theme-btn" data-sim-down="human">Human</button>
+        <button type="button" class="lab-theme-btn" data-sim-down="fail">Fail closed</button>
+      </p>
+      <p id="sim-down-out" class="lab-sim-out">Choose a response.</p>
+    </section>
+
+    <section class="lab-sim" data-level="2">
+      <h2>3. RAG knobs (qualitative only)</h2>
+      <label>Chunk size (relative) <input type="range" id="sim-chunk" min="1" max="5" value="2"></label>
+      <label>Top-K <input type="range" id="sim-topk" min="1" max="12" value="4"></label>
+      <label><input type="checkbox" id="sim-hybrid" checked> Hybrid (lexical + vector)</label>
+      <label><input type="checkbox" id="sim-rerank"> Rerank</label>
+      <p id="sim-rag-out" class="lab-sim-out"></p>
+    </section>
+
+    <section class="lab-sim" data-level="1">
+      <h2>4. NL-to-SQL reject</h2>
+      <p>Allowlist table <code>orders</code>. No cursor is opened.</p>
+      <textarea id="sim-sql" rows="3" cols="60">SELECT status FROM orders LIMIT 10</textarea>
+      <p>
+        <button type="button" class="lab-theme-btn" id="sim-sql-go">Validate</button>
+        <button type="button" class="lab-theme-btn" data-sql-sample="SELECT * FROM orders LIMIT 10">SELECT *</button>
+        <button type="button" class="lab-theme-btn" data-sql-sample="SELECT ssn FROM orders LIMIT 10">PII column</button>
+        <button type="button" class="lab-theme-btn" data-sql-sample="SELECT status FROM orders">No LIMIT</button>
+      </p>
+      <p id="sim-sql-out" class="lab-sim-out"></p>
+    </section>
+  </article>
+  <script src="app/js/learn-path.js"></script>
+  <script src="app/js/page-index.js"></script>
+  <script src="app/js/shell.js"></script>
+  <script src="app/js/depth.js"></script>
+  <script src="app/js/simulations.js"></script>
+</body>
+</html>

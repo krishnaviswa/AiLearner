@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L8 — Secure enterprise agent — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>42-CAPSTONE-PROJECTS/L08.md</code></p>
+    <h1>L8 — Secure enterprise agent</h1>
+<p><strong>Proves:</strong> identity + deterministic policy + egress. The system prompt is <strong>not</strong> the control (LLM08).</p>
+<h2>Runnable</h2>
+<p><code>python 42-CAPSTONE-PROJECTS/labs/l08_secure_agent.py</code></p>
+<h2>Toy vs production-oriented</h2>
+<p>Toy: “never leak MRNs” in a prompt. This lab: policy engine + regex at the sink.</p>
+<h2>BREAK</h2>
+<p>Hidden context contains <code>API_KEY=not-a-secret</code> as a <strong>negative</strong> test — the lab asserts credentials must <strong>not</strong> live there. Egress of <code>SYN-MRN-0001</code> is blocked.</p>
+<h2>Security</h2>
+<p>Synthetic only. Model-as-filter is a helper, not this gate (<a href="../22-GUARDRAILS/19-comparison.html">22</a>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="L09.html">L09</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

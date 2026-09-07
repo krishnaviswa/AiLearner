@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When not to embed — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>06-EMBEDDINGS/19-comparison.md</code></p>
+    <h1>When not to embed</h1>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Prefer</th>
+<th>Not embeddings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary key / order id</td>
+<td>SQL / API</td>
+<td>Fuzzy neighbors invent the wrong row</td>
+</tr>
+<tr>
+<td>Regulated exact match</td>
+<td>Deterministic lookup</td>
+<td>Similarity is not evidence</td>
+</tr>
+<tr>
+<td>Fast-changing facts</td>
+<td>Fresh store + retrieve, or don’t cache</td>
+<td>Stale vectors</td>
+</tr>
+<tr>
+<td>Tiny closed vocab</td>
+<td>Enum / classifier</td>
+<td>Overkill</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  Q{Is the answer a known key?}
+  Q --&gt;|yes| SQL[SQL / API]
+  Q --&gt;|no| P{Must neighbors respect ACL?}
+  P --&gt;|yes| E[Embed + filter]
+  P --&gt;|no| Toy[Toy demo only]
+</pre>
+<p>Do not treat embedding similarity as a permission check (<code>SRC-OWASP-LLM-TOP10-2026</code> vector/embedding weaknesses).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

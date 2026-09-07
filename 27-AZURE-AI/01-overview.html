@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Azure mapping (not a stack) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>27-AZURE-AI/01-overview.md</code></p>
+    <h1>Azure mapping (not a stack)</h1>
+<p>Sketch only. Names from Learn (<code>SRC-MS-FOUNDRY-WHAT-IS</code>, <code>SRC-MS-FOUNDRY-AGENTS</code>, fetched 2026-09-07): <strong>Microsoft Foundry</strong>, <strong>Foundry Agent Service</strong>. URL path stays <code>/azure/foundry/</code>. Previous brand: Azure AI Studio / Azure AI Foundry.</p>
+<h2>Concern → family</h2>
+<table>
+<thead>
+<tr>
+<th>Neutral concern</th>
+<th>Azure family (docs, not a BOM)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identity</td>
+<td>Microsoft Entra; per-agent identity on Agent Service (<code>SRC-MS-FOUNDRY-AGENTS</code>)</td>
+</tr>
+<tr>
+<td>Prompt-only agent</td>
+<td><strong>Prompt agents</strong> — config, Foundry runs them</td>
+</tr>
+<tr>
+<td>Bring-your-own code</td>
+<td><strong>Hosted agents</strong> — container or zip; Entra identity, scaling (<code>SRC-MS-HOSTED-AGENTS</code>)</td>
+</tr>
+<tr>
+<td>Retrieve</td>
+<td>Azure AI Search; Learn also mentions <strong>Foundry IQ</strong> as a knowledge layer on Search (<code>SRC-AZURE-AI-SEARCH-SKU</code>)</td>
+</tr>
+<tr>
+<td>Observe</td>
+<td>Tracing + Application Insights (same overview)</td>
+</tr>
+<tr>
+<td>A2A</td>
+<td><strong>A2A protocol (preview)</strong> on the hosted-agents page</td>
+</tr>
+</tbody>
+</table>
+<h2>Hosted agents are not treated as GA</h2>
+<p>Re-fetched <code>SRC-MS-HOSTED-AGENTS</code> on 2026-09-07. The page <strong>does not say generally available</strong>. It no longer repeats the older “currently in preview” sentence in the converted HTML; <strong>A2A is still labeled preview</strong>. This lab <strong>does not treat hosted agents as GA</strong> (owner rule: remain preview unless Learn says GA).</p>
+<p>Third-party frameworks and non-Foundry models remain <strong>your</strong> risk (<code>SRC-MS-HOSTED-AGENTS</code>).</p>
+<h2>Search tiers — names only, no prices</h2>
+<p>Learn (<code>SRC-AZURE-AI-SEARCH-SKU</code>, fetched 2026-09-07): Dedicated (Free, Basic, Standard S1–S3 / S3 HD, Storage Optimized L1–L2) vs <strong>Serverless (preview)</strong> Developer. Dollar rates: verify <a href="https://azure.microsoft.com/pricing/details/search/">Azure AI Search pricing</a> — <strong>UNVERIFIED</strong> here.</p>
+<pre class="mermaid">flowchart LR
+  App[Your app] --&gt; Entra[Entra]
+  Entra --&gt; FAS[Foundry Agent Service]
+  FAS --&gt; PA[Prompt agent]
+  FAS --&gt; HA[Hosted agent]
+  HA --&gt; ACR[Your container]
+  FAS --&gt; Search[Azure AI Search]
+</pre>
+<h2>What should I remember?</h2>
+<p>Mapping, not a recommendation to “do everything in Foundry.”</p>
+<h2>What should I learn next?</h2>
+<p><a href="../28-AWS-AI/01-overview.html">AWS map</a> · <a href="../40-REFERENCE-ARCHITECTURES/B-enterprise-agent.html">Architecture B</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

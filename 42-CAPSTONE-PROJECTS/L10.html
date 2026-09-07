@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L10 — Platform harness (not a platform) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>42-CAPSTONE-PROJECTS/L10.md</code></p>
+    <h1>L10 — Platform harness (not a platform)</h1>
+<p><strong>Proves:</strong> you can <strong>fail a release</strong> across the ladder. This is a <strong>smoke + checklist</strong>, not the fifteen-use-case factory and not a deployable “Enterprise AI Data &amp; Agent Platform.”</p>
+<h2>Runnable</h2>
+<p><code>python 42-CAPSTONE-PROJECTS/labs/l10_platform_harness.py</code></p>
+<p>It re-runs L1–L9. If any level fails, the “platform” does not ship.</p>
+<h2>Design the rest (homework, not this gate)</h2>
+<p>Capstone sketch from Gate 0: sources → lakehouse → knowledge → search → gateway → runtime → tools/MCP → RAG → NL2SQL → guardrails → DLP → eval → observe → gov → CI/CD. <strong>Do not implement it here.</strong></p>
+<p>NIST RMF Measure is the organizational name for this harness (<code>SRC-NIST-AI-RMF-LANDING</code>).</p>
+<h2>Toy vs production-oriented</h2>
+<table>
+<thead>
+<tr>
+<th>This lab</th>
+<th>A real platform</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ten local stubs</td>
+<td>Identity provider, real indexes, DR</td>
+</tr>
+<tr>
+<td>Exit code</td>
+<td>Same idea in CI (<a href="../20-LLMOPS/01-overview.html">20</a>)</td>
+</tr>
+<tr>
+<td>No prices</td>
+<td>Verify official price pages (<a href="../38-AI-COST/01-overview.html">38</a>)</td>
+</tr>
+</tbody>
+</table>
+<h2>BREAK</h2>
+<p>Comment out L3 in <code>run_all.py</code> locally — L10 should then fail. Do not “waive” a layer because the demo looks good.</p>
+<h2>Security</h2>
+<p>Still synthetic. Hosted agents stay <strong>not treated as GA</strong> (<a href="../27-AZURE-AI/01-overview.html">27</a>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="../41-REAL-WORLD-USE-CASES/01-overview.html">Use-case map</a> · Gate 9 interactive KB (after this gate PASSes)</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

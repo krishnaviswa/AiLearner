@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python for AI — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>02-PYTHON-FOR-AI/01-overview.md</code></p>
+    <h1>Python for AI</h1>
+<p>You already write Python. This domain is the <strong>shape</strong> of AI-adjacent code: typed payloads, timeouts, retries, and never trusting model text as code.</p>
+<h2>What is it?</h2>
+<p>The same skills you use for a REST client talking to a flaky downstream: <strong>async or explicit timeouts</strong>, <strong>schema at the boundary</strong>, <strong>idempotency keys</strong>, <strong>structured logs</strong>. The model is just another unreliable I/O.</p>
+<h2>Data / cloud analogy</h2>
+<p>A Databricks job that calls a vendor HTTP API: you do not <code>eval</code> the response. You deserialize, validate, and dead-letter. LLM output is that response.</p>
+<pre class="mermaid">flowchart LR
+  In[Typed request] --&gt; Call[HTTP / SDK call]
+  Call --&gt; Raw[Raw payload]
+  Raw --&gt; Val[Validate schema]
+  Val --&gt;|ok| Out[Domain object]
+  Val --&gt;|fail| DLQ[Retry / refuse / human]
+</pre>
+<h2>What we will not reteach</h2>
+<p>Loops, list comprehensions, “what is a class,” basic SQL.</p>
+<h2>When not to use an agent</h2>
+<p>If your Python already knows the next function to call, <strong>call it</strong>. Do not wrap a known <code>update_row()</code> in a tool-picking loop (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<h2>What should I remember?</h2>
+<p>Treat the model as an untrusted parser/generator behind a contract.</p>
+<h2>What should I learn next?</h2>
+<p><a href="02-simple.html">02-simple.md</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

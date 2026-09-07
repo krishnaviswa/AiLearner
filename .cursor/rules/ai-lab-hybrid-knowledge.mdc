@@ -1,0 +1,26 @@
+---
+description: Token-efficient hybrid knowledge — local artifacts first, LLM and web only when they add value.
+alwaysApply: true
+---
+
+# Hybrid knowledge (minimize repeated LLM calls)
+
+## Layer 1 — Baked knowledge (default)
+
+Answer from local Markdown, HTML, JSON, YAML, diagrams, code, decision matrices, and exercises.
+
+## Layer 2 — Local retrieval
+
+Question → search this repo → relevant docs → answer. Prefer reading `00-MASTER-MAP/`, `99-META/`, and the domain folder for the concept.
+
+## Layer 3 — LLM
+
+Use the model for adaptive explanation, Socratic questions, architecture reasoning, code generation, reviewing learner answers, debugging, comparing options, and new exercises — **after** local context is loaded.
+
+## Layer 4 — Current web research
+
+Required for volatile facts: APIs, SDKs, cloud capabilities, framework versions, pricing, deprecations. Then combine local durable knowledge + verified current info.
+
+Do not call the web to restate what embeddings or authorization are. Do not generate thousands of near-duplicate pages because information exists.
+
+Full design: `00-MASTER-MAP/hybrid-knowledge-architecture.md`.

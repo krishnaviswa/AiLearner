@@ -1,0 +1,36 @@
+---
+description: Phased gate process — QA chair PASS advances; standing auto-advance through Gate 10.
+alwaysApply: true
+---
+
+# Gate process
+
+Stop after the current gate's deliverables. Do not dump later gates.
+
+| Gate | Name | Outcome then STOP |
+|---|---|---|
+| 0 | SCOPE | Taxonomy, graphs, structure, architectures, maps, plan, sources, projects, sequence, HTML/hybrid proposals |
+| 1 | ARCHITECTURE | Validate architecture, relationships, tech categories, dependencies |
+| 2 | FOUNDATIONS | Fundamentals only |
+| 3 | RAG | RAG curriculum and labs |
+| 4 | AGENTS | Major agent patterns |
+| 5 | EVALUATION | Evaluation framework |
+| 6 | SECURITY | Security, guardrails, DLP, PII/PHI |
+| 7 | PRODUCTION | Production reference architectures |
+| 8 | HANDS-ON | Executable projects |
+| 9 | INTERACTIVE KB | HTML/JS application |
+| 10 | FINAL INTEGRATION | Cross-links only |
+
+## Advance rule
+
+Read `99-META/GATE-STATUS.md`. While `owner_policy` is **standing auto-advance through Gate 10**, human named-gate approval is **waived**. The go bit is **QA chair PASS** (`99-META/qa/gate-N-scorecard.md`). FAIL → fix → re-score (max two retries). Never skip a gate on FAIL.
+
+If that policy is unset, do not start the next gate unless the user names it and explicitly approves.
+
+## Before declaring a gate complete
+
+Assess: accuracy, completeness, source quality, freshness, architecture/terminology consistency, code/security correctness, production realism, cross-refs, learning progression.
+
+Mark **PASS**, **FAIL**, or **NEEDS REVIEW**. Do not hide uncertainty. Unverifiable → **UNVERIFIED**.
+
+Update `99-META/GATE-STATUS.md` when a gate's status changes. Read `99-META/gate-plan.md` and `.cursor/skills/qa-gate/SKILL.md`.

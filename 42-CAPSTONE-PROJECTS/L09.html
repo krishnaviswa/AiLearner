@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L9 — Observable production agent — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>42-CAPSTONE-PROJECTS/L09.md</code></p>
+    <h1>L9 — Observable production agent</h1>
+<p><strong>Proves:</strong> spans for request / retrieve / tool <strong>without</strong> prompt or PII bodies. OTel GenAI semconv is <strong>Development</strong> (<code>SRC-OTEL-GENAI-SEMCONV</code>) — this lab emits a <strong>local JSON</strong> list, not a vendor exporter. Field names are placeholders.</p>
+<h2>Runnable</h2>
+<p><code>python 42-CAPSTONE-PROJECTS/labs/l09_observe.py</code></p>
+<h2>Toy vs production-oriented</h2>
+<p>Toy: log the full prompt. Official guidance: content attributes are <strong>opt-in</strong> (<code>SRC-OTEL-GENAI-SPANS</code>).</p>
+<h2>BREAK</h2>
+<p>A span that includes <code>SYN-MRN-0001</code> fails the lab.</p>
+<h2>Security</h2>
+<p>No real tracer backend. Do not turn on content capture in prod “to debug.”</p>
+<h2>What should I learn next?</h2>
+<p><a href="L10.html">L10</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

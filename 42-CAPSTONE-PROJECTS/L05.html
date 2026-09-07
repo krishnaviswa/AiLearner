@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L5 — Agentic RAG — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>42-CAPSTONE-PROJECTS/L05.md</code></p>
+    <h1>L5 — Agentic RAG</h1>
+<p><strong>Proves:</strong> retrieve is a <strong>tool</strong>, with a hop budget. Use only after a single retrieve fails (Gate 3).</p>
+<h2>Runnable</h2>
+<p><code>python 42-CAPSTONE-PROJECTS/labs/l05_agentic_rag.py</code></p>
+<h2>Toy vs production-oriented</h2>
+<p>Toy: unbounded “think again.” This lab: <code>MAX_HOPS = 2</code>. Retrieved text is still hostile (LLM01).</p>
+<h2>BREAK</h2>
+<p>Set hops to 99 in a scratch copy — the lab’s budget must still win if you keep the constant.</p>
+<h2>Security</h2>
+<p>Same synthetic corpus as L2. Do not add a write tool here.</p>
+<h2>What should I learn next?</h2>
+<p><a href="L06.html">L06</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

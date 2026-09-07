@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Master mind map — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/master-mindmap.md</code></p>
+    <h1>Master mind map</h1>
+<p>Gate 0 visual of the spine. Interactive HTML visualization is Gate 9.</p>
+<pre><code class="language-text">Business problem
+    → Data
+        → Data engineering (batch / CDC / streaming)
+            → Knowledge / semantic layer
+                → Retrieval / search
+                    → LLM
+                        → Tools (APIs · MCP · data systems)
+                            → Agents
+                                → Orchestration
+                                    → Guardrails
+                                        → Evaluation
+                                            → Observability
+                                                → Security
+                                                    → Governance
+                                                        → Deployment
+                                                            → Production operations
+                                                                → Continuous improvement
+</code></pre>
+<h2>Same idea as a relationship map</h2>
+<pre class="mermaid">flowchart TB
+  BP[Business problem] --&gt; D[Data]
+  D --&gt; DE[Data engineering]
+  DE --&gt; KL[Knowledge / semantic layer]
+  KL --&gt; RS[Retrieval / search]
+  RS --&gt; LLM[LLM]
+  LLM --&gt; T[Tools]
+  T --&gt; A[Agents]
+  A --&gt; O[Orchestration]
+  O --&gt; G[Guardrails]
+  G --&gt; E[Evaluation]
+  E --&gt; OBS[Observability]
+  OBS --&gt; SEC[Security]
+  SEC --&gt; GOV[Governance]
+  GOV --&gt; DEP[Deployment]
+  DEP --&gt; OPS[Production operations]
+  OPS --&gt; CI[Continuous improvement]
+</pre>
+<h2>Discipline overlaps (do not collapse these)</h2>
+<table>
+<thead>
+<tr>
+<th>If you only know…</th>
+<th>You will under-weight…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data engineering</td>
+<td>Agent state, tool authz, prompt injection</td>
+</tr>
+<tr>
+<td>ML engineering</td>
+<td>Retrieval ACLs, agent loops, token cost</td>
+</tr>
+<tr>
+<td>LLM prompting</td>
+<td>Evaluation harnesses, durability, DLP</td>
+</tr>
+<tr>
+<td>Cloud landing zones</td>
+<td>Grounding, golden datasets, agent failure modes</td>
+</tr>
+</tbody>
+</table>
+<h2>Architect bridge (durable)</h2>
+<p>Traditional: Kafka → Spark → Database → API</p>
+<p>Agentic: Event → Agent → Decision → {Database | API | RAG | Human}</p>
+<p><strong>Durable claim:</strong> an agent does not automatically replace deterministic data pipelines. In many enterprise architectures it sits <strong>above</strong> deterministic systems and decides which capability to invoke.</p>
+<h2>Canonical production stack (logical)</h2>
+<p>See <a href="reference-architecture.html">reference-architecture.md</a>. Depth selector later:</p>
+<ol>
+<li>User → LLM → Tool → Result</li>
+<li>Agent {Reason, Decide, Act}</li>
+<li>Planner → tool select → execute → observe → next</li>
+<li>Gateway → identity/policy → runtime (planner, state, memory, model router, RAG, tool registry) → guardrails → observability → evaluation</li>
+</ol>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Knowledge graph outline — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/knowledge-graph-outline.md</code></p>
+    <h1>Knowledge graph outline</h1>
+<p>Gate 0 item 2. Machine-readable file: <a href="../99-META/knowledge-graph.json"><code>../99-META/knowledge-graph.json</code></a>.</p>
+<p>This is an <strong>outline</strong>: core nodes and relations only. Gate 1 validates and extends. Gate 10 is full cross-link.</p>
+<h2>Core motif (from the master prompt)</h2>
+<pre><code class="language-text">Agent
+  ├── uses → LLM
+  ├── uses → State
+  ├── may use → Memory
+  ├── uses → Tools
+  ├── may use → RAG
+  └── requires → Evaluation
+
+Tool
+  ├── may be → API
+  ├── may be → MCP
+  └── requires → Authorization
+
+RAG
+  ├── uses → Chunking
+  ├── uses → Embeddings
+  ├── uses → Retrieval
+  ├── may use → Reranking
+  └── requires → Evaluation
+</code></pre>
+<h2>MCP motif (official architecture, SRC-MCP-ARCHITECTURE)</h2>
+<pre><code class="language-text">MCP host (AI application)
+  └── creates one MCP client per server
+        └── dedicated connection → MCP server
+              ├── tools
+              ├── resources
+              └── prompts
+
+Transports: STDIO (local) | Streamable HTTP (remote)
+</code></pre>
+<p>MCP is a <strong>context-exchange protocol</strong>. It does not dictate how the host uses an LLM.</p>
+<h2>How to grow the graph later</h2>
+<ol>
+<li>Add a node when a concept gets a real page (<code>concept_id</code>).</li>
+<li>Add edges only for relations we are willing to defend (uses / requires / may-use / specializes / constrains).</li>
+<li>Do not add vendor SKUs as core nodes; put those in <code>technology-status.yaml</code>.</li>
+<li>Render interactively in Gate 9.</li>
+<li>Gate 10 (2026-09-07): machine graph <strong>v1.10.0</strong> adds catalog nodes (<code>glossary</code>, <code>cheat-sheets</code>, <code>interviews</code>, <code>design-patterns</code>, <code>anti-patterns</code>) plus taught-folder nodes for <code>17</code>, <code>27–30</code>, <code>36</code>, <code>39</code>. Indexes only; they do not invent domains.</li>
+</ol>
+<h2>Intentionally missing from v0.1</h2>
+<p>Per-framework class names, model catalogs, price nodes, and every RAG pipeline stage as its own node. Those belong when the matching gate writes real content.</p>
+<p>Gate 1 (2026-09-07): dropped <code>agent</code> → <code>may-be</code> → <code>workflow</code>; added <code>workflow</code> → <code>alternative-to</code> → <code>agent</code> and <code>when-not-agent</code>. <code>simple-llm-app</code> and <code>structured-output</code> are <code>kind: app-flavor</code>. See <a href="gate-1-architecture-validation.html">gate-1-architecture-validation.md</a>.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

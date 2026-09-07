@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gate 2 scorecard — AI Engineering Knowledge Lab</title>
+  <script src="../../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>99-META/qa/gate-2-scorecard.md</code></p>
+    <h1>Gate 2 scorecard</h1>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gate</td>
+<td>2 — FOUNDATIONS</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2026-09-07</td>
+</tr>
+<tr>
+<td>Chair</td>
+<td>Factory orchestrator</td>
+</tr>
+<tr>
+<td>Retry</td>
+<td>0 of 2</td>
+</tr>
+<tr>
+<td>Overall</td>
+<td><strong>PASS</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>Committee</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Agent / notes</th>
+<th>Mark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source verifier</td>
+<td><code>SRC-TIKTOKEN</code> README fetched; <code>SRC-OPENAI-STRUCTURED-OUTPUTS</code> URL recorded but HTTP fetch timed out — wire-format UNVERIFIED</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Architecture / terminology</td>
+<td>Workflow ≠ agent; apps before agents; matches Gate 1 graph</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Pedagogy</td>
+<td>L1 first; when-not-agent first-class; no CS101; no RAG/agent dump</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Diagram QA</td>
+<td>Flow/sequence + when-not tables on major pages</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>Domain MD rendered via <code>render-pages.py</code>; nav lists Gate 2</td>
+<td>PASS</td>
+</tr>
+</tbody>
+</table>
+<h2>Criteria</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Mark</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accuracy</td>
+<td>PASS</td>
+<td>No invented SKUs/prices/SDK methods</td>
+</tr>
+<tr>
+<td>Completeness</td>
+<td>PASS</td>
+<td>Spine only: 4 real files × 5 domains</td>
+</tr>
+<tr>
+<td>Source quality</td>
+<td>PASS</td>
+<td>Tier 1 tiktoken + existing NIST/OWASP/MS</td>
+</tr>
+<tr>
+<td>Freshness</td>
+<td>PASS</td>
+<td>Timeouts labeled; residuals listed</td>
+</tr>
+<tr>
+<td>Architecture consistency</td>
+<td>PASS</td>
+<td>Aligns with reference-architecture + Gate 1</td>
+</tr>
+<tr>
+<td>Terminology consistency</td>
+<td>PASS</td>
+<td>Agency vs application vs workflow</td>
+</tr>
+<tr>
+<td>Code correctness</td>
+<td>PASS</td>
+<td>Tiny stdlib / official tiktoken README snippets</td>
+</tr>
+<tr>
+<td>Security correctness</td>
+<td>PASS</td>
+<td>Untrusted input, fail-closed parse, no secret logging</td>
+</tr>
+<tr>
+<td>Production realism</td>
+<td>PASS</td>
+<td>Toy vs production labeled</td>
+</tr>
+<tr>
+<td>Cross-reference integrity</td>
+<td>PASS</td>
+<td>Graph v1.2.0 nodes tokens/context/decoding/python-for-ai</td>
+</tr>
+<tr>
+<td>Learning progression</td>
+<td>PASS</td>
+<td>Sequence steps 3–4 only</td>
+</tr>
+</tbody>
+</table>
+<h2>Residual UNVERIFIED</h2>
+<ul>
+<li>OpenAI structured-outputs <strong>request parameter names</strong> (guide fetch timed out 2026-09-07)</li>
+<li>Model context-window sizes and current model IDs (intentionally not pinned)</li>
+<li>Carry-forward: hosted-agents GA, AutoGen/SK deprecation, CrewAI version/adoption, OTel spec version, Azure AI Search SKUs</li>
+</ul>
+<h2>Failures to fix before re-score</h2>
+<ul>
+<li>none</li>
+</ul>
+<h2>Decision</h2>
+<p><strong>PASS</strong> — Gate 3 (embeddings / RAG spine) may start. Do not dump Gate 3 in this close.</p>
+  </article>
+  <script src="../../app/js/learn-path.js"></script>
+  <script src="../../app/js/page-index.js"></script>
+  <script src="../../app/js/shell.js"></script>
+  <script src="../../app/js/depth.js"></script>
+  <script src="../../app/js/why-chain.js"></script>
+  <script src="../../app/js/mermaid-boot.js"></script>
+</body>
+</html>

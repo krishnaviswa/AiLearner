@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gate 0 scorecard — AI Engineering Knowledge Lab</title>
+  <script src="../../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>99-META/qa/gate-0-scorecard.md</code></p>
+    <h1>Gate 0 scorecard</h1>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gate</td>
+<td>0 — SCOPE</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2026-09-07</td>
+</tr>
+<tr>
+<td>Chair</td>
+<td>Factory orchestrator (standing auto-advance)</td>
+</tr>
+<tr>
+<td>Retry</td>
+<td>0 of 2</td>
+</tr>
+<tr>
+<td>Overall</td>
+<td><strong>PASS</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>Committee</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Agent / notes</th>
+<th>Mark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source verifier</td>
+<td>Official Learn/OTel/CrewAI fetch 2026-09-07; residuals UNVERIFIED</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Architecture / terminology</td>
+<td>Vendor-neutral first; Foundry naming note; OTel Development wording aligned</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Pedagogy</td>
+<td>Sequence and dependency graph match gate-plan; no curriculum dump</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Diagram QA</td>
+<td>Four mermaid blocks parse; labels match prose; HTML keeps <code>pre.mermaid</code></td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>HTML / browser</td>
+<td>Shell + renderer; nav is <code>.html</code> only. Browser MCP tab was flaky; static HTML/CSS/JS and generated files reviewed. Theme/nav/mermaid designed for http.server</td>
+<td>PASS</td>
+</tr>
+</tbody>
+</table>
+<h2>Criteria</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Mark</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accuracy</td>
+<td>PASS</td>
+<td>Claims cited or UNVERIFIED; no invented SKUs/prices</td>
+</tr>
+<tr>
+<td>Completeness</td>
+<td>PASS</td>
+<td>Twelve Gate 0 artifacts + mind map + Wave 0 reader</td>
+</tr>
+<tr>
+<td>Source quality</td>
+<td>PASS</td>
+<td>Tier 1/2 registry; CrewAI now has official docs</td>
+</tr>
+<tr>
+<td>Freshness</td>
+<td>PASS</td>
+<td>Volatile rows re-fetched 2026-09-07; residuals listed</td>
+</tr>
+<tr>
+<td>Architecture consistency</td>
+<td>PASS</td>
+<td>Canonical logical first; cloud sketches labeled</td>
+</tr>
+<tr>
+<td>Terminology consistency</td>
+<td>PASS</td>
+<td>Microsoft Foundry / Foundry Agent Service noted; previous brand Azure AI Foundry</td>
+</tr>
+<tr>
+<td>Code correctness</td>
+<td>PASS</td>
+<td>Renderer and theme/shell JS; no executable labs this gate</td>
+</tr>
+<tr>
+<td>Security correctness</td>
+<td>N/A</td>
+<td>No runtime that handles secrets/PII</td>
+</tr>
+<tr>
+<td>Production realism</td>
+<td>PASS</td>
+<td>Toy vs production labeled on RAG pipeline</td>
+</tr>
+<tr>
+<td>Cross-reference integrity</td>
+<td>PASS</td>
+<td>Graph is an outline; Gate 1 expands edges</td>
+</tr>
+<tr>
+<td>Learning progression</td>
+<td>PASS</td>
+<td>Sequence proposed; L1-first plan</td>
+</tr>
+</tbody>
+</table>
+<h2>Residual UNVERIFIED</h2>
+<ul>
+<li>Hosted agents: Learn metadata still includes preview; one converted page omitted the sentence — do not treat as GA (<code>SRC-MS-HOSTED-AGENTS</code>)</li>
+<li>AutoGen / Semantic Kernel <strong>project-level</strong> deprecation — Agent Framework docs are successor language only (<code>SRC-MS-AGENT-FRAMEWORK</code>)</li>
+<li>CrewAI package version pin (install page vs CLI example) — do not pin</li>
+<li>CrewAI adoption stats and vendor “production-ready” claims</li>
+<li>OTel GenAI <strong>spec version number</strong> — document status is Development (<code>SRC-OTEL-GENAI-SEMCONV</code>)</li>
+<li>Azure AI Search SKU list — intentionally not listed</li>
+</ul>
+<h2>Failures to fix before re-score</h2>
+<ul>
+<li>none</li>
+</ul>
+<h2>Decision</h2>
+<p><strong>PASS</strong> — Gate 1 may start under standing auto-advance.</p>
+  </article>
+  <script src="../../app/js/learn-path.js"></script>
+  <script src="../../app/js/page-index.js"></script>
+  <script src="../../app/js/shell.js"></script>
+  <script src="../../app/js/depth.js"></script>
+  <script src="../../app/js/why-chain.js"></script>
+  <script src="../../app/js/mermaid-boot.js"></script>
+</body>
+</html>

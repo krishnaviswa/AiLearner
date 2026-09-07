@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — count tokens (tiny) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>01-FOUNDATIONS/16-hands-on.md</code></p>
+    <h1>DO — count tokens (tiny)</h1>
+<p>Not a product. Prove to yourself that <strong>words ≠ tokens</strong>.</p>
+<p>Official <code>tiktoken</code> README (<code>SRC-TIKTOKEN</code>, fetched 2026-09-07) shows:</p>
+<pre><code class="language-python">import tiktoken
+
+enc = tiktoken.get_encoding(&quot;o200k_base&quot;)
+assert enc.decode(enc.encode(&quot;hello world&quot;)) == &quot;hello world&quot;
+
+# Tokenizer for a named OpenAI API model (name is volatile — README example used gpt-4o)
+enc = tiktoken.encoding_for_model(&quot;gpt-4o&quot;)
+print(len(enc.encode(&quot;SELECT * FROM orders WHERE region = 'EMEA'&quot;)))
+</code></pre>
+<h2>Experiment</h2>
+<ol>
+<li>Encode a short English sentence and a SQL string. Compare <code>len(text.split())</code> vs <code>len(enc.encode(text))</code>.</li>
+<li>Paste a 2 KB JSON payload. Guess the count, then measure.</li>
+<li>Read <code>SRC-TIKTOKEN-COOKBOOK</code> if you need chat-message overhead — do not invent message-format token taxes from memory.</li>
+</ol>
+<h2>Break (light)</h2>
+<p>Change one identifier (<code>customer_id</code> vs <code>cid</code>). Token count moves. That is why “chunk by character count” is a toy.</p>
+<h2>Remember</h2>
+<p>This lab does not pin prices. Token count is the <strong>unit</strong>; vendor price pages are Gate 7 / cost pages.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gate 7 scorecard — AI Engineering Knowledge Lab</title>
+  <script src="../../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>99-META/qa/gate-7-scorecard.md</code></p>
+    <h1>Gate 7 scorecard</h1>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gate</td>
+<td>7 — PRODUCTION</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2026-09-07</td>
+</tr>
+<tr>
+<td>Chair</td>
+<td>Factory orchestrator</td>
+</tr>
+<tr>
+<td>Retry</td>
+<td>0 of 2</td>
+</tr>
+<tr>
+<td>Overall</td>
+<td><strong>PASS</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>Committee</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Notes</th>
+<th>Mark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source verifier</td>
+<td>Learn hosted-agents + Foundry Agent Service; Azure AI Search SKU page; Bedrock Agents Classic maintenance; AgentCore overview; Databricks MCP/AI Search Public Preview. No invented prices. Hosted agents <strong>not</strong> treated as GA (page does not say GA).</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Architecture / terminology</td>
+<td>Vendor-neutral first. Cloud pages are mappings. A–E keep Gate 0 distinctive risks. Workflow-over-agent rule retained.</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Pedagogy</td>
+<td>L1 + when-not; methods pages have no fake p95 / $; GCP is an explicit stub</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Diagram QA</td>
+<td>Mermaid on all new pages</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>Renderer 1–30 and 36–40; 128 files; shell Gate 7 group</td>
+<td>PASS</td>
+</tr>
+</tbody>
+</table>
+<h2>Criteria</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Mark</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accuracy</td>
+<td>PASS</td>
+<td>Classic vs AgentCore; preview labels recorded</td>
+</tr>
+<tr>
+<td>Completeness</td>
+<td>PASS</td>
+<td>Spine only — not SKU catalogs or full BOMs</td>
+</tr>
+<tr>
+<td>Source quality</td>
+<td>PASS</td>
+<td>New IDs AgentCore + Azure Search SKU</td>
+</tr>
+<tr>
+<td>Freshness</td>
+<td>PASS</td>
+<td>2026-09-07 fetches</td>
+</tr>
+<tr>
+<td>Architecture consistency</td>
+<td>PASS</td>
+<td>Matches reference-architecture A–E</td>
+</tr>
+<tr>
+<td>Terminology consistency</td>
+<td>PASS</td>
+<td>Microsoft Foundry naming; AI Search former Vector Search</td>
+</tr>
+<tr>
+<td>Code correctness</td>
+<td>N/A</td>
+<td>No executable this gate</td>
+</tr>
+<tr>
+<td>Security correctness</td>
+<td>PASS</td>
+<td>ACL-in-query, HITL writes, no grant union</td>
+</tr>
+<tr>
+<td>Production realism</td>
+<td>PASS</td>
+<td>Failure-first tables; preview called out</td>
+</tr>
+<tr>
+<td>Cross-reference integrity</td>
+<td>PASS</td>
+<td>Graph v1.7.0</td>
+</tr>
+<tr>
+<td>Learning progression</td>
+<td>PASS</td>
+<td>Production after security; hands-on not started</td>
+</tr>
+</tbody>
+</table>
+<h2>Residual UNVERIFIED</h2>
+<ul>
+<li>Hosted agents <strong>GA vs preview</strong> — Learn snapshot does not say GA; conservative <strong>preview</strong></li>
+<li>Dollar rates (Azure Search, AgentCore, Databricks MCP) — verify official price pages</li>
+<li>GCP Vertex / Agent Engine SKUs and names</li>
+<li>AgentCore retrieve / Knowledge Bases successor path</li>
+<li>Carry-forward: RMF 1.0 revision; Measure playbook; OTel spec version; evals schema; embeddings fields; pgvector; AutoGen/SK; CrewAI; MCP spec pin</li>
+</ul>
+<h2>Failures to fix before re-score</h2>
+<ul>
+<li>(none)</li>
+</ul>
+<h2>Decision</h2>
+<p><strong>PASS</strong> — Gate 8 may start. This close does not start Gate 8 content.</p>
+  </article>
+  <script src="../../app/js/learn-path.js"></script>
+  <script src="../../app/js/page-index.js"></script>
+  <script src="../../app/js/shell.js"></script>
+  <script src="../../app/js/depth.js"></script>
+  <script src="../../app/js/why-chain.js"></script>
+  <script src="../../app/js/mermaid-boot.js"></script>
+</body>
+</html>

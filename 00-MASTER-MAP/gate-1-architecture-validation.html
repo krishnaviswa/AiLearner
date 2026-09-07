@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gate 1 — Architecture validation — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/gate-1-architecture-validation.md</code></p>
+    <h1>Gate 1 — Architecture validation</h1>
+<p>Gate 1 validates maps. It does <strong>not</strong> write foundation curriculum. Durable claims below; volatile vendor rows stay in <a href="../99-META/technology-status.yaml"><code>../99-META/technology-status.yaml</code></a> with <code>source_id</code>.</p>
+<h2>What was validated</h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Canonical logical architecture</td>
+<td>Confirmed: identity → app → runtime → model router / tools / RAG; cross-cutting guardrails, eval, observability</td>
+</tr>
+<tr>
+<td>Cloud sketches</td>
+<td>Confirmed as sketches, not BOMs. No SKU catalogs added</td>
+</tr>
+<tr>
+<td>Learning sequence</td>
+<td>Confirmed; see <a href="learning-sequence.html">learning-sequence.md</a> Gate 1 confirmation</td>
+</tr>
+<tr>
+<td>Knowledge graph</td>
+<td>Edges reviewed; <code>agent may-be workflow</code> <strong>dropped</strong>; non-agent apps no longer <code>kind: agent-flavor</code></td>
+</tr>
+<tr>
+<td>Technology categories</td>
+<td>Decision <strong>stubs</strong> only — <a href="technology-decision-stubs.html">technology-decision-stubs.md</a></td>
+</tr>
+</tbody>
+</table>
+<h2>Logical stack (confirmed)</h2>
+<pre class="mermaid">flowchart TB
+  U[User] --&gt; FE[Web / API]
+  FE --&gt; IAM[Authn / Authz]
+  IAM --&gt; APP[AI application]
+  APP --&gt; RT[Runtime]
+  RT --&gt; WF[Deterministic workflow]
+  RT --&gt; AG[Agent]
+  WF -.-&gt;|prefer when steps are known| OUT[Result]
+  AG --&gt; TOOL[Tools / MCP]
+  AG --&gt; RAG[RAG]
+  AG --&gt; LLM[LLM]
+  RT --&gt; GR[Guardrails / DLP]
+  GR --&gt; OBS[Eval / observability]
+</pre>
+<p>Architect rule (durable; also stated on Microsoft Learn Agent Framework overview, <code>SRC-MS-AGENT-FRAMEWORK</code>): if you can write a function or workflow for a stable procedure, do that instead of an agent.</p>
+<h2>Graph corrections (this gate)</h2>
+<table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Removed <code>agent</code> → <code>may-be</code> → <code>workflow</code></td>
+<td>A workflow is not a kind of agent</td>
+</tr>
+<tr>
+<td>Added <code>workflow</code> → <code>alternative-to</code> → <code>agent</code></td>
+<td>Prefer workflow when steps are known</td>
+</tr>
+<tr>
+<td>Added <code>when-not-agent</code> node</td>
+<td>Negative space is first-class</td>
+</tr>
+<tr>
+<td><code>simple-llm-app</code> / <code>structured-output</code> kind → <code>app-flavor</code></td>
+<td>They are LLM apps, not agents</td>
+</tr>
+<tr>
+<td>Added permission / eval / MCP identity edges</td>
+<td>Matches reference architecture and MCP motif (<code>SRC-MCP-ARCHITECTURE</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Machine file: <a href="../99-META/knowledge-graph.json"><code>../99-META/knowledge-graph.json</code></a> (<code>status: gate-1-validated</code>).</p>
+<h2>Cloud mapping discipline</h2>
+<table>
+<thead>
+<tr>
+<th>Do</th>
+<th>Do not</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Map a <strong>concern</strong> (identity, retrieval, runtime) to a vendor family</td>
+<td>Force every concern onto every cloud</td>
+</tr>
+<tr>
+<td>Cite Learn/AWS/Databricks/GCP docs</td>
+<td>Invent SKUs or “Company X built RAG” stories</td>
+</tr>
+<tr>
+<td>Mark preview/Development</td>
+<td>Treat hosted agents as GA (<code>SRC-MS-HOSTED-AGENTS</code> — preview as of 2026-09-07)</td>
+</tr>
+</tbody>
+</table>
+<h2>Sequence confirmation</h2>
+<p>The Gate 0 sequence is the teaching order: apps without agents → embeddings/RAG → tools → agents → MCP → multi-agent/NL2SQL → eval → security → production. Do not invert “agents are fun, security later.”</p>
+<h2>Closing</h2>
+<h3>What should I remember?</h3>
+<p>Vendor-neutral architecture first. An agent is optional. Graph edges are claims we are willing to defend.</p>
+<h3>What should I build?</h3>
+<p>Nothing executable this gate. Next: Gate 2 spine pages (few files, L1 first).</p>
+<h3>What can go wrong?</h3>
+<p>Treating a cloud sketch as a bill of materials; treating a workflow as an agent.</p>
+<h3>Senior question</h3>
+<p>Where does authorization actually filter — query, chunk, or tool?</p>
+<h3>Principal question</h3>
+<p>Which edge in the graph would you delete because it over-claims?</p>
+<h3>Architect challenge</h3>
+<p>Draw the same logical stack with <strong>no</strong> agent box. What still works?</p>
+<h3>Learn next</h3>
+<p><a href="technology-decision-stubs.html">technology-decision-stubs.md</a>, then Gate 2 foundations.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

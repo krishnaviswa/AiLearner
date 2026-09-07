@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fifteen use cases (not fifteen platforms) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>41-REAL-WORLD-USE-CASES/01-overview.md</code></p>
+    <h1>Fifteen use cases (not fifteen platforms)</h1>
+<p>Pointers from Gate 0. <strong>Do not</strong> build these as products this gate. Each row says which <strong>ladder level</strong> exercises the hard part, and when a <strong>deterministic</strong> path wins.</p>
+<table>
+<thead>
+<tr>
+<th>Use case</th>
+<th>Ladder</th>
+<th>Deterministic might win</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enterprise knowledge assistant</td>
+<td>L3</td>
+<td>Search + workflow</td>
+</tr>
+<tr>
+<td>Healthcare knowledge assistant</td>
+<td>L3 + L8</td>
+<td>Form + human review; PHI</td>
+</tr>
+<tr>
+<td>Customer support agent</td>
+<td>L4 + L8</td>
+<td>Refund playbook</td>
+</tr>
+<tr>
+<td>Data analyst agent</td>
+<td>L6</td>
+<td>BI dashboard</td>
+</tr>
+<tr>
+<td>NL-to-SQL analyst</td>
+<td>L6</td>
+<td>Semantic layer / API</td>
+</tr>
+<tr>
+<td>Data quality agent</td>
+<td>L10 checklist</td>
+<td>dbt / GE tests</td>
+</tr>
+<tr>
+<td>Pipeline monitoring agent</td>
+<td>L9</td>
+<td>Threshold pager</td>
+</tr>
+<tr>
+<td>Incident management agent</td>
+<td>L4 read-only</td>
+<td>Runbook</td>
+</tr>
+<tr>
+<td>Documentation agent</td>
+<td>L2</td>
+<td>Docs search</td>
+</tr>
+<tr>
+<td>Software engineering agent</td>
+<td>L8</td>
+<td>Sandbox + CI (no secrets)</td>
+</tr>
+<tr>
+<td>Cloud operations agent</td>
+<td>L8</td>
+<td>Approved runbook</td>
+</tr>
+<tr>
+<td>Security investigation agent</td>
+<td>L8 + L9</td>
+<td>SIEM query, not a confident chatbot</td>
+</tr>
+<tr>
+<td>Financial reporting agent</td>
+<td>L6</td>
+<td>Deterministic aggregates</td>
+</tr>
+<tr>
+<td>Marketing analytics agent</td>
+<td>L3 DLP</td>
+<td>Warehouse metrics</td>
+</tr>
+<tr>
+<td>Enterprise research agent</td>
+<td>L2 + L5</td>
+<td>Citations + freshness</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  U[Use case] --&gt; D{Function or SQL enough?}
+  D --&gt;|yes| Det[Skip the agent]
+  D --&gt;|no| L[Pick a ladder level]
+</pre>
+<p>Full outlines remain in <a href="../00-MASTER-MAP/projects.html">projects.md</a>. Implementations: <a href="../42-CAPSTONE-PROJECTS/01-overview.html">42</a>.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../42-CAPSTONE-PROJECTS/01-overview.html">Ladder</a> · <a href="../44-ARCHITECTURE-INTERVIEWS/01-overview.html">Architect interviews</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

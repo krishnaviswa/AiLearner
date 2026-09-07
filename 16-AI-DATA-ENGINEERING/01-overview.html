@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lakehouse → index (Gate 3 light note) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>16-AI-DATA-ENGINEERING/01-overview.md</code></p>
+    <h1>Lakehouse → index (Gate 3 light note)</h1>
+<p>Not the full data-engineering domain. Only the <strong>connective tissue</strong> for RAG.</p>
+<p>Source of record (tables, files, UC objects) → quality + <strong>ACL columns</strong> → document/chunk grain → embed → index that <strong>reuses those grants</strong>. Databricks AI Search is one governed retrieval sketch (<code>SRC-DATABRICKS-AI-SEARCH</code>).</p>
+<pre class="mermaid">flowchart LR
+  T[Curated table] --&gt; ACL[Grants / tags]
+  ACL --&gt; CH[Chunks]
+  CH --&gt; IDX[Search / vector index]
+</pre>
+<p>Do not build a second permission system in the index that disagrees with the lakehouse.</p>
+<p>Full pipeline curriculum waits for later gates.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../17-LLM-DATA-PIPELINES/01-overview.html">Index freshness</a> · <a href="../08-RAG/19-comparison.html">Permission-aware RAG</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

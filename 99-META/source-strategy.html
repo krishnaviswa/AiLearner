@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Source strategy — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>99-META/source-strategy.md</code></p>
+    <h1>Source strategy</h1>
+<p>Gate 0 item 8. Machine registry: <a href="sources.yaml"><code>sources.yaml</code></a>.</p>
+<h2>Goal</h2>
+<p>Keep <strong>durable</strong> knowledge stable for years. Refresh <strong>volatile</strong> implementation facts from official sources instead of baking a chat session into the repo.</p>
+<h2>Classification</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Examples</th>
+<th>Refresh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Durable</td>
+<td>What an embedding is; why retrieval exists; why authorization is required; what state means; why evaluation is needed; distributed-system principles; general architecture patterns</td>
+<td>Rarely; only if the concept is wrong</td>
+</tr>
+<tr>
+<td>Volatile</td>
+<td>SDK syntax, model names, API endpoints, cloud SKUs, framework features, pricing, preview flags</td>
+<td>Re-verify against Tier 1 before teaching as current</td>
+</tr>
+</tbody>
+</table>
+<p>Every technology-specific page must record: last verified, version, primary source, status, alternatives.</p>
+<h2>Tiers</h2>
+<h3>Tier 1 (default for technical claims)</h3>
+<p>Official cloud documentation, official framework/SDK docs, official standards, architecture centers, official GitHub repositories.</p>
+<h3>Tier 2</h3>
+<p>CNCF, Apache, Linux Foundation, NIST, OWASP, universities, research papers, established technical organizations.</p>
+<h3>Tier 3</h3>
+<p>Reputable engineering blogs, conference talks, technical articles, high-quality GitHub repos. Use for practice notes, not as sole proof of a product capability.</p>
+<h3>Tier 4</h3>
+<p>Community discussions, Reddit, Stack Overflow, Medium, personal blogs. Use for troubleshooting color only.</p>
+<h2>Anti-hallucination</h2>
+<ul>
+<li>Unverifiable → <strong>UNVERIFIED</strong></li>
+<li>Do not invent APIs, SDK methods, cloud services, framework capabilities, pricing, performance numbers, adoption statistics, or architecture claims</li>
+<li>If sources disagree: show both, explain likely reason, state which evidence is stronger</li>
+<li>Label: Stable, Mature, Emerging, Preview, Deprecated, Experimental, Vendor-specific, General industry pattern (lab enum in <code>technology-status.yaml</code> uses lowercase: stable, mature, emerging, preview, experimental, deprecated, vendor-specific)</li>
+</ul>
+<h2>Important technical claims</h2>
+<p>Trace to <code>source_id</code> in <code>sources.yaml</code> (fields: source_id, title, URL, publisher, date, technology, version, trust_level, last_verified, topics).</p>
+<p>Every real-world use case, vendor capability, paper, standard, or “as used in production” claim <strong>must</strong> have a fetchable Tier 1/2 URL in that registry and a cite on the page. If the URL cannot be fetched, write <strong>UNVERIFIED</strong> — do not invent a company story, case study, or link. When a page is fetched, record: URL, date fetched, and what the page actually supports vs what we inferred.</p>
+<h2>Gate 0 research slice (2026-09-07)</h2>
+<p>Used to outline — not to freeze versions:</p>
+<ul>
+<li>OWASP GenAI LLM Top 10 <strong>2026</strong> (published 2026-08; canonical GitHub <code>GenAI-Security-Project/GenAI-LLM-Top10</code>)</li>
+<li>NIST AI RMF 1.0 (AI 100-1) and NIST AI 600-1 Generative AI Profile (July 2024)</li>
+<li>MCP architecture (Host / Client / Server; tools, resources, prompts; STDIO and Streamable HTTP)</li>
+<li>Microsoft Agent Framework as documented successor to AutoGen + Semantic Kernel (Microsoft Learn)</li>
+<li>Microsoft Foundry Agent Service (hosted agents documented as <strong>preview</strong> in Learn; previous brand Azure AI Studio / Azure AI Foundry; URL path still <code>/azure/foundry/</code>)</li>
+<li>LangGraph orchestration/persistence docs (LangChain)</li>
+<li>OpenAI Agents SDK official docs</li>
+<li>LlamaIndex agents/workflows docs</li>
+<li>Google Agent Development Kit (ADK) docs</li>
+<li>Amazon Bedrock Agents / Knowledge Bases / Guardrails user guide</li>
+<li>Databricks managed MCP + AI Search (formerly Vector Search) docs</li>
+<li>OpenTelemetry GenAI semantic conventions (<strong>Status: Development</strong>)</li>
+<li>Microsoft Presidio analyzer/anonymizer docs</li>
+</ul>
+<p>Pricing is <strong>not</strong> recorded. Verify from official price pages when Gate 7/cost pages are in scope.</p>
+<h2>What not to do</h2>
+<p>Do not treat blog “framework death” posts as deprecation notices. Confirm maintenance/deprecation on the project’s own docs or repo.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

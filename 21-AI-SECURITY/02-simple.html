@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Three OWASP doors that open together — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>21-AI-SECURITY/02-simple.md</code></p>
+    <h1>Three OWASP doors that open together</h1>
+<p>Keep these three distinct. Official 2026 entries (<code>SRC-OWASP-LLM-TOP10-2026-GH</code>, files fetched 2026-09-07):</p>
+<table>
+<thead>
+<tr>
+<th>Door</th>
+<th>Official entry</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input</td>
+<td>LLM01 Prompt Injection</td>
+<td>Untrusted tokens change behavior. User text, RAG, tools, images, memory — same stream.</td>
+</tr>
+<tr>
+<td>Privilege</td>
+<td>LLM03 Excessive Agency</td>
+<td>The model’s output can <strong>do</strong> too much (tools, shell, mail, MCP).</td>
+</tr>
+<tr>
+<td>Egress</td>
+<td>LLM10 Improper Output Handling</td>
+<td>You treat model tokens as trusted input to HTML, SQL, shell, or Markdown renderers.</td>
+</tr>
+</tbody>
+</table>
+<p>LLM01’s own note: injection is the <strong>input</strong> boundary; LLM02 is <strong>what leaks</strong> in outputs; LLM03 is <strong>privileged actions</strong>; LLM10 is <strong>sanitizing outputs before sinks</strong>.</p>
+<h2>Data / cloud analogy</h2>
+<p>A ticket system that lets anyone write the subject line (input), a service account with <code>*:*</code> (agency), and <code>innerHTML = response</code> (output). Fix any one and the incident shrinks; leave all three and you have a kill chain.</p>
+<pre class="mermaid">sequenceDiagram
+  participant Attacker
+  participant Corpus as Retrieved text
+  participant Model
+  participant Runtime
+  participant Sink as Browser or SQL
+  Attacker-&gt;&gt;Corpus: plant instructions
+  Corpus-&gt;&gt;Model: tokens in context
+  Model-&gt;&gt;Runtime: tool args or HTML
+  Runtime-&gt;&gt;Sink: unvalidated
+  Note over Runtime,Sink: LLM10 is this hop
+</pre>
+<h2>Durable design rule (from LLM01)</h2>
+<p>OWASP states current models have <strong>no reliable prevention</strong> of injection because they do not separate instructions from data. Defense is architectural: least privilege, human confirmation for irreversible actions, schema checks in <strong>your</strong> code, not a second model as the only filter.</p>
+<p>Do not paste paper attack-success percentages into a design review. Use the official list; measure <strong>your</strong> system.</p>
+<h2>Hidden context is not a vault</h2>
+<p>LLM08 Hidden Context Exposure: system prompts, tool schemas, and “secret” policy text are <strong>discoverable</strong>. Do not put credentials there. Do not use the system prompt as authorization (<code>SRC-OWASP-LLM-TOP10-2026-GH</code>).</p>
+<h2>What should I remember?</h2>
+<p>Injection without agency is often a bad answer. Agency without output handling is a remote tool. Together they are an incident.</p>
+<h2>What should I learn next?</h2>
+<p><a href="03-logical.html">03-logical.md</a> · <a href="../22-GUARDRAILS/01-overview.html">Guardrails</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

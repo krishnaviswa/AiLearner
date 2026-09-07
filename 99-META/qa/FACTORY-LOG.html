@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Factory log (append-only) — AI Engineering Knowledge Lab</title>
+  <script src="../../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>99-META/qa/FACTORY-LOG.md</code></p>
+    <h1>Factory log (append-only)</h1>
+<p>Restart-safe human log. Machine resume: <a href="factory-state.json"><code>factory-state.json</code></a>. Chart: <a href="../../progress.html"><code>../../progress.html</code></a>.</p>
+<hr />
+<h2>2026-09-07T15:10Z — wave 0 — gate 0 — bake-policy</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>99-META/GATE-STATUS.md</code>, <code>.cursor/rules/ai-lab-gates.mdc</code>, <code>.cursor/rules/ai-lab-operating-system.mdc</code>, <code>.cursor/skills/advance-gate/SKILL.md</code>, <code>.cursor/skills/qa-gate/SKILL.md</code>, <code>.cursor/skills/contribute-concept/SKILL.md</code>, <code>99-META/qa/gate-scorecard.md</code>, <code>AGENTS.md</code>, <code>99-META/gate-plan.md</code></li>
+<li><strong>UNVERIFIED:</strong> none introduced</li>
+<li><strong>Next if interrupted:</strong> <code>wave0-html-shell</code></li>
+</ul>
+<h2>2026-09-07T15:25Z — wave 0 — gate 0 — html-shell</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>app/css/lab.css</code>, <code>app/js/theme.js</code>, <code>app/js/shell.js</code>, <code>app/js/mermaid-boot.js</code>, <code>app/tools/render-pages.py</code>, <code>index.html</code>, <code>00-MASTER-MAP/html-architecture.md</code>, generated sibling <code>.html</code> (18 files)</li>
+<li><strong>UNVERIFIED:</strong> mermaid CDN (jsDelivr mermaid@11) — local fallback is source text if CDN blocked</li>
+<li><strong>Next if interrupted:</strong> <code>wave0-source-verify</code></li>
+</ul>
+<h2>2026-09-07T15:30Z — wave 0 — gate 0 — source-verify</h2>
+<ul>
+<li><strong>Status:</strong> PASS (durable remainder; volatile residuals listed)</li>
+<li><strong>Files:</strong> <code>99-META/sources.yaml</code>, <code>99-META/technology-status.yaml</code></li>
+<li><strong>UNVERIFIED:</strong> hosted-agents silent GA; AutoGen/SK own-project deprecation; CrewAI version pin + adoption stats; OTel GenAI spec version</li>
+<li><strong>Next if interrupted:</strong> <code>wave0-diagram-arch-html-qa</code></li>
+</ul>
+<h2>2026-09-07T15:45Z — wave 0 — gate 0 — image-policy</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>.cursor/skills/qa-gate/SKILL.md</code>, <code>.cursor/skills/contribute-concept/SKILL.md</code></li>
+<li><strong>Note:</strong> Raster images → subagent model <code>gpt-5.6-sol-medium</code> + GenerateImage. Architecture stays Mermaid/tables.</li>
+<li><strong>Next if interrupted:</strong> <code>wave0-checkpoints</code></li>
+</ul>
+<h2>2026-09-07T16:00Z — wave 0 — gate 0 — checkpoints-and-progress</h2>
+<ul>
+<li><strong>Status:</strong> PASS (this step)</li>
+<li><strong>Files:</strong> <code>99-META/qa/FACTORY-LOG.md</code>, <code>99-META/qa/factory-state.json</code>, <code>app/js/progress-data.js</code>, <code>progress.html</code>, <code>app/tools/write-factory-state.py</code>, <code>99-META/source-strategy.md</code></li>
+<li><strong>UNVERIFIED:</strong> (carry-forward from source-verify)</li>
+<li><strong>Next if interrupted:</strong> <code>gate0-chair-scorecard</code></li>
+</ul>
+<h2>2026-09-07T16:10Z — wave 0 — gate 0 — chair-scorecard</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>99-META/qa/gate-0-scorecard.md</code>, <code>99-META/GATE-STATUS.md</code></li>
+<li><strong>UNVERIFIED:</strong> hosted-agents GA ambiguity; AutoGen/SK deprecation; CrewAI version/adoption; OTel spec version; Azure AI Search SKUs</li>
+<li><strong>Next if interrupted:</strong> <code>gate1-author-validation</code></li>
+</ul>
+<h2>2026-09-07T16:20Z — wave 0 — gate 1 — author-validation</h2>
+<ul>
+<li><strong>Status:</strong> running (pages written; Gate 1 scorecard not closed)</li>
+<li><strong>Files:</strong> <code>00-MASTER-MAP/gate-1-architecture-validation.md</code>, <code>00-MASTER-MAP/technology-decision-stubs.md</code>, <code>99-META/knowledge-graph.json</code>, <code>00-MASTER-MAP/knowledge-graph-outline.md</code>, <code>00-MASTER-MAP/learning-sequence.md</code></li>
+<li><strong>UNVERIFIED:</strong> (carry-forward)</li>
+<li><strong>Next if interrupted:</strong> <code>gate1-chair-scorecard</code></li>
+</ul>
+<h2>2026-09-07T16:25Z — wave 0 — gate 1 — chair-scorecard</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>99-META/qa/gate-1-scorecard.md</code>, <code>99-META/GATE-STATUS.md</code></li>
+<li><strong>UNVERIFIED:</strong> carry-forward only</li>
+<li><strong>Next if interrupted:</strong> <code>gate2-author-spine</code></li>
+</ul>
+<h2>2026-09-07T16:40Z — wave 0 — gate 2 — author-spine</h2>
+<ul>
+<li><strong>Status:</strong> PASS (pages written)</li>
+<li><strong>Files:</strong> <code>01-FOUNDATIONS/*</code>, <code>02-PYTHON-FOR-AI/*</code>, <code>03-LLM-ENGINEERING/*</code>, <code>04-PROMPT-ENGINEERING/*</code>, <code>05-LLM-APPLICATION-ENGINEERING/*</code> (4 files each), <code>99-META/sources.yaml</code>, <code>99-META/knowledge-graph.json</code></li>
+<li><strong>UNVERIFIED:</strong> structured-outputs wire-format; model IDs / context sizes</li>
+<li><strong>Next if interrupted:</strong> <code>gate2-html-and-scorecard</code></li>
+</ul>
+<h2>2026-09-07T16:50Z — wave 0 — gate 2 — chair-scorecard</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>99-META/qa/gate-2-scorecard.md</code>, <code>99-META/GATE-STATUS.md</code>, <code>app/tools/render-pages.py</code>, <code>app/js/shell.js</code></li>
+<li><strong>UNVERIFIED:</strong> carry-forward + structured-outputs fetch timeout</li>
+<li><strong>Next if interrupted:</strong> <code>gate3-author-spine</code></li>
+</ul>
+<h2>2026-09-07T17:10Z — wave 0 — gate 3 — author-spine</h2>
+<ul>
+<li><strong>Status:</strong> PASS (pages written)</li>
+<li><strong>Files:</strong> <code>06-EMBEDDINGS/*</code>, <code>07-VECTOR-DATABASES/*</code>, <code>08-RAG/*</code>, <code>09-AGENTIC-RAG/*</code> (4 each), <code>16-AI-DATA-ENGINEERING/01-overview.md</code>, <code>17-LLM-DATA-PIPELINES/01-overview.md</code>, sources + graph</li>
+<li><strong>UNVERIFIED:</strong> OpenAI embeddings/structured-outputs fields; pgvector README operators</li>
+<li><strong>Next if interrupted:</strong> <code>gate3-chair-scorecard</code></li>
+</ul>
+<h2>2026-09-07T17:15Z — wave 0 — gate 3 — chair-scorecard</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>99-META/qa/gate-3-scorecard.md</code>, <code>99-META/GATE-STATUS.md</code></li>
+<li><strong>UNVERIFIED:</strong> as scorecard</li>
+<li><strong>Next if interrupted:</strong> <code>gate4-author-spine</code></li>
+</ul>
+<h2>2026-09-07T17:30Z — wave 0 — gate 4 — author-spine</h2>
+<ul>
+<li><strong>Status:</strong> PASS (pages written)</li>
+<li><strong>Files:</strong> <code>10-AGENTS</code> (5), <code>11</code>–<code>15</code> (4 each), sources fetch notes, knowledge-graph.json</li>
+<li><strong>UNVERIFIED:</strong> marketing customer lists; example model names; MCP spec pin; carry-forward</li>
+<li><strong>Next if interrupted:</strong> <code>gate4-chair-scorecard</code></li>
+</ul>
+<h2>2026-09-07T17:35Z — wave 0 — gate 4 — chair-scorecard</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>99-META/qa/gate-4-scorecard.md</code>, <code>99-META/GATE-STATUS.md</code></li>
+<li><strong>Next if interrupted:</strong> <code>gate5-author-spine</code></li>
+</ul>
+<h2>2026-09-07T17:50Z — wave 0 — gate 5 — author-spine</h2>
+<ul>
+<li><strong>Status:</strong> PASS (pages written)</li>
+<li><strong>Files:</strong> <code>18-EVALUATION</code> (6), <code>36-AI-TESTING/01-overview.md</code>, NIST/evals sources</li>
+<li><strong>UNVERIFIED:</strong> RMF 1.0 revision; Measure playbook; evals schema</li>
+<li><strong>Next if interrupted:</strong> <code>gate5-chair-scorecard</code></li>
+</ul>
+<h2>2026-09-07T17:55Z — wave 0 — gate 5 — chair-scorecard</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>99-META/qa/gate-5-scorecard.md</code>, <code>99-META/GATE-STATUS.md</code></li>
+<li><strong>Next if interrupted:</strong> <code>gate6-author-spine</code></li>
+</ul>
+<h2>2026-09-07T21:55Z — wave 0 — gate 6 — author-spine</h2>
+<ul>
+<li><strong>Status:</strong> PASS (pages written; QA next)</li>
+<li><strong>Files:</strong> <code>21-AI-SECURITY</code> (3), <code>22-GUARDRAILS</code> (2), <code>23-PHI-PII-DLP</code> (3), <code>24-AI-GOVERNANCE</code> (3), <code>25-RESPONSIBLE-AI</code> (2); sources + graph v1.6.0; renderer 21–25; shell nav</li>
+<li><strong>UNVERIFIED:</strong> NIST RMF 1.0 revision; Measure playbook subcategory steps; OWASP landing vs GitHub publish date (Aug 3 vs 4); carry-forward vendor rows</li>
+<li><strong>Next if interrupted:</strong> <code>gate6-chair-scorecard</code></li>
+</ul>
+<h2>2026-09-07T22:10Z — wave 0 — gate 6 — chair-scorecard</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>99-META/qa/gate-6-scorecard.md</code>, <code>99-META/GATE-STATUS.md</code>, render 110 HTML</li>
+<li><strong>UNVERIFIED:</strong> RMF 1.0 revision; Measure playbook; OWASP Aug 3 vs 4 date; carry-forward</li>
+<li><strong>Next if interrupted:</strong> <code>gate7-author-spine</code></li>
+</ul>
+<h2>2026-09-07T22:40Z — wave 0 — gate 7 — author-spine</h2>
+<ul>
+<li><strong>Status:</strong> PASS (pages written; QA next)</li>
+<li><strong>Files:</strong> <code>26</code> (2), <code>27</code>/<code>28</code>/<code>29</code> stub/<code>30</code> (1 each), <code>40</code> (6), <code>19</code>/<code>20</code>/<code>37</code>/<code>38</code>/<code>39</code> (1 each); sources AgentCore + Azure Search SKU; graph v1.7.0</li>
+<li><strong>UNVERIFIED:</strong> hosted-agents GA (not declared); dollar prices; GCP Vertex SKUs; AgentCore retrieve path; OTel spec pin</li>
+<li><strong>Next if interrupted:</strong> <code>gate7-chair-scorecard</code></li>
+</ul>
+<h2>2026-09-07T22:50Z — wave 0 — gate 7 — chair-scorecard</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>99-META/qa/gate-7-scorecard.md</code>, <code>99-META/GATE-STATUS.md</code>, render 128 HTML</li>
+<li><strong>UNVERIFIED:</strong> hosted-agents GA; prices; GCP SKUs; AgentCore retrieve; carry-forward</li>
+<li><strong>Next if interrupted:</strong> <code>gate8-author-spine</code></li>
+</ul>
+<h2>2026-09-07T23:05Z — wave 0 — gate 8 — author-spine</h2>
+<ul>
+<li><strong>Status:</strong> PASS (labs written and run)</li>
+<li><strong>Files:</strong> <code>42-CAPSTONE-PROJECTS</code> L01–L10 + labs; <code>41</code> use-case map; <code>43</code> break_acl; graph v1.8.0</li>
+<li><strong>UNVERIFIED:</strong> vendor SDK method names (intentionally stubbed); carry-forward Gate 7 rows</li>
+<li><strong>Next if interrupted:</strong> <code>gate8-chair-scorecard</code></li>
+</ul>
+<h2>2026-09-07T23:10Z — wave 0 — gate 8 — chair-scorecard</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>99-META/qa/gate-8-scorecard.md</code>, <code>99-META/GATE-STATUS.md</code></li>
+<li><strong>UNVERIFIED:</strong> stub SDK names; carry-forward</li>
+<li><strong>Next if interrupted:</strong> <code>gate9-author-spine</code></li>
+</ul>
+<h2>2026-09-07T23:20Z — wave 0 — gate 9 — author-spine</h2>
+<ul>
+<li><strong>Status:</strong> in progress (UI written; render + browser QA next)</li>
+<li><strong>Files:</strong> depth.js, why-chain.js, simulations.html, three why-chain.json, render wrap data-level</li>
+<li><strong>UNVERIFIED:</strong> mermaid CDN if offline</li>
+<li><strong>Next if interrupted:</strong> <code>gate9-chair-scorecard</code></li>
+</ul>
+<h2>2026-09-07T23:35Z — wave 0 — gate 9 — chair-scorecard</h2>
+<ul>
+<li><strong>Status:</strong> PASS</li>
+<li><strong>Files:</strong> <code>99-META/qa/gate-9-scorecard.md</code>, <code>99-META/GATE-STATUS.md</code>, interactive JS/HTML</li>
+<li><strong>UNVERIFIED:</strong> live IDE-browser hops; file:// Why-chains; mermaid CDN</li>
+<li><strong>Next if interrupted:</strong> <code>gate10-author-spine</code></li>
+</ul>
+<h2>2026-09-07T23:40Z — wave 0 — gate 10 — author-spine</h2>
+<ul>
+<li><strong>Status:</strong> PASS (catalogs written)</li>
+<li><strong>Files:</strong> <code>44</code>, <code>46</code>, <code>47</code>, <code>48</code>, <code>50</code>; graph v1.10.0; nav + renderer; learn-next on missing overviews</li>
+<li><strong>UNVERIFIED:</strong> live IDE-browser hops; file:// Why-chains; mermaid CDN; carry-forward vendor rows</li>
+<li><strong>Next if interrupted:</strong> <code>gate10-chair-scorecard</code></li>
+</ul>
+<h2>2026-09-07T23:50Z — wave 0 — gate 10 — chair-scorecard</h2>
+<ul>
+<li><strong>Status:</strong> PASS — factory complete</li>
+<li><strong>Files:</strong> <code>99-META/qa/gate-10-scorecard.md</code>, <code>99-META/GATE-STATUS.md</code></li>
+<li><strong>UNVERIFIED:</strong> live IDE-browser hops; file:// Why-chains; mermaid CDN; carry-forward</li>
+<li><strong>Next if interrupted:</strong> <code>factory-complete</code></li>
+</ul>
+  </article>
+  <script src="../../app/js/learn-path.js"></script>
+  <script src="../../app/js/page-index.js"></script>
+  <script src="../../app/js/shell.js"></script>
+  <script src="../../app/js/depth.js"></script>
+  <script src="../../app/js/why-chain.js"></script>
+  <script src="../../app/js/mermaid-boot.js"></script>
+</body>
+</html>

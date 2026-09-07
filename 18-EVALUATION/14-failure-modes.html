@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How evaluation fails — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>18-EVALUATION/14-failure-modes.md</code></p>
+    <h1>How evaluation fails</h1>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>What happens</th>
+<th>Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contamination</td>
+<td>Gold items sat in the prompt, fine-tune, or few-shot</td>
+<td>Hold out; hash cases; rotate</td>
+</tr>
+<tr>
+<td>Circular judging</td>
+<td>Judge model is the same family/prompt as the system</td>
+<td>Gold for a slice; blind human audit</td>
+</tr>
+<tr>
+<td>Metric gaming</td>
+<td>Optimize the number, not the user</td>
+<td>Multiple metrics; hidden holdout</td>
+</tr>
+<tr>
+<td>Stale gold</td>
+<td>Product changed, labels did not</td>
+<td>Review cadence</td>
+</tr>
+<tr>
+<td>Anecdote eval</td>
+<td>Three chats decide a release</td>
+<td>Harness or no ship (<a href="19-comparison.html">19</a>)</td>
+</tr>
+<tr>
+<td>Logging gold with PII</td>
+<td>Eval store becomes a leak</td>
+<td>Minimize; access control (<code>SRC-NIST-AI-600-1</code>)</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  E[Eval number went up] --&gt; Q{Holdout still good?}
+  Q --&gt;|no| G[Gaming / leak]
+  Q --&gt;|yes| H{Human sample agrees?}
+  H --&gt;|no| C[Circular judge]
+  H --&gt;|yes| S[Credible signal]
+</pre>
+<p>A rising score without a holdout is not evidence.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

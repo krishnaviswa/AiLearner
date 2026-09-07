@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When not to generate SQL — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>15-NL2SQL/19-comparison.md</code></p>
+    <h1>When not to generate SQL</h1>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Prefer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Known report</td>
+<td>Parameterized query / semantic layer</td>
+</tr>
+<tr>
+<td>Single-row lookup by id</td>
+<td>API</td>
+</tr>
+<tr>
+<td>Write / DDL</td>
+<td>Human + change management</td>
+</tr>
+<tr>
+<td>Cross-tenant warehouse</td>
+<td>Do not give the model a god role</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  N[Need data] --&gt; K{Query known?}
+  K --&gt;|yes| SQL[Checked-in SQL]
+  K --&gt;|no| S{Semantic metrics exist?}
+  S --&gt;|yes| SL[Semantic layer]
+  S --&gt;|no| NL[NL2SQL + AST + role]
+</pre>
+<p>If the “agent” only ever emits one template, it is a function (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

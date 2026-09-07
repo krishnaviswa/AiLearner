@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why-chains — AI Engineering Knowledge Lab</title>
+  <script src="app/js/theme.js"></script>
+  <link rel="stylesheet" href="app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="."></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>why-chains.md</code></p>
+    <h1>Why-chains</h1>
+<p>Expandable reasoning stored as <strong>JSON beside the page</strong>. The browser fetches it; no model runs in this tab.</p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>JSON</th>
+<th>Shows on</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Why a vector store?</td>
+<td><a href="07-VECTOR-DATABASES/why-chain.json">07-VECTOR-DATABASES/why-chain.json</a></td>
+<td>Vector store pages</td>
+</tr>
+<tr>
+<td>Why an agent — or not?</td>
+<td><a href="10-AGENTS/why-chain.json">10-AGENTS/why-chain.json</a></td>
+<td>Agents / when-not</td>
+</tr>
+<tr>
+<td>Why ACL on chunks?</td>
+<td><a href="08-RAG/why-chain.json">08-RAG/why-chain.json</a></td>
+<td>RAG overview / comparison</td>
+</tr>
+</tbody>
+</table>
+<p>Open a listed HTML page over <code>http://127.0.0.1:8000/</code> so <code>fetch</code> works. On <code>file://</code> the chain is skipped (no backend).</p>
+<h2>What should I remember?</h2>
+<p>A Why-chain is a teaching aid, not a live architect. Edit the JSON to change the argument.</p>
+<h2>What should I learn next?</h2>
+<p><a href="simulations.html">Simulations</a></p>
+  </article>
+  <script src="app/js/learn-path.js"></script>
+  <script src="app/js/page-index.js"></script>
+  <script src="app/js/shell.js"></script>
+  <script src="app/js/depth.js"></script>
+  <script src="app/js/why-chain.js"></script>
+  <script src="app/js/mermaid-boot.js"></script>
+</body>
+</html>

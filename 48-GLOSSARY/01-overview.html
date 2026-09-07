@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab glossary — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>48-GLOSSARY/01-overview.md</code></p>
+    <h1>Lab glossary</h1>
+<p>Durable definitions for terms <strong>this lab actually uses</strong>. Not a vendor dictionary. Links go to the page that teaches the term. Volatile SKU names stay out.</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Durable meaning here</th>
+<th>Open</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent</td>
+<td>Runtime that may <strong>choose the next action</strong> (usually a tool) under uncertainty</td>
+<td><a href="../10-AGENTS/01-overview.html">10-AGENTS</a></td>
+</tr>
+<tr>
+<td>Workflow</td>
+<td>Enumerated steps with explicit order — not a free loop</td>
+<td><a href="../10-AGENTS/19-comparison.html">When not an agent</a></td>
+</tr>
+<tr>
+<td>LLM application</td>
+<td>One (or few) model calls with a contract; no agency</td>
+<td><a href="../05-LLM-APPLICATION-ENGINEERING/01-overview.html">05</a></td>
+</tr>
+<tr>
+<td>Structured output</td>
+<td>Model must emit a schema the runtime can parse</td>
+<td><a href="../05-LLM-APPLICATION-ENGINEERING/01-overview.html">05</a></td>
+</tr>
+<tr>
+<td>Token / context window</td>
+<td>Discrete model input units; a hard length budget</td>
+<td><a href="../01-FOUNDATIONS/01-overview.html">01-FOUNDATIONS</a></td>
+</tr>
+<tr>
+<td>Embedding</td>
+<td>Vector that places text in a similarity space</td>
+<td><a href="../06-EMBEDDINGS/01-overview.html">06</a></td>
+</tr>
+<tr>
+<td>Vector database</td>
+<td>Store + search for those vectors; not an ACL system</td>
+<td><a href="../07-VECTOR-DATABASES/01-overview.html">07</a></td>
+</tr>
+<tr>
+<td>Chunk</td>
+<td>Index grain that retrieve returns; <strong>must carry ACL</strong> in production RAG</td>
+<td><a href="../08-RAG/01-overview.html">08-RAG</a></td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>Retrieve evidence, then generate; generate cannot fix a wrong retrieve</td>
+<td><a href="../08-RAG/01-overview.html">08-RAG</a></td>
+</tr>
+<tr>
+<td>Hybrid retrieve</td>
+<td>Lexical + vector (and usually filters)</td>
+<td><a href="../08-RAG/19-comparison.html">08 comparison</a></td>
+</tr>
+<tr>
+<td>Permission-aware RAG</td>
+<td>Principal filter <strong>in the retrieve query</strong>, not after</td>
+<td><a href="../08-RAG/19-comparison.html">08 comparison</a></td>
+</tr>
+<tr>
+<td>ACL-in-query</td>
+<td>Same as above — grants travel with the chunk</td>
+<td><a href="../40-REFERENCE-ARCHITECTURES/A-enterprise-rag.html">Arch A</a></td>
+</tr>
+<tr>
+<td>Agentic RAG</td>
+<td>Retrieve is a <strong>tool</strong> the model may call again</td>
+<td><a href="../09-AGENTIC-RAG/01-overview.html">09</a></td>
+</tr>
+<tr>
+<td>Retrieve-as-tool</td>
+<td>The pattern name for that loop</td>
+<td><a href="../09-AGENTIC-RAG/01-overview.html">09</a></td>
+</tr>
+<tr>
+<td>Tool / function calling</td>
+<td>Model proposes name + args; <strong>runtime</strong> invokes after authz</td>
+<td><a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12</a></td>
+</tr>
+<tr>
+<td>Tool registry</td>
+<td>Catalog of callable tools with identity, not a prompt list</td>
+<td><a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12</a></td>
+</tr>
+<tr>
+<td>MCP</td>
+<td>Protocol: host creates a client per server; tools/resources/prompts</td>
+<td><a href="../13-MCP/01-overview.html">13</a></td>
+</tr>
+<tr>
+<td>MCP host / client / server</td>
+<td>Official roles (<code>SRC-MCP-ARCHITECTURE</code>)</td>
+<td><a href="../13-MCP/19-comparison.html">13 comparison</a></td>
+</tr>
+<tr>
+<td>Orchestration</td>
+<td>Coordination of steps or agents on <strong>explicit</strong> paths</td>
+<td><a href="../11-AGENT-ORCHESTRATION/01-overview.html">11</a></td>
+</tr>
+<tr>
+<td>Multi-agent</td>
+<td>Several loops plus a coordination rule</td>
+<td><a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14</a></td>
+</tr>
+<tr>
+<td>Supervisor / worker</td>
+<td>One loop assigns work to specialists</td>
+<td><a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14</a></td>
+</tr>
+<tr>
+<td>Handoff</td>
+<td>Transfer of the conversation or task to another agent</td>
+<td><a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14</a></td>
+</tr>
+<tr>
+<td>NL-to-SQL</td>
+<td>Model proposes SQL; parse + policy before any cursor</td>
+<td><a href="../15-NL2SQL/01-overview.html">15</a></td>
+</tr>
+<tr>
+<td>Ground truth / gold</td>
+<td>Labeled cases you trust</td>
+<td><a href="../18-EVALUATION/01-overview.html">18</a></td>
+</tr>
+<tr>
+<td>Eval harness</td>
+<td>Automated run of gold (and helpers) that can fail a build</td>
+<td><a href="../18-EVALUATION/03-logical.html">18 logical</a></td>
+</tr>
+<tr>
+<td>LLM-as-judge</td>
+<td>Helper scorer — <strong>must not replace</strong> gold (<code>SRC-OPENAI-EVALS</code> is one registry, not required)</td>
+<td><a href="../18-EVALUATION/02-simple.html">18 simple</a></td>
+</tr>
+<tr>
+<td>Guardrail</td>
+<td>Policy + <strong>deterministic</strong> filters; a second model vote is not enough</td>
+<td><a href="../22-GUARDRAILS/01-overview.html">22</a></td>
+</tr>
+<tr>
+<td>DLP / PII / PHI</td>
+<td>Detect and block sensitive fields; LLM classifier is not enough</td>
+<td><a href="../23-PHI-PII-DLP/01-overview.html">23</a></td>
+</tr>
+<tr>
+<td>Identity / authz</td>
+<td>Who the tool runs as; prompt is not a grant</td>
+<td><a href="../26-AI-CLOUD-ARCHITECTURE/01-overview.html">26</a></td>
+</tr>
+<tr>
+<td>HITL</td>
+<td>Human confirmation of the <strong>exact</strong> action before irreversible writes</td>
+<td><a href="../22-GUARDRAILS/19-comparison.html">22 comparison</a></td>
+</tr>
+<tr>
+<td>Prompt injection (LLM01:2026)</td>
+<td>Hostile instructions in user, retrieve, or tool text</td>
+<td><a href="../21-AI-SECURITY/03-logical.html">21 map</a></td>
+</tr>
+<tr>
+<td>Excessive agency (LLM03:2026)</td>
+<td>Tools that can do more than the task needs</td>
+<td><a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12</a></td>
+</tr>
+<tr>
+<td>Hidden context (LLM08:2026)</td>
+<td>Secrets or policy buried in a prompt that can leak</td>
+<td><a href="../22-GUARDRAILS/01-overview.html">22</a></td>
+</tr>
+<tr>
+<td>Improper output handling (LLM10:2026)</td>
+<td>Treating model text as safe code/SQL/HTML</td>
+<td><a href="../15-NL2SQL/01-overview.html">15</a></td>
+</tr>
+<tr>
+<td>Confused deputy</td>
+<td>Agent or tool acting with a stronger identity than the caller</td>
+<td><a href="../40-REFERENCE-ARCHITECTURES/E-multi-agent.html">Arch E</a></td>
+</tr>
+<tr>
+<td>Why-chain</td>
+<td>Baked JSON reasoning beside a page — not a live LLM</td>
+<td><a href="../why-chains.html">why-chains</a></td>
+</tr>
+<tr>
+<td>Depth L1–L8</td>
+<td>Simple → Expert hide/show on the <strong>same</strong> concept</td>
+<td>Gate 9 header control</td>
+</tr>
+<tr>
+<td>Stage-gate factory</td>
+<td>This lab’s Gates 0–10: author → QA PASS → next gate</td>
+<td><a href="../99-META/gate-plan.html">gate-plan</a></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  Term[Term in a page] --&gt; Def[This glossary]
+  Def --&gt; Page[Teaching page]
+  Page --&gt; Graph[knowledge-graph.json]
+</pre>
+<h2>What should I remember?</h2>
+<p>If a word is not in this table, the lab has not claimed a durable definition for it.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../50-CHEAT-SHEETS/01-overview.html">Cheat-sheets</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

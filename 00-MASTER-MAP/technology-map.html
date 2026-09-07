@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technology map — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/technology-map.md</code></p>
+    <h1>Technology map</h1>
+<p>Gate 0 item 6. Status registry: <a href="../99-META/technology-status.yaml"><code>../99-META/technology-status.yaml</code></a>.</p>
+<p>This is a <strong>maintainable matrix outline</strong>. Cells are not scores. Do not invent pricing or adoption stats. Re-verify versions at implementation gates.</p>
+<h2>How to use</h2>
+<ol>
+<li>Pick the <strong>category</strong> (durable need).</li>
+<li>Read <strong>when to use / not</strong> (judgment).</li>
+<li>Open official docs (Tier 1) before writing code.</li>
+<li>Prefer workflow/API/SQL when an agent is unnecessary.</li>
+</ol>
+<h2>Matrix (Gate 0)</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Technology</th>
+<th>Purpose</th>
+<th>Maturity (this repo)</th>
+<th>When to use</th>
+<th>When not to use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Protocol</td>
+<td>MCP</td>
+<td>Standard tool/resource/prompt interface</td>
+<td>Mature protocol, evolving spec</td>
+<td>Multiple hosts need the same tools; enterprise tool catalog</td>
+<td>Simple one-off function tools in a single app — plain function calling may be enough</td>
+</tr>
+<tr>
+<td>Orchestration</td>
+<td>LangGraph</td>
+<td>Durable stateful graphs, HITL, mix deterministic + agentic</td>
+<td>Mature (docs)</td>
+<td>Long-running, restartable, explicit control</td>
+<td>Throwaway chat prototype</td>
+</tr>
+<tr>
+<td>Agents</td>
+<td>Microsoft Agent Framework</td>
+<td>Agents + workflows; MS-documented successor to AutoGen/SK</td>
+<td>Emerging / current MS path</td>
+<td>Azure/.NET or migrating off SK/AutoGen</td>
+<td>Need to confirm package/version first; not a cloud-neutral default</td>
+</tr>
+<tr>
+<td>Agents</td>
+<td>OpenAI Agents SDK</td>
+<td>Few primitives: agents, handoffs, guardrails, sandbox</td>
+<td>Mature (official SDK)</td>
+<td>OpenAI-centric apps, sandbox workspaces</td>
+<td>Strong multi-cloud lock-in concern</td>
+</tr>
+<tr>
+<td>Data/RAG agents</td>
+<td>LlamaIndex</td>
+<td>Agents/workflows over data</td>
+<td>Mature (docs)</td>
+<td>RAG-heavy knowledge assistants</td>
+<td>Treat as the only orchestration runtime without checking durability needs</td>
+</tr>
+<tr>
+<td>Agents</td>
+<td>Google ADK</td>
+<td>OSS agent kit, GCP-aligned</td>
+<td>Emerging</td>
+<td>GCP/Vertex-centric teams</td>
+<td>Assuming feature parity with LangGraph without reading ADK docs</td>
+</tr>
+<tr>
+<td>Managed runtime</td>
+<td>Foundry Agent Service (Microsoft Foundry Agent Service)</td>
+<td>Managed/hosted agents</td>
+<td>Hosted agents <strong>preview</strong></td>
+<td>Azure enterprise hosting</td>
+<td>Treating preview hosting as GA</td>
+</tr>
+<tr>
+<td>Managed runtime</td>
+<td>Bedrock Agents</td>
+<td>Managed agents + KB + guardrails</td>
+<td>Vendor-specific</td>
+<td>AWS-native estates</td>
+<td>Portability-first architectures</td>
+</tr>
+<tr>
+<td>Lakehouse retrieval</td>
+<td>Databricks AI Search</td>
+<td>Governed semantic/hybrid search</td>
+<td>Vendor-specific</td>
+<td>Data already in UC/lakehouse</td>
+<td>Forcing Databricks as the vector DB for a non-lakehouse app</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td>OTel GenAI semconv</td>
+<td>Standard traces/metrics</td>
+<td>Development (official document status; not Stable)</td>
+<td>New instrumentation; expect attribute change</td>
+<td>Assuming production-stable names; OTel says Development SHOULD NOT be treated as production-stable (<code>SRC-OTEL-GENAI-SEMCONV</code>)</td>
+</tr>
+<tr>
+<td>DLP</td>
+<td>Presidio</td>
+<td>PII detect/anonymize</td>
+<td>Mature OSS</td>
+<td>Layer in a pipeline</td>
+<td>Sole compliance control</td>
+</tr>
+<tr>
+<td>Predecessor</td>
+<td>AutoGen / Semantic Kernel</td>
+<td>Historical patterns</td>
+<td>Successor language on MS Learn — <strong>not</strong> a deprecation notice</td>
+<td>Reading old code / migration</td>
+<td>New greenfield (verify current support on their own repos; do not teach as deprecated)</td>
+</tr>
+<tr>
+<td>Agents</td>
+<td>CrewAI</td>
+<td>Role-based crews + event-driven Flows (official intro)</td>
+<td>Emerging (official docs)</td>
+<td>After reading official docs in Gate 4</td>
+<td>Vendor “production-ready” claims remain <strong>UNVERIFIED</strong>; not a default orchestrator</td>
+</tr>
+</tbody>
+</table>
+<h2>Decision guides to write in later gates (do not decide now)</h2>
+<ul>
+<li>Vector DB vs search engine</li>
+<li>RAG vs fine-tuning</li>
+<li>Workflow vs agent</li>
+<li>Single vs multi-agent</li>
+<li>LangGraph vs other orchestrators</li>
+<li>Azure AI Search vs pgvector</li>
+<li>Batch vs streaming</li>
+<li>REST vs MCP</li>
+<li>SQL agent vs semantic layer</li>
+<li>LLM classifier vs deterministic rules</li>
+<li>Managed vs open source</li>
+<li>Large vs small model</li>
+</ul>
+<p>Each guide needs: criteria, default if justified, exceptions, trade-offs, cost, complexity, ops burden, security, lock-in. <strong>No unsupported absolute recommendations.</strong></p>
+<h2>Cloud platforms (category only)</h2>
+<p>Azure (Microsoft Foundry / Entra / Purview family; previous brand Azure AI Studio / Azure AI Foundry) · AWS (Bedrock / IAM) · GCP (Vertex / ADK / BigQuery gravity) · Databricks (UC + AI Search + MCP). Choose by <strong>data gravity and identity plane</strong>, not a feature bingo card from blogs.</p>
+<h2>Explicitly out of Gate 0</h2>
+<p>Model name leaderboards, token prices, “best framework 2026” rankings.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

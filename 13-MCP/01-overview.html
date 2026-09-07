@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Model Context Protocol — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>13-MCP/01-overview.md</code></p>
+    <h1>Model Context Protocol</h1>
+<p>Official architecture (re-fetched 2026-09-07, <code>SRC-MCP-ARCHITECTURE</code>): MCP is a <strong>context-exchange protocol</strong>. It does <strong>not</strong> dictate how the host uses an LLM.</p>
+<h2>Participants</h2>
+<p>The <strong>MCP host</strong> (an AI application) creates <strong>one MCP client per MCP server</strong>. Each client keeps a dedicated connection to that server.</p>
+<ul>
+<li><strong>Host</strong> — coordinates clients (docs example: an IDE acting as host).</li>
+<li><strong>Client</strong> — connection + context for the host.</li>
+<li><strong>Server</strong> — program that provides context (local or remote).</li>
+</ul>
+<p>Local servers typically use <strong>STDIO</strong> (often one client). Remote servers typically use <strong>Streamable HTTP</strong> (many clients).</p>
+<pre class="mermaid">flowchart TB
+  subgraph host [MCP Host]
+    C1[Client 1]
+    C2[Client 2]
+  end
+  C1 --&gt;|dedicated| S1[Server local STDIO]
+  C2 --&gt;|dedicated| S2[Server remote Streamable HTTP]
+</pre>
+<h2>Layers (official)</h2>
+<p><strong>Data layer:</strong> JSON-RPC — capability/version discovery; primitives <strong>tools, resources, prompts</strong>, notifications.<br />
+<strong>Transport layer:</strong> connection, framing, authorization.</p>
+<h2>Intro</h2>
+<p><code>SRC-MCP-INTRO</code> — what MCP is. Use both IDs when teaching.</p>
+<h2>When not to use MCP</h2>
+<p>One app, three in-process functions — plain function calling (<a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12</a>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">MCP vs function calling</a> · <a href="../50-CHEAT-SHEETS/mcp-vs-tools.html">Cheat-sheet</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gate 6 scorecard — AI Engineering Knowledge Lab</title>
+  <script src="../../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>99-META/qa/gate-6-scorecard.md</code></p>
+    <h1>Gate 6 scorecard</h1>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gate</td>
+<td>6 — SECURITY</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2026-09-07</td>
+</tr>
+<tr>
+<td>Chair</td>
+<td>Factory orchestrator</td>
+</tr>
+<tr>
+<td>Retry</td>
+<td>0 of 2</td>
+</tr>
+<tr>
+<td>Overall</td>
+<td><strong>PASS</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>Committee</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Notes</th>
+<th>Mark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source verifier</td>
+<td>OWASP 2026 titles from official GitHub README (Aug 4). Landing HTML date Aug 3 — same list, date disagreement recorded. LLM01/08/09/10 files fetched. NIST landing + AI 600-1 PDF §2 twelve risks. Presidio docs host moved; Bedrock Guardrails overview fetched. No invented Top-10 IDs or CVE stats.</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Architecture / terminology</td>
+<td>Guardrails = policy + deterministic vs model-as-filter. DLP: LLM classifier is not enough. Governance = NIST functions, not a SKU. Identity/HITL/eval edges kept.</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Pedagogy</td>
+<td>L1 overviews; when-not tables; synthetic PII only; OWASP map after simple three-door model</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Diagram QA</td>
+<td>Mermaid on every Gate 6 page except DLP DO (code + asserts). Labels match prose.</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td><code>render-pages.py</code> 110 files; prefixes 21–25; shell nav Gate 6 group</td>
+<td>PASS</td>
+</tr>
+</tbody>
+</table>
+<h2>Criteria</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Mark</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accuracy</td>
+<td>PASS</td>
+<td>Official titles and NIST risk names only</td>
+</tr>
+<tr>
+<td>Completeness</td>
+<td>PASS</td>
+<td>Spine only: few real pages per 21–25</td>
+</tr>
+<tr>
+<td>Source quality</td>
+<td>PASS</td>
+<td>Tier 1/2; fetch notes on OWASP/NIST/Presidio/Bedrock</td>
+</tr>
+<tr>
+<td>Freshness</td>
+<td>PASS</td>
+<td>last_verified 2026-09-07; RMF 1.0 revision flagged</td>
+</tr>
+<tr>
+<td>Architecture consistency</td>
+<td>PASS</td>
+<td>Cross-cutting security/guardrails/DLP as in reference-architecture</td>
+</tr>
+<tr>
+<td>Terminology consistency</td>
+<td>PASS</td>
+<td>Taxonomy OWASP list matches README</td>
+</tr>
+<tr>
+<td>Code correctness</td>
+<td>PASS</td>
+<td>Synthetic MRN regex asserts</td>
+</tr>
+<tr>
+<td>Security correctness</td>
+<td>PASS</td>
+<td>No exploit PoCs; architectural defenses</td>
+</tr>
+<tr>
+<td>Production realism</td>
+<td>PASS</td>
+<td>Vendor products labeled vendor-specific</td>
+</tr>
+<tr>
+<td>Cross-reference integrity</td>
+<td>PASS</td>
+<td>Graph v1.6.0; folder links</td>
+</tr>
+<tr>
+<td>Learning progression</td>
+<td>PASS</td>
+<td>Eval (Gate 5) before security; production not started</td>
+</tr>
+</tbody>
+</table>
+<h2>Residual UNVERIFIED</h2>
+<ul>
+<li>NIST AI RMF 1.0 <strong>being revised</strong> (landing 2026-09-07)</li>
+<li>Measure playbook subcategory steps (not re-copied from playbook PDF)</li>
+<li>OWASP landing <strong>August 3</strong> vs GitHub README <strong>August 4</strong> 2026 (titles agree)</li>
+<li>Carry-forward: evals schema; embeddings/structured-output fields; pgvector operators; Azure Search SKUs; hosted-agents GA; AutoGen/SK deprecation; CrewAI pin; OTel spec version; context sizes; MCP spec pin</li>
+</ul>
+<h2>Failures to fix before re-score</h2>
+<ul>
+<li>(none)</li>
+</ul>
+<h2>Decision</h2>
+<p><strong>PASS</strong> — Gate 7 may start. This close does not start Gate 7 content.</p>
+  </article>
+  <script src="../../app/js/learn-path.js"></script>
+  <script src="../../app/js/page-index.js"></script>
+  <script src="../../app/js/shell.js"></script>
+  <script src="../../app/js/depth.js"></script>
+  <script src="../../app/js/why-chain.js"></script>
+  <script src="../../app/js/mermaid-boot.js"></script>
+</body>
+</html>

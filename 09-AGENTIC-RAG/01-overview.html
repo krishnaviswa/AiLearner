@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agentic RAG — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>09-AGENTIC-RAG/01-overview.md</code></p>
+    <h1>Agentic RAG</h1>
+<p>Level 1. Retrieval becomes a <strong>tool the model may call again</strong> — rewrite query, search twice, follow a citation. This is <strong>not</strong> Gate 4 (no MCP catalog, no multi-agent).</p>
+<h2>What is it?</h2>
+<p>A loop: generate a query → retrieve → observe → maybe retrieve again → answer. It exists because <strong>one</strong> retrieve often misses.</p>
+<h2>Only after these failures are real</h2>
+<p>You already saw them in <a href="../08-RAG/02-simple.html">08-RAG/02-simple.md</a>: bad chunk, wrong top-K, no ACL, no refuse, stale index. If you have not measured those, an agentic loop <strong>amplifies</strong> them (more calls, more leak surface). OWASP <strong>excessive agency</strong> (<code>SRC-OWASP-LLM-TOP10-2026</code>). Prefer a function when a function is enough (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<pre class="mermaid">flowchart TD
+  Q[Question] --&gt; R1[Retrieve once]
+  R1 --&gt; G{Enough evidence?}
+  G --&gt;|yes| A[Answer + cite]
+  G --&gt;|no| L{Known rewrite rule?}
+  L --&gt;|yes| W[Deterministic query rewrite]
+  W --&gt; R1
+  L --&gt;|no| AG[Agentic retrieve tool]
+  AG --&gt; R1
+</pre>
+<h2>Data / cloud analogy</h2>
+<p>A human analyst who runs a second SQL after the first result is empty — useful. A human who gets <code>UPDATE</code> on prod because the first SELECT was empty — not useful.</p>
+<h2>What should I remember?</h2>
+<p>Agentic RAG is a <strong>retry policy with a brain</strong>. Brains need budgets and authz.</p>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">19-comparison.md</a>, then stop until Gate 4.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

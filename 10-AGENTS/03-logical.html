@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent flavors map — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>10-AGENTS/03-logical.md</code></p>
+    <h1>Agent flavors map</h1>
+<p>Taxonomy list from <a href="../00-MASTER-MAP/master-taxonomy.html">master-taxonomy.md</a>. This is a <strong>map</strong>, not 21 files per flavor.</p>
+<table>
+<thead>
+<tr>
+<th>Flavor</th>
+<th>Kind</th>
+<th>This lab</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple LLM app / prompt-driven / structured-output</td>
+<td><strong>Not an agent</strong></td>
+<td><a href="../05-LLM-APPLICATION-ENGINEERING/01-overview.html">05</a></td>
+</tr>
+<tr>
+<td>Deterministic workflow / API / SQL / pipeline</td>
+<td><strong>Negative space</strong></td>
+<td>This page + <a href="../11-AGENT-ORCHESTRATION/01-overview.html">11</a></td>
+</tr>
+<tr>
+<td>Tool / function-calling</td>
+<td>Agent primitive</td>
+<td><a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12</a></td>
+</tr>
+<tr>
+<td>ReAct</td>
+<td>Thought → act → observe</td>
+<td><a href="02-simple.html">02-simple.md</a></td>
+</tr>
+<tr>
+<td>Workflow-based</td>
+<td>Graph with optional LLM nodes</td>
+<td><a href="../11-AGENT-ORCHESTRATION/01-overview.html">11</a></td>
+</tr>
+<tr>
+<td>Router</td>
+<td>Dispatch to a specialist</td>
+<td><a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14</a></td>
+</tr>
+<tr>
+<td>Planner / executor</td>
+<td>Plan then run</td>
+<td><a href="../11-AGENT-ORCHESTRATION/01-overview.html">11</a></td>
+</tr>
+<tr>
+<td>Stateful / memory-enabled</td>
+<td>Session / store</td>
+<td>LangGraph persistence docs (<code>SRC-LANGGRAPH-PERSISTENCE</code>)</td>
+</tr>
+<tr>
+<td>HITL / approval-based</td>
+<td>Human gates a tool</td>
+<td><a href="../11-AGENT-ORCHESTRATION/01-overview.html">11</a></td>
+</tr>
+<tr>
+<td>Long-running / durable / background</td>
+<td>Resume after crash</td>
+<td>LangGraph: durable execution (<code>SRC-LANGGRAPH-OVERVIEW</code>)</td>
+</tr>
+<tr>
+<td>Event-driven</td>
+<td>Triggered by a message</td>
+<td>Same as any consumer + policy</td>
+</tr>
+<tr>
+<td>Autonomous / semi-autonomous</td>
+<td>How much may proceed without a human</td>
+<td>Policy, not a product</td>
+</tr>
+<tr>
+<td>Agentic RAG</td>
+<td>Retrieve as a tool</td>
+<td><a href="../09-AGENTIC-RAG/01-overview.html">09</a></td>
+</tr>
+<tr>
+<td>Multi-agent / supervisor / handoff / parallel / hierarchical</td>
+<td>After single-agent failures</td>
+<td><a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14</a></td>
+</tr>
+<tr>
+<td>MCP-based</td>
+<td>Tools via protocol</td>
+<td><a href="../13-MCP/01-overview.html">13</a></td>
+</tr>
+<tr>
+<td>NL-to-SQL</td>
+<td>Generate SQL</td>
+<td><a href="../15-NL2SQL/01-overview.html">15</a> — security first</td>
+</tr>
+<tr>
+<td>Data-engineering / data-quality / cloud-ops / security / coding / research / enterprise knowledge / CS / decision-support</td>
+<td><strong>Use-case labels</strong></td>
+<td>Same primitives + domain tools; not extra runtimes</td>
+</tr>
+</tbody>
+</table>
+<p>OpenAI SDK adds documented <strong>handoffs</strong>, <strong>guardrails</strong>, <strong>sandbox agents</strong>, <strong>sessions</strong>, <strong>HITL</strong> (<code>SRC-OPENAI-AGENTS-SDK</code>). Microsoft documents <strong>Harness Agent</strong> (opinionated long-task agent) and <strong>workflows</strong> separately from single agents (<code>SRC-MS-AGENT-FRAMEWORK</code>). Those names are vendor; the flavors above stay durable.</p>
+<pre class="mermaid">flowchart LR
+  App[LLM app] --&gt; Tools[Tool-calling]
+  Tools --&gt; Orch[Orchestration]
+  Orch --&gt; MA[Multi-agent]
+  Tools --&gt; MCP[MCP]
+  Tools --&gt; NLQ[NL2SQL]
+</pre>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

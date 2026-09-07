@@ -1,0 +1,23 @@
+{
+  "id": "vector-db",
+  "title": "Why a vector store?",
+  "applies_to": ["01-overview.html", "02-simple.html", "19-comparison.html"],
+  "steps": [
+    {
+      "claim": "You need nearest neighbors in embedding space",
+      "because": "A question and a passage are similar when their vectors are close. That is retrieval by meaning, not by exact tokens."
+    },
+    {
+      "claim": "An LLM alone is not a corpus index",
+      "because": "Weights are not a queryable catalog with ACLs, freshness, or citations. Asking the model to 'remember the handbook' is not search."
+    },
+    {
+      "claim": "Keyword search still has a job",
+      "because": "IDs, error codes, and rare names often lose to neighbors that merely sound related. Hybrid (lexical + vector) covers both."
+    },
+    {
+      "claim": "The store is not the architecture",
+      "because": "Permission must be in the query (LLM09). A shared scan plus a polite filter is not a control."
+    }
+  ]
+}

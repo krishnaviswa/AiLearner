@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L3 — Production-oriented RAG — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>42-CAPSTONE-PROJECTS/L03.md</code></p>
+    <h1>L3 — Production-oriented RAG</h1>
+<p><strong>Proves:</strong> tenant ACL <strong>inside</strong> retrieve (LLM09) + egress DLP + a harness. Architecture A.</p>
+<h2>Runnable</h2>
+<p><code>python 42-CAPSTONE-PROJECTS/labs/l03_acl_dlp.py</code></p>
+<h2>Toy vs production-oriented</h2>
+<p>L2 plus: principal on the query, MRN pattern blocked on the way out.</p>
+<h2>BREAK</h2>
+<p>Run the extra experiment: <code>python 43-EXPERIMENTS/break_acl.py</code> — a query <strong>without</strong> a tenant must not see both tenants’ chunks.</p>
+<h2>Security</h2>
+<p>Synthetic <code>SYN-MRN-0001</code> only. An LLM classifier is <strong>not</strong> this DLP (<a href="../23-PHI-PII-DLP/19-comparison.html">23</a>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="L04.html">L04</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

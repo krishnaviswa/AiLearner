@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — fail closed on bad JSON — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>02-PYTHON-FOR-AI/16-hands-on.md</code></p>
+    <h1>DO — fail closed on bad JSON</h1>
+<p>Tiny lab: no vendor SDK required.</p>
+<pre><code class="language-python">import json
+from typing import Any
+
+ALLOWED = {&quot;refund&quot;, &quot;shipping&quot;, &quot;other&quot;}
+
+def parse_label(raw: str) -&gt; str:
+    data: Any = json.loads(raw)
+    if not isinstance(data, dict) or data.get(&quot;label&quot;) not in ALLOWED:
+        raise ValueError(&quot;schema&quot;)
+    return data[&quot;label&quot;]
+
+if __name__ == &quot;__main__&quot;:
+    print(parse_label('{&quot;label&quot;: &quot;refund&quot;}'))
+    try:
+        parse_label('{&quot;label&quot;: &quot;drop_table&quot;}')
+    except ValueError:
+        print(&quot;refused&quot;)
+</code></pre>
+<h2>Experiment</h2>
+<p>Feed the parser: trailing commas, a list, a markdown fence, a plausible wrong label. Those are <strong>production</strong> failure modes, not jokes.</p>
+<h2>What can go wrong?</h2>
+<p><code>json.loads</code> succeeding on <code>{"label": "refund", "extra": "exfil"}</code> — decide whether extra keys are allowed.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

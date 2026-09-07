@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foundations — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>01-FOUNDATIONS/01-overview.md</code></p>
+    <h1>Foundations</h1>
+<p>Level 1. Audience: people who already ship pipelines. This is not “what is AI.”</p>
+<h2>What is it?</h2>
+<p>An LLM does not read your string the way a Kafka consumer reads bytes. It reads <strong>tokens</strong> — integer pieces of text produced by a tokenizer. Official OpenAI <code>tiktoken</code> docs describe BPE as reversible, lossless, and (in their words) about <strong>4 bytes per token on average</strong> (<code>SRC-TIKTOKEN</code>). That average is a rule of thumb, not a capacity SLA.</p>
+<p><strong>Context window</strong> is the model’s working set: prompt + completion must fit. Overflow is not “it gets a bit worse” — it fails or silently drops, depending on the API (behavior is <strong>volatile</strong>; check the vendor).</p>
+<p><strong>Agency</strong> is the permission to <em>choose the next action</em> (call a tool, loop, wait). A single LLM call with a schema is an <strong>application</strong>. A loop that picks tools is an <strong>agent</strong>. Microsoft’s Agent Framework overview says: if you can write a function to handle the task, do that instead of an AI agent (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<h2>Data / cloud analogy</h2>
+<table>
+<thead>
+<tr>
+<th>Familiar</th>
+<th>LLM analog</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max.message.bytes</code> / payload limit</td>
+<td>Context window</td>
+</tr>
+<tr>
+<td>Serialization format (Avro vs JSON)</td>
+<td>Tokenizer / encoding</td>
+</tr>
+<tr>
+<td>Orchestrator that calls APIs in a fixed DAG</td>
+<td>Workflow (prefer this)</td>
+</tr>
+<tr>
+<td>Orchestrator that <em>decides</em> which job to run</td>
+<td>Agent</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  T[Text] --&gt; TOK[Tokenizer]
+  TOK --&gt; IDS[Token ids]
+  IDS --&gt; LLM[LLM]
+  LLM --&gt; OUT[Tokens out]
+  OUT --&gt; DETOK[Detokenize]
+</pre>
+<h2>Why it exists</h2>
+<p>Tokens make training and billing discrete. Context bounds memory. Agency exists for <em>unknown</em> next steps — not for a known Spark job.</p>
+<h2>When NOT to use an agent</h2>
+<p>See <a href="19-comparison.html">19-comparison.md</a>. Default: <strong>workflow, SQL, or one structured call</strong>.</p>
+<h2>What should I remember?</h2>
+<p>Tokens ≠ words. Context is a hard budget. Agency is optional and expensive.</p>
+<h2>What should I learn next?</h2>
+<p><a href="02-simple.html">02-simple.md</a> — one call. Then <a href="../05-LLM-APPLICATION-ENGINEERING/01-overview.html">05-LLM-APPLICATION-ENGINEERING/01-overview.md</a>.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

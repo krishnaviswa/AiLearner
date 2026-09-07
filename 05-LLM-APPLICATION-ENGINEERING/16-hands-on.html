@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — a six-line eval harness — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>05-LLM-APPLICATION-ENGINEERING/16-hands-on.md</code></p>
+    <h1>DO — a six-line eval harness</h1>
+<p>You may stub the model. The point is the <strong>harness</strong>, not a demo.</p>
+<pre><code class="language-python">GOLD = {&quot;t1&quot;: &quot;shipping&quot;, &quot;t2&quot;: &quot;refund&quot;}
+
+def accuracy(pred: dict[str, str]) -&gt; float:
+    ok = sum(pred[k] == v for k, v in GOLD.items())
+    return ok / len(GOLD)
+
+# Pretend model outputs (replace with a real call later — SDK names UNVERIFIED here)
+pred = {&quot;t1&quot;: &quot;shipping&quot;, &quot;t2&quot;: &quot;other&quot;}
+print(accuracy(pred))  # 0.5
+</code></pre>
+<h2>Experiment</h2>
+<ol>
+<li>Add a third gold case.</li>
+<li>Refuse to compute accuracy if a prediction key is missing.</li>
+<li>Do <strong>not</strong> add an LLM-as-judge yet (Gate 5). Confabulation risk stays labeled (<code>SRC-NIST-AI-600-1</code>).</li>
+</ol>
+<h2>What can go wrong?</h2>
+<p>Optimizing the prompt on the same three rows you report as “prod accuracy.”</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PII, PHI, and DLP — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>23-PHI-PII-DLP/01-overview.md</code></p>
+    <h1>PII, PHI, and DLP</h1>
+<p><strong>Data loss prevention</strong> for LLM apps is egress and ingress control: what may enter the context window, and what may leave to a user, log, tool, or model vendor.</p>
+<h2>What is it?</h2>
+<ul>
+<li><strong>PII</strong> — identifiers that point at a person (names, phones, account numbers). Sensitivity is <strong>contextual</strong> (NIST AI 600-1 §2.4).</li>
+<li><strong>PHI</strong> — health information tied to a person. Same engineering problem, higher legal temperature. This lab uses <strong>synthetic</strong> records only.</li>
+<li><strong>DLP</strong> — policy + detectors + <strong>enforcement at a sink</strong> (block, redact, refuse to call the tool).</li>
+</ul>
+<p>NIST AI 600-1 names <strong>data privacy</strong> as a generative-AI risk: leakage, unauthorized use, de-anonymization, and inference of sensitive attributes even when the training set did not contain that fact (<code>SRC-NIST-AI-600-1</code>). OWASP LLM02 is the app-level sibling (sensitive information disclosure).</p>
+<h2>Data / cloud analogy</h2>
+<p>Column-level security + tokenization + an egress proxy. You already do not <code>SELECT *</code> from a PHI table into a public dashboard. Do not <code>retrieve *</code> into a prompt either.</p>
+<pre class="mermaid">flowchart TD
+  Src[Source record] --&gt; In[Ingress DLP]
+  In --&gt; Idx[Index / prompt]
+  Idx --&gt; M[Model]
+  M --&gt; Eg[Egress DLP]
+  Eg --&gt; U[User]
+  Eg --&gt; T[Tools / vendor API]
+  Eg --&gt; L[Logs]
+</pre>
+<h2>LLM classifier is not enough</h2>
+<p>A model that says “this looks like PII” is another injectable, stochastic component (LLM01). It misses encodings, splits across fields, and anything outside its prompt. Pair it with:</p>
+<ul>
+<li>Deterministic recognizers (regex, checksums, NER) — e.g. Presidio Analyzer: regex + NER + custom recognizers (<code>SRC-PRESIDIO</code>, docs now at data-privacy-stack.github.io, fetched 2026-09-07).</li>
+<li>Network and IAM: the model never receives the raw column; tools never send raw PHI to an external endpoint.</li>
+<li>Purpose limitation: a summarizer does not need MRNs in the prompt.</li>
+</ul>
+<p>Bedrock’s sensitive-information filter is one <strong>vendor</strong> mix of probabilistic PII plus custom regex (<code>SRC-AWS-BEDROCK-GUARDRAILS-OVERVIEW</code>). Useful, not a compliance program.</p>
+<h2>What should I remember?</h2>
+<p>Redact at the <strong>sink</strong>. Detecting in a chat transcript after the vendor already stored the prompt is incident response, not DLP.</p>
+<h2>What should I learn next?</h2>
+<p><a href="02-simple.html">02-simple.md</a> · <a href="19-comparison.html">19-comparison.md</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

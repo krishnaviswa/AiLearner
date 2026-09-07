@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E — Secure multi-agent platform — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>40-REFERENCE-ARCHITECTURES/E-multi-agent.md</code></p>
+    <h1>E — Secure multi-agent platform</h1>
+<p>Several agents, one <strong>trust story</strong>. Distinctive risks: <strong>confused deputy</strong> (agent B acts with agent A’s privileges) and <strong>A2A trust</strong> (who may call whom).</p>
+<p>Foundry documents <strong>A2A protocol (preview)</strong> (<code>SRC-MS-HOSTED-AGENTS</code>, <code>SRC-MS-FOUNDRY-AGENTS</code>). Treat A2A as volatile. MCP still has host / client / server — the <strong>host</strong> owns authz (<a href="../13-MCP/01-overview.html">13</a>).</p>
+<h2>Sequence</h2>
+<pre class="mermaid">sequenceDiagram
+  participant U as User
+  participant H as Host / supervisor
+  participant A as Agent A
+  participant B as Agent B
+  participant T as Tool
+  U-&gt;&gt;H: task + user token
+  H-&gt;&gt;A: scoped grant A
+  A-&gt;&gt;H: handoff request
+  H-&gt;&gt;H: map grant A to grant B not union
+  H-&gt;&gt;B: scoped grant B
+  B-&gt;&gt;T: call as B not as U unless OBO
+</pre>
+<h2>When not architecture E</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Prefer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One loop is enough</td>
+<td>Architecture B</td>
+</tr>
+<tr>
+<td>Coordination is a fixed DAG</td>
+<td>Workflow of functions / agents on rails</td>
+</tr>
+<tr>
+<td>You cannot name the deputy</td>
+<td>Do not add A2A</td>
+</tr>
+<tr>
+<td>Shared service account for all agents</td>
+<td>Do not ship</td>
+</tr>
+</tbody>
+</table>
+<h2>Failure-first</h2>
+<p>Confused deputy → per-agent identity, no grant union. Poisoned handoff text → treat as LLM01. Unreadable traces → do not add a third agent (<a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14</a>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="../19-OBSERVABILITY/01-overview.html">Observability</a> · <a href="../39-AI-PRODUCTION-OPERATIONS/01-overview.html">Ops</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

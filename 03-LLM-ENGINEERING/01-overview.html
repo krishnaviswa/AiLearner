@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM engineering — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>03-LLM-ENGINEERING/01-overview.md</code></p>
+    <h1>LLM engineering</h1>
+<p>Level 1. The model is a <strong>component</strong> with knobs: context, decoding, routing, output shape. It is not a coworker.</p>
+<h2>What is it?</h2>
+<p><strong>LLM engineering</strong> is choosing and operating that component: which model family, how much context you spend, how greedy or random decoding is, whether output is free text or a schema, and how you route easy vs hard traffic.</p>
+<h2>Data / cloud analogy</h2>
+<p>A query engine: you pick warehouse size, max scan, and result format. You do not let the engine invent extra tables. Routing cheap/small vs large models is like a query governor.</p>
+<pre class="mermaid">flowchart TB
+  Req[Request] --&gt; R[Model router]
+  R --&gt; S[Small / cheap model]
+  R --&gt; L[Large / capable model]
+  S --&gt; D[Decoding + max tokens]
+  L --&gt; D
+  D --&gt; V[Validate / refuse]
+</pre>
+<h2>Durable vs volatile</h2>
+<table>
+<thead>
+<tr>
+<th>Durable</th>
+<th>Volatile</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tokens, context budget, validate output</td>
+<td>Model names, context sizes, SKUs</td>
+</tr>
+<tr>
+<td>Temperature-style randomness exists</td>
+<td>Exact parameter names and defaults</td>
+</tr>
+<tr>
+<td>Routing by difficulty / risk</td>
+<td>Vendor “router” product names</td>
+</tr>
+</tbody>
+</table>
+<p>Context-window sizes and current model IDs are <strong>UNVERIFIED</strong> here on purpose — they churn. Re-read official model cards at implement time.</p>
+<h2>When not to use an agent</h2>
+<p>Routing between two <strong>single calls</strong> is still an application. A router agent that also wields write-tools is Gate 4.</p>
+<h2>What should I remember?</h2>
+<p>Spend context like money. Decode like a risk control. Route like a load balancer.</p>
+<h2>What should I learn next?</h2>
+<p><a href="02-simple.html">02-simple.md</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

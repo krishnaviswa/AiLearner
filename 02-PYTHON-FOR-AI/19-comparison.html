@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparison — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>02-PYTHON-FOR-AI/19-comparison.md</code></p>
+    <h1>Comparison</h1>
+<table>
+<thead>
+<tr>
+<th>Shape</th>
+<th>Use when</th>
+<th>Do not use when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Notebook</td>
+<td>Exploration, token experiments (<code>SRC-TIKTOKEN</code>)</td>
+<td>Serving customers</td>
+</tr>
+<tr>
+<td>CLI / batch job</td>
+<td>Backfill, eval harness</td>
+<td>Interactive tool-picking</td>
+</tr>
+<tr>
+<td>Sync/async service</td>
+<td>One structured call, SLA, authn</td>
+<td>You have not validated output</td>
+</tr>
+<tr>
+<td>Agent runtime</td>
+<td>Unknown next tool, after Gate 4</td>
+<td>The next call is already <code>classify()</code></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  A[Need model I/O] --&gt; B{Is the next Python call known?}
+  B --&gt;|yes| C[Service or job]
+  B --&gt;|no| D{Are tools required?}
+  D --&gt;|no| C
+  D --&gt;|yes| E[Defer to Gate 4 — agent + authz]
+</pre>
+<h2>Principal question</h2>
+<p>Why is there a <code>tools=</code> array on a function that only ever calls one endpoint?</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

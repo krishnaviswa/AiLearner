@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One encode, one compare (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>06-EMBEDDINGS/02-simple.md</code></p>
+    <h1>One encode, one compare (simple)</h1>
+<h2>How it works</h2>
+<ol>
+<li>Normalize text (your rules: lowercase? strip PII? — decide, version it).</li>
+<li>Embed with a <strong>pinned</strong> model id (volatile — read the vendor page).</li>
+<li>Store vector <strong>plus</strong> document id, tenant, ACL, source URI, embed_version.</li>
+<li>At query time embed the question with the <strong>same</strong> model.</li>
+<li>Rank by a distance you actually understand (cosine / inner product — confirm what the store uses).</li>
+</ol>
+<pre class="mermaid">sequenceDiagram
+  participant App
+  participant Emb as Embed API
+  participant Store
+  App-&gt;&gt;Emb: encode chunk
+  Emb--&gt;&gt;App: vector
+  App-&gt;&gt;Store: upsert vector + ACL
+  App-&gt;&gt;Emb: encode question
+  Emb--&gt;&gt;App: qvec
+  App-&gt;&gt;Store: knn + filter
+  Store--&gt;&gt;App: ids
+</pre>
+<h2>How it fails</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model swap, old vectors</td>
+<td>Re-embed or dual-write version</td>
+</tr>
+<tr>
+<td>Empty / huge chunk</td>
+<td>Chunk policy + token budget</td>
+</tr>
+<tr>
+<td>PII in the vector store</td>
+<td>DLP before embed (<code>SRC-NIST-AI-600-1</code>)</td>
+</tr>
+<tr>
+<td>Cross-tenant neighbor</td>
+<td>Filter <strong>before</strong> or <strong>inside</strong> knn, not after the LLM sees it</td>
+</tr>
+</tbody>
+</table>
+<h2>Evaluate</h2>
+<p>Not “the answer sounded good.” Measure retrieval: did the gold chunk appear in top-K?</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

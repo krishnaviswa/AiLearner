@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — cosine on toy vectors — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>06-EMBEDDINGS/16-hands-on.md</code></p>
+    <h1>DO — cosine on toy vectors</h1>
+<p>No live embed API. Prove the geometry.</p>
+<pre><code class="language-python">import math
+
+def cosine(a, b):
+    dot = sum(x * y for x, y in zip(a, b))
+    na = math.sqrt(sum(x * x for x in a))
+    nb = math.sqrt(sum(y * y for y in b))
+    return dot / (na * nb)
+
+q = [1.0, 0.0]
+print(cosine(q, [1.0, 0.1]))
+print(cosine(q, [0.0, 1.0]))
+</code></pre>
+<h2>Experiment</h2>
+<p>Add a third vector that is almost <code>q</code> but you would <strong>not</strong> be allowed to see that document. Notice the math does not know ACL. That is the whole lesson.</p>
+<p>Vendor embed dimensions and request bodies remain <strong>UNVERIFIED</strong> (<code>SRC-OPENAI-EMBEDDINGS</code> timeout).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

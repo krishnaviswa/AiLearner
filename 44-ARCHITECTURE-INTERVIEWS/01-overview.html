@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Architect / principal interviews — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>44-ARCHITECTURE-INTERVIEWS/01-overview.md</code></p>
+    <h1>Architect / principal interviews</h1>
+<p>Questions with <strong>no single correct answer</strong>. A strong answer names a trade-off, a failure mode, and a page in this lab. The lab’s DESIGN surfaces are comparison pages, reference architectures, and “what a principal would challenge” sections — there is no separate <code>18-design-challenge.md</code> set.</p>
+<p>Use these in an interview loop: candidate talks, then they open the linked DESIGN page and argue <strong>against</strong> their first sketch.</p>
+<h2>How to use this set</h2>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>What you do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SEE</td>
+<td>Read the question and the linked DESIGN page</td>
+</tr>
+<tr>
+<td>DO</td>
+<td>Sketch two designs that disagree</td>
+</tr>
+<tr>
+<td>BREAK</td>
+<td>Name how each design fails (ACL, agency, judge, SQL)</td>
+</tr>
+<tr>
+<td>DESIGN</td>
+<td>Defend one under a constraint the interviewer changes</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  Q[Question] --&gt; A[First sketch]
+  A --&gt; P[Open DESIGN page]
+  P --&gt; C{Interviewer changes constraint}
+  C --&gt; B[Second sketch]
+  B --&gt; E[Name the residual risk]
+</pre>
+<h2>Questions (no single answer)</h2>
+<h3>1. Agent or not?</h3>
+<p>The business asked for “an AI agent over our orders.” When do you refuse? What do you ship instead?</p>
+<p><strong>DESIGN pages:</strong> <a href="../10-AGENTS/19-comparison.html">When not an agent</a> · <a href="../01-FOUNDATIONS/19-comparison.html">Foundations when-not</a> · <a href="../50-CHEAT-SHEETS/rag-vs-agent.html">RAG vs agent sheet</a></p>
+<p>A principal would challenge a <code>tools=</code> list of length 1 that is always called.</p>
+<h3>2. Where does the ACL live?</h3>
+<p>Two tenants share an index. Is the filter in the query, after retrieve, or in the prompt?</p>
+<p><strong>DESIGN pages:</strong> <a href="../08-RAG/19-comparison.html">Naive / hybrid / ACL</a> · <a href="../40-REFERENCE-ARCHITECTURES/A-enterprise-rag.html">Arch A</a> · <a href="../43-EXPERIMENTS/01-overview.html">BREAK ACL</a></p>
+<h3>3. When is retrieve allowed to loop?</h3>
+<p>Your first retrieve misses 30% of gold chunks. Do you add agentic RAG, a rewrite workflow, or fix chunking?</p>
+<p><strong>DESIGN pages:</strong> <a href="../09-AGENTIC-RAG/19-comparison.html">When not agentic RAG</a> · <a href="../09-AGENTIC-RAG/01-overview.html">09 overview</a></p>
+<h3>4. Judge score went up. Can you ship?</h3>
+<p>The LLM-as-judge is the same family as the system. Gold is ten chats from the PM.</p>
+<p><strong>DESIGN pages:</strong> <a href="../18-EVALUATION/19-comparison.html">When chats are not eval</a> · <a href="../18-EVALUATION/14-failure-modes.html">How eval fails</a> · <a href="../18-EVALUATION/02-simple.html">Gold vs judge</a></p>
+<h3>5. MCP or three functions?</h3>
+<p>Five teams want “the standard tool bus.” You have three in-process calls today.</p>
+<p><strong>DESIGN pages:</strong> <a href="../13-MCP/19-comparison.html">MCP vs function calling</a> · <a href="../50-CHEAT-SHEETS/mcp-vs-tools.html">MCP vs tools sheet</a></p>
+<h3>6. Who is the deputy?</h3>
+<p>A supervisor agent can call a worker that has warehouse admin. The user is a read-only analyst.</p>
+<p><strong>DESIGN pages:</strong> <a href="../40-REFERENCE-ARCHITECTURES/E-multi-agent.html">Arch E</a> · <a href="../14-MULTI-AGENT-SYSTEMS/19-comparison.html">Multi-agent</a> · <a href="../42-CAPSTONE-PROJECTS/L07.html">L7</a></p>
+<h3>7. NL-to-SQL or a semantic layer?</h3>
+<p>The demo generates beautiful SQL. The warehouse has PII columns and no row filter.</p>
+<p><strong>DESIGN pages:</strong> <a href="../15-NL2SQL/19-comparison.html">When not SQL</a> · <a href="../40-REFERENCE-ARCHITECTURES/C-nl2sql.html">Arch C</a> · <a href="../simulations.html">NL2SQL sim</a></p>
+<h3>8. Is the model the guardrail?</h3>
+<p>Security wants a second LLM to vote “safe” before <code>cancel_order</code>.</p>
+<p><strong>DESIGN pages:</strong> <a href="../22-GUARDRAILS/19-comparison.html">Model is not a filter</a> · <a href="../40-REFERENCE-ARCHITECTURES/B-enterprise-agent.html">Arch B</a></p>
+<h3>9. Canonical arch or a SKU slide?</h3>
+<p>A vendor map shows six product names. Which boxes are durable vs volatile?</p>
+<p><strong>DESIGN pages:</strong> <a href="../26-AI-CLOUD-ARCHITECTURE/19-comparison.html">When not a SKU dump</a> · <a href="../00-MASTER-MAP/reference-architecture.html">Canonical reference</a> · <a href="../40-REFERENCE-ARCHITECTURES/01-overview.html">Arch index</a></p>
+<h3>10. What would you not automate?</h3>
+<p>A data-engineering agent can <code>DROP</code> a table that failed a test. Where is HITL, and what does the human see?</p>
+<p><strong>DESIGN pages:</strong> <a href="../40-REFERENCE-ARCHITECTURES/D-data-engineering-agent.html">Arch D</a> · <a href="../22-GUARDRAILS/19-comparison.html">Guardrails HITL</a></p>
+<h2>What a principal would challenge</h2>
+<p>An interview answer that names a vendor SKU but cannot name the failure mode on <a href="../40-REFERENCE-ARCHITECTURES/01-overview.html">Arch A–E</a>.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../47-ANTI-PATTERNS/01-overview.html">Anti-patterns</a> · <a href="../48-GLOSSARY/01-overview.html">Glossary</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

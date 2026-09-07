@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When not to use an agent — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>10-AGENTS/19-comparison.md</code></p>
+    <h1>When not to use an agent</h1>
+<p>First-class page. Also: <a href="../01-FOUNDATIONS/19-comparison.html">foundations when-not</a>.</p>
+<p>Microsoft Learn table (re-fetched 2026-09-07, <code>SRC-MS-AGENT-FRAMEWORK</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Use an agent when…</th>
+<th>Use a workflow when…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Task is open-ended or conversational</td>
+<td>Process has well-defined steps</td>
+</tr>
+<tr>
+<td>Autonomous tool use and planning</td>
+<td>Explicit control over execution order</td>
+</tr>
+<tr>
+<td>A single LLM call (possibly with tools) suffices</td>
+<td>Multiple agents or functions must coordinate</td>
+</tr>
+</tbody>
+</table>
+<p>And: <strong>if you can write a function to handle the task, do that instead of using an AI agent.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Prefer</th>
+<th>Instead of an agent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workflow / DAG / state machine</td>
+<td>Known steps</td>
+</tr>
+<tr>
+<td>REST / SQL / semantic layer</td>
+<td>Known lookup</td>
+</tr>
+<tr>
+<td>Structured LLM app</td>
+<td>One extraction / classify</td>
+</tr>
+<tr>
+<td>Pipeline (Spark / dbt)</td>
+<td>Deterministic transform</td>
+</tr>
+<tr>
+<td>Human form + API</td>
+<td>No decision under uncertainty</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  Q{Can a function or SQL do it?}
+  Q --&gt;|yes| F[Ship the function]
+  Q --&gt;|no| W{Are steps enumerated?}
+  W --&gt;|yes| WF[Workflow]
+  W --&gt;|no| A[Agent + authz + eval]
+</pre>
+<h2>What a principal would challenge</h2>
+<p>A <code>tools=</code> list of length 1 that is always called.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

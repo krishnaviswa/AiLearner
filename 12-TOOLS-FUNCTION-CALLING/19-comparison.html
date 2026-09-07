@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Function call vs REST vs MCP — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>12-TOOLS-FUNCTION-CALLING/19-comparison.md</code></p>
+    <h1>Function call vs REST vs MCP</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>In-process function</th>
+<th>REST you own</th>
+<th>MCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Catalog</td>
+<td>One app</td>
+<td>One app / gateway</td>
+<td>Many hosts, one server (<code>SRC-MCP-ARCHITECTURE</code>)</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>Call stack</td>
+<td>HTTP</td>
+<td>STDIO or Streamable HTTP</td>
+</tr>
+<tr>
+<td>Authz</td>
+<td>Your IAM</td>
+<td>Your IAM</td>
+<td>Still <strong>your</strong> IAM — protocol ≠ permission</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="../13-MCP/19-comparison.html">13</a>.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

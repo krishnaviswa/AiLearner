@@ -1,0 +1,23 @@
+{
+  "id": "acl-on-chunks",
+  "title": "Why ACL on chunks?",
+  "applies_to": ["01-overview.html", "19-comparison.html"],
+  "steps": [
+    {
+      "claim": "Chunks inherit documents’ secrets",
+      "because": "A public paragraph and a confidential footnote can sit in one file. If you embed the whole file, retrieve can leak the footnote."
+    },
+    {
+      "claim": "Filter in the query, not after the scan",
+      "because": "OWASP LLM09: similarity search across a shared index can reveal other tenants even when you later drop their rows. Architecture A requires the principal on retrieve."
+    },
+    {
+      "claim": "Empty retrieve must refuse",
+      "because": "No hits is not a license to confabulate. Gate 5: no gold, no quality claim; here: no allowed chunk, no answer."
+    },
+    {
+      "claim": "An LLM classifier is not this control",
+      "because": "DLP and ACL are deterministic (or IAM). A second model can be prompted around (LLM01)."
+    }
+  ]
+}

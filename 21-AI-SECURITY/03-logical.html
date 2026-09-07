@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OWASP LLM Top 10 2026 → lab controls — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>21-AI-SECURITY/03-logical.md</code></p>
+    <h1>OWASP LLM Top 10 2026 → lab controls</h1>
+<p>Titles are the official 2026 list (<code>SRC-OWASP-LLM-TOP10-2026-GH</code>). Control families are <strong>this lab’s</strong> mapping to existing nodes — not a new OWASP ID and not a vendor SKU.</p>
+<table>
+<thead>
+<tr>
+<th>Official entry</th>
+<th>Lab control family</th>
+<th>First node to open</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM01 Prompt Injection</td>
+<td>Treat retrieved/tool text as hostile; least privilege; HITL for writes</td>
+<td><a href="02-simple.html">02-simple.md</a></td>
+</tr>
+<tr>
+<td>LLM02 Sensitive Information Disclosure</td>
+<td>Secrets out of prompts; DLP on ingress and egress</td>
+<td><a href="../23-PHI-PII-DLP/01-overview.html">23-PHI-PII-DLP</a></td>
+</tr>
+<tr>
+<td>LLM03 Excessive Agency</td>
+<td>Tool IAM, capability budget, no convenience <code>*:*</code></td>
+<td><a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12-TOOLS-FUNCTION-CALLING</a></td>
+</tr>
+<tr>
+<td>LLM04 Supply Chain</td>
+<td>Pin and audit MCP servers, models, packages</td>
+<td><a href="../13-MCP/01-overview.html">13-MCP</a></td>
+</tr>
+<tr>
+<td>LLM05 Data and Model Poisoning</td>
+<td>Ingest provenance; eval after corpus change</td>
+<td><a href="../18-EVALUATION/01-overview.html">18-EVALUATION</a></td>
+</tr>
+<tr>
+<td>LLM06 Unbounded Consumption</td>
+<td>Quotas, timeouts, max tool loops</td>
+<td>Gate 7 cost/ops</td>
+</tr>
+<tr>
+<td>LLM07 Misinformation</td>
+<td>Gold cases; do not ship on vibes</td>
+<td><a href="../18-EVALUATION/02-simple.html">18-EVALUATION</a></td>
+</tr>
+<tr>
+<td>LLM08 Hidden Context Exposure</td>
+<td>No secrets in system prompt; prompt is not authz</td>
+<td><a href="../22-GUARDRAILS/01-overview.html">22-GUARDRAILS</a></td>
+</tr>
+<tr>
+<td>LLM09 Vector and Embedding Weaknesses</td>
+<td>ACL <strong>inside</strong> retrieve, not after; embeddings ≈ source data</td>
+<td><a href="../08-RAG/19-comparison.html">08-RAG</a></td>
+</tr>
+<tr>
+<td>LLM10 Improper Output Handling</td>
+<td>Encode for the sink; never <code>exec</code> model text</td>
+<td><a href="../15-NL2SQL/01-overview.html">15-NL2SQL</a></td>
+</tr>
+</tbody>
+</table>
+<h2>Vector layer (LLM09) without invented CVEs</h2>
+<p>Official description (fetched 2026-09-07): weaknesses in <strong>embedding geometry and similarity search</strong> — poisoning that makes retrieve wrong, inversion that leaks source text, jamming that makes retrieve silent, ACL that runs <strong>after</strong> a shared search. Distinct from LLM01 (instructions in retrieved text).</p>
+<p>Permission-aware RAG you already have: filter <strong>in the query</strong>, not as a polite post-step.</p>
+<h2>NIST companion, not a second Top 10</h2>
+<p>NIST AI 600-1 §2.9 names prompt injection and data poisoning under <strong>information security</strong>, and lists <strong>data privacy</strong> separately (<code>SRC-NIST-AI-600-1</code>). Use OWASP for app threats; use NIST for organizational risk functions (<a href="../24-AI-GOVERNANCE/01-overview.html">24</a>).</p>
+<pre class="mermaid">flowchart LR
+  O[OWASP LLM01-10] --&gt; App[App and runtime controls]
+  N[NIST AI RMF + 600-1] --&gt; Org[Govern Map Measure Manage]
+  App --&gt; Org
+</pre>
+<h2>What a principal would challenge</h2>
+<p>“We passed an OWASP checklist” with no evidence of tenant-scoped retrieve, tool authz, or output encoding. The list does not expire those controls.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../22-GUARDRAILS/01-overview.html">Guardrails</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

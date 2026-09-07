@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One tool loop (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>10-AGENTS/02-simple.md</code></p>
+    <h1>One tool loop (simple)</h1>
+<pre class="mermaid">sequenceDiagram
+  participant U as User
+  participant A as Agent runtime
+  participant M as Model
+  participant T as Tool
+  U-&gt;&gt;A: goal
+  A-&gt;&gt;M: context + tool schemas
+  M--&gt;&gt;A: tool call
+  A-&gt;&gt;T: invoke with authz
+  T--&gt;&gt;A: result
+  A-&gt;&gt;M: observation
+  M--&gt;&gt;A: final or another call
+</pre>
+<h2>How it works</h2>
+<ol>
+<li>Bound the tool list (allow-list).</li>
+<li>Cap turns (budget).</li>
+<li>Run the model → maybe invoke a tool → observe.</li>
+<li>Stop on final, refuse, or cap.</li>
+</ol>
+<p>OpenAI’s SDK documents a built-in loop, handoffs, and guardrails (<code>SRC-OPENAI-AGENTS-SDK</code>). Exact class names beyond what that page states are not required here.</p>
+<h2>How it fails</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wrong tool</td>
+<td>Smaller catalog; unit-test tool choice</td>
+</tr>
+<tr>
+<td>Infinite loop</td>
+<td>Max turns</td>
+</tr>
+<tr>
+<td>Tool writes prod</td>
+<td>HITL / no write tools</td>
+</tr>
+<tr>
+<td>Prompt injection via tool output</td>
+<td>Treat tool output as untrusted (<code>SRC-OWASP-LLM-TOP10-2026</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2>When this is still too much</h2>
+<p>If the sequence is always <code>get_order</code> then <code>format_reply</code>, delete the loop (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

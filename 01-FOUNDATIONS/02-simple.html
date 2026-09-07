@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One LLM call (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>01-FOUNDATIONS/02-simple.md</code></p>
+    <h1>One LLM call (simple)</h1>
+<p>A production-shaped mental model before tools or RAG.</p>
+<pre class="mermaid">sequenceDiagram
+  participant App
+  participant Tok as Tokenizer
+  participant M as Model API
+  App-&gt;&gt;Tok: count / encode prompt
+  App-&gt;&gt;M: messages + constraints
+  M--&gt;&gt;App: text or structured payload
+  App-&gt;&gt;App: validate, log ids, score
+</pre>
+<h2>How it works</h2>
+<ol>
+<li>Build a <strong>contract</strong>: input fields, output shape, refusal cases.</li>
+<li>Estimate tokens (<code>SRC-TIKTOKEN</code>, <code>SRC-TIKTOKEN-COOKBOOK</code>).</li>
+<li>Call the model once.</li>
+<li><strong>Validate</strong> the output (schema, allow-list, SQL AST later — not this gate).</li>
+<li>Record: model id, prompt version, token counts, latency. Do not log raw PII (<code>SRC-NIST-AI-600-1</code> privacy / information-security themes).</li>
+</ol>
+<p>Toy: paste into a chat UI.<br />
+Production-oriented: versioned prompt, typed output, eval set of 20 golden cases, identity of the caller.</p>
+<h2>How it fails</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>What you see</th>
+<th>First control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Context overflow</td>
+<td>Error or truncated prompt</td>
+<td>Count tokens first</td>
+</tr>
+<tr>
+<td>Confabulation</td>
+<td>Fluent wrong fact</td>
+<td>Ground or refuse (<code>SRC-NIST-AI-600-1</code>)</td>
+</tr>
+<tr>
+<td>Schema drift</td>
+<td>JSON that does not parse</td>
+<td>Constrained decode + local validate</td>
+</tr>
+<tr>
+<td>Cost spike</td>
+<td>Surprise bill</td>
+<td>Cap max tokens; cache static prefix</td>
+</tr>
+</tbody>
+</table>
+<p>Exact error codes and parameter names are <strong>volatile</strong> — read the vendor page at implement time.</p>
+<h2>What should I build?</h2>
+<p>A function <code>classify(ticket) -&gt; {label, confidence}</code> with a golden CSV. Not an agent.</p>
+<h2>What can go wrong?</h2>
+<p>Treating chat-UI success as an eval harness.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

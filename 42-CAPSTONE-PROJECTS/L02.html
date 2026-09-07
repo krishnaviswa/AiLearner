@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L2 — RAG application — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>42-CAPSTONE-PROJECTS/L02.md</code></p>
+    <h1>L2 — RAG application</h1>
+<p><strong>Proves:</strong> retrieve + <strong>citations</strong>. In-memory keyword search — no vector SKU.</p>
+<h2>Runnable</h2>
+<p><code>python 42-CAPSTONE-PROJECTS/labs/l02_rag.py</code></p>
+<h2>Toy vs production-oriented</h2>
+<p>Toy: PDF → embed → top-K → LLM. This lab: cite <code>doc_id</code> or fail. Still <strong>no ACL</strong> (that is L3).</p>
+<h2>BREAK</h2>
+<p>Ask “return window” — the wrong chunk must not be cited as gold. Empty retrieve → refuse, do not confabulate (<code>SRC-NIST-AI-600-1</code>).</p>
+<h2>Security</h2>
+<p>Corpus is fake policy text. Treat retrieved text as untrusted (LLM01) when you add a real model.</p>
+<h2>What should I learn next?</h2>
+<p><a href="L03.html">L03</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gate 8 scorecard — AI Engineering Knowledge Lab</title>
+  <script src="../../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>99-META/qa/gate-8-scorecard.md</code></p>
+    <h1>Gate 8 scorecard</h1>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gate</td>
+<td>8 — HANDS-ON</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2026-09-07</td>
+</tr>
+<tr>
+<td>Chair</td>
+<td>Factory orchestrator</td>
+</tr>
+<tr>
+<td>Retry</td>
+<td>0 of 2</td>
+</tr>
+<tr>
+<td>Overall</td>
+<td><strong>PASS</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>Committee</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Notes</th>
+<th>Mark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source verifier</td>
+<td>No invented SDKs; OTel/NIST/OWASP cites already sourced. Stubs labeled UNVERIFIED for vendor calls.</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Architecture / terminology</td>
+<td>Toy vs production-oriented; workflow/function preferred; L10 is a harness not a platform</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Pedagogy</td>
+<td>L1–L10 map to taught domains; 15 use cases are pointers only</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Diagram QA</td>
+<td>Mermaid on index + use-case map</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>Renderer includes 41–43</td>
+<td>PASS</td>
+</tr>
+</tbody>
+</table>
+<h2>Criteria</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Mark</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accuracy</td>
+<td>PASS</td>
+<td>Labs ran locally L1–L10 + <code>break_acl.py</code></td>
+</tr>
+<tr>
+<td>Completeness</td>
+<td>PASS</td>
+<td>Ladder spine; not 15 platforms</td>
+</tr>
+<tr>
+<td>Source quality</td>
+<td>PASS</td>
+<td>Placeholders, not fake APIs</td>
+</tr>
+<tr>
+<td>Freshness</td>
+<td>PASS</td>
+<td>Durable lab methods</td>
+</tr>
+<tr>
+<td>Architecture consistency</td>
+<td>PASS</td>
+<td>A/B/C/E mapped</td>
+</tr>
+<tr>
+<td>Terminology consistency</td>
+<td>PASS</td>
+<td>SYN-MRN only</td>
+</tr>
+<tr>
+<td>Code correctness</td>
+<td>PASS</td>
+<td><code>run_all.py</code> exit 0</td>
+</tr>
+<tr>
+<td>Security correctness</td>
+<td>PASS</td>
+<td>No secrets; ACL fail-closed; DLP regex</td>
+</tr>
+<tr>
+<td>Production realism</td>
+<td>PASS</td>
+<td>Stubs labeled; L10 refuses to be a platform</td>
+</tr>
+<tr>
+<td>Cross-reference integrity</td>
+<td>PASS</td>
+<td>Graph v1.8.0</td>
+</tr>
+<tr>
+<td>Learning progression</td>
+<td>PASS</td>
+<td>After production; Gate 9 not started</td>
+</tr>
+</tbody>
+</table>
+<h2>Residual UNVERIFIED</h2>
+<ul>
+<li>Vendor SDK / HTTP field names for a real model call (labs stub on purpose)</li>
+<li>Carry-forward: hosted-agents GA; dollar prices; GCP SKUs; AgentCore retrieve; RMF revision; OTel spec pin; evals schema; embeddings fields; pgvector; AutoGen/SK; CrewAI; MCP spec pin</li>
+</ul>
+<h2>Failures to fix before re-score</h2>
+<ul>
+<li>(none)</li>
+</ul>
+<h2>Decision</h2>
+<p><strong>PASS</strong> — Gate 9 may start. This close does not start Gate 9 content.</p>
+  </article>
+  <script src="../../app/js/learn-path.js"></script>
+  <script src="../../app/js/page-index.js"></script>
+  <script src="../../app/js/shell.js"></script>
+  <script src="../../app/js/depth.js"></script>
+  <script src="../../app/js/why-chain.js"></script>
+  <script src="../../app/js/mermaid-boot.js"></script>
+</body>
+</html>

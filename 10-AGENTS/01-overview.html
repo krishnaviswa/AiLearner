@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agents — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>10-AGENTS/01-overview.md</code></p>
+    <h1>Agents</h1>
+<p>Level 1. An <strong>agent</strong> is a runtime that may <strong>choose the next action</strong> (usually a tool) under uncertainty. A single structured LLM call is an <a href="../05-LLM-APPLICATION-ENGINEERING/01-overview.html">application</a>, not an agent. Retrieval-as-a-second-search is <a href="../09-AGENTIC-RAG/01-overview.html">agentic RAG</a> — link, do not duplicate.</p>
+<h2>What is it?</h2>
+<p>Microsoft Learn’s Agent Framework overview: use an agent when the task is open-ended or needs autonomous tool use; use a <strong>workflow</strong> when steps are well-defined; <strong>if you can write a function, do that instead</strong> (<code>SRC-MS-AGENT-FRAMEWORK</code>, re-fetched 2026-09-07).</p>
+<p>OpenAI Agents SDK (official, re-fetched 2026-09-07): an agent is an LLM with instructions and tools, plus a loop until the task completes (<code>SRC-OPENAI-AGENTS-SDK</code>). That is a vendor primitive set, not a requirement to use that SDK.</p>
+<h2>Data / cloud analogy</h2>
+<p>A Kubernetes controller reconciles toward a desired state. An agent reconciles toward a <em>goal</em> by calling APIs. A CronJob that always calls the same three endpoints is a <strong>workflow</strong>.</p>
+<pre class="mermaid">flowchart TD
+  G[Goal + policy] --&gt; D{Next action known?}
+  D --&gt;|yes| W[Workflow / function]
+  D --&gt;|no| A[Agent loop]
+  A --&gt; T[Tool]
+  T --&gt; O[Observe]
+  O --&gt; D
+</pre>
+<h2>Why it exists</h2>
+<p>Unknown next hop. Not because “AI” looks better on a slide.</p>
+<h2>Mandatory next page</h2>
+<p><a href="19-comparison.html">When not to use an agent</a>. Then <a href="03-logical.html">flavors map</a>.</p>
+<h2>What should I remember?</h2>
+<p>Agency is a control-plane decision. OWASP <strong>excessive agency</strong> (<code>SRC-OWASP-LLM-TOP10-2026</code>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">When not to use an agent</a> · <a href="03-logical.html">Flavors</a> · <a href="../50-CHEAT-SHEETS/rag-vs-agent.html">RAG vs agent sheet</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

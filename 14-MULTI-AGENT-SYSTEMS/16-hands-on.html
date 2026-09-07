@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — a deterministic router — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>14-MULTI-AGENT-SYSTEMS/16-hands-on.md</code></p>
+    <h1>DO — a deterministic router</h1>
+<pre><code class="language-python">def route(intent: str) -&gt; str:
+    return {&quot;refund&quot;: &quot;billing&quot;, &quot;outage&quot;: &quot;ops&quot;}.get(intent, &quot;refuse&quot;)
+
+assert route(&quot;refund&quot;) == &quot;billing&quot;
+assert route(&quot;hack&quot;) == &quot;refuse&quot;
+</code></pre>
+<p>If this table is stable, you do not need a supervisor agent to pick the specialist (<code>SRC-MS-AGENT-FRAMEWORK</code>). Handoffs belong when the <strong>conversation</strong> should move; a dict is enough when the <strong>intent</strong> is already classified.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

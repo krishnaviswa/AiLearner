@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI governance — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>24-AI-GOVERNANCE/01-overview.md</code></p>
+    <h1>AI governance</h1>
+<p>Governance is <strong>who decides, who is accountable, and which evidence counts</strong> — not a slide titled “Responsible AI” and not a cloud marketplace tile.</p>
+<h2>What is it?</h2>
+<p>NIST’s AI Risk Management Framework (AI RMF 1.0, January 2023) is <strong>voluntary</strong>. It exists to incorporate trustworthiness into design, development, use, and <strong>evaluation</strong> (<code>SRC-NIST-AI-RMF-LANDING</code>, <code>SRC-NIST-AI-RMF-100-1</code>, re-fetched 2026-09-07).</p>
+<p>Four functions (same names as previously registered; this fetch did not reprint every subcategory):</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Engineer translation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Govern</strong></td>
+<td>Policies, roles, inventory, incident process</td>
+</tr>
+<tr>
+<td><strong>Map</strong></td>
+<td>Context, intended use, who is harmed if it fails</td>
+</tr>
+<tr>
+<td><strong>Measure</strong></td>
+<td>Eval harness, metrics, red team — <a href="../18-EVALUATION/01-overview.html">Gate 5</a></td>
+</tr>
+<tr>
+<td><strong>Manage</strong></td>
+<td>Prioritize residual risk, change control, kill switches</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Volatile:</strong> the NIST landing page states AI RMF 1.0 <strong>is being revised</strong> (as of 2026-09-07). Do not treat 1.0 subcategory text as frozen. Function names remain the map.</p>
+<h2>Data / cloud analogy</h2>
+<p>Data governance: stewards, classification, retention, and a change board. AI governance adds <strong>behavior</strong> (confabulation, agency) to the same inventory problem.</p>
+<pre class="mermaid">flowchart LR
+  GV[Govern] --&gt; MP[Map]
+  MP --&gt; MS[Measure]
+  MS --&gt; MG[Manage]
+  MG --&gt; GV
+</pre>
+<h2>Generative profile, not a product</h2>
+<p>NIST AI 600-1 (26 July 2024) is a <strong>cross-sectoral profile</strong> of the RMF for generative AI. It defines risks unique to or exacerbated by GAI and suggests actions tagged GV / MP / MS / MG (<code>SRC-NIST-AI-600-1</code>, PDF read 2026-09-07). It is not an Azure/AWS feature list.</p>
+<h2>What should I remember?</h2>
+<p>If you cannot name the owner of residual risk and the gold set that would fail a release, you have branding, not governance.</p>
+<h2>What should I learn next?</h2>
+<p><a href="03-logical.html">03-logical.md</a> · <a href="19-comparison.html">19-comparison.md</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

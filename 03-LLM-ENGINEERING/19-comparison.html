@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparison — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>03-LLM-ENGINEERING/19-comparison.md</code></p>
+    <h1>Comparison</h1>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Output</th>
+<th>Control</th>
+<th>Default?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Free text</td>
+<td>Prose</td>
+<td>Weak</td>
+<td>Demos only</td>
+</tr>
+<tr>
+<td>Structured call</td>
+<td>Object</td>
+<td>Schema + tests</td>
+<td><strong>Yes</strong> for apps</td>
+</tr>
+<tr>
+<td>Tool-calling agent</td>
+<td>Side effects</td>
+<td>Authz, HITL, eval</td>
+<td>Only if steps unknown</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  Need[Need a decision from text] --&gt; S[Structured LLM call]
+  Need2[Need a known API] --&gt; W[Workflow]
+  Need3[Need unknown tool sequence] --&gt; A[Agent later]
+</pre>
+<p>If the “tools” list has one function you always call, you wanted a workflow (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

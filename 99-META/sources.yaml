@@ -1,0 +1,505 @@
+# Source registry
+# Trace important claims to source_id. trust_level: 1-4 (see source-strategy.md)
+
+sources:
+  - source_id: SRC-OWASP-LLM-TOP10-2026
+    title: OWASP Top 10 for LLM Applications 2026
+    URL: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+    publisher: OWASP GenAI Security Project
+    date: 2026-08-04
+    technology: llm-security
+    version: "2026"
+    trust_level: 2
+    last_verified: 2026-09-07
+    topics: [prompt-injection, excessive-agency, supply-chain, poisoning, unbounded-consumption]
+    fetch_note: Landing re-fetched 2026-09-07. Page date shown as August 3, 2026. Official numbered list is not printed on the landing HTML we received; titles taken from SRC-OWASP-LLM-TOP10-2026-GH README. Do not invent extra Top-10 IDs.
+
+  - source_id: SRC-OWASP-LLM-TOP10-2026-GH
+    title: OWASP GenAI LLM Top 10 2026 canonical markdown
+    URL: https://github.com/GenAI-Security-Project/GenAI-LLM-Top10/tree/main/2026/final
+    publisher: OWASP GenAI Security Project
+    date: 2026-08-04
+    technology: llm-security
+    version: "2026"
+    trust_level: 2
+    last_verified: 2026-09-07
+    topics: [llm01, llm02, llm03, llm04, llm05, llm06, llm07, llm08, llm09, llm10]
+    fetch_note: >
+      Repo README re-fetched 2026-09-07. Current release 2026 published August 4, 2026
+      (one day later than genai.owasp.org landing). Official titles: LLM01 Prompt Injection,
+      LLM02 Sensitive Information Disclosure, LLM03 Excessive Agency, LLM04 Supply Chain,
+      LLM05 Data and Model Poisoning, LLM06 Unbounded Consumption, LLM07 Misinformation,
+      LLM08 Hidden Context Exposure, LLM09 Vector and Embedding Weaknesses,
+      LLM10 Improper Output Handling. Individual 2026/final files LLM01, LLM08, LLM09, LLM10
+      fetched the same day. Do not invent CVE stats or paper attack-success percentages.
+
+  - source_id: SRC-NIST-AI-RMF-100-1
+    title: Artificial Intelligence Risk Management Framework (AI RMF 1.0)
+    URL: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10
+    publisher: NIST
+    date: 2023-01
+    technology: ai-governance
+    version: "1.0"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [govern, map, measure, manage]
+    fetch_note: Publication page re-fetched 2026-09-07 (NIST AI 100-1, Jan 2023). Landing page https://www.nist.gov/itl/ai-risk-management-framework states the RMF is voluntary and meant to improve trustworthiness in design, development, use, and evaluation. Same landing page says AI RMF 1.0 is being revised (volatile) as part of the White House AI Action Plan. Function names Govern/Map/Measure/Manage remain as previously registered; this fetch did not re-list subcategory text — do not invent Measure playbook steps.
+
+  - source_id: SRC-NIST-AI-RMF-LANDING
+    title: AI Risk Management Framework (NIST ITL landing)
+    URL: https://www.nist.gov/itl/ai-risk-management-framework
+    publisher: NIST
+    date: null
+    technology: ai-governance
+    version: "landing-as-of-2026-09-07"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [ai-rmf, evaluation, generative-ai-profile]
+    fetch_note: Re-fetched 2026-09-07. Confirms voluntary RMF, 2023-01-26 release, NIST-AI-600-1 on 2024-07-26, 1.0 being revised, plus April 7 2026 concept note for a critical-infrastructure profile (out of Gate 6 spine scope).
+
+  - source_id: SRC-OPENAI-EVALS
+    title: openai/evals
+    URL: https://github.com/openai/evals
+    publisher: OpenAI
+    date: null
+    technology: llm-evaluation
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [evals, benchmarks]
+    fetch_note: Official GitHub page fetched 2026-09-07 — "framework for evaluating LLMs and LLM systems, and an open-source registry of benchmarks." Do not teach registry YAML/schema from memory.
+
+  - source_id: SRC-NIST-AI-600-1
+    title: Artificial Intelligence Risk Management Framework — Generative AI Profile
+    URL: https://doi.org/10.6028/NIST.AI.600-1
+    publisher: NIST
+    date: 2024-07-26
+    technology: generative-ai-risk
+    version: "NIST.AI.600-1"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [confabulation, privacy, information-security, human-ai-configuration]
+    fetch_note: >
+      DOI profile + nvlpubs PDF read 2026-09-07. Companion to AI RMF 1.0 for generative AI
+      (July 2024). Twelve named GAI risks listed in §2; suggested actions tagged GV/MP/MS/MG.
+      Do not reprint Action IDs from memory. Environmental carbon study numbers in the PDF
+      were not independently verified — omit from curriculum.
+
+  - source_id: SRC-MCP-INTRO
+    title: What is the Model Context Protocol (MCP)?
+    URL: https://modelcontextprotocol.io/docs/getting-started/intro
+    publisher: Model Context Protocol
+    date: null
+    technology: mcp
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [mcp, tools, interoperability]
+
+  - source_id: SRC-MCP-ARCHITECTURE
+    title: MCP architecture overview
+    URL: https://modelcontextprotocol.io/docs/learn/architecture
+    publisher: Model Context Protocol
+    date: null
+    technology: mcp
+    version: "docs-as-of-2026-09-07"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [host, client, server, stdio, streamable-http, tools, resources, prompts]
+    fetch_note: Re-fetched 2026-09-07 (Gate 4). Host creates one client per server; tools/resources/prompts; STDIO vs Streamable HTTP; protocol does not dictate LLM usage.
+
+  - source_id: SRC-MS-AGENT-FRAMEWORK
+    title: Microsoft Agent Framework Overview
+    URL: https://learn.microsoft.com/en-us/agent-framework/overview/
+    publisher: Microsoft Learn
+    date: null
+    technology: microsoft-agent-framework
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, workflows, autogen-successor, semantic-kernel-successor, mcp, foundry, harness-agent]
+    fetch_note: Re-fetched 2026-09-07. Function-over-agent rule and agent-vs-workflow table confirmed. Go SDK public preview. Example model names on the page are volatile — not pinned in curriculum.
+
+  - source_id: SRC-MS-FOUNDRY-WHAT-IS
+    title: What is Microsoft Foundry?
+    URL: https://learn.microsoft.com/en-us/azure/foundry/what-is-foundry
+    publisher: Microsoft Learn
+    date: null
+    technology: microsoft-foundry
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [naming, microsoft-foundry, azure-ai-foundry, foundry-agent-service, hosted-agents]
+
+  - source_id: SRC-MS-FOUNDRY-AGENTS
+    title: What is Microsoft Foundry Agent Service?
+    URL: https://learn.microsoft.com/en-us/azure/foundry/agents/overview
+    publisher: Microsoft Learn
+    date: null
+    technology: foundry-agent-service
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [hosted-agents, prompt-agents, entra, observability, microsoft-foundry]
+
+  - source_id: SRC-MS-HOSTED-AGENTS
+    title: Hosted agents in Foundry Agent Service (preview)
+    URL: https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/hosted-agents
+    publisher: Microsoft Learn
+    date: 2026-06-12
+    technology: foundry-hosted-agents
+    version: preview
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [preview, containers, langgraph, agent-framework, protocol-libraries, framework-agnostic]
+    fetch_note: >
+      Re-fetched 2026-09-07 (Gate 7). Converted page title is "Hosted agents in Foundry Agent Service"
+      without "(preview)" in the title we received. Body does not say "generally available" or "GA".
+      Older fetches included "Hosted agents are currently in preview"; this snapshot omitted that
+      sentence. A2A endpoint is still labeled (preview). Lab rule: do not treat as GA unless Learn
+      says GA — conservative status remains preview. Third-Party Systems remain caller risk.
+
+  - source_id: SRC-MS-HOSTED-AGENTS-MIGRATE
+    title: Migrate hosted agents to the latest version
+    URL: https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/migrate-hosted-agent-preview
+    publisher: Microsoft Learn
+    date: null
+    technology: foundry-hosted-agents
+    version: preview
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [preview, protocol-libraries, adapters, agent-framework, langgraph]
+
+  - source_id: SRC-LANGGRAPH-OVERVIEW
+    title: LangGraph overview
+    URL: https://docs.langchain.com/oss/python/langgraph/overview
+    publisher: LangChain
+    date: null
+    technology: langgraph
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [durable-execution, streaming, human-in-the-loop, persistence]
+    fetch_note: Re-fetched 2026-09-07. Official capabilities cited; vendor "trusted by" customer list treated as marketing, not architecture proof.
+
+  - source_id: SRC-LANGGRAPH-PERSISTENCE
+    title: LangGraph persistence
+    URL: https://docs.langchain.com/oss/python/langgraph/persistence
+    publisher: LangChain
+    date: null
+    technology: langgraph
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [checkpointers, stores, memory]
+
+  - source_id: SRC-OPENAI-AGENTS-SDK
+    title: OpenAI Agents SDK
+    URL: https://openai.github.io/openai-agents-python/
+    publisher: OpenAI
+    date: null
+    technology: openai-agents-sdk
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, handoffs, guardrails, sandbox-agents, tracing, mcp, hitl, sessions]
+    fetch_note: Re-fetched 2026-09-07. Primitives agents/handoffs/guardrails; also sandbox, HITL, MCP tools, sessions. Realtime model names on the page are volatile.
+
+  - source_id: SRC-LLAMAINDEX-AGENTS
+    title: LlamaIndex agents
+    URL: https://developers.llamaindex.ai/python/framework/use_cases/agents/
+    publisher: LlamaIndex
+    date: null
+    technology: llamaindex
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, workflows, rag-tools]
+
+  - source_id: SRC-GOOGLE-ADK
+    title: Agent Development Kit (ADK)
+    URL: https://google.github.io/adk-docs/
+    publisher: Google
+    date: null
+    technology: google-adk
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, workflows, evaluation, deployment]
+
+  - source_id: SRC-AWS-BEDROCK-AGENTS
+    title: Automate tasks using Amazon Bedrock Agents
+    URL: https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html
+    publisher: Amazon Web Services
+    date: null
+    technology: bedrock-agents
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, action-groups, knowledge-bases]
+    fetch_note: >
+      Re-fetched 2026-09-07 (Gate 7). Page states Amazon Bedrock Agents (now Agents Classic)
+      is no longer open to new customers; existing customers continue; see Classic maintenance
+      mode; similar capabilities via Amazon Bedrock AgentCore. Do not teach Classic as the
+      green-field default.
+
+  - source_id: SRC-AWS-BEDROCK-AGENTCORE
+    title: What is Amazon Bedrock AgentCore?
+    URL: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html
+    publisher: Amazon Web Services
+    date: null
+    technology: bedrock-agentcore
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [runtime, gateway, identity, policy, observability, memory]
+    fetch_note: >
+      Fetched 2026-09-07. Modular services usable together or independently. Frameworks listed
+      as examples (CrewAI, LangGraph, LlamaIndex, Strands, ADK, OpenAI Agents SDK) — not an
+      endorsement catalog. Pricing is consumption-based per AWS; dollar rates UNVERIFIED
+      (see official AgentCore pricing page). Do not dump every named service as required architecture.
+
+  - source_id: SRC-AZURE-AI-SEARCH-SKU
+    title: Choose a pricing model and service tier — Azure AI Search
+    URL: https://learn.microsoft.com/en-us/azure/search/search-sku-tier
+    publisher: Microsoft Learn
+    date: null
+    technology: azure-ai-search
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [dedicated, serverless-preview, basic, standard, foundry-iq]
+    fetch_note: >
+      Fetched 2026-09-07. Dedicated vs Serverless (preview) Developer. Dedicated tiers named:
+      Free, Basic, Standard S1–S3 / S3 HD, Storage Optimized L1–L2. Page mentions Foundry IQ
+      as a knowledge layer on Azure AI Search. Dollar rates live on Azure pricing pages —
+      not copied here. Learn billing example uses a hypothetical $100 — do not treat as real price.
+
+  - source_id: SRC-AWS-BEDROCK-GUARDRAILS
+    title: Associate a guardrail with a Bedrock agent
+    URL: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-guardrail.html
+    publisher: Amazon Web Services
+    date: null
+    technology: bedrock-guardrails
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [guardrails, agents]
+    fetch_note: Re-fetched 2026-09-07. Associate via console Guardrail details or API GuardrailConfiguration on CreateAgent/UpdateAgent. Vendor-specific; not the lab definition of a guardrail.
+
+  - source_id: SRC-AWS-BEDROCK-GUARDRAILS-OVERVIEW
+    title: Detect and filter harmful content by using Amazon Bedrock Guardrails
+    URL: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html
+    publisher: Amazon Web Services
+    date: null
+    technology: bedrock-guardrails
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [content-filters, denied-topics, word-filters, pii, grounding]
+    fetch_note: >
+      Fetched 2026-09-07. Product filters include content categories, denied topics, exact-match
+      word lists, sensitive-information (probabilistic PII plus custom regex), contextual grounding,
+      Automated Reasoning checks. ApplyGuardrail API can run without invoking an FM.
+      Vendor-specific. Do not treat as portable architecture.
+
+  - source_id: SRC-DATABRICKS-MCP
+    title: Databricks managed MCP servers
+    URL: https://docs.databricks.com/aws/en/agents/mcp-tools/managed-mcp
+    publisher: Databricks
+    date: null
+    technology: databricks-mcp
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [mcp, unity-catalog, ai-search, genie, sql]
+    fetch_note: >
+      Re-fetched 2026-09-07. Page last updated Sep 3, 2026; feature labeled Public Preview.
+      Servers listed: Genie One, Genie Agent, AI Search, Databricks SQL, UC functions.
+      Pricing points at feature-specific official pages — do not copy dollar rates.
+
+  - source_id: SRC-DATABRICKS-AI-SEARCH
+    title: AI Search MCP server (formerly Vector Search)
+    URL: https://docs.databricks.com/gcp/en/agents/mcp-tools/ai-search
+    publisher: Databricks
+    date: null
+    technology: databricks-ai-search
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [retrieval, hybrid-search, unity-catalog]
+
+  - source_id: SRC-OTEL-GENAI-MOVED
+    title: Moved — Generative AI semantic conventions (opentelemetry.io stub)
+    URL: https://opentelemetry.io/docs/specs/semconv/gen-ai/
+    publisher: OpenTelemetry
+    date: null
+    technology: opentelemetry
+    version: moved
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [gen-ai, docs-move]
+
+  - source_id: SRC-OTEL-GENAI-REPO
+    title: OpenTelemetry GenAI Semantic Conventions repository
+    URL: https://github.com/open-telemetry/semantic-conventions-genai
+    publisher: OpenTelemetry
+    date: null
+    technology: opentelemetry
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [gen-ai, agents, mcp, spans, metrics]
+
+  - source_id: SRC-OTEL-GENAI-SEMCONV
+    title: Semantic conventions for generative AI systems
+    URL: https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/README.md
+    publisher: OpenTelemetry
+    date: null
+    technology: opentelemetry
+    version: development
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [traces, metrics, events, gen-ai, agents, mcp]
+
+  - source_id: SRC-OTEL-GENAI-AGENT-SPANS
+    title: Semantic Conventions for GenAI agent and framework spans
+    URL: https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-agent-spans.md
+    publisher: OpenTelemetry
+    date: null
+    technology: opentelemetry
+    version: development
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, create-agent, invoke-agent, plan, execute-tool]
+
+  - source_id: SRC-OTEL-GENAI-SPANS
+    title: Semantic Conventions for GenAI model operation spans
+    URL: https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-spans.md
+    publisher: OpenTelemetry
+    date: null
+    technology: opentelemetry
+    version: development
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [inference, embeddings, retrieval, content-opt-in, pii]
+
+  - source_id: SRC-OTEL-DOCUMENT-STATUS
+    title: Definitions of Document Statuses
+    URL: https://opentelemetry.io/docs/specs/otel/document-status/
+    publisher: OpenTelemetry
+    date: null
+    technology: opentelemetry
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [development, alpha, beta, stable, deprecated]
+
+  - source_id: SRC-PRESIDIO
+    title: Presidio analyzer
+    URL: https://data-privacy-stack.github.io/presidio/analyzer/
+    publisher: Microsoft / Data Privacy Stack
+    date: null
+    technology: presidio
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [pii, ner, regex, anonymization]
+    fetch_note: >
+      microsoft.github.io/presidio/analyzer redirected 2026-09-07 to
+      data-privacy-stack.github.io/presidio/analyzer/. AnalyzerEngine uses recognizers
+      (regex, NER, custom). Example phone 212-555-5555 is documentation sample — lab pages
+      use synthetic SYN-MRN / 555-0100 only.
+
+  - source_id: SRC-CREWAI-DOCS
+    title: CrewAI Documentation
+    URL: https://docs.crewai.com
+    publisher: CrewAI
+    date: null
+    technology: crewai
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [agents, crews, flows, official-docs]
+
+  - source_id: SRC-CREWAI-INTRO
+    title: CrewAI Introduction
+    URL: https://docs.crewai.com/en/introduction
+    publisher: CrewAI
+    date: null
+    technology: crewai
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [crews, flows, agents, architecture]
+
+  - source_id: SRC-CREWAI-INSTALL
+    title: CrewAI Installation
+    URL: https://docs.crewai.com/en/installation
+    publisher: CrewAI
+    date: null
+    technology: crewai
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [installation, python-version, cli, uv]
+
+  - source_id: SRC-TIKTOKEN
+    title: openai/tiktoken README
+    URL: https://github.com/openai/tiktoken
+    publisher: OpenAI
+    date: null
+    technology: tiktoken
+    version: "readme-as-of-2026-09-07"
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [tokens, bpe, o200k_base, encoding_for_model]
+    fetch_note: Fetched README 2026-09-07. Supports BPE tokenizer, get_encoding("o200k_base"), encoding_for_model("gpt-4o"), average ~4 bytes/token claim. Does not define context-window sizes or prices.
+
+  - source_id: SRC-TIKTOKEN-COOKBOOK
+    title: How to count tokens with tiktoken (OpenAI Cookbook)
+    URL: https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb
+    publisher: OpenAI
+    date: null
+    technology: tiktoken
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [token-counting]
+    fetch_note: Linked from official tiktoken README. Notebook contents not re-executed this gate.
+
+  - source_id: SRC-OPENAI-STRUCTURED-OUTPUTS
+    title: OpenAI structured outputs guide
+    URL: https://platform.openai.com/docs/guides/structured-outputs
+    publisher: OpenAI
+    date: null
+    technology: openai-api
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [structured-output, json-schema]
+    fetch_note: URL is the official guide path. HTTP fetch timed out 2026-09-07 and again 2026-09-07 (Gate 3 retry). Do not teach current request-parameter names from memory. Durable idea (schema-constrained output + local validation) stands; wire-format is UNVERIFIED until re-fetched.
+
+  - source_id: SRC-OPENAI-EMBEDDINGS
+    title: OpenAI embeddings guide
+    URL: https://platform.openai.com/docs/guides/embeddings
+    publisher: OpenAI
+    date: null
+    technology: embeddings
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [embeddings]
+    fetch_note: Official guide path. HTTP fetch timed out 2026-09-07. Do not teach model names, dimensions, or request fields from memory.
+
+  - source_id: SRC-PGVECTOR
+    title: pgvector — vector similarity search for Postgres
+    URL: https://github.com/pgvector/pgvector
+    publisher: pgvector project
+    date: null
+    technology: pgvector
+    version: null
+    trust_level: 1
+    last_verified: 2026-09-07
+    topics: [vector-search, postgres]
+    fetch_note: Official GitHub repo page fetched 2026-09-07 — describes open-source vector similarity search for Postgres. README (index types, operators) fetch timed out; do not teach current operator/index names from memory.

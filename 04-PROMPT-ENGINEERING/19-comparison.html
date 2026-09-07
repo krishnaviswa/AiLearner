@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparison (stubs, no bake-off) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>04-PROMPT-ENGINEERING/19-comparison.md</code></p>
+    <h1>Comparison (stubs, no bake-off)</h1>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>First try</th>
+<th>Not first</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Change tone / fields</td>
+<td>Prompt + schema</td>
+<td>Fine-tune</td>
+</tr>
+<tr>
+<td>Facts that change weekly</td>
+<td>Retrieval (Gate 3)</td>
+<td>Stuffing the prompt forever</td>
+</tr>
+<tr>
+<td>Known procedure</td>
+<td>Code / workflow</td>
+<td>Agent (<code>SRC-MS-AGENT-FRAMEWORK</code>)</td>
+</tr>
+<tr>
+<td>Unknown tool sequence</td>
+<td>Agent (Gate 4)</td>
+<td>A longer prompt</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  F{Do facts change?}
+  F --&gt;|yes| R[RAG later]
+  F --&gt;|no| P{Is the procedure known?}
+  P --&gt;|yes| C[Code + optional structured LLM]
+  P --&gt;|no| A[Agent later]
+</pre>
+<p>Do not invent a vendor “prompt OS” SKU. Fine-tune vs RAG criteria stay in <a href="../00-MASTER-MAP/technology-decision-stubs.html">technology-decision-stubs.md</a> (<code>D-RAG-FT</code>).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

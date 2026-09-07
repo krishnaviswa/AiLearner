@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Map this lab onto NIST — not a brochure — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>24-AI-GOVERNANCE/03-logical.md</code></p>
+    <h1>Map this lab onto NIST — not a brochure</h1>
+<p>AI 600-1 is a <strong>profile</strong>: implement RMF functions for generative AI (<code>SRC-NIST-AI-600-1</code>). Action IDs in the PDF look like <code>GV-1.1-001</code>. This page does <strong>not</strong> reprint the catalog. It maps <strong>functions and named GAI risks</strong> to folders you already have.</p>
+<h2>Functions → lab artifacts</h2>
+<table>
+<thead>
+<tr>
+<th>NIST function</th>
+<th>Evidence in this lab</th>
+<th>Not evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Govern</td>
+<td>Written allow/deny, system inventory, incident notes</td>
+<td>A vendor “AI governance” SKU name</td>
+</tr>
+<tr>
+<td>Map</td>
+<td>Intended use, when-not-agent, threat = OWASP 2026</td>
+<td>A logo slide of frameworks</td>
+</tr>
+<tr>
+<td>Measure</td>
+<td>Golden set + harness (<a href="../18-EVALUATION/03-logical.html">18</a>)</td>
+<td>Three Slack thumbs-up</td>
+</tr>
+<tr>
+<td>Manage</td>
+<td>Block-the-build, HITL, decommission path</td>
+<td>“We will monitor in prod” with no owner</td>
+</tr>
+</tbody>
+</table>
+<h2>Named GAI risks in 600-1 §2 (PDF 2026-09-07)</h2>
+<p>Official labels only — do not invent extra ones:</p>
+<ol>
+<li>CBRN Information or Capabilities  </li>
+<li>Confabulation  </li>
+<li>Dangerous, Violent, or Hateful Content  </li>
+<li>Data Privacy  </li>
+<li>Environmental Impacts  </li>
+<li>Harmful Bias or Homogenization  </li>
+<li>Human-AI Configuration  </li>
+<li>Information Integrity  </li>
+<li>Information Security  </li>
+<li>Intellectual Property  </li>
+<li>Obscene, Degrading, and/or Abusive Content  </li>
+<li>Value Chain and Component Integration  </li>
+</ol>
+<p>Security engineering in this gate primarily covers <strong>information security</strong> (injection, poisoning) and <strong>data privacy</strong>. Confabulation and information integrity sit with evaluation. Human-AI configuration and harmful bias sit with <a href="../25-RESPONSIBLE-AI/01-overview.html">responsible AI</a>. Value chain overlaps OWASP LLM04.</p>
+<p>Playbook <strong>subcategory step lists</strong> are still <strong>UNVERIFIED</strong> here (not re-copied from the Measure playbook PDF).</p>
+<pre class="mermaid">flowchart TD
+  Risk[Named 600-1 risk] --&gt; F{Which function?}
+  F --&gt;|Govern| Pol[Policy and owner]
+  F --&gt;|Map| Ctx[Use case and harm]
+  F --&gt;|Measure| Ev[Harness and gold]
+  F --&gt;|Manage| Act[Ship, limit, or stop]
+</pre>
+<h2>What a principal would challenge</h2>
+<p>A RACI chart with no Measure loop. NIST’s own landing page ties the framework to <strong>evaluation</strong> (<code>SRC-NIST-AI-RMF-LANDING</code>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">19-comparison.md</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

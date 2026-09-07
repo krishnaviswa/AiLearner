@@ -1,0 +1,18 @@
+# Copy the YAML block into a concept markdown file.
+# knowledge_class: durable | volatile | mixed
+# status: draft | needs-review | verified
+# tech_status: stable | mature | emerging | preview | experimental | deprecated | vendor-specific | general-pattern
+
+---
+concept_id: example.rag.chunking
+title: Chunking
+domain_folder: 08-RAG
+levels_covered: [1, 2, 3]
+knowledge_class: mixed
+tech_status: general-pattern
+last_verified: YYYY-MM-DD
+version: null
+primary_source: SRC-000
+status: draft
+related_nodes: []
+---

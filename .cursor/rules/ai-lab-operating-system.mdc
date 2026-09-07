@@ -1,0 +1,27 @@
+---
+description: Core operating system for this AI Engineering Knowledge Lab. Always apply in every chat.
+alwaysApply: true
+---
+
+# AI Engineering Lab — operating system
+
+This repo is a **learning laboratory**, not an encyclopedia and not a dump of tutorials.
+
+**Current gate:** read `99-META/GATE-STATUS.md` first. While `owner_policy` is standing auto-advance through Gate 10, start the next gate only after **QA chair PASS** — not after a human named-gate message. Human-in-the-loop is off until that policy is cleared.
+
+Authoritative spec: `AI_Engineering_Knowledge_Repository_Master_Prompt.md`. Agent entrypoint: `AGENTS.md`.
+
+## Mission
+
+Take an experienced cloud/data engineer from logical understanding → implementation → engineering → production → architect judgment → principal-level trade-offs. Cover **all major agent flavors**, not only RAG. Explicitly teach when an agent is the wrong solution.
+
+## Non-negotiables
+
+- Do not generate the full curriculum in one pass.
+- Do not create empty markdown files. Content only when it is meaningful.
+- Do not invent APIs, SDKs, cloud SKUs, pricing, or performance numbers. Mark `UNVERIFIED`.
+- Prefer local durable artifacts over repeated LLM/web calls.
+- Bridge from Python/SQL/Spark/Kafka/Databricks/cloud — do not reteach basic programming.
+- Markdown is the authoring source; HTML is generated (`app/tools/render-pages.py`). Do not dual-write.
+
+If the user says "continue" without naming a gate **and** standing auto-advance is unset, ask which gate. If standing auto-advance is set, continue the factory at the current gate after QA PASS.

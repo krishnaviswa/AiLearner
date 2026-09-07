@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BREAK experiments — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>43-EXPERIMENTS/01-overview.md</code></p>
+    <h1>BREAK experiments</h1>
+<p>Extra scripts that <strong>must fail</strong> (or fail-closed) when a control is missing. Not a second curriculum.</p>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Attacks</th>
+<th>Expected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>break_acl.py</code></td>
+<td>Retrieve with no tenant (LLM09)</td>
+<td>Exit 0 only if the leak is <strong>detected</strong></td>
+</tr>
+<tr>
+<td>(in-lab) L4–L8</td>
+<td>Wrong tool, <code>SELECT *</code>, grant union, MRN egress</td>
+<td>Covered in <code>42-.../labs/</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-text">python 43-EXPERIMENTS/break_acl.py
+</code></pre>
+<h2>Security</h2>
+<p>Synthetic tenants <code>tenant-a</code> / <code>tenant-b</code> only.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../42-CAPSTONE-PROJECTS/L03.html">L03</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When not to call it governance — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>24-AI-GOVERNANCE/19-comparison.md</code></p>
+    <h1>When not to call it governance</h1>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Framework logo collage</td>
+<td><strong>Not governance</strong></td>
+</tr>
+<tr>
+<td>Voluntary NIST RMF + named owners + eval evidence</td>
+<td>Governance work</td>
+</tr>
+<tr>
+<td>“Aligned with 600-1” and no inventory</td>
+<td>Marketing</td>
+</tr>
+<tr>
+<td>Policy that the model must enforce via prompt</td>
+<td>Security theater (LLM08)</td>
+</tr>
+<tr>
+<td>Board metric with no gold set</td>
+<td>Not Measure</td>
+</tr>
+</tbody>
+</table>
+<p>NIST states the RMF is <strong>voluntary</strong> and aimed at trustworthiness in design, development, use, and evaluation (<code>SRC-NIST-AI-RMF-LANDING</code>). Voluntary does not mean optional evidence.</p>
+<pre class="mermaid">flowchart TD
+  C[Claim: we govern AI] --&gt; I{Inventory of systems?}
+  I --&gt;|no| N[Not governance]
+  I --&gt;|yes| E{Can Measure fail a release?}
+  E --&gt;|no| N
+  E --&gt;|yes| Y[Governance loop exists]
+</pre>
+<h2>When not to wait for the 1.0 revision</h2>
+<p>The landing page says 1.0 is being revised (2026-09-07). You can still Govern/Map/Measure/Manage <strong>your</strong> agent tomorrow. Do not freeze a procurement on unreleased text.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../25-RESPONSIBLE-AI/01-overview.html">Responsible AI</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orchestration — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>11-AGENT-ORCHESTRATION/01-overview.md</code></p>
+    <h1>Orchestration</h1>
+<p>Level 1. Orchestration is <strong>who runs which step, in what order, with what state</strong> — including humans and crashes.</p>
+<h2>What is it?</h2>
+<p>LangGraph’s official overview (re-fetched 2026-09-07, <code>SRC-LANGGRAPH-OVERVIEW</code>): a low-level runtime to <strong>mix deterministic, hand-coded steps with LLM-driven steps</strong> in one graph; central benefits include <strong>durable execution</strong>, <strong>streaming</strong>, <strong>human-in-the-loop</strong>, and <strong>persistence</strong>. You do not need LangChain to use LangGraph (same page).</p>
+<p>Microsoft Agent Framework documents <strong>workflows</strong> as explicit execution paths that connect agents and functions (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<p>Vendor marketing (“trusted by …”) on the LangGraph page is <strong>not</strong> used as architecture proof.</p>
+<h2>Data / cloud analogy</h2>
+<p>Airflow / Step Functions / Temporal: known graph, retries, human approval nodes. An “agent graph” that is 100% LLM-chosen edges is just an unbounded loop.</p>
+<pre class="mermaid">stateDiagram-v2
+  [*] --&gt; Deterministic
+  Deterministic --&gt; LLM_step: need judgment
+  LLM_step --&gt; HITL: high-risk tool
+  HITL --&gt; Deterministic: approved
+  HITL --&gt; [*]: rejected
+  Deterministic --&gt; [*]
+</pre>
+<h2>Durability</h2>
+<p>If the process can outlive a pod restart, you need a checkpointer / session store. LangGraph persistence docs: checkpointers vs stores (<code>SRC-LANGGRAPH-PERSISTENCE</code>). Exact API names: re-read those docs at implement time.</p>
+<h2>When not to use an agent graph</h2>
+<p>The graph never branches on a model decision — use the workflow engine you already have.</p>
+<h2>What should I learn next?</h2>
+<p><a href="02-simple.html">02-simple.md</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

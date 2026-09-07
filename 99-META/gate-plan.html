@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phased gate plan — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>99-META/gate-plan.md</code></p>
+    <h1>Phased gate plan</h1>
+<p>This is Gate 0 item 7. <strong>Do not dump later gates in one pass.</strong> Produce only the current gate, then STOP that gate for QA.</p>
+<p>Authoritative process: master prompt sections 43–44 and 55. Cursor encoding: <code>.cursor/rules/ai-lab-gates.mdc</code>, <code>.cursor/skills/advance-gate/SKILL.md</code>, <code>.cursor/skills/qa-gate/SKILL.md</code>.</p>
+<p>While <code>99-META/GATE-STATUS.md</code> has <code>owner_policy: standing auto-advance through Gate 10</code>, human named-gate approval is waived. The next gate starts only after <strong>QA chair PASS</strong>. FAIL → fix → re-score (max two retries). If that policy is unset, never continue without explicit named-gate approval.</p>
+<h2>Gate 0 — SCOPE (this gate)</h2>
+<p>Produce only the twelve scope artifacts listed in <code>GATE-STATUS.md</code>, plus the folder skeleton and operating rules so future agents stop here.</p>
+<p>Then <strong>STOP</strong> that gate for the QA committee.</p>
+<p>Exit criteria: QA chair PASS (or listed residual UNVERIFIED); no curriculum pages leaked into domain folders.</p>
+<h2>Gate 1 — ARCHITECTURE</h2>
+<p>Validate, do not flood with pages:</p>
+<ul>
+<li>Master architecture (logical + physical/cloud mappings)</li>
+<li>Concept relationships (expand knowledge graph with reviewed edges)</li>
+<li>Technology categories (decision-guide stubs, still no full bake of volatile SKUs)</li>
+<li>Learning dependencies (confirm sequence)</li>
+</ul>
+<p>Then <strong>STOP</strong>.</p>
+<h2>Gate 2 — FOUNDATIONS</h2>
+<p><code>01-FOUNDATIONS</code>, <code>02-PYTHON-FOR-AI</code> (AI-specific only), <code>03-LLM-ENGINEERING</code>, <code>04-PROMPT-ENGINEERING</code>, <code>05-LLM-APPLICATION-ENGINEERING</code>. Mental models + tiny implementations. Then <strong>STOP</strong>.</p>
+<h2>Gate 3 — RAG</h2>
+<p><code>06-EMBEDDINGS</code>, <code>07-VECTOR-DATABASES</code>, <code>08-RAG</code>, <code>09-AGENTIC-RAG</code>, relevant pipeline notes in <code>16-</code>/<code>17-</code>. Naive → enterprise permission-aware RAG. Then <strong>STOP</strong>.</p>
+<h2>Gate 4 — AGENTS</h2>
+<p><code>10-AGENTS</code> through <code>15-NL2SQL</code> including MCP and multi-agent. Every major flavor from the taxonomy. Then <strong>STOP</strong>.</p>
+<h2>Gate 5 — EVALUATION</h2>
+<p><code>18-EVALUATION</code>, ground-truth vs LLM-as-judge, harness design, dataset methodology. Then <strong>STOP</strong>.</p>
+<h2>Gate 6 — SECURITY</h2>
+<p><code>21-AI-SECURITY</code>, <code>22-GUARDRAILS</code>, <code>23-PHI-PII-DLP</code>, <code>24-AI-GOVERNANCE</code>, <code>25-RESPONSIBLE-AI</code>. Map to OWASP GenAI LLM Top 10 2026 and NIST AI RMF / AI 600-1. Then <strong>STOP</strong>.</p>
+<h2>Gate 7 — PRODUCTION</h2>
+<p><code>26-</code>–<code>40-</code> as needed: cloud mappings, reference architectures A–E (vendor-neutral + Azure + AWS, Databricks where relevant), cost/performance/ops. Then <strong>STOP</strong>.</p>
+<h2>Gate 8 — HANDS-ON</h2>
+<p>Project ladder L1–L10 and the 15 use-case implementations at lab quality (not all 15 full platforms). Then <strong>STOP</strong>.</p>
+<h2>Gate 9 — INTERACTIVE KNOWLEDGE BASE</h2>
+<p>Static/local-first HTML app: nav tree, depth selector, Why? chains, simulations. Then <strong>STOP</strong>.</p>
+<h2>Gate 10 — FINAL INTEGRATION</h2>
+<p>Cross-links, graph completeness, glossary, cheat-sheets, interview set. Then <strong>STOP</strong>.</p>
+<h2>Quality bar before any PASS</h2>
+<p>Accuracy, completeness, source quality, freshness, architecture consistency, terminology consistency, code correctness, security correctness, production realism, cross-reference integrity, learning progression.</p>
+<p>Marks: <strong>PASS</strong> | <strong>FAIL</strong> | <strong>NEEDS REVIEW</strong>. Do not hide uncertainty.</p>
+<h2>Token-efficiency during later gates</h2>
+<p>Edit local artifacts. Do not regenerate entire domains. Research official docs only for volatile slices.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

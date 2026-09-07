@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — prove post-filters lie — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>07-VECTOR-DATABASES/16-hands-on.md</code></p>
+    <h1>DO — prove post-filters lie</h1>
+<p>Toy corpus: three chunks, two tenants.</p>
+<pre><code class="language-python">CHUNKS = [
+    {&quot;id&quot;: &quot;a&quot;, &quot;tenant&quot;: &quot;t1&quot;, &quot;score&quot;: 0.99, &quot;text&quot;: &quot;t1 secret&quot;},
+    {&quot;id&quot;: &quot;b&quot;, &quot;tenant&quot;: &quot;t2&quot;, &quot;score&quot;: 0.98, &quot;text&quot;: &quot;t2 secret&quot;},
+    {&quot;id&quot;: &quot;c&quot;, &quot;tenant&quot;: &quot;t1&quot;, &quot;score&quot;: 0.50, &quot;text&quot;: &quot;t1 public&quot;},
+]
+
+def naive_topk(k=2):
+    return sorted(CHUNKS, key=lambda x: -x[&quot;score&quot;])[:k]
+
+def filtered(principal_tenant, k=2):
+    allowed = [c for c in CHUNKS if c[&quot;tenant&quot;] == principal_tenant]
+    return sorted(allowed, key=lambda x: -x[&quot;score&quot;])[:k]
+
+print(&quot;naive&quot;, [c[&quot;id&quot;] for c in naive_topk()])
+print(&quot;t1&quot;, [c[&quot;id&quot;] for c in filtered(&quot;t1&quot;)])
+</code></pre>
+<p>Naive top-2 for a <code>t1</code> user still <em>saw</em> <code>t2 secret</code> in the ranked list. If you “filter after the LLM,” the model already read it. That is an embedding/retrieval weakness pattern (<code>SRC-OWASP-LLM-TOP10-2026</code>).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

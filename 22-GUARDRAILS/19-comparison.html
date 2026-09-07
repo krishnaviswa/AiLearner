@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When not to use the model as the filter — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>22-GUARDRAILS/19-comparison.md</code></p>
+    <h1>When not to use the model as the filter</h1>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System prompt is the only deny list</td>
+<td><strong>Not a guardrail</strong> — LLM08 says hidden context is discoverable</td>
+</tr>
+<tr>
+<td>Second LLM votes “safe” before a delete tool</td>
+<td><strong>Not enough</strong> — LLM01: no reliable injection prevention</td>
+</tr>
+<tr>
+<td>Schema + IAM + HITL on irreversible actions</td>
+<td>Minimum for write tools</td>
+</tr>
+<tr>
+<td>Exact-match word list / regex / allowlisted tool args</td>
+<td>Deterministic layer — keep it</td>
+</tr>
+<tr>
+<td>Cloud “guardrails” product with no identity on tools</td>
+<td>Vendor filter ≠ authorization</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  A[Need a control] --&gt; B{Must it fail closed?}
+  B --&gt;|yes| D[Policy plus deterministic code]
+  B --&gt;|no| C{Is it extra logging?}
+  C --&gt;|yes| M[Model-as-filter OK as helper]
+  C --&gt;|no| D
+</pre>
+<h2>When not to buy a product first</h2>
+<p>You have no written policy and no tool IAM. A SKU will wrap the same hole.</p>
+<h2>When not to skip HITL</h2>
+<p>OWASP LLM01: require explicit human confirmation before privileged, irreversible, or externally visible actions, and show the <strong>exact</strong> action, not a summary.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../23-PHI-PII-DLP/01-overview.html">DLP</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

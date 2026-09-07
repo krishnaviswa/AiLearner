@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Typed boundary (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>02-PYTHON-FOR-AI/02-simple.md</code></p>
+    <h1>Typed boundary (simple)</h1>
+<h2>How it works</h2>
+<pre><code class="language-python">from typing import Literal
+from dataclasses import dataclass
+
+Label = Literal[&quot;refund&quot;, &quot;shipping&quot;, &quot;other&quot;]
+
+@dataclass(frozen=True)
+class TicketIn:
+    ticket_id: str
+    text: str
+
+@dataclass(frozen=True)
+class TicketOut:
+    ticket_id: str
+    label: Label
+</code></pre>
+<p>Your job: map <code>TicketIn</code> → model → <strong>parse</strong> → <code>TicketOut</code>. If parse fails, do not “ask the agent to try something else” on the first lab — fail closed or retry the <strong>same</strong> contract.</p>
+<p>SDK method names and client constructors are <strong>volatile</strong>. Do not copy a remembered <code>client.chat.completions.create(...)</code> as if it were pinned. Call whatever the current official SDK says after you re-read it.</p>
+<h2>How it fails</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Network timeout</td>
+<td>Deadline smaller than the user’s SLA</td>
+</tr>
+<tr>
+<td>Truncated JSON</td>
+<td>Constrain output; validate; retry once</td>
+</tr>
+<tr>
+<td>Prompt injection in <code>text</code></td>
+<td>Treat as untrusted input (<code>SRC-OWASP-LLM-TOP10-2026</code>)</td>
+</tr>
+<tr>
+<td>Logging the ticket body</td>
+<td>Default off — PII (<code>SRC-NIST-AI-600-1</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2>Evaluate</h2>
+<p>Ten labeled tickets in a fixture file. Accuracy against labels — not “the model sounded sure.”</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

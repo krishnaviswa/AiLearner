@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second retrieve, same ACL (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>09-AGENTIC-RAG/02-simple.md</code></p>
+    <h1>Second retrieve, same ACL (simple)</h1>
+<h2>How it works</h2>
+<pre class="mermaid">sequenceDiagram
+  participant M as Model
+  participant T as retrieve tool
+  participant IAM
+  M-&gt;&gt;T: query_1
+  T-&gt;&gt;IAM: same principal
+  IAM--&gt;&gt;T: filter
+  T--&gt;&gt;M: hits_1
+  M-&gt;&gt;T: query_2
+  T-&gt;&gt;IAM: same principal
+  T--&gt;&gt;M: hits_2
+  M--&gt;&gt;M: answer or refuse
+</pre>
+<p>The tool must <strong>not</strong> widen ACL on retry. Max steps: 2–3 in a lab. Each hop costs tokens and leak risk.</p>
+<h2>How it fails</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loop on empty</td>
+<td>Cap iterations; then refuse</td>
+</tr>
+<tr>
+<td>Query becomes “ignore ACLs”</td>
+<td>Tool ignores natural-language overrides</td>
+</tr>
+<tr>
+<td>Writes</td>
+<td>No write tools in this gate</td>
+</tr>
+</tbody>
+</table>
+<p>Full tool-calling / MCP: Gate 4.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

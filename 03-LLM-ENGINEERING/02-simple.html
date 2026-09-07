@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Decoding and structured output (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>03-LLM-ENGINEERING/02-simple.md</code></p>
+    <h1>Decoding and structured output (simple)</h1>
+<h2>How it works</h2>
+<p><strong>Decoding</strong> turns next-token probabilities into a string. Higher randomness (often called temperature) increases variety and usually increases schema breakage. For classification, you typically want <strong>low</strong> randomness.</p>
+<p><strong>Structured output</strong> means the application expects an object (JSON matching a schema), not an essay. Official OpenAI guide URL: <code>SRC-OPENAI-STRUCTURED-OUTPUTS</code>. <strong>Fetch of that page timed out 2026-09-07</strong> — do not memorize request field names from a chat model. Durable practice:</p>
+<ol>
+<li>Publish a JSON Schema (or equivalent) as the contract.</li>
+<li>Ask the vendor’s <em>current</em> constrained-decoding feature to honor it.</li>
+<li><strong>Still validate locally</strong> — the network can lie, models can still fail.</li>
+</ol>
+<p>NIST AI 600-1 treats <strong>confabulation</strong> as a generative-AI risk (<code>SRC-NIST-AI-600-1</code>). A schema reduces shape errors; it does not make facts true.</p>
+<pre class="mermaid">sequenceDiagram
+  participant App
+  participant API as Model API
+  participant Val as Local validator
+  App-&gt;&gt;API: prompt + schema constraint
+  API--&gt;&gt;App: candidate object
+  App-&gt;&gt;Val: validate
+  Val--&gt;&gt;App: ok or reject
+</pre>
+<h2>When to use / not</h2>
+<table>
+<thead>
+<tr>
+<th>Use structured single call</th>
+<th>Do not</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Labels, extractions, tool-args later</td>
+<td>Open-ended research prose</td>
+</tr>
+<tr>
+<td>You have a golden set</td>
+<td>You will “just read the vibe”</td>
+</tr>
+</tbody>
+</table>
+<h2>Cost / scale</h2>
+<p>Output tokens dominate many bills. Cap max completion tokens. Exact prices: <strong>not recorded</strong> (Gate 7).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

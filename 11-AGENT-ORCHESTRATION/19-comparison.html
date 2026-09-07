@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workflow vs graph vs free agent — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>11-AGENT-ORCHESTRATION/19-comparison.md</code></p>
+    <h1>Workflow vs graph vs free agent</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Workflow</th>
+<th>Durable graph</th>
+<th>Free agent loop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Edges</td>
+<td>Coded</td>
+<td>Coded + optional LLM nodes</td>
+<td>Model-chosen</td>
+</tr>
+<tr>
+<td>HITL</td>
+<td>Approval node</td>
+<td>Interrupt / resume</td>
+<td>Ad hoc</td>
+</tr>
+<tr>
+<td>Crash</td>
+<td>Job retry</td>
+<td>Checkpoint</td>
+<td>Often lost</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><strong>Known process</strong></td>
+<td>Mix det + agentic (<code>SRC-LANGGRAPH-OVERVIEW</code>)</td>
+<td>Last resort</td>
+</tr>
+</tbody>
+</table>
+<p>Microsoft: workflows when you need explicit control; agents when open-ended (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

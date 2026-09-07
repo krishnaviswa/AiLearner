@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hands-on ladder L1–L10 — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>42-CAPSTONE-PROJECTS/01-overview.md</code></p>
+    <h1>Hands-on ladder L1–L10</h1>
+<p>Lab quality, not fifteen platforms. Each level <strong>proves one claim</strong>. Python under <code>labs/</code> uses <strong>stubs and synthetic data</strong> — no API keys, no real PII. SDK method names stay <strong>UNVERIFIED</strong> until you fetch the vendor page.</p>
+<p>Run from the repo root (Windows PowerShell):</p>
+<pre><code class="language-text">python 42-CAPSTONE-PROJECTS/labs/run_all.py
+</code></pre>
+<p>Or one file: <code>python 42-CAPSTONE-PROJECTS/labs/l01_simple_llm.py</code></p>
+<h2>Map to domains already taught</h2>
+<table>
+<thead>
+<tr>
+<th>L</th>
+<th>Proves</th>
+<th>Taught in</th>
+<th>Architecture</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="L01.html">1</a></td>
+<td>Contract + eval of one call</td>
+<td><a href="../05-LLM-APPLICATION-ENGINEERING/01-overview.html">05</a>, <a href="../18-EVALUATION/01-overview.html">18</a></td>
+<td>LLM app, not an agent</td>
+</tr>
+<tr>
+<td><a href="L02.html">2</a></td>
+<td>Retrieve + citations</td>
+<td><a href="../08-RAG/01-overview.html">08</a></td>
+<td>Toy RAG</td>
+</tr>
+<tr>
+<td><a href="L03.html">3</a></td>
+<td>ACL in query + DLP + harness</td>
+<td><a href="../08-RAG/19-comparison.html">08</a>, <a href="../23-PHI-PII-DLP/01-overview.html">23</a></td>
+<td>A — enterprise RAG</td>
+</tr>
+<tr>
+<td><a href="L04.html">4</a></td>
+<td>Tool authz, timeout, wrong-tool</td>
+<td><a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12</a></td>
+<td>B (read tools)</td>
+</tr>
+<tr>
+<td><a href="L05.html">5</a></td>
+<td>Retrieve as a tool + loop budget</td>
+<td><a href="../09-AGENTIC-RAG/01-overview.html">09</a></td>
+<td>Agentic RAG</td>
+</tr>
+<tr>
+<td><a href="L06.html">6</a></td>
+<td>SQL AST / policy before execute</td>
+<td><a href="../15-NL2SQL/01-overview.html">15</a></td>
+<td>C</td>
+</tr>
+<tr>
+<td><a href="L07.html">7</a></td>
+<td>Handoff vs supervisor, no grant union</td>
+<td><a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14</a></td>
+<td>E (tiny)</td>
+</tr>
+<tr>
+<td><a href="L08.html">8</a></td>
+<td>Identity, policy, egress</td>
+<td><a href="../21-AI-SECURITY/01-overview.html">21</a>, <a href="../22-GUARDRAILS/01-overview.html">22</a></td>
+<td>B secure</td>
+</tr>
+<tr>
+<td><a href="L09.html">9</a></td>
+<td>Traces without leaking PII</td>
+<td><a href="../19-OBSERVABILITY/01-overview.html">19</a></td>
+<td>Ops</td>
+</tr>
+<tr>
+<td><a href="L10.html">10</a></td>
+<td>Platform harness (design + smoke)</td>
+<td><a href="../26-AI-CLOUD-ARCHITECTURE/01-overview.html">26</a>, <a href="../24-AI-GOVERNANCE/01-overview.html">24</a></td>
+<td>Capstone <strong>stub</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Use-case pointers (not implementations): <a href="../41-REAL-WORLD-USE-CASES/01-overview.html">41</a>. BREAK extras: <a href="../43-EXPERIMENTS/01-overview.html">43</a>.</p>
+<pre class="mermaid">flowchart TD
+  L1[L1 contract] --&gt; L2[L2 retrieve]
+  L2 --&gt; L3[L3 ACL/DLP]
+  L3 --&gt; L4[L4 tools]
+  L4 --&gt; L5[L5 agentic RAG]
+  L4 --&gt; L6[L6 NL2SQL]
+  L5 --&gt; L7[L7 multi-agent]
+  L6 --&gt; L8[L8 secure]
+  L7 --&gt; L8
+  L8 --&gt; L9[L9 observe]
+  L9 --&gt; L10[L10 harness]
+</pre>
+<h2>Toy vs production-oriented</h2>
+<table>
+<thead>
+<tr>
+<th>Toy</th>
+<th>Production-oriented in this ladder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stub model, in-memory index</td>
+<td>Gold cases that <strong>fail the process</strong></td>
+</tr>
+<tr>
+<td>No cloud SKUs</td>
+<td>ACL <strong>in</strong> retrieve, DLP at egress</td>
+</tr>
+<tr>
+<td>Happy-path demo</td>
+<td>BREAK notes + wrong-tool / injection cases</td>
+</tr>
+</tbody>
+</table>
+<h2>Security</h2>
+<p>Synthetic names and <code>SYN-MRN-0001</code> only. Do not paste secrets or real PHI into these labs or a hosted model.</p>
+<h2>What should I learn next?</h2>
+<p><a href="L01.html">L01</a> · <a href="../44-ARCHITECTURE-INTERVIEWS/01-overview.html">Interviews</a> · <a href="../47-ANTI-PATTERNS/01-overview.html">Anti-patterns</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

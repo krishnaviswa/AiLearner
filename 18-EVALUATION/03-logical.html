@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harness design — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>18-EVALUATION/03-logical.md</code></p>
+    <h1>Harness design</h1>
+<p>A <strong>harness</strong> is the job that runs cases against a pinned artifact and emits a report. <code>openai/evals</code> describes itself as a framework for evaluating LLM systems plus a registry of benchmarks (<code>SRC-OPENAI-EVALS</code>, fetched 2026-09-07). Registry formats are <strong>not</strong> taught from memory.</p>
+<h2>Offline vs online</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Offline</th>
+<th>Online</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data</td>
+<td>Frozen golden set</td>
+<td>Live traffic / traces</td>
+</tr>
+<tr>
+<td>Use</td>
+<td>PR gate, nightly</td>
+<td>Drift, canaries</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>Set goes stale</td>
+<td>Privacy, selection bias</td>
+</tr>
+</tbody>
+</table>
+<h2>Toy vs production-oriented</h2>
+<table>
+<thead>
+<tr>
+<th>Toy</th>
+<th>Production-oriented</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Five chats in Slack</td>
+<td>Versioned cases + artifact ids</td>
+</tr>
+<tr>
+<td>One metric forever</td>
+<td>Retrieve vs generate vs tool-success split</td>
+</tr>
+<tr>
+<td>“Looks good”</td>
+<td>Fail the build on gold regressions</td>
+</tr>
+<tr>
+<td>Shared eval prompt in a notebook</td>
+<td>Same harness in CI (<code>36</code> light note)</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  Gold[Golden set vN] --&gt; H[Harness]
+  Art[Prompt/index/model ids] --&gt; H
+  H --&gt; R[Report]
+  R --&gt; CI[Pass / fail gate]
+</pre>
+<h2>Dataset methodology (minimum)</h2>
+<p>Split: <strong>train/dev must not leak into gold</strong>. Record who labeled, when, and the policy. Measure <strong>retrieve</strong> separately from <strong>generate</strong> for RAG (<a href="../08-RAG/02-simple.html">08</a>).</p>
+<p>No fake leaderboard scores.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

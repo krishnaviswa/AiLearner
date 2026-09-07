@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>App vs workflow vs agent — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>05-LLM-APPLICATION-ENGINEERING/19-comparison.md</code></p>
+    <h1>App vs workflow vs agent</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>LLM app</th>
+<th>Workflow</th>
+<th>Agent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Next step</td>
+<td>Fixed</td>
+<td>Fixed (may include an LLM step)</td>
+<td>Chosen at runtime</td>
+</tr>
+<tr>
+<td>Tools</td>
+<td>Optional one API you always call</td>
+<td>Explicit nodes</td>
+<td>Catalog + policy</td>
+</tr>
+<tr>
+<td>Eval</td>
+<td>Golden I/O</td>
+<td>Job tests</td>
+<td>Trajectory + side effects</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><strong>This gate</strong></td>
+<td>When many systems already exist</td>
+<td>Gate 4, after failure modes</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  S[Ship a text feature] --&gt; Q{Unknown next action?}
+  Q --&gt;|no| APP[LLM application]
+  Q --&gt;|yes| Q2{Mutating tools?}
+  Q2 --&gt;|no| APP
+  Q2 --&gt;|yes| AG[Stop — Gate 4]
+</pre>
+<p>Architect challenge: delete the agent box and list what still ships. That list is your MVP.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

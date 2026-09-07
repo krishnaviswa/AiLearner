@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Supervisor vs handoff (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>14-MULTI-AGENT-SYSTEMS/02-simple.md</code></p>
+    <h1>Supervisor vs handoff (simple)</h1>
+<pre class="mermaid">sequenceDiagram
+  participant U as User
+  participant Sup as Supervisor
+  participant Sp as Specialist
+  U-&gt;&gt;Sup: goal
+  alt supervisor
+    Sup-&gt;&gt;Sp: task + bounded tools
+    Sp--&gt;&gt;Sup: result
+    Sup--&gt;&gt;U: answer
+  else handoff
+    Sup-&gt;&gt;Sp: transfer conversation
+    Sp--&gt;&gt;U: answer
+  end
+</pre>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Supervisor / worker</th>
+<th>Handoff</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Who answers the user</td>
+<td>Supervisor</td>
+<td>Specialist after transfer</td>
+</tr>
+<tr>
+<td>Tool sets</td>
+<td>Isolated per worker</td>
+<td>Specialist’s set</td>
+</tr>
+<tr>
+<td>Failure</td>
+<td>Supervisor can retry another worker</td>
+<td>User is now in another policy domain</td>
+</tr>
+</tbody>
+</table>
+<p>OpenAI documents both styles (<code>SRC-OPENAI-AGENTS-SDK</code>). Do not mix them accidentally.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

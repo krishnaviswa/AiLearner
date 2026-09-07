@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Layered DLP (synthetic only) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>23-PHI-PII-DLP/02-simple.md</code></p>
+    <h1>Layered DLP (synthetic only)</h1>
+<p>All examples below are <strong>fake</strong>. Do not paste real patient or customer data into this lab, logs, or a hosted model.</p>
+<p>Synthetic record:</p>
+<pre><code class="language-text">name: Alex Rivera
+mrn: SYN-MRN-0001
+phone: 555-0100
+note: follow-up Tuesday
+</code></pre>
+<h2>DO — fail closed on a pattern</h2>
+<p>Tiny deterministic check. Not a product and not HIPAA certification.</p>
+<pre><code class="language-python">import re
+
+SYNTHETIC = &quot;Alex Rivera, MRN SYN-MRN-0001, phone 555-0100&quot;
+MRN = re.compile(r&quot;SYN-MRN-\d{4}&quot;)
+
+def egress_ok(text: str) -&gt; bool:
+    return MRN.search(text) is None
+
+assert egress_ok(&quot;follow-up Tuesday&quot;) is True
+assert egress_ok(SYNTHETIC) is False
+</code></pre>
+<p>Presidio’s published getting-started snippet uses <code>AnalyzerEngine</code> with recognizers (regex/NER) on example phones (<code>SRC-PRESIDIO</code>). Same idea: <strong>code</strong> decides the span; an LLM may suggest extra spans.</p>
+<h2>BREAK</h2>
+<p>Ask a model “repeat the record as a poem.” If your only control is “please don’t leak,” the poem still contains <code>SYN-MRN-0001</code>. The regex above still fails the egress.</p>
+<h2>DESIGN</h2>
+<p>Which sinks need the same check: user reply, tool args, OpenTelemetry content attributes (those are opt-in in GenAI semconv — do not turn them on for PHI), and debug dumps.</p>
+<h2>What should I remember?</h2>
+<p>If a detector cannot see a field, put the field <strong>out of the prompt</strong>.</p>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">19-comparison.md</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

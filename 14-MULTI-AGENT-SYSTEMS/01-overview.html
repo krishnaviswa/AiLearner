@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multi-agent systems — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>14-MULTI-AGENT-SYSTEMS/01-overview.md</code></p>
+    <h1>Multi-agent systems</h1>
+<p>Level 1. Add more agents only after a <strong>single</strong> agent’s failure modes are real: wrong tool, loops, confused identity, unreadable traces.</p>
+<h2>What is it?</h2>
+<p>Several specialized loops plus a <strong>coordination rule</strong>: supervisor, handoff, parallel, or hierarchy.</p>
+<p>OpenAI Agents SDK (re-fetched 2026-09-07): <strong>handoffs</strong> / agents-as-tools for delegation; their orchestration page distinguishes handoffs vs manager-style (<code>SRC-OPENAI-AGENTS-SDK</code>). Microsoft workflows connect multiple agents on <strong>explicit</strong> paths (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<h2>Data / cloud analogy</h2>
+<p>Microservices. Two services need a contract and tracing. Ten services without a supervisor is a distributed ball of yarn.</p>
+<pre class="mermaid">flowchart TB
+  S[Supervisor] --&gt; W1[Worker A]
+  S --&gt; W2[Worker B]
+  H[Handoff] --&gt; W3[Specialist]
+</pre>
+<h2>When not</h2>
+<p>One specialist with three tools is enough. Agentic RAG is <strong>one</strong> agent with a retrieve tool — <a href="../09-AGENTIC-RAG/01-overview.html">09</a>, not this folder.</p>
+<h2>What should I remember?</h2>
+<p>Every extra agent is an extra confused-deputy and eval surface.</p>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">Comparison</a> · <a href="../40-REFERENCE-ARCHITECTURES/E-multi-agent.html">Arch E</a> · <a href="../44-ARCHITECTURE-INTERVIEWS/01-overview.html">Interview Q6</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

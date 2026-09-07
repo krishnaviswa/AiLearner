@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAG — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>08-RAG/01-overview.md</code></p>
+    <h1>RAG</h1>
+<p>Level 1. <strong>Retrieval-Augmented Generation</strong>: look up evidence, then ask the model to answer <strong>from that evidence</strong>.</p>
+<h2>What is it?</h2>
+<p>Not “chat with your PDFs.” A pipeline: ingest → chunk → embed → index → retrieve → (optional rerank) → assemble context → generate → cite / refuse.</p>
+<h2>Data / cloud analogy</h2>
+<p>A serving layer over a curated mart: the LLM is the renderer; the index is the mart. If the mart has the wrong grain or no grants, the renderer will look confident and still be wrong.</p>
+<pre class="mermaid">flowchart TB
+  subgraph ingest
+    S[Source] --&gt; C[Chunk + ACL]
+    C --&gt; E[Embed]
+    E --&gt; I[Index]
+  end
+  Q[Question] --&gt; R[Retrieve + filter]
+  I --&gt; R
+  R --&gt; G[Generate with citations]
+  G --&gt; O[Answer or refuse]
+</pre>
+<h2>Why it exists</h2>
+<p>Parametric memory goes stale. Retrieval can be updated, audited, and permissioned — if you design it that way.</p>
+<h2>Flavors this gate (conceptual)</h2>
+<table>
+<thead>
+<tr>
+<th>Flavor</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Naive</td>
+<td>Top-K vectors → prompt</td>
+</tr>
+<tr>
+<td>Hybrid</td>
+<td>Lexical + vector</td>
+</tr>
+<tr>
+<td>Permission-aware</td>
+<td>Principal filters <strong>in</strong> retrieve</td>
+</tr>
+<tr>
+<td>Agentic</td>
+<td>Retrieve becomes a <strong>tool loop</strong> — <a href="../09-AGENTIC-RAG/01-overview.html">09</a> only after failures</td>
+</tr>
+</tbody>
+</table>
+<p>Toy vs production: see <a href="19-comparison.html">19-comparison.md</a> and <a href="../00-MASTER-MAP/reference-architecture.html">reference-architecture.md</a>.</p>
+<h2>What should I remember?</h2>
+<p>If retrieve is wrong, generate cannot be right on purpose.</p>
+<h2>What should I learn next?</h2>
+<p><a href="02-simple.html">02-simple.md</a> · <a href="19-comparison.html">Naive / hybrid / ACL</a> · <a href="../50-CHEAT-SHEETS/rag-vs-agent.html">RAG vs agent</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

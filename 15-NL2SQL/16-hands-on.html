@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — reject before execute — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>15-NL2SQL/16-hands-on.md</code></p>
+    <h1>DO — reject before execute</h1>
+<p>Toy parser (not a production AST). The <strong>habit</strong> is the lesson.</p>
+<pre><code class="language-python">BLOCK = (&quot;drop&quot;, &quot;delete&quot;, &quot;update&quot;, &quot;insert&quot;, &quot;alter&quot;, &quot;truncate&quot;, &quot;merge&quot;)
+
+def permit(sql: str) -&gt; bool:
+    head = sql.strip().lower()
+    if not head.startswith(&quot;select&quot;):
+        return False
+    return not any(f&quot; {b} &quot; in f&quot; {head} &quot; for b in BLOCK)
+
+assert permit(&quot;SELECT id FROM orders LIMIT 10&quot;)
+assert not permit(&quot;DROP TABLE orders&quot;)
+assert not permit(&quot;SELECT * FROM orders; DROP TABLE orders&quot;)
+</code></pre>
+<h2>Experiment</h2>
+<p>Add a comment-smuggled <code>drop</code>. Notice the toy check is weak — that is why this page says <strong>AST</strong>, not regex, in production. Do not run a wow demo until this test exists.</p>
+<p>No live warehouse in this lab.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

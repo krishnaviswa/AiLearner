@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning dependency graph — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/dependency-graph.md</code></p>
+    <h1>Learning dependency graph</h1>
+<p>Gate 0 item 3. Read top-to-bottom. Do not skip security/evaluation until “after agents feel fun.”</p>
+<pre class="mermaid">flowchart TB
+  subgraph G2[Gate 2 — Foundations]
+    F[Foundations] --&gt; PY[Python for AI]
+    PY --&gt; LLM[LLM engineering]
+    LLM --&gt; PR[Prompt engineering]
+    PR --&gt; APP[LLM applications]
+  end
+
+  subgraph G3[Gate 3 — RAG]
+    APP --&gt; EMB[Embeddings]
+    EMB --&gt; VDB[Vector DBs / search]
+    VDB --&gt; RAG[RAG]
+    RAG --&gt; ARAG[Agentic RAG]
+  end
+
+  subgraph G4[Gate 4 — Agents]
+    APP --&gt; AG[Agents]
+    RAG --&gt; AG
+    AG --&gt; TOOL[Tools / function calling]
+    TOOL --&gt; MCP[MCP]
+    AG --&gt; ORCH[Orchestration]
+    ORCH --&gt; MA[Multi-agent]
+    AG --&gt; NLQ[NL-to-SQL]
+    DE[AI data engineering] --&gt; RAG
+    DE --&gt; NLQ
+  end
+
+  subgraph G5[Gate 5 — Evaluation]
+    RAG --&gt; EV[Evaluation]
+    AG --&gt; EV
+    NLQ --&gt; EV
+  end
+
+  subgraph G6[Gate 6 — Security]
+    AG --&gt; SEC[AI security]
+    MCP --&gt; SEC
+    NLQ --&gt; SEC
+    SEC --&gt; GR[Guardrails]
+    SEC --&gt; DLP[PII/PHI/DLP]
+    SEC --&gt; GOV[Governance / responsible AI]
+  end
+
+  subgraph G7[Gate 7 — Production]
+    EV --&gt; PROD[Cloud + ref architectures]
+    SEC --&gt; PROD
+    PROD --&gt; OPS[Perf / cost / LLMOps / ops]
+  end
+
+  subgraph G8[Gate 8 — Hands-on]
+    OPS --&gt; LAB[Project ladder L1-L10]
+  end
+</pre>
+<p>Note: <code>AG → TOOL</code> is a <em>uses</em> dependency (agents invoke tools). Teaching order is Tools before Agents (<a href="learning-sequence.html">learning-sequence.md</a> and the taxonomy spine). Do not read that arrow as “learn agents first.”</p>
+<h2>Hard prerequisites</h2>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Must already understand</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAG</td>
+<td>Embeddings, chunking purpose, why ACLs on chunks matter conceptually</td>
+</tr>
+<tr>
+<td>Agents</td>
+<td>LLM apps, tools as APIs, why a workflow may be better</td>
+</tr>
+<tr>
+<td>MCP</td>
+<td>Tools/function calling, trust boundaries, identity</td>
+</tr>
+<tr>
+<td>NL-to-SQL</td>
+<td>Query planning, SQL injection, row/column security</td>
+</tr>
+<tr>
+<td>Multi-agent</td>
+<td>Single-agent failure modes, handoff vs supervisor trade-off</td>
+</tr>
+<tr>
+<td>Production ref arch</td>
+<td>Evaluation + security + observability at least at logical level</td>
+</tr>
+</tbody>
+</table>
+<h2>Parallel tracks (safe)</h2>
+<ul>
+<li>Azure vs AWS vs GCP mappings can be learned after the vendor-neutral architecture (do not start with a single vendor catalog).</li>
+<li>Databricks track after data-engineering + RAG, not before.</li>
+<li>Interview/anti-pattern folders consume later gates; do not author them first.</li>
+</ul>
+<h2>Recommended sequence (human)</h2>
+<p>See <a href="learning-sequence.html">learning-sequence.md</a>.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

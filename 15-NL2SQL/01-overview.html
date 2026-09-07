@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NL-to-SQL — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>15-NL2SQL/01-overview.md</code></p>
+    <h1>NL-to-SQL</h1>
+<p>Level 1. The demo is “English in, table out.” The engineering is <strong>never running unvalidated SQL</strong>.</p>
+<h2>What is it?</h2>
+<p>A model proposes a query; a <strong>deterministic</strong> layer must parse, authorize, and often rewrite before any cursor opens. Distinctive risks from the canonical architecture: injection, cartesian joins, PII columns (<a href="../00-MASTER-MAP/reference-architecture.html">reference-architecture.md</a> Architecture C).</p>
+<h2>Data / cloud analogy</h2>
+<p>You already forbid string-concat SQL in apps. An LLM is a very creative concatenator.</p>
+<pre class="mermaid">flowchart LR
+  Q[Question] --&gt; M[Model]
+  M --&gt; SQL[Candidate SQL]
+  SQL --&gt; AST[Parse / AST]
+  AST --&gt; P[Policy: tables, cols, LIMIT]
+  P --&gt; X[Execute as principal]
+</pre>
+<h2>When not to use NL-to-SQL</h2>
+<p>A parameterized API or semantic layer already answers the question. Prefer that.</p>
+<h2>Wow demos</h2>
+<p>Forbidden until the reject path is tested. See <a href="16-hands-on.html">16-hands-on.md</a>.</p>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">When not to generate SQL</a> · <a href="../40-REFERENCE-ARCHITECTURES/C-nl2sql.html">Arch C</a> · <a href="../50-CHEAT-SHEETS/eval.html">Eval sheet</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

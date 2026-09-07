@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Performance (methods, not fake latency) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>37-AI-PERFORMANCE/01-overview.md</code></p>
+    <h1>Performance (methods, not fake latency)</h1>
+<p>No invented p95s. Measure <strong>your</strong> path.</p>
+<h2>What to time</h2>
+<table>
+<thead>
+<tr>
+<th>Segment</th>
+<th>Why it dominates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Time to first token</td>
+<td>User-perceived chat</td>
+</tr>
+<tr>
+<td>Retrieve + rerank</td>
+<td>RAG (A)</td>
+</tr>
+<tr>
+<td>Tool fan-out / serial tools</td>
+<td>Agent (B)</td>
+</tr>
+<tr>
+<td>SQL compile + warehouse</td>
+<td>NL-to-SQL (C)</td>
+</tr>
+<tr>
+<td>Cold start of a hosted container</td>
+<td>Managed runtime — <strong>preview/GA status is separate</strong></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  In[Request] --&gt; R[Retrieve]
+  R --&gt; M[Model]
+  M --&gt; T[Tools]
+  T --&gt; Out[Encode]
+</pre>
+<p>Budgets are <strong>design knobs</strong>: max retrieved chunks, max tool hops, hybrid vs ANN (<code>SRC-DATABRICKS-AI-SEARCH</code> <code>_meta</code> can pin <code>num_results</code> / <code>HYBRID</code>). They are not SLOs until you measure.</p>
+<h2>When not</h2>
+<p>Optimize the model SKU before you know if retrieve is 90% of the time. Quote a blog’s “200 ms RAG” as architecture truth.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../38-AI-COST/01-overview.html">Cost</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A minimum prompt spec (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>04-PROMPT-ENGINEERING/02-simple.md</code></p>
+    <h1>A minimum prompt spec (simple)</h1>
+<p>Write these sections even if the file is 40 lines:</p>
+<ol>
+<li><strong>Purpose</strong> — one sentence.</li>
+<li><strong>Inputs</strong> — names, types, untrusted? (user text is untrusted: <code>SRC-OWASP-LLM-TOP10-2026</code> prompt injection).</li>
+<li><strong>Output</strong> — schema or enum.</li>
+<li><strong>Refuse when</strong> — missing data, out of policy.</li>
+<li><strong>Non-goals</strong> — no browsing, no tools, no “be helpful” override.</li>
+<li><strong>Examples</strong> — 3 input/output pairs that you will put in the golden set.</li>
+</ol>
+<pre class="mermaid">sequenceDiagram
+  participant Dev
+  participant Prompt as Prompt vN
+  participant Model
+  participant Test as Golden tests
+  Dev-&gt;&gt;Prompt: edit
+  Prompt-&gt;&gt;Model: run fixture
+  Model-&gt;&gt;Test: compare
+  Test--&gt;&gt;Dev: pass / fail
+</pre>
+<h2>How it fails</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt injection</td>
+<td>User text treated as instructions</td>
+</tr>
+<tr>
+<td>Silent policy change</td>
+<td>Unversioned string in a notebook</td>
+</tr>
+<tr>
+<td>Eval on anecdotes</td>
+<td>Three Slack examples</td>
+</tr>
+</tbody>
+</table>
+<h2>Secure / evaluate</h2>
+<p>Do not put secrets in the prompt. Evaluate on fixtures, not vibes. LLM-as-judge waits for Gate 5.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

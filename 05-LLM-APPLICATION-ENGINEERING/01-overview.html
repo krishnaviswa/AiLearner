@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM applications (not agents) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>05-LLM-APPLICATION-ENGINEERING/01-overview.md</code></p>
+    <h1>LLM applications (not agents)</h1>
+<p>Gate 2 ends here on purpose. If you can ship a <strong>single-call app</strong> with eval, you are ready for embeddings later — not for a tool loop.</p>
+<h2>What is it?</h2>
+<p>An LLM application: user or job → your API → <strong>one</strong> model invocation (maybe a cheap router) → validated object → downstream system. No autonomous tool picker.</p>
+<p>Microsoft Learn: if you can write a function, do that instead of an AI agent (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<h2>Data / cloud analogy</h2>
+<p>A request/response microservice that calls a translator API. You would not give that service <code>DROP TABLE</code> as a tool.</p>
+<pre class="mermaid">flowchart LR
+  U[Caller + identity] --&gt; API[Your API]
+  API --&gt; LLM[One structured call]
+  LLM --&gt; V[Validate]
+  V --&gt; DB[Store / respond]
+</pre>
+<h2>Flavors in this lab</h2>
+<table>
+<thead>
+<tr>
+<th>Flavor</th>
+<th>Graph node</th>
+<th>This gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple LLM app</td>
+<td><code>simple-llm-app</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Structured-output app</td>
+<td><code>structured-output</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Tool / ReAct agent</td>
+<td><code>react-agent</code></td>
+<td><strong>No</strong> — Gate 4</td>
+</tr>
+</tbody>
+</table>
+<h2>What should I remember?</h2>
+<p>Most “AI features” should die as functions.</p>
+<h2>What should I learn next?</h2>
+<p><a href="02-simple.html">02-simple.md</a>, then Gate 3 embeddings — not agents.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Engineering Knowledge Lab</title>
+  <script src="app/js/theme.js"></script>
+  <link rel="stylesheet" href="app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="."></div>
+  <article class="lab-article">
+    <div class="lab-hero">
+      <h1>Learn the path. Do not browse a dump.</h1>
+      <p>This is a static course: one lesson per page, Previous / Next at the bottom, modules across the top. Markdown stays the source of truth.</p>
+      <p><a class="lab-cta" href="00-MASTER-MAP/master-mindmap.html">Start the path</a></p>
+    </div>
+    <h2>How a hosted site would flow</h2>
+    <ol class="lab-path-ol">
+      <li><strong>Start</strong> — this page</li>
+      <li><strong>Map</strong> — why the lab exists, canonical architecture, sequence</li>
+      <li><strong>Foundations</strong> — tokens, one call, when not an agent, then LLM apps</li>
+      <li><strong>RAG</strong> — embeddings → store → naive → hybrid/ACL → agentic retrieve</li>
+      <li><strong>Agents</strong> — tools, MCP, orchestration, multi-agent, NL-to-SQL</li>
+      <li><strong>Eval → Security → Production → Labs</strong></li>
+    </ol>
+    <p>On a concept, the pills under the title are <em>other HTML files</em> (Overview / Simple / When not / Do). They change the URL. They are not a depth dropdown that hides headings on the same page.</p>
+    <h2>Open this lab</h2>
+    <p>Port <strong>8000</strong> is often another API on this machine (<code>{"detail":"Not Found"}</code>). Serve the lab from the repo root on <strong>8766</strong>:</p>
+    <pre><code>python -m http.server 8766</code></pre>
+    <p>Then <a href="http://127.0.0.1:8766/index.html">http://127.0.0.1:8766/index.html</a></p>
+    <p>Or run <code>.\serve-lab.ps1</code>.</p>
+  </article>
+  <script src="app/js/learn-path.js"></script>
+  <script src="app/js/page-index.js"></script>
+  <script src="app/js/shell.js"></script>
+  <script src="app/js/depth.js"></script>
+</body>
+</html>

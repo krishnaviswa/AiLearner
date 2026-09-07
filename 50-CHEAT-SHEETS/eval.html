@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat-sheet — evaluation — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>50-CHEAT-SHEETS/eval.md</code></p>
+    <h1>Cheat-sheet — evaluation</h1>
+<p>NIST positions the AI RMF as helping organizations <strong>evaluate</strong> systems (<code>SRC-NIST-AI-RMF-LANDING</code>). A Slack thread is not that. Official <code>openai/evals</code> is one registry (<code>SRC-OPENAI-EVALS</code>); you do not need it to have a golden JSONL.</p>
+<table>
+<thead>
+<tr>
+<th>Practice</th>
+<th>Verdict</th>
+<th>Page</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A few chats, then ship</td>
+<td><strong>Not eval</strong></td>
+<td><a href="../18-EVALUATION/19-comparison.html">18 comparison</a></td>
+</tr>
+<tr>
+<td>Gold + fail-the-build</td>
+<td>Minimum for a structured app</td>
+<td><a href="../18-EVALUATION/01-overview.html">18</a></td>
+</tr>
+<tr>
+<td>Gold + retrieve@k + human sample</td>
+<td>Minimum for RAG / agents</td>
+<td><a href="../18-EVALUATION/01-overview.html">18</a></td>
+</tr>
+<tr>
+<td>Judge-only score as “accuracy”</td>
+<td>Helper abused as truth</td>
+<td><a href="../18-EVALUATION/02-simple.html">02-simple</a></td>
+</tr>
+<tr>
+<td>Same-family judge, no gold slice</td>
+<td>Circular judging</td>
+<td><a href="../18-EVALUATION/14-failure-modes.html">14-failure-modes</a></td>
+</tr>
+<tr>
+<td>Score up, holdout down</td>
+<td>Gaming / leak</td>
+<td><a href="../18-EVALUATION/14-failure-modes.html">14-failure-modes</a></td>
+</tr>
+<tr>
+<td>Unit tests only</td>
+<td>Parsers pass; fluent wrong answers ship</td>
+<td><a href="../36-AI-TESTING/01-overview.html">36</a></td>
+</tr>
+<tr>
+<td>Harness only</td>
+<td><code>DROP TABLE</code> can still pass a fluent judge</td>
+<td><a href="../15-NL2SQL/16-hands-on.html">15 hands-on</a></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  S[Want to ship] --&gt; G{Gold exists?}
+  G --&gt;|no| N[Do not claim quality]
+  G --&gt;|yes| H[Harness]
+  H --&gt; J{Judge used?}
+  J --&gt;|yes| A[Audit vs gold / human]
+  J --&gt;|no| B[Gold metrics]
+</pre>
+<h2>When not</h2>
+<p>Do not invent accuracy, p95, or dollar savings on these sheets. This lab has none.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

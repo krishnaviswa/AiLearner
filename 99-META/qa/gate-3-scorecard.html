@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gate 3 scorecard — AI Engineering Knowledge Lab</title>
+  <script src="../../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>99-META/qa/gate-3-scorecard.md</code></p>
+    <h1>Gate 3 scorecard</h1>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gate</td>
+<td>3 — RAG</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2026-09-07</td>
+</tr>
+<tr>
+<td>Chair</td>
+<td>Factory orchestrator</td>
+</tr>
+<tr>
+<td>Retry</td>
+<td>0 of 2</td>
+</tr>
+<tr>
+<td>Overall</td>
+<td><strong>PASS</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>Committee</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Agent / notes</th>
+<th>Mark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source verifier</td>
+<td>pgvector repo page fetched; Databricks AI Search + OWASP reused; OpenAI embeddings + structured-outputs fetch timeout again</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Architecture / terminology</td>
+<td>Matches canonical toy vs production pipeline; ACL on chunks</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Pedagogy</td>
+<td>Naive → hybrid → permission-aware; agentic only after failures; no Gate 4 dump</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Diagram QA</td>
+<td>Flow/sequence + tables on major pages</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>Renderer extended 06–09, 16–17; nav Gate 3</td>
+<td>PASS</td>
+</tr>
+</tbody>
+</table>
+<h2>Criteria</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Mark</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accuracy</td>
+<td>PASS</td>
+<td>No invented SKUs, index operators, or embed API fields</td>
+</tr>
+<tr>
+<td>Completeness</td>
+<td>PASS</td>
+<td>Four domains × four files + two light notes</td>
+</tr>
+<tr>
+<td>Source quality</td>
+<td>PASS</td>
+<td>Tier 1/2; timeouts labeled</td>
+</tr>
+<tr>
+<td>Freshness</td>
+<td>PASS</td>
+<td>Structured-outputs retry still timeout</td>
+</tr>
+<tr>
+<td>Architecture consistency</td>
+<td>PASS</td>
+<td>reference-architecture.md</td>
+</tr>
+<tr>
+<td>Terminology consistency</td>
+<td>PASS</td>
+<td>Agentic RAG ≠ full agent platform</td>
+</tr>
+<tr>
+<td>Code correctness</td>
+<td>PASS</td>
+<td>Tiny local scripts, no fake SDKs</td>
+</tr>
+<tr>
+<td>Security correctness</td>
+<td>PASS</td>
+<td>Filter-before-top-K, refuse without evidence</td>
+</tr>
+<tr>
+<td>Production realism</td>
+<td>PASS</td>
+<td>Toy vs production table</td>
+</tr>
+<tr>
+<td>Cross-reference integrity</td>
+<td>PASS</td>
+<td>Graph v1.3.0</td>
+</tr>
+<tr>
+<td>Learning progression</td>
+<td>PASS</td>
+<td>Sequence steps 5–6</td>
+</tr>
+</tbody>
+</table>
+<h2>Residual UNVERIFIED</h2>
+<ul>
+<li>OpenAI embeddings guide (fetch timeout) — model names / dimensions / request fields</li>
+<li>OpenAI structured-outputs request fields (retry timeout)</li>
+<li>pgvector README operators / index types (README timeout; repo existence fetched)</li>
+<li>Azure AI Search SKU list</li>
+<li>Carry-forward: hosted-agents GA, AutoGen/SK deprecation, CrewAI version/adoption, OTel spec version, model context sizes</li>
+</ul>
+<h2>Failures to fix before re-score</h2>
+<ul>
+<li>none</li>
+</ul>
+<h2>Decision</h2>
+<p><strong>PASS</strong> — Gate 4 may start. This close does not start Gate 4.</p>
+  </article>
+  <script src="../../app/js/learn-path.js"></script>
+  <script src="../../app/js/page-index.js"></script>
+  <script src="../../app/js/shell.js"></script>
+  <script src="../../app/js/depth.js"></script>
+  <script src="../../app/js/why-chain.js"></script>
+  <script src="../../app/js/mermaid-boot.js"></script>
+</body>
+</html>

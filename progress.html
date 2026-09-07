@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Factory progress — AI Engineering Knowledge Lab</title>
+  <script src="app/js/theme.js"></script>
+  <link rel="stylesheet" href="app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="."></div>
+  <article class="lab-article">
+    <h1>Factory progress</h1>
+    <p>Honest checkpoint. Serve from the repo root on <strong>8766</strong> (<code>python -m http.server 8766</code>). Port 8000 is often another API. On <code>file://</code> this page uses <code>app/js/progress-data.js</code>.</p>
+    <p id="progress-source" class="md-source">Loading state…</p>
+
+    <div class="progress-overall">
+      <div class="progress-overall-label">
+        <span>Overall pipeline</span>
+        <strong id="progress-pct">—</strong>
+      </div>
+      <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
+        <span id="progress-bar-fill"></span>
+      </div>
+    </div>
+
+    <ol class="progress-stages" id="progress-stages"></ol>
+
+    <h2>Current step</h2>
+    <p id="progress-current"></p>
+    <p><strong>Resume from:</strong> <code id="progress-resume"></code></p>
+    <p>Status: <span id="progress-status" class="lab-badge"></span></p>
+
+    <h2>Residual UNVERIFIED</h2>
+    <ul id="progress-unverified"></ul>
+
+    <h2>Recent log</h2>
+    <ul id="progress-log"></ul>
+
+    <h2>How to resume</h2>
+    <p>Read <code>99-META/qa/factory-state.json</code> and continue at <code>resume_from</code>. Do not redo completed PASS steps. Human log: <a href="99-META/qa/FACTORY-LOG.html">FACTORY-LOG</a>.</p>
+  </article>
+  <script src="app/js/learn-path.js"></script>
+  <script src="app/js/page-index.js"></script>
+  <script src="app/js/progress-data.js"></script>
+  <script src="app/js/progress.js"></script>
+  <script src="app/js/shell.js"></script>
+  <script src="app/js/depth.js"></script>
+</body>
+</html>

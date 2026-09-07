@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L6 — NL-to-SQL (validation first) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>42-CAPSTONE-PROJECTS/L06.md</code></p>
+    <h1>L6 — NL-to-SQL (validation first)</h1>
+<p><strong>Proves:</strong> parse + policy <strong>before</strong> any cursor. This lab never opens a database.</p>
+<h2>Runnable</h2>
+<p><code>python 42-CAPSTONE-PROJECTS/labs/l06_nl2sql.py</code></p>
+<h2>Toy vs production-oriented</h2>
+<p>Toy: <code>EXECUTE</code> model text. This lab: reject <code>SELECT *</code>, unknown tables, PII columns, missing <code>LIMIT</code>.</p>
+<h2>BREAK</h2>
+<p>Gold includes <code>SELECT * FROM orders</code> and <code>SELECT ssn FROM orders</code> — both must fail closed.</p>
+<h2>Security</h2>
+<p>No live warehouse. Column <code>ssn</code> is a <strong>name</strong> in the allowlist deny, not a real SSN.</p>
+<h2>When not NL-to-SQL</h2>
+<p>A parameterized API or a semantic layer already answers the question (<a href="../40-REFERENCE-ARCHITECTURES/C-nl2sql.html">C</a>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="L07.html">L07</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

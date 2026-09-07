@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When not to collapse the three words — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>25-RESPONSIBLE-AI/19-comparison.md</code></p>
+    <h1>When not to collapse the three words</h1>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Job</th>
+<th>When it is the wrong tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Security</strong></td>
+<td>Stop injection, agency, leaks, bad sinks (OWASP 2026)</td>
+<td>“We red-teamed tone”</td>
+</tr>
+<tr>
+<td><strong>Responsible AI</strong></td>
+<td>Human-AI setup, bias/homogenization, over-trust</td>
+<td>“We added a content filter, therefore fair”</td>
+</tr>
+<tr>
+<td><strong>Compliance / DLP</strong></td>
+<td>Legal basis, retention, PHI egress</td>
+<td>“The model promised it would not store PII”</td>
+</tr>
+<tr>
+<td><strong>Governance</strong></td>
+<td>Owners + Measure + Manage (NIST RMF)</td>
+<td>A brochure that lists all of the above</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  S[Security] --&gt; G[Governance]
+  R[Responsible AI] --&gt; G
+  D[DLP / privacy] --&gt; G
+  G --&gt; M[Measure]
+</pre>
+<h2>When not to use a chatbot as the ethicist</h2>
+<p>Consequential decisions (credit, care, employment) need mapped use, human accountability, and gold cases. NIST 600-1 §2.2 flags healthcare confabulation as a domain where confident error is operationally dangerous. Do not “ask the model if this is fair” as the control.</p>
+<h2>What should I remember?</h2>
+<p>Three labels, three evidence piles. One slide that says “we take RAI seriously” is none of them.</p>
+<h2>What should I learn next?</h2>
+<p>Back to <a href="../21-AI-SECURITY/03-logical.html">security map</a> if a control is missing; otherwise wait for Gate 7 production architectures.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

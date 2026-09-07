@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — a loop with a budget — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>10-AGENTS/16-hands-on.md</code></p>
+    <h1>DO — a loop with a budget</h1>
+<pre><code class="language-python">MAX_TURNS = 3
+TOOLS = {&quot;get_status&quot;}  # allow-list
+
+def run(actions: list[str]) -&gt; str:
+    for i, name in enumerate(actions, start=1):
+        if i &gt; MAX_TURNS:
+            return &quot;STOP: turn budget&quot;
+        if name not in TOOLS:
+            return f&quot;REFUSE: {name}&quot;
+        print(&quot;invoke&quot;, name)
+    return &quot;done&quot;
+
+print(run([&quot;get_status&quot;, &quot;get_status&quot;, &quot;drop_table&quot;, &quot;get_status&quot;]))
+</code></pre>
+<h2>Experiment</h2>
+<p><code>drop_table</code> must never run. That is excessive-agency control (<code>SRC-OWASP-LLM-TOP10-2026</code>). No vendor SDK.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

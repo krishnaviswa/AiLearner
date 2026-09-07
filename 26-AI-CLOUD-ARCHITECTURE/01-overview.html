@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vendor-neutral production architecture — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>26-AI-CLOUD-ARCHITECTURE/01-overview.md</code></p>
+    <h1>Vendor-neutral production architecture</h1>
+<p>Level 1. Cloud pages are <strong>mappings</strong>. This page is the canonical stack. Do not start a design from a SKU list.</p>
+<h2>What is it?</h2>
+<p>The same logical path already validated in Gate 1: user → API → <strong>identity</strong> → application → runtime (workflow <strong>or</strong> agent) → model router / tools / RAG → <strong>guardrails / DLP</strong> → eval / observability.</p>
+<pre class="mermaid">flowchart TB
+  U[User] --&gt; FE[Web / API]
+  FE --&gt; GW[API gateway]
+  GW --&gt; IAM[Authn / Authz]
+  IAM --&gt; APP[AI application]
+  APP --&gt; RT[Runtime]
+  RT --&gt; WF[Deterministic workflow]
+  RT --&gt; AG[Agent]
+  WF --&gt; OUT[Result]
+  AG --&gt; MR[Model router]
+  AG --&gt; TR[Tool registry]
+  AG --&gt; RAG[RAG]
+  RT --&gt; GR[Guardrails / DLP]
+  GR --&gt; OBS[Eval / observability / audit]
+</pre>
+<p>If steps are known, prefer a <strong>workflow or function</strong> (<code>SRC-MS-AGENT-FRAMEWORK</code>). An agent is optional.</p>
+<h2>Cloud sketches (not BOMs)</h2>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Neutral</th>
+<th>Azure map</th>
+<th>AWS map</th>
+<th>Databricks map</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identity</td>
+<td>OIDC + policy</td>
+<td>Entra ID (<code>SRC-MS-FOUNDRY-AGENTS</code>)</td>
+<td>IAM / IdP + AgentCore Identity (<code>SRC-AWS-BEDROCK-AGENTCORE</code>)</td>
+<td>Unity Catalog + cloud IdP</td>
+</tr>
+<tr>
+<td>Models</td>
+<td>Router / gateway</td>
+<td>Foundry model catalog / project endpoint</td>
+<td>Bedrock + other FMs via AgentCore</td>
+<td>Serving / gateway — confirm current Databricks name</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td>Self-host graph</td>
+<td>Foundry prompt vs <strong>hosted</strong> agents — <strong>not treated as GA</strong> (<code>SRC-MS-HOSTED-AGENTS</code>)</td>
+<td>Bedrock Agents <strong>Classic</strong> in maintenance; AgentCore for new work (<code>SRC-AWS-BEDROCK-AGENTS</code>)</td>
+<td>Custom agents + <strong>preview</strong> managed MCP (<code>SRC-DATABRICKS-MCP</code>)</td>
+</tr>
+<tr>
+<td>Retrieve</td>
+<td>Hybrid + ACL in query</td>
+<td>Azure AI Search / Foundry IQ — confirm SKU on Learn (<code>SRC-AZURE-AI-SEARCH-SKU</code>)</td>
+<td>Bedrock Knowledge Bases</td>
+<td>AI Search (formerly Vector Search) (<code>SRC-DATABRICKS-AI-SEARCH</code>)</td>
+</tr>
+<tr>
+<td>Guardrails</td>
+<td>Policy + deterministic</td>
+<td>Content filters / Purview — confirm names</td>
+<td>Bedrock Guardrails (<code>SRC-AWS-BEDROCK-GUARDRAILS-OVERVIEW</code>); AgentCore Policy</td>
+<td>UC grants</td>
+</tr>
+<tr>
+<td>Observe</td>
+<td>OTel GenAI (<strong>Development</strong>)</td>
+<td>App Insights + OTel</td>
+<td>CloudWatch + OTel (<code>SRC-AWS-BEDROCK-AGENTCORE</code>)</td>
+<td>Confirm MLflow tracing on current docs</td>
+</tr>
+</tbody>
+</table>
+<p>GCP is a <strong>stub</strong>, not a third column of fake parity (<a href="../29-GCP-AI/01-overview.html">29</a>).</p>
+<h2>What should I remember?</h2>
+<p>Map <strong>concerns</strong>. Do not copy a marketplace tile into the architecture diagram.</p>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">19-comparison.md</a> · <a href="../27-AZURE-AI/01-overview.html">Azure map</a> · <a href="../40-REFERENCE-ARCHITECTURES/01-overview.html">Ref arch A–E</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

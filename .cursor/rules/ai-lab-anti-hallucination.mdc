@@ -1,0 +1,30 @@
+---
+description: Source tiers, freshness, and anti-hallucination rules for all lab content.
+alwaysApply: true
+---
+
+# Sources, freshness, anti-hallucination
+
+If a claim cannot be verified, write **UNVERIFIED**. Do not invent API names, SDK methods, cloud services, framework capabilities, pricing, performance numbers, adoption stats, or architecture claims.
+
+If sources disagree: show the disagreement, likely reason, and which evidence is stronger.
+
+## Classify every page
+
+- **Durable** — embeddings, retrieval, authz, state, evaluation, distributed-systems principles, general patterns.
+- **Volatile** — SDK syntax, model names, endpoints, cloud SKUs, framework features, pricing, preview flags.
+
+Technology-specific pages must record: last verified, version, primary source, status, alternatives.
+
+Status labels: Stable | Mature | Emerging | Preview | Experimental | Deprecated | Vendor-specific | General industry pattern.
+
+## Source tiers (prefer higher)
+
+1. Official cloud / framework / SDK docs, standards, architecture centers, official GitHub.
+2. CNCF, Apache, Linux Foundation, NIST, OWASP, universities, papers, established orgs.
+3. Reputable engineering blogs, conferences, high-quality repos.
+4. Forums, Reddit, SO, Medium, personal blogs — experience/troubleshooting only.
+
+Trace important claims to IDs in `99-META/sources.yaml`. Refresh volatile facts from official docs; do not bake a chat model's memory into the repo.
+
+Do not log or paste secrets, PHI, or real PII into examples — use synthetic data.

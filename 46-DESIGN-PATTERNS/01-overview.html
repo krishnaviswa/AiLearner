@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Patterns the lab already teaches — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>46-DESIGN-PATTERNS/01-overview.md</code></p>
+    <h1>Patterns the lab already teaches</h1>
+<p>Only patterns that already have a teaching page. This is an index, not a Gang-of-Four rewrite and not a new curriculum.</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>What it is</th>
+<th>Not</th>
+<th>Open</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Function-over-agent</strong></td>
+<td>If you can write a function, do that (<code>SRC-MS-AGENT-FRAMEWORK</code>)</td>
+<td>Wrapping a CronJob as an agent</td>
+<td><a href="../10-AGENTS/19-comparison.html">10 when-not</a></td>
+</tr>
+<tr>
+<td><strong>Workflow-over-agent</strong></td>
+<td>Enumerated steps stay a DAG / state machine</td>
+<td>Free loop for a refund playbook</td>
+<td><a href="../11-AGENT-ORCHESTRATION/01-overview.html">11</a></td>
+</tr>
+<tr>
+<td><strong>Retrieve-as-tool</strong></td>
+<td>Agentic RAG: retrieve may run again under a budget</td>
+<td>Agent-for-everything over docs</td>
+<td><a href="../09-AGENTIC-RAG/01-overview.html">09</a></td>
+</tr>
+<tr>
+<td><strong>ACL-in-query</strong></td>
+<td>Principal filter inside retrieve</td>
+<td>Post-hoc drop of hits</td>
+<td><a href="../08-RAG/19-comparison.html">08 comparison</a></td>
+</tr>
+<tr>
+<td><strong>Hybrid retrieve</strong></td>
+<td>Lexical + vector (+ filters)</td>
+<td>Vector-only on IDs and codes</td>
+<td><a href="../08-RAG/19-comparison.html">08 comparison</a></td>
+</tr>
+<tr>
+<td><strong>Parse-then-policy SQL</strong></td>
+<td>AST + allowlist + LIMIT before a cursor</td>
+<td><code>exec</code> of model SQL</td>
+<td><a href="../15-NL2SQL/01-overview.html">15</a></td>
+</tr>
+<tr>
+<td><strong>Host-client-server MCP</strong></td>
+<td>Host creates one client per server</td>
+<td>MCP as an LLM API</td>
+<td><a href="../13-MCP/01-overview.html">13</a></td>
+</tr>
+<tr>
+<td><strong>Identity-on-tools</strong></td>
+<td>Runtime IAM, not a system-prompt deny list</td>
+<td><code>*:*</code> because the demo needed it</td>
+<td><a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12</a></td>
+</tr>
+<tr>
+<td><strong>Gold-before-judge</strong></td>
+<td>Labeled cases first; judge is a helper</td>
+<td>Judge score as accuracy</td>
+<td><a href="../18-EVALUATION/02-simple.html">18</a></td>
+</tr>
+<tr>
+<td><strong>Policy-plus-filters</strong></td>
+<td>Guardrails = written policy + deterministic code</td>
+<td>Model-as-filter</td>
+<td><a href="../22-GUARDRAILS/01-overview.html">22</a></td>
+</tr>
+<tr>
+<td><strong>HITL on irreversible writes</strong></td>
+<td>Show the <strong>exact</strong> action</td>
+<td>“Looks safe” summary</td>
+<td><a href="../22-GUARDRAILS/19-comparison.html">22 comparison</a></td>
+</tr>
+<tr>
+<td><strong>Supervisor / handoff</strong></td>
+<td>Explicit coordination among specialists</td>
+<td>Ten agents with no contract</td>
+<td><a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14</a></td>
+</tr>
+<tr>
+<td><strong>Caller identity, not grant union</strong></td>
+<td>Tool runs as the principal</td>
+<td>Max of all connected roles</td>
+<td><a href="../42-CAPSTONE-PROJECTS/L07.html">L7</a></td>
+</tr>
+<tr>
+<td><strong>Stage-gate factory</strong></td>
+<td>Author only this gate; QA chair PASS; then next</td>
+<td>Dump the encyclopedia in one pass</td>
+<td><a href="../99-META/gate-plan.html">gate-plan</a></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  P[Pattern name] --&gt; Page[Teaching page]
+  Page --&gt; Anti[Matching anti-pattern]
+  Anti --&gt; A47[47-ANTI-PATTERNS]
+</pre>
+<h2>When not to add a pattern</h2>
+<p>If it is not in this table, do not invent a name for a vendor feature. Mark <strong>UNVERIFIED</strong> or teach it in a later folder that actually has content.</p>
+<h2>What should I remember?</h2>
+<p>Patterns here are <strong>control-plane choices</strong>. They do not replace evaluation.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../44-ARCHITECTURE-INTERVIEWS/01-overview.html">Interviews</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Responsible AI — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>25-RESPONSIBLE-AI/01-overview.md</code></p>
+    <h1>Responsible AI</h1>
+<p><strong>Responsible AI</strong> here means designing for NIST’s trustworthy characteristics — valid and reliable, safe, secure and resilient, accountable and transparent, explainable and interpretable, privacy-enhanced, fair with harmful bias managed — not a values poster.</p>
+<h2>What is it?</h2>
+<p>AI 600-1 maps each named GAI risk to those characteristics (<code>SRC-NIST-AI-600-1</code>). Two risks that security pages under-cover:</p>
+<ul>
+<li><strong>Human-AI configuration</strong> — automation bias, over-reliance, aversion, emotional entanglement. The human is in the loop in the wrong way, or not at all when they must be.</li>
+<li><strong>Harmful bias or homogenization</strong> — subgroup failure, stereotyped generation, overly uniform outputs. This is an <strong>eval and data</strong> problem, not a filter SKU.</li>
+</ul>
+<p>Confabulation is the same phenomenon Gate 5 already treats as “no gold, no ship.”</p>
+<h2>Data / cloud analogy</h2>
+<p>Data quality + model monitoring + a human exception path. A “fairness dashboard” without a failed-build rule is a BI slide.</p>
+<pre class="mermaid">flowchart TD
+  Use[Intended use] --&gt; Hum[Human role]
+  Hum --&gt; Bias{Automation bias risk?}
+  Bias --&gt;|high| HITL[Show evidence; require confirmation]
+  Bias --&gt;|low| Auto[Bounded automation]
+  Use --&gt; Ev[Gold plus subgroup slices]
+</pre>
+<h2>What it is not</h2>
+<ul>
+<li>A substitute for OWASP controls.</li>
+<li>A claim that your model is unbiased. Measure <strong>your</strong> slices; do not invent disparity percentages.</li>
+<li>Coverage of illegal content production (CSAM/NCII): AI 600-1 names that risk; this lab does not teach how to generate it. Policy is: do not.</li>
+</ul>
+<h2>What should I remember?</h2>
+<p>Responsible AI without Measure is a press release. Security without Responsible AI still ships a system people over-trust.</p>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">19-comparison.md</a> · Gate 7 production (after this gate PASSes)</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

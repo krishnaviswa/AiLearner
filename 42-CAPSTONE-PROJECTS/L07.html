@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L7 — Multi-agent (tiny) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>42-CAPSTONE-PROJECTS/L07.md</code></p>
+    <h1>L7 — Multi-agent (tiny)</h1>
+<p><strong>Proves:</strong> supervisor <strong>or</strong> handoff, and <strong>no grant union</strong>. Add agents only after a single loop’s failures are real (<a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14</a>).</p>
+<h2>Runnable</h2>
+<p><code>python 42-CAPSTONE-PROJECTS/labs/l07_multi_agent.py</code></p>
+<p>Handoffs as a primitive appear in the OpenAI Agents SDK docs (<code>SRC-OPENAI-AGENTS-SDK</code>). This lab does not call that SDK.</p>
+<h2>Toy vs production-oriented</h2>
+<p>Toy: two chatbots share one service account. This lab: agent B gets <code>{read_kb}</code>, not A∪B.</p>
+<h2>BREAK</h2>
+<p>A handoff that copies A’s <code>write_ticket</code> grant must be rejected.</p>
+<h2>Security</h2>
+<p>Confused deputy is the distinctive risk of architecture E.</p>
+<h2>What should I learn next?</h2>
+<p><a href="L08.html">L08</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

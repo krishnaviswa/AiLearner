@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — treat the model as an untrusted serializer — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>03-LLM-ENGINEERING/16-hands-on.md</code></p>
+    <h1>DO — treat the model as an untrusted serializer</h1>
+<p>You do not need a live API to practice the control that matters.</p>
+<pre><code class="language-python">import json
+
+SCHEMA_KEYS = {&quot;intent&quot;, &quot;confidence&quot;}
+
+def accept(payload: str) -&gt; dict:
+    obj = json.loads(payload)
+    if set(obj) != SCHEMA_KEYS:
+        raise ValueError(&quot;keys&quot;)
+    if not isinstance(obj[&quot;confidence&quot;], (int, float)) or not 0 &lt;= obj[&quot;confidence&quot;] &lt;= 1:
+        raise ValueError(&quot;confidence&quot;)
+    if obj[&quot;intent&quot;] not in {&quot;buy&quot;, &quot;cancel&quot;, &quot;unknown&quot;}:
+        raise ValueError(&quot;intent&quot;)
+    return obj
+</code></pre>
+<h2>Experiment</h2>
+<p>Reject: missing key, extra key, confidence <code>1.7</code>, intent <code>rm -rf</code>. That last one is how “structured” still needs an allow-list.</p>
+<p>Wire-format of a specific vendor’s structured-output API remains <strong>UNVERIFIED</strong> until <code>SRC-OPENAI-STRUCTURED-OUTPUTS</code> is successfully re-fetched.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "id": "agent-vs-workflow",
+  "title": "Why an agent — or why not?",
+  "applies_to": ["01-overview.html", "19-comparison.html", "03-logical.html"],
+  "steps": [
+    {
+      "claim": "An agent is a loop that may call tools",
+      "because": "The model proposes the next action under uncertainty. That is different from a numbered procedure you already know."
+    },
+    {
+      "claim": "If you can write a function, do that",
+      "because": "Microsoft Agent Framework’s own overview says a function or workflow wins when steps are known. An agent adds agency risk (OWASP LLM03)."
+    },
+    {
+      "claim": "Workflows keep the order explicit",
+      "because": "A DAG or state machine is testable. A free loop is not a substitute for a refund playbook or a dbt test."
+    },
+    {
+      "claim": "Tools need identity, not a system prompt",
+      "because": "Hidden context is discoverable (LLM08). Least privilege lives in the runtime that actually invokes the API."
+    }
+  ]
+}

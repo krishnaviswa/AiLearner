@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat-sheet — RAG vs agent — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>50-CHEAT-SHEETS/rag-vs-agent.md</code></p>
+    <h1>Cheat-sheet — RAG vs agent</h1>
+<p>Microsoft Learn: if you can write a function, do that (<code>SRC-MS-AGENT-FRAMEWORK</code>). This table is the lab’s durable cut.</p>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Prefer</th>
+<th>First page</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Answer from <strong>your</strong> corpus, one retrieve</td>
+<td>RAG</td>
+<td><a href="../08-RAG/01-overview.html">08</a></td>
+</tr>
+<tr>
+<td>Same, but keywords + vectors</td>
+<td>Hybrid RAG</td>
+<td><a href="../08-RAG/19-comparison.html">08 comparison</a></td>
+</tr>
+<tr>
+<td>Multi-tenant / classified docs</td>
+<td>Permission-aware RAG</td>
+<td><a href="../08-RAG/19-comparison.html">08 comparison</a></td>
+</tr>
+<tr>
+<td>First retrieve measured-wrong, rewrite is ad hoc</td>
+<td>Agentic RAG (retrieve-as-tool)</td>
+<td><a href="../09-AGENTIC-RAG/01-overview.html">09</a></td>
+</tr>
+<tr>
+<td>Known rewrite (hyphenate SKU, add synonym)</td>
+<td>Workflow, not an agent</td>
+<td><a href="../09-AGENTIC-RAG/19-comparison.html">09 when-not</a></td>
+</tr>
+<tr>
+<td>Next action unknown; tools under uncertainty</td>
+<td>Agent</td>
+<td><a href="../10-AGENTS/01-overview.html">10</a></td>
+</tr>
+<tr>
+<td>Steps already enumerated</td>
+<td>Workflow / DAG</td>
+<td><a href="../10-AGENTS/19-comparison.html">10 when-not</a></td>
+</tr>
+<tr>
+<td>One classify / extract</td>
+<td>Structured LLM app</td>
+<td><a href="../05-LLM-APPLICATION-ENGINEERING/01-overview.html">05</a></td>
+</tr>
+<tr>
+<td>Known lookup</td>
+<td>SQL / API / semantic layer</td>
+<td><a href="../15-NL2SQL/19-comparison.html">15 when-not</a></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  N[Need an answer] --&gt; C{Corpus or tools?}
+  C --&gt;|corpus| R{One retrieve enough?}
+  R --&gt;|yes + ACL| RAG[Permission-aware RAG]
+  R --&gt;|measured miss| AR[Agentic RAG]
+  C --&gt;|tools / unknown next hop| A{Function enough?}
+  A --&gt;|yes| F[Function]
+  A --&gt;|no, steps known| W[Workflow]
+  A --&gt;|no, steps unknown| AG[Agent + IAM + eval]
+</pre>
+<h2>When not</h2>
+<p>Do not wrap a single always-called retrieve in an “agent.” That is RAG with extra blast radius (LLM03).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

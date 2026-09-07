@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Observability (methods, not fake SLOs) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>19-OBSERVABILITY/01-overview.md</code></p>
+    <h1>Observability (methods, not fake SLOs)</h1>
+<p>You cannot operate what you cannot <strong>trace without leaking</strong>.</p>
+<h2>What is it?</h2>
+<p>Spans for: inbound request, model call, retrieve, tool, guardrail decision, handoff. OpenTelemetry GenAI semantic conventions are <strong>Development</strong>, not Stable (<code>SRC-OTEL-GENAI-SEMCONV</code>, <code>SRC-OTEL-DOCUMENT-STATUS</code>). Do not pin a spec version from memory.</p>
+<p>OTel guidance already recorded: do <strong>not</strong> capture instructions, inputs, or outputs by default — those attributes are opt-in (<code>SRC-OTEL-GENAI-SPANS</code>). PHI in a span is a DLP incident.</p>
+<pre class="mermaid">flowchart LR
+  Req[Request span] --&gt; M[Model span]
+  Req --&gt; R[Retrieve span]
+  Req --&gt; T[Tool span]
+  T --&gt; G[Guardrail decision]
+</pre>
+<h2>What to measure (no invented numbers)</h2>
+<p>Presence of: trace id on user-visible errors, tool name + latency, retrieve hit/miss, tokens <strong>if</strong> your vendor bill uses them, guardrail block reason. Targets and p95s belong in <strong>your</strong> SLO doc after you measure — not in this lab.</p>
+<p>AgentCore Observability emits OTel-compatible telemetry (<code>SRC-AWS-BEDROCK-AGENTCORE</code>). Foundry lists tracing + App Insights (<code>SRC-MS-FOUNDRY-AGENTS</code>). Same method, different sinks.</p>
+<h2>When not</h2>
+<p>Debug dumps of full prompts in production. “We have CloudWatch” with no agent spans.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../20-LLMOPS/01-overview.html">LLMOps</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

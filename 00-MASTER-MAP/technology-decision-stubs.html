@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technology decision stubs — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/technology-decision-stubs.md</code></p>
+    <h1>Technology decision stubs</h1>
+<p>Gate 1. <strong>Stubs only</strong> — criteria, not winners. No SKU catalogs, prices, or “best of 2026” ranks. Re-verify official docs when a later gate implements a choice.</p>
+<h2>How to use a stub</h2>
+<ol>
+<li>Name the <strong>decision</strong> (durable).</li>
+<li>List <strong>criteria</strong> (what would change the answer).</li>
+<li>Note <strong>default only if justified</strong> later — empty here on purpose.</li>
+<li>Open Tier 1 URLs before coding.</li>
+</ol>
+<pre class="mermaid">flowchart LR
+  Need[Durable need] --&gt; Crit[Criteria]
+  Crit --&gt; Docs[Official docs]
+  Docs --&gt; Pick[Pick / defer / UNVERIFIED]
+</pre>
+<h2>Decision stubs</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Decision</th>
+<th>Criteria (not a recommendation)</th>
+<th>Defer to</th>
+<th>Sources</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D-WF-AG</td>
+<td>Workflow vs agent</td>
+<td>Are steps known and stable? Is a function enough? Blast radius of tools?</td>
+<td>Gates 2, 4</td>
+<td><code>SRC-MS-AGENT-FRAMEWORK</code> (prefer a function when you can write one)</td>
+</tr>
+<tr>
+<td>D-FC-MCP</td>
+<td>Function calling vs MCP vs REST</td>
+<td>One app vs many hosts? Need a shared tool catalog? Transport (STDIO vs Streamable HTTP)?</td>
+<td>Gate 4</td>
+<td><code>SRC-MCP-ARCHITECTURE</code></td>
+</tr>
+<tr>
+<td>D-RAG-FT</td>
+<td>RAG vs fine-tuning</td>
+<td>Does the fact change often? Do you need citations? Who owns the corpus?</td>
+<td>Gate 3</td>
+<td>Durable IR idea; no vendor bake-off here</td>
+</tr>
+<tr>
+<td>D-VDB-SE</td>
+<td>Vector DB vs search engine</td>
+<td>Need lexical + vector? ACL filters at query time? Ops team already runs search?</td>
+<td>Gates 3, 7</td>
+<td>No SKU list</td>
+</tr>
+<tr>
+<td>D-HYBRID</td>
+<td>Hybrid vs vector-only retrieve</td>
+<td>Keyword-heavy IDs? Proper nouns? Recall vs precision?</td>
+<td>Gate 3</td>
+<td>Durable IR</td>
+</tr>
+<tr>
+<td>D-PERM</td>
+<td>Toy RAG vs permission-aware</td>
+<td>Are chunks shared across tenants? Is ACL on the document or the chunk?</td>
+<td>Gate 3</td>
+<td>Durable authz; Azure AI Search SKUs <strong>UNVERIFIED</strong></td>
+</tr>
+<tr>
+<td>D-1-N</td>
+<td>Single agent vs multi-agent</td>
+<td>One failure domain or many? Handoff cost? Shared memory races?</td>
+<td>Gate 4</td>
+<td>Durable distributed-systems</td>
+</tr>
+<tr>
+<td>D-ORCH</td>
+<td>Graph orchestrator family</td>
+<td>Durability, HITL, mix of deterministic + agentic steps; lock-in</td>
+<td>Gate 4</td>
+<td><code>SRC-LANGGRAPH-OVERVIEW</code>, <code>SRC-MS-AGENT-FRAMEWORK</code> — compare later, do not crown a winner</td>
+</tr>
+<tr>
+<td>D-HOST</td>
+<td>Self-host vs managed runtime</td>
+<td>Identity plane, data gravity, preview vs GA</td>
+<td>Gates 4, 7</td>
+<td>Hosted agents <strong>preview</strong> <code>SRC-MS-HOSTED-AGENTS</code>; Bedrock <code>SRC-AWS-BEDROCK-AGENTS</code></td>
+</tr>
+<tr>
+<td>D-JUDGE</td>
+<td>Ground truth vs LLM-as-judge</td>
+<td>Do you have labels? Is the judge the metric or a helper?</td>
+<td>Gate 5</td>
+<td>Durable eval</td>
+</tr>
+<tr>
+<td>D-GR</td>
+<td>Policy/deterministic filter vs model-as-filter</td>
+<td>Can a regex/schema reject it? Must the control fail closed?</td>
+<td>Gate 6</td>
+<td>Durable control theory; Bedrock Guardrails <code>SRC-AWS-BEDROCK-GUARDRAILS</code> as one vendor sketch</td>
+</tr>
+<tr>
+<td>D-OTEL</td>
+<td>OTel GenAI vs vendor tracer</td>
+<td>Need portable spans? Accept Development-status attribute churn?</td>
+<td>Gates 7, 9</td>
+<td><code>SRC-OTEL-GENAI-SEMCONV</code> status <strong>Development</strong></td>
+</tr>
+<tr>
+<td>D-SQL</td>
+<td>NL-to-SQL vs semantic layer vs fixed API</td>
+<td>Who may see which columns? Injection? Cartesian risk?</td>
+<td>Gate 4–6</td>
+<td>Durable security; no “wow demo” default</td>
+</tr>
+</tbody>
+</table>
+<h2>Explicitly not decided</h2>
+<p>LangGraph vs Microsoft Agent Framework vs CrewAI vs ADK as a <strong>global default</strong>. CrewAI official intro exists (<code>SRC-CREWAI-INTRO</code>); vendor “production-ready” and adoption stats remain <strong>UNVERIFIED</strong>.</p>
+<h2>What should I remember?</h2>
+<p>A stub is a question with criteria. Shipping a winner without criteria is a catalog, not architecture.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

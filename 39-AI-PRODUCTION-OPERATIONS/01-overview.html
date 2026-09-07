@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Production operations (detect → fallback) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>39-AI-PRODUCTION-OPERATIONS/01-overview.md</code></p>
+    <h1>Production operations (detect → fallback)</h1>
+<p>Same failure list as the canonical architecture. For each class: <strong>detect, mitigate, fallback, recover, alert, test</strong>. No invented MTTR.</p>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Detect</th>
+<th>Fallback</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM timeout / unavailable</td>
+<td>Span error, budget</td>
+<td>Cached safe reply or “try later”; do not retry forever</td>
+</tr>
+<tr>
+<td>Search / DB down</td>
+<td>Dependency check</td>
+<td>Degrade to keyword or refuse</td>
+</tr>
+<tr>
+<td>Wrong tool / loop</td>
+<td>Hop counter, eval</td>
+<td>Cut loop; HITL</td>
+</tr>
+<tr>
+<td>Prompt injection</td>
+<td>Policy + logs</td>
+<td>Least privilege already on (LLM01/03)</td>
+</tr>
+<tr>
+<td>Bad retrieve / stale index</td>
+<td>Gold retrieve@k, freshness job</td>
+<td>Refuse rather than guess</td>
+</tr>
+<tr>
+<td>Bad SQL</td>
+<td>Validator reject</td>
+<td>No execute</td>
+</tr>
+<tr>
+<td>PII/PHI leak</td>
+<td>Egress DLP</td>
+<td>Block + incident</td>
+</tr>
+<tr>
+<td>Token / cost explosion</td>
+<td>Quotas (LLM06)</td>
+<td>Kill switch</td>
+</tr>
+<tr>
+<td>Model regression</td>
+<td>Harness on release</td>
+<td>Rollback model id</td>
+</tr>
+<tr>
+<td>Index corruption</td>
+<td>Checksum / canary query</td>
+<td>Prior replica</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  Ev[Event] --&gt; D{Detect}
+  D --&gt; M[Mitigate]
+  M --&gt; F[Fallback]
+  F --&gt; R[Recover]
+  R --&gt; A[Alert]
+  A --&gt; T[Add a test]
+</pre>
+<h2>When not</h2>
+<p>Pager on every model hesitation. “The agent will self-heal” with write tools.</p>
+<h2>What should I learn next?</h2>
+<p>Back to <a href="../40-REFERENCE-ARCHITECTURES/01-overview.html">A–E</a>. Hands-on is Gate 8.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

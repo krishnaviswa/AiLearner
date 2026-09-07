@@ -1,0 +1,38 @@
+---
+description: How to write lab content — progressive levels, 15 questions, four modes, no dumps.
+alwaysApply: true
+---
+
+# Writing curriculum content
+
+Never answer a learning request with an enormous unstructured dump.
+
+1. Identify the concept and prerequisites.
+2. Give the simplest useful mental model.
+3. Add complexity only after the simple model lands.
+4. Connect related concepts (knowledge graph).
+5. Implement, then break, then evaluate, then design production.
+
+## Every major concept must eventually answer
+
+What / why / how it works / how to implement / interactions / how it fails / secure / evaluate / scale / cost / when to use / when NOT to use / alternatives / what a production architect worries about / what a principal would challenge.
+
+## Progressive levels (do not show all at once)
+
+L1 Simple → L2 Logical → L3 Mechanical → L4 Implementation → L5 Engineering → L6 Architect → L7 Production → L8 Principal.
+
+Interactive HTML (Gate 9) uses a depth selector. Markdown should still lead with L1 and disclose deeper sections.
+
+## Four modes
+
+**SEE** (visual) · **DO** (exercise) · **BREAK** (inject failure) · **DESIGN** (architecture challenge with no single correct answer).
+
+## Finish every major topic with
+
+Remember / build / experiment / what can go wrong / Senior question / Principal question / Architect challenge / learn next.
+
+## Architect bridges
+
+Map new AI ideas onto Kafka, Spark, APIs, state stores, data quality, tracing, and governance. An agent does not automatically replace a deterministic pipeline.
+
+Use `.cursor/skills/contribute-concept/SKILL.md` when adding a concept. Use `99-META/templates/concept.md`. Only create template files that have real content.

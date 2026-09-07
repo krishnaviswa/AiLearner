@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parse then permit (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>15-NL2SQL/02-simple.md</code></p>
+    <h1>Parse then permit (simple)</h1>
+<pre class="mermaid">sequenceDiagram
+  participant U as User
+  participant App
+  participant M as Model
+  participant V as Validator
+  participant DB
+  U-&gt;&gt;App: question
+  App-&gt;&gt;M: schema subset the user may see
+  M--&gt;&gt;App: SQL text
+  App-&gt;&gt;V: parse AST
+  V--&gt;&gt;App: allow / rewrite / deny
+  alt deny
+    App--&gt;&gt;U: refused
+  else allow
+    App-&gt;&gt;DB: execute as user role
+    DB--&gt;&gt;App: rows
+    App--&gt;&gt;U: answer + query
+  end
+</pre>
+<h2>Rules (durable)</h2>
+<ol>
+<li>Show the model only <strong>allowed</strong> tables/columns (do not prompt the whole warehouse).</li>
+<li>Reject non-<code>SELECT</code> (or whatever your policy is) at AST, not by regex alone (regex loses).</li>
+<li>Force <code>LIMIT</code>.</li>
+<li>Run as the <strong>caller’s</strong> DB role, not a superuser.</li>
+<li>Log the SQL; watch PII columns (<code>SRC-NIST-AI-600-1</code>).</li>
+</ol>
+<p>Parser library choice is volatile — pick one and test it; do not invent an API here.</p>
+<p>Improper output handling and injection sit in OWASP LLM Top 10 2026 (<code>SRC-OWASP-LLM-TOP10-2026</code>).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

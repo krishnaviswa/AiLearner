@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When not to skip a harness — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>18-EVALUATION/19-comparison.md</code></p>
+    <h1>When not to skip a harness</h1>
+<table>
+<thead>
+<tr>
+<th>Practice</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Look at a few chats, then ship</td>
+<td><strong>Not eval</strong> — exploration only</td>
+</tr>
+<tr>
+<td>Ship with no gold and no judge audit</td>
+<td><strong>Not a release</strong> for anything user-facing</td>
+</tr>
+<tr>
+<td>Judge-only score as “accuracy”</td>
+<td>Helper abused as truth</td>
+</tr>
+<tr>
+<td>Gold set + fail-the-build</td>
+<td>Minimum for a structured app</td>
+</tr>
+<tr>
+<td>Gold + retrieve@k + human sample</td>
+<td>Minimum for RAG / agents</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  S[Want to ship] --&gt; G{Golden cases exist?}
+  G --&gt;|no| N[Do not claim quality]
+  G --&gt;|yes| H[Run harness]
+  H --&gt; P{Regressed?}
+  P --&gt;|yes| Block[Block]
+  P --&gt;|no| Ship[Ship]
+</pre>
+<p>NIST positions the AI RMF as helping organizations <strong>evaluate</strong> AI systems (<code>SRC-NIST-AI-RMF-LANDING</code>). Looking at Slack threads is not that.</p>
+<h2>When a huge benchmark registry is the wrong first step</h2>
+<p>You have no task-specific gold. A public leaderboard will not tell you if <em>your</em> ACL filter works. Start with ten labeled cases.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

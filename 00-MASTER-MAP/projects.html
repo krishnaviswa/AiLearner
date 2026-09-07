@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Initial real-world projects — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/projects.md</code></p>
+    <h1>Initial real-world projects</h1>
+<p>Gate 0 item 9. Outlines only. Implementations are Gate 8. Each item must later include why a <strong>deterministic</strong> solution might be better.</p>
+<h2>Hands-on ladder (must exist eventually)</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Project</th>
+<th>Proves</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Simple LLM application</td>
+<td>Contracts, eval of one call</td>
+</tr>
+<tr>
+<td>2</td>
+<td>RAG application</td>
+<td>Retrieval + citations</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Production-oriented RAG</td>
+<td>ACL, DLP, eval harness</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Tool-using agent</td>
+<td>Authz, timeouts, wrong-tool tests</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Agentic RAG</td>
+<td>Retrieval as a tool, loops</td>
+</tr>
+<tr>
+<td>6</td>
+<td>NL-to-SQL agent</td>
+<td>AST/security validation</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Multi-agent system</td>
+<td>Handoff vs supervisor</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Secure enterprise agent</td>
+<td>Identity, policy, egress</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Observable production agent</td>
+<td>OTel, cost, traces without leaking PII</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Enterprise AI platform</td>
+<td>Capstone: data → knowledge → agents → gov</td>
+</tr>
+</tbody>
+</table>
+<p>Each project later: architecture, README, repo layout, Python, tests, sample data, Docker where appropriate, deploy notes, eval dataset + scripts, observability, security, cost assumptions.</p>
+<h2>Fifteen enterprise use cases (stubs)</h2>
+<p>For each: business problem · why AI/agent · why deterministic might win · data · architecture · pattern · tools · security · evaluation · implementation · failures · production · cost/perf.</p>
+<ol>
+<li><strong>Enterprise knowledge assistant</strong> — permission-aware RAG; often a search+workflow is enough.</li>
+<li><strong>Healthcare knowledge assistant</strong> — PHI; DLP and human review; agents are optional.</li>
+<li><strong>Customer support agent</strong> — tools + HITL; deterministic playbooks for refunds.</li>
+<li><strong>Data analyst agent</strong> — NL-to-SQL + semantic layer; BI dashboards still win for repeated questions.</li>
+<li><strong>NL-to-SQL analyst</strong> — same as 4 with harder security.</li>
+<li><strong>Data quality agent</strong> — often Great Expectations/DBT tests; agent for triage only.</li>
+<li><strong>Pipeline monitoring agent</strong> — event-driven; paging rules may beat an LLM.</li>
+<li><strong>Incident management agent</strong> — read-only first; write tools are excessive agency.</li>
+<li><strong>Documentation agent</strong> — RAG over repos; hallucination of APIs is the failure mode.</li>
+<li><strong>Software engineering agent</strong> — sandbox; supply chain and secret leakage.</li>
+<li><strong>Cloud operations agent</strong> — IAM blast radius; prefer runbooks + approval.</li>
+<li><strong>Security investigation agent</strong> — SOC; false confidence is the risk.</li>
+<li><strong>Financial reporting agent</strong> — SOX-like controls; deterministic aggregations first.</li>
+<li><strong>Marketing analytics agent</strong> — PII in event streams; governance.</li>
+<li><strong>Enterprise research agent</strong> — web+internal; citation and freshness.</li>
+</ol>
+<h2>Final capstone (Gate 8–10, not now)</h2>
+<p><strong>Enterprise AI Data &amp; Agent Platform:</strong> sources → lakehouse → governed data → knowledge processing → search/vector → AI gateway → model router → agent runtime → tools/MCP → RAG → NL-to-SQL → guardrails → DLP → evaluation → observability → governance → CI/CD → production.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

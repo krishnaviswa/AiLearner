@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tools / function calling — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>12-TOOLS-FUNCTION-CALLING/01-overview.md</code></p>
+    <h1>Tools / function calling</h1>
+<p>A <strong>tool</strong> is an API the model is allowed to request. It is not “the model running Python.” You bind a <strong>schema</strong>, <strong>identity</strong>, and <strong>blast radius</strong>.</p>
+<h2>What is it?</h2>
+<p>Same as exposing a method on a service: name, parameters, authz, timeout, idempotency. The model proposes arguments; <strong>your runtime</strong> invokes.</p>
+<p>OpenAI Agents SDK: function tools from Python functions with schema generation (<code>SRC-OPENAI-AGENTS-SDK</code>). MCP can expose the same idea over a protocol (<a href="../13-MCP/01-overview.html">13</a>).</p>
+<h2>Data / cloud analogy</h2>
+<p>An API gateway + IAM. You would not give a batch job <code>*:*</code> on prod because a notebook asked nicely.</p>
+<pre class="mermaid">flowchart LR
+  M[Model] --&gt;|tool name + args| R[Runtime]
+  R --&gt; IAM[Authz]
+  IAM --&gt; API[Downstream API]
+  API --&gt; R
+  R --&gt; M
+</pre>
+<h2>Blast radius</h2>
+<p>Read vs write, one tenant vs all, delete vs list. OWASP <strong>excessive agency</strong> (<code>SRC-OWASP-LLM-TOP10-2026</code>).</p>
+<h2>When not to add a tool</h2>
+<p>You always call it — then it is just code (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="../13-MCP/19-comparison.html">MCP vs tools</a> · <a href="../50-CHEAT-SHEETS/mcp-vs-tools.html">MCP vs tools sheet</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

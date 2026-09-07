@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When not to treat a classifier as DLP — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>23-PHI-PII-DLP/19-comparison.md</code></p>
+    <h1>When not to treat a classifier as DLP</h1>
+<table>
+<thead>
+<tr>
+<th>Practice</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM labels “PII / not PII” then you ship</td>
+<td><strong>Not DLP</strong> — helper only</td>
+</tr>
+<tr>
+<td>Regex + NER + policy at each sink</td>
+<td>Minimum engineering control</td>
+</tr>
+<tr>
+<td>Vendor PII filter, no IAM on tools</td>
+<td>Incomplete — egress still possible via tools</td>
+</tr>
+<tr>
+<td>Embeddings of PHI in a shared index</td>
+<td>Treat as source-data exposure (LLM09)</td>
+</tr>
+<tr>
+<td>Gold-set of synthetic leaks in the harness</td>
+<td>How you <strong>evaluate</strong> DLP</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  T[Text leaving a sink] --&gt; R{Regex / NER / allowlist}
+  R --&gt;|hit| Block[Block or redact]
+  R --&gt;|miss| H{Optional LLM hint}
+  H --&gt;|flag| Review[Human or second deterministic pass]
+  H --&gt;|clean| Out[Release]
+</pre>
+<p>Same pattern as evaluation: an LLM-as-judge is a helper; gold is truth (<a href="../18-EVALUATION/02-simple.html">18</a>).</p>
+<h2>When not to index</h2>
+<p>You cannot enforce row-level ACL on retrieve. Then do not embed the PHI corpus. Use a deterministic API that already knows the caller.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../24-AI-GOVERNANCE/01-overview.html">Governance</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

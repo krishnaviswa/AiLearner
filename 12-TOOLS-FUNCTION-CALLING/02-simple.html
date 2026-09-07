@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One tool call (sequence) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>12-TOOLS-FUNCTION-CALLING/02-simple.md</code></p>
+    <h1>One tool call (sequence)</h1>
+<pre class="mermaid">sequenceDiagram
+  participant M as Model
+  participant RT as Runtime
+  participant IAM
+  participant API
+  M-&gt;&gt;RT: get_order(id)
+  RT-&gt;&gt;IAM: may caller read this id?
+  IAM--&gt;&gt;RT: allow / deny
+  alt deny
+    RT--&gt;&gt;M: error: forbidden
+  else allow
+    RT-&gt;&gt;API: GET /orders/id
+    API--&gt;&gt;RT: json
+    RT--&gt;&gt;M: observation (redacted)
+  end
+</pre>
+<h2>How it fails</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model invents <code>id</code> of another tenant</td>
+<td>Authz uses <strong>caller</strong>, not model text</td>
+</tr>
+<tr>
+<td>Timeout</td>
+<td>Deadline; circuit breaker</td>
+</tr>
+<tr>
+<td>Tool returns PII</td>
+<td>Redact before re-prompt (<code>SRC-NIST-AI-600-1</code>)</td>
+</tr>
+<tr>
+<td>Injection in observation</td>
+<td>Untrusted content (<code>SRC-OWASP-LLM-TOP10-2026</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>SDK method names are volatile — do not copy a remembered client call as pinned truth.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proposed interactive HTML architecture — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/html-architecture.md</code></p>
+    <h1>Proposed interactive HTML architecture</h1>
+<p>Gate 0 item 11. <strong>Do not build the full app until Gate 9 is approved.</strong></p>
+<p>Current shells: <a href="../index.html"><code>../index.html</code></a> (lab home) and <a href="index.html"><code>index.html</code></a> (this folder’s artifact index). Local-first: HTML, CSS, JS, Markdown, JSON, YAML, Mermaid. No backend unless a later gate proves it necessary.</p>
+<h2>Goals</h2>
+<p>Navigation tree · concept pages · depth selector · expand/collapse · diagrams · decision trees · simulations · quizzes · architecture challenges · progress tracking where practical · related-concept links · source references · freshness indicators.</p>
+<p>Progressive disclosure: do not show production architecture on first view.</p>
+<h2>Proposed app layout (Gate 9)</h2>
+<pre><code class="language-text">/
+  index.html                 shell: nav + depth + content pane
+  app/
+    css/lab.css
+    js/nav.js
+    js/depth.js
+    js/why-chain.js
+    js/graph.js              reads 99-META/knowledge-graph.json
+    js/progress.js           localStorage only
+  00-MASTER-MAP/             maps
+  NN-DOMAIN/**/*.md          rendered in-pane (static fetch)
+  99-META/                   sources + freshness badges
+</code></pre>
+<p>No build step required for Gate 9 v1 (marked markdown or pre-rendered HTML). A bundler is optional later.</p>
+<h2>Depth selector</h2>
+<p><code>Simple — Medium — Hard — Engineering — Architect — Production — Expert</code></p>
+<p>These seven UI labels are <strong>not</strong> a 1:1 rename of curriculum levels L1–L8 (Simple → Logical → Mechanical → Implementation → Engineering → Architect → Production → Principal). Mapping is deferred to Gate 9.</p>
+<p>Changing depth must not lose the current concept.</p>
+<h2>“Why?” chains</h2>
+<p>Important statements are expandable reasoning chains (example: vector DB → semantic retrieval → keyword gaps → why not only an LLM → why hybrid). Stored as JSON beside the page, not generated live by an LLM.</p>
+<h2>Simulations (small, honest)</h2>
+<ul>
+<li>Agent tool-picker (order lookup)</li>
+<li>Failure: tool down → retry / fallback / human / fail</li>
+<li>RAG: chunk size, top-K, hybrid, rerank — <strong>conceptual effects only</strong></li>
+<li>NL-to-SQL: reject unsafe SQL</li>
+</ul>
+<p>Do not imply toy metrics are production performance.</p>
+<h2>Architecture challenges</h2>
+<p>Free-text or structured rubric. Compare against considerations, not a single correct answer.</p>
+<h2>What Gate 0 ships vs Wave 0 vs Gate 9</h2>
+<p>Gate 0: maps, graphs, source strategy, and a readable home page. Curriculum domains stay empty.</p>
+<p><strong>Wave 0 (factory bake, not Gate 9):</strong> shared dark/light CSS, theme toggle (<code>localStorage</code>), injected nav, and generated <code>.html</code> siblings from Gate 0 Markdown via <code>app/tools/render-pages.py</code>. Browser links <code>.html</code> only. Markdown remains the source of truth.</p>
+<p><strong>Gate 9:</strong> depth selector, Why? chains, graph explorer, simulations on top of this shell. Do not implement those now.</p>
+<pre class="mermaid">flowchart LR
+  MD[Markdown source] --&gt; R[render-pages.py]
+  R --&gt; HTML[HTML read model]
+  HTML --&gt; Shell[theme + nav + mermaid]
+</pre>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

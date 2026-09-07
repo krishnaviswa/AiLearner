@@ -1,0 +1,218 @@
+# Technology status — Gate 0 outline
+# Status: stable | mature | emerging | preview | experimental | deprecated | vendor-specific
+# Do not treat this file as a version pin. Re-verify before implementation gates.
+# last_verified: 2026-09-07
+
+last_verified: 2026-09-07
+items:
+  - id: mcp
+    category: tool-protocol
+    technology: Model Context Protocol
+    purpose: Standardize how AI apps connect to tools, resources, and prompts
+    status: mature
+    production_readiness: production-used; protocol still evolving
+    notes: Host/Client/Server; tools, resources, prompts; STDIO and Streamable HTTP. Sampling deprecated as of protocol version 2026-07-28 per official architecture docs (SRC-MCP-ARCHITECTURE). Confirm current spec version before teaching wire format.
+    primary_source: SRC-MCP-ARCHITECTURE
+    alternatives: [direct-function-calling, rest-apis]
+
+  - id: microsoft-agent-framework
+    category: agent-framework
+    technology: Microsoft Agent Framework
+    purpose: Agents, harness agent, workflows; Microsoft-documented successor to AutoGen and Semantic Kernel
+    status: emerging
+    production_readiness: use official Learn docs; confirm package versions at implement time
+    notes: >
+      SRC-MS-AGENT-FRAMEWORK (fetched 2026-09-07) exact wording: Agent Framework
+      "combines AutoGen's simple agent abstractions with Semantic Kernel's
+      enterprise features" and "The Agent Framework is the direct successor,
+      created by the same teams." Also: "In short, Agent Framework is the next
+      generation of both Semantic Kernel and AutoGen." It does not call AutoGen
+      or Semantic Kernel deprecated, and does not use "replacement" for those
+      products. Go SDK is separately labeled public preview. Third-Party Systems
+      remain user risk/responsibility.
+    primary_source: SRC-MS-AGENT-FRAMEWORK
+    alternatives: [langgraph, openai-agents-sdk, google-adk]
+
+  - id: foundry-hosted-agents
+    category: managed-agent-runtime
+    technology: Microsoft Foundry Agent Service — hosted agents
+    purpose: Run containerized agents with managed identity, scaling, observability
+    status: preview
+    production_readiness: preview — do not treat as GA without re-checking Learn
+    notes: >
+      Gate 7 re-fetch 2026-09-07: page title we received has no "(preview)";
+      body still does not say GA. Older "currently in preview" sentence omitted
+      in this snapshot. A2A still labeled (preview). Conservative status remains
+      preview — do not treat as GA. Language support: Python and C#. Docs say protocol
+      libraries are framework-agnostic; overview authoring surface lists Agent
+      Framework, LangGraph, OpenAI Agents SDK, Anthropic Agent SDK, GitHub
+      Copilot SDK, or custom code. DISAGREEMENT vs older "framework-specific
+      adapters": SRC-MS-HOSTED-AGENTS-MIGRATE says initial-preview packages
+      azure-ai-agentserver-agentframework and azure-ai-agentserver-langgraph
+      are replaced by protocol libraries
+      (azure-ai-agentserver-responses / azure-ai-agentserver-invocations);
+      CrewAI, Semantic Kernel, or custom code use those protocol libraries
+      directly. Naming on fetched pages: "Microsoft Foundry", "Foundry Agent
+      Service", "Microsoft Foundry Agent Service". SRC-MS-FOUNDRY-WHAT-IS
+      maps previous brand "Azure AI Studio / Azure AI Foundry" to current
+      "Microsoft Foundry". URL path remains /azure/foundry/. Learn metadata
+      still has uhfHeaderId azure-ai-foundry.
+    primary_source: SRC-MS-HOSTED-AGENTS
+    alternatives: [self-host-runtime, bedrock-agents, vertex-agent-runtime]
+
+  - id: langgraph
+    category: agent-orchestration
+    technology: LangGraph
+    purpose: Low-level durable, stateful agent/workflow orchestration
+    status: mature
+    production_readiness: documented durable execution, HITL, persistence; confirm current version
+    notes: Mix deterministic and agentic steps. Checkpointers vs stores for short-term vs long-term memory (SRC-LANGGRAPH-OVERVIEW, SRC-LANGGRAPH-PERSISTENCE).
+    primary_source: SRC-LANGGRAPH-OVERVIEW
+    alternatives: [microsoft-agent-framework, llama-index-workflows, google-adk]
+
+  - id: openai-agents-sdk
+    category: agent-framework
+    technology: OpenAI Agents SDK
+    purpose: Lightweight agents, handoffs, guardrails, sandbox agents, tracing
+    status: mature
+    production_readiness: official production-oriented SDK; OpenAI-ecosystem gravity
+    notes: Python and TypeScript docs. Sandbox agents add isolated workspace execution (SRC-OPENAI-AGENTS-SDK).
+    primary_source: SRC-OPENAI-AGENTS-SDK
+    alternatives: [langgraph, microsoft-agent-framework]
+
+  - id: llamaindex
+    category: data-agents-rag
+    technology: LlamaIndex
+    purpose: Agents and event-driven workflows over data / RAG
+    status: mature
+    production_readiness: strong data/RAG story; confirm current workflow APIs
+    notes: Prebuilt agents vs custom Workflows (SRC-LLAMAINDEX-AGENTS).
+    primary_source: SRC-LLAMAINDEX-AGENTS
+    alternatives: [langgraph, custom-rag]
+
+  - id: google-adk
+    category: agent-framework
+    technology: Google Agent Development Kit (ADK)
+    purpose: Build, evaluate, deploy agents; GCP-aligned
+    status: emerging
+    production_readiness: official OSS framework; confirm language GA vs preview
+    notes: Multi-language (Python, TypeScript, Go, Java, Kotlin per project docs). Go Agent Framework on Microsoft side is separately documented as public preview — do not conflate the two.
+    primary_source: SRC-GOOGLE-ADK
+    alternatives: [langgraph, vertex-managed-agents]
+
+  - id: bedrock-agents
+    category: managed-agent-runtime
+    technology: Amazon Bedrock Agents
+    purpose: Managed agents with action groups, knowledge bases, optional guardrails
+    status: vendor-specific
+    production_readiness: AWS-managed; confirm regional/feature GA in AWS docs
+    notes: >
+      Gate 7: Agents Classic no longer open to new customers (SRC-AWS-BEDROCK-AGENTS).
+      Green-field sketch is AgentCore (SRC-AWS-BEDROCK-AGENTCORE). Guardrails still
+      associate via CreateAgent/UpdateAgent on Classic (SRC-AWS-BEDROCK-GUARDRAILS).
+    primary_source: SRC-AWS-BEDROCK-AGENTS
+    alternatives: [self-host-runtime, foundry-agent-service]
+
+  - id: databricks-ai-search
+    category: retrieval
+    technology: Databricks AI Search (formerly Vector Search)
+    purpose: Governed semantic/hybrid retrieval over lakehouse data
+    status: vendor-specific
+    production_readiness: Unity Catalog governed; confirm workspace feature availability
+    notes: >
+      Docs state former name Vector Search; old URL prefix still works
+      (SRC-DATABRICKS-AI-SEARCH). Managed MCP + AI Search MCP pages labeled
+      Public Preview as of 2026-09-03 docs (SRC-DATABRICKS-MCP).
+    primary_source: SRC-DATABRICKS-AI-SEARCH
+    alternatives: [azure-ai-search, opensearch, pgvector]
+
+  - id: otel-genai
+    category: observability
+    technology: OpenTelemetry GenAI semantic conventions
+    purpose: Standard spans/metrics/events for GenAI and agents
+    status: experimental
+    production_readiness: Official status is Development — OTel says SHOULD NOT be used in production
+    notes: >
+      Official document status is Development, not Experimental and not Stable
+      (SRC-OTEL-GENAI-SEMCONV, SRC-OTEL-GENAI-AGENT-SPANS). Lab status enum
+      "experimental" is the closest local label; do not conflate it with an
+      OTel Experimental maturity. SRC-OTEL-DOCUMENT-STATUS defines Development
+      as: not all pieces in place; configuration may break often; "The
+      component SHOULD NOT be used in production"; MAY be removed without
+      notice. Agent-specific spans exist and are all Development:
+      create_agent, invoke_agent (client and internal), invoke_workflow, plan,
+      execute_tool. Shared attributes such as error.type and server.port remain
+      Stable from core semconv. opentelemetry.io/docs/specs/semconv/gen-ai/
+      is a move stub (SRC-OTEL-GENAI-MOVED); canonical repo is
+      open-telemetry/semantic-conventions-genai. No tagged GenAI spec version
+      found this pass (repo README Schema URL is TODO) — do not invent a
+      version number. Instrumentations SHOULD NOT capture instructions, inputs,
+      or outputs by default; those attributes are Opt-In (SRC-OTEL-GENAI-SPANS).
+    primary_source: SRC-OTEL-GENAI-SEMCONV
+    alternatives: [vendor-tracing, langsmith, mlflow-tracing]
+
+  - id: presidio
+    category: dlp
+    technology: Microsoft Presidio
+    purpose: Detect and anonymize PII in text (and related image redaction)
+    status: mature
+    production_readiness: useful detector, not a complete compliance program
+    notes: >
+      Analyzer + anonymizer; regex/NER recognizers. Docs host moved to
+      data-privacy-stack.github.io (SRC-PRESIDIO, 2026-09-07). An LLM classifier
+      alone is not sufficient DLP (lab principle).
+    primary_source: SRC-PRESIDIO
+    alternatives: [purview, cloud-dlp, regex-allowlists]
+
+  - id: autogen
+    category: agent-framework
+    technology: AutoGen
+    purpose: Predecessor multi-agent abstractions
+    status: vendor-specific
+    production_readiness: do not start new work here without verifying AutoGen's own repo/docs
+    notes: >
+      SRC-MS-AGENT-FRAMEWORK calls Agent Framework the "direct successor" and
+      "next generation" of AutoGen; that is successor language, not a
+      deprecation notice. AutoGen's own official docs were not successfully
+      re-fetched this pass. Do not teach AutoGen as deprecated unless AutoGen's
+      own docs or repo say so. UNVERIFIED: AutoGen project-level support /
+      maintenance status as of 2026-09-07.
+    primary_source: SRC-MS-AGENT-FRAMEWORK
+    alternatives: [microsoft-agent-framework]
+
+  - id: semantic-kernel
+    category: agent-framework
+    technology: Semantic Kernel
+    purpose: Predecessor enterprise skills/plugins SDK
+    status: vendor-specific
+    production_readiness: Microsoft documents Agent Framework as the successor path; verify SK repo for remaining support
+    notes: >
+      SRC-MS-AGENT-FRAMEWORK calls Agent Framework the "direct successor" and
+      "next generation" of Semantic Kernel; that is successor language, not a
+      product-level deprecation notice. Semantic Kernel's own overview was not
+      successfully re-fetched this pass. Do not treat SK as deprecated unless
+      Semantic Kernel's own docs say so. UNVERIFIED: SK project-level support /
+      maintenance status as of 2026-09-07.
+    primary_source: SRC-MS-AGENT-FRAMEWORK
+    alternatives: [microsoft-agent-framework]
+
+  - id: crewai
+    category: agent-framework
+    technology: CrewAI
+    purpose: Role-based multi-agent crews plus event-driven Flows (per official intro)
+    status: emerging
+    production_readiness: official OSS docs exist; vendor "production-ready" claim is not independently verified
+    notes: >
+      Official docs found (Tier-1): docs.crewai.com (SRC-CREWAI-DOCS,
+      SRC-CREWAI-INTRO, SRC-CREWAI-INSTALL). Intro describes Crews as teams of
+      role-playing autonomous agents and Flows as event-driven stateful
+      workflows; it recommends using both for production-shaped apps. Vendor
+      copy says "production-ready" / "enterprise-ready" — treat as vendor
+      claims, not lab-verified production fitness. Installation requires
+      Python >=3.10 and <3.14. Same install page mentions "CrewAI 0.175.0"
+      and example CLI output "crewai v0.102.0" — do not pin a package version
+      (page-internal disagreement). Intro adoption stat ("over 100,000
+      developers certified") is UNVERIFIED as a metric. Feature-by-feature
+      comparison claims remain UNVERIFIED until curriculum gates.
+    primary_source: SRC-CREWAI-INTRO
+    alternatives: [langgraph, microsoft-agent-framework]

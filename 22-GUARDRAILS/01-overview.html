@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guardrails — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>22-GUARDRAILS/01-overview.md</code></p>
+    <h1>Guardrails</h1>
+<p>A <strong>guardrail</strong> is a <strong>policy</strong> plus an <strong>enforcer that is not the same model you are trying to constrain</strong>.</p>
+<h2>What is it?</h2>
+<p>Three layers, in this order:</p>
+<ol>
+<li><strong>Policy</strong> — written allow/deny: who may call which tool, which topics are out of scope, what may leave the tenant.</li>
+<li><strong>Deterministic filters</strong> — schema validation, allowlists, regex/NER DLP, IAM, rate limits, output encoding. They fail closed.</li>
+<li><strong>Model-as-filter</strong> — a classifier or “safety” LLM that scores text. Useful as a <strong>hint</strong>. It is still an LLM: injectable, stochastic, and evadable (LLM01).</li>
+</ol>
+<p>OWASP LLM08: do not rely on hidden-context instructions as the primary control; enforce critical behavior <strong>outside</strong> the model (<code>SRC-OWASP-LLM-TOP10-2026-GH</code>). LLM01: validate outputs in <strong>trusted application code</strong>, not a second LLM call, if you need a structural guarantee.</p>
+<h2>Data / cloud analogy</h2>
+<p>WAF + IAM + schema registry. You would not replace a network ACL with “ask the chatbot if this packet looks nice.”</p>
+<pre class="mermaid">sequenceDiagram
+  participant User
+  participant Policy as Policy engine
+  participant Det as Deterministic filters
+  participant Model
+  participant Out as Output encode / DLP
+  User-&gt;&gt;Policy: identity and intent
+  Policy--&gt;&gt;User: deny if no grant
+  Policy-&gt;&gt;Det: allowed request
+  Det-&gt;&gt;Model: sanitized payload
+  Model-&gt;&gt;Out: tokens
+  Out--&gt;&gt;User: encoded or blocked
+</pre>
+<h2>Vendor product ≠ definition</h2>
+<p>Amazon Bedrock Guardrails is one <strong>vendor-specific</strong> control plane: content filters, denied topics, word lists, sensitive-information filters (probabilistic PII plus custom regex), optional grounding checks (<code>SRC-AWS-BEDROCK-GUARDRAILS-OVERVIEW</code>, fetched 2026-09-07). You can associate a guardrail with a Bedrock agent (<code>SRC-AWS-BEDROCK-GUARDRAILS</code>). That does not make “Bedrock” the architecture. Portable design: policy + deterministic path first.</p>
+<h2>When a model-as-filter is acceptable</h2>
+<p>Soft ranking, extra logging, language you have not written a recognizer for yet. Never as the only gate in front of a write tool, a payment, or PHI egress.</p>
+<h2>What should I remember?</h2>
+<p>If the only lock is a prompt that says “never do X,” you do not have a guardrail. You have a hope.</p>
+<h2>What should I learn next?</h2>
+<p><a href="19-comparison.html">19-comparison.md</a> · <a href="../23-PHI-PII-DLP/01-overview.html">DLP</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

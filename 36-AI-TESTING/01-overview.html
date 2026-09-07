@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harness vs unit tests (Gate 5 light note) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>36-AI-TESTING/01-overview.md</code></p>
+    <h1>Harness vs unit tests (Gate 5 light note)</h1>
+<p>Not the full testing domain.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Unit / contract tests</th>
+<th>Eval harness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Asserts</td>
+<td>Parsers, authz, AST refuse</td>
+<td>Behavior vs gold</td>
+</tr>
+<tr>
+<td>Determinism</td>
+<td>High</td>
+<td>Model may flake — pin seeds/models or allow retry policy</td>
+</tr>
+<tr>
+<td>CI</td>
+<td>Every commit</td>
+<td>Every commit for <strong>small gold</strong>; nightly for large</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  U[Unit tests] --&gt; G[Gates parsers]
+  H[Eval harness] --&gt; B[Gates behavior]
+</pre>
+<p>If you only have unit tests, you can still ship a fluent wrong answer. If you only have a harness, you can still ship <code>DROP TABLE</code> through an untested parser (<a href="../15-NL2SQL/16-hands-on.html">15</a>).</p>
+<p>Full test-strategy pages wait for later gates.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../50-CHEAT-SHEETS/eval.html">Eval pocket</a> · <a href="../18-EVALUATION/14-failure-modes.html">How eval fails</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cost (drivers, not invented prices) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>38-AI-COST/01-overview.md</code></p>
+    <h1>Cost (drivers, not invented prices)</h1>
+<p><strong>Do not</strong> copy dollar figures into this lab. Verify the official price page for the SKU you actually use.</p>
+<h2>Drivers (durable)</h2>
+<table>
+<thead>
+<tr>
+<th>Driver</th>
+<th>Shows up in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tokens in / out (and cached, if the vendor bills it)</td>
+<td>Every LLM call</td>
+</tr>
+<tr>
+<td>Embedding + index storage</td>
+<td>Architecture A</td>
+</tr>
+<tr>
+<td>Tool / MCP / SQL compute</td>
+<td>B, C, D</td>
+</tr>
+<tr>
+<td>Idle provisioned search units vs serverless CU</td>
+<td>Azure AI Search Dedicated vs Serverless preview (<code>SRC-AZURE-AI-SEARCH-SKU</code>)</td>
+</tr>
+<tr>
+<td>Container compute on hosted agents</td>
+<td>Foundry hosted cost model lists inference + tools + <strong>container</strong> (<code>SRC-MS-FOUNDRY-AGENTS</code>)</td>
+</tr>
+<tr>
+<td>Agent loops</td>
+<td>Unbounded consumption (OWASP LLM06)</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  Q[Question] --&gt; T[Tokens]
+  Q --&gt; Idx[Index / retrieve]
+  Q --&gt; Tool[Tools / SQL]
+  T --&gt; Bill[Vendor bill]
+  Idx --&gt; Bill
+  Tool --&gt; Bill
+</pre>
+<p>Official pages to <strong>re-open</strong> (do not memorize rates):</p>
+<ul>
+<li>Azure AI Search / Foundry IQ: https://azure.microsoft.com/pricing/details/search/</li>
+<li>AgentCore: AWS “AgentCore pricing” link from <code>SRC-AWS-BEDROCK-AGENTCORE</code></li>
+<li>Databricks managed MCP: feature-specific pages listed on <code>SRC-DATABRICKS-MCP</code></li>
+</ul>
+<p>Rates on those pages are <strong>UNVERIFIED</strong> in this repo (not copied).</p>
+<h2>When not</h2>
+<p>A slide with “$0.00 / 1K tokens” from a workshop. A design that cannot name the <strong>unit</strong> the vendor bills.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../39-AI-PRODUCTION-OPERATIONS/01-overview.html">Ops</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

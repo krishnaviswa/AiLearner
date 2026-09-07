@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — assemble context or refuse — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>08-RAG/16-hands-on.md</code></p>
+    <h1>DO — assemble context or refuse</h1>
+<pre><code class="language-python">def answer(question: str, hits: list[dict], min_score: float = 0.4) -&gt; str:
+    kept = [h for h in hits if h[&quot;score&quot;] &gt;= min_score]
+    if not kept:
+        return &quot;REFUSE: no evidence&quot;
+    cites = &quot;, &quot;.join(h[&quot;id&quot;] for h in kept)
+    return f&quot;(cite {cites}) &lt;model would only use these texts&gt;&quot;
+
+print(answer(&quot;x&quot;, [{&quot;id&quot;: &quot;c1&quot;, &quot;score&quot;: 0.2}]))
+print(answer(&quot;x&quot;, [{&quot;id&quot;: &quot;c1&quot;, &quot;score&quot;: 0.9}]))
+</code></pre>
+<h2>Experiment</h2>
+<ol>
+<li>Lower <code>min_score</code> until you always “answer.” That is how demos ship confabulation (<code>SRC-NIST-AI-600-1</code>).</li>
+<li>Add a hit from <code>tenant=other</code>. Drop it <strong>before</strong> the string goes to a model.</li>
+</ol>
+<p>No vendor SDK. Wire-up later; this is the control.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HITL on a write (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>11-AGENT-ORCHESTRATION/02-simple.md</code></p>
+    <h1>HITL on a write (simple)</h1>
+<pre class="mermaid">sequenceDiagram
+  participant G as Graph runtime
+  participant M as Model
+  participant H as Human
+  participant T as Write tool
+  G-&gt;&gt;M: state
+  M--&gt;&gt;G: propose refund
+  G-&gt;&gt;H: pause / inspect state
+  H--&gt;&gt;G: approve or edit
+  G-&gt;&gt;T: invoke
+  T--&gt;&gt;G: result
+</pre>
+<p>LangGraph lists HITL as inspecting and modifying agent state (<code>SRC-LANGGRAPH-OVERVIEW</code>). OpenAI Agents SDK also documents built-in human-in-the-loop (<code>SRC-OPENAI-AGENTS-SDK</code>). Neither page is a license to skip authz.</p>
+<h2>How it fails</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HITL on every read</td>
+<td>Fatigue; only gate <strong>mutating</strong> or high-blast tools</td>
+</tr>
+<tr>
+<td>Resume without identity</td>
+<td>Confused deputy</td>
+</tr>
+<tr>
+<td>No timeout on pause</td>
+<td>Stuck work items</td>
+</tr>
+</tbody>
+</table>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

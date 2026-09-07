@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recommended learning sequence — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/learning-sequence.md</code></p>
+    <h1>Recommended learning sequence</h1>
+<p>Gate 0 item 10. Audience: experienced Python/SQL/AWS/Azure/Spark/Kafka/Databricks/Snowflake engineers.</p>
+<p>Do not reteach programming. Use pipeline, state-machine, API, and governance analogies.</p>
+<h2>Sequence</h2>
+<ol>
+<li><strong>Why this lab exists</strong> — <a href="master-mindmap.html">master-mindmap.md</a>, <a href="hybrid-knowledge-architecture.html">hybrid-knowledge-architecture.md</a></li>
+<li><strong>Canonical architecture</strong> — <a href="reference-architecture.html">reference-architecture.md</a> at Simple depth only</li>
+<li><strong>Foundations</strong> — tokens, context windows, what “agency” means, when <strong>not</strong> to use an agent</li>
+<li><strong>LLM applications without agents</strong> — structured output, eval of a single call</li>
+<li><strong>Embeddings + search</strong> — durable IR ideas, then one volatile implementation</li>
+<li><strong>RAG</strong> — naive → hybrid → permission-aware; always toy vs production pipeline</li>
+<li><strong>Tools</strong> — APIs as tools; blast radius; authz</li>
+<li><strong>Agents</strong> — ReAct / router / planner-executor / stateful / HITL</li>
+<li><strong>MCP</strong> — protocol vs function calling vs REST</li>
+<li><strong>Agentic RAG and multi-agent</strong> — only after single-agent failure modes</li>
+<li><strong>NL-to-SQL</strong> — security validation before “wow demos”</li>
+<li><strong>Evaluation</strong> — ground truth first; LLM-as-judge as a helper, not the source of truth</li>
+<li><strong>Security / DLP / governance</strong> — OWASP LLM Top 10 2026 + NIST AI RMF/600-1</li>
+<li><strong>Observability / LLMOps / cost / performance</strong></li>
+<li><strong>Reference architectures A–E</strong> and cloud mappings</li>
+<li><strong>Project ladder L1–L10</strong> and selected enterprise use cases</li>
+<li><strong>Principal challenges</strong> — interviews, anti-patterns, “would I choose either?”</li>
+</ol>
+<h2>Depth at each step</h2>
+<p>Simple → logical → mechanical → implement → engineer → architect → production → principal. Do not dump all eight in one page.</p>
+<h2>Timebox suggestion (multi-year lab, not a weekend course)</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Gates</th>
+<th>Intent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quarter 1</td>
+<td>2–3</td>
+<td>RAG that you would not be ashamed to threat-model</td>
+</tr>
+<tr>
+<td>Quarter 2</td>
+<td>4–6</td>
+<td>Agents you can refuse to ship</td>
+</tr>
+<tr>
+<td>Quarter 3</td>
+<td>7–8</td>
+<td>One production-shaped system</td>
+</tr>
+<tr>
+<td>Quarter 4</td>
+<td>9–10</td>
+<td>Teaching interface + integration</td>
+</tr>
+</tbody>
+</table>
+<p>Adjust; the gate process still stops between phases.</p>
+<h2>Gate 1 confirmation (2026-09-07)</h2>
+<p>The sequence above is <strong>confirmed</strong> as the teaching order. Do not start agents before LLM apps without agents, and do not postpone evaluation/security until “after it works.”</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Matches dependency graph G2→G8</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Matches taxonomy spine</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>When-not-agent appears before agent flavors</td>
+<td>Yes (step 3)</td>
+</tr>
+<tr>
+<td>Cloud vendor catalogs first</td>
+<td>No — vendor-neutral architecture first (step 2)</td>
+</tr>
+</tbody>
+</table>
+<p>Validation write-up: <a href="gate-1-architecture-validation.html">gate-1-architecture-validation.md</a>.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

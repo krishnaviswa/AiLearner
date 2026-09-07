@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Canonical production reference architecture — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/reference-architecture.md</code></p>
+    <h1>Canonical production reference architecture</h1>
+<p>Gate 0 item 5. <strong>Vendor-neutral logical architecture first.</strong> Cloud mappings are sketches, not bills of materials. Do not invent SKUs or prices.</p>
+<h2>Logical (durable)</h2>
+<pre><code class="language-text">User
+  → Web / Mobile / API
+    → API Gateway
+      → Authentication / Authorization
+        → AI application
+          → Agent runtime / orchestrator
+            → Planner / router
+              → Model router → LLM
+            → Tool registry
+                ├── APIs
+                ├── MCP
+                ├── Databases
+                ├── Search
+                └── Enterprise systems
+
+RAG / knowledge layer (parallel capability, not always on)
+  ├── Document processing
+  ├── Chunking
+  ├── Enrichment
+  ├── Embeddings
+  ├── Search
+  └── Reranking
+
+Data layer
+  ├── PostgreSQL / SQL Server
+  ├── Snowflake / Databricks / Delta Lake
+  └── Object storage (ADLS / S3 / GCS)
+
+Cross-cutting: identity, authorization, policy, guardrails, DLP,
+PII/PHI detection, secrets, audit, evaluation, observability,
+cost management, governance, CI/CD.
+</code></pre>
+<pre class="mermaid">flowchart TB
+  U[User] --&gt; FE[Web / API]
+  FE --&gt; GW[API gateway]
+  GW --&gt; IAM[Authn / Authz]
+  IAM --&gt; APP[AI application]
+  APP --&gt; RT[Agent runtime]
+  RT --&gt; PR[Planner / router]
+  PR --&gt; MR[Model router]
+  MR --&gt; LLM[LLM]
+  RT --&gt; TR[Tool registry]
+  TR --&gt; API[APIs]
+  TR --&gt; MCP[MCP]
+  TR --&gt; DB[Databases]
+  TR --&gt; SRCH[Search]
+  RT --&gt; RAG[RAG / knowledge]
+  RAG --&gt; DATA[Data layer]
+  RT --&gt; GR[Guardrails / DLP]
+  GR --&gt; OBS[Observability / eval / audit]
+</pre>
+<h2>Architect rule (durable)</h2>
+<p>If the steps are known and stable, prefer a <strong>workflow</strong> (or plain code) over an agent. Microsoft Agent Framework’s own overview states: if you can write a function to handle the task, do that instead of using an AI agent (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<h2>Data → AI knowledge pipeline (logical)</h2>
+<p>Source systems → batch/CDC/stream → ingest → raw → DQ → cleanse → enrich → metadata → document processing → ACL/security metadata → chunk → embed → search/vector index → hybrid retrieve → rerank → context assembly → RAG/agent → guardrails/DLP → output.</p>
+<p>Toy (insufficient for enterprise): PDF → chunks → embeddings → vector search → LLM.</p>
+<p>Production-oriented adds malware scan, parsing, classification, ACL extraction, permission filtering, citation, output DLP, audit, telemetry, evaluation.</p>
+<h2>Physical / cloud mapping (volatile — re-verify)</h2>
+<p>Do not force every technology onto every cloud.</p>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Vendor-neutral</th>
+<th>Azure sketch</th>
+<th>AWS sketch</th>
+<th>Databricks sketch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identity</td>
+<td>OIDC / policy engine</td>
+<td>Microsoft Entra ID</td>
+<td>IAM / Identity Center</td>
+<td>Unity Catalog + cloud IdP</td>
+</tr>
+<tr>
+<td>Model access</td>
+<td>Model router / gateway</td>
+<td>Microsoft Foundry model catalog / project endpoint (<code>SRC-MS-AGENT-FRAMEWORK</code>)</td>
+<td>Amazon Bedrock</td>
+<td>Model serving / AI gateway (confirm current product names in Databricks docs)</td>
+</tr>
+<tr>
+<td>Agent runtime</td>
+<td>Self-host graph runtime</td>
+<td>Foundry Agent Service; <strong>hosted agents documented as preview</strong> (<code>SRC-MS-HOSTED-AGENTS</code>)</td>
+<td>Bedrock Agents (<code>SRC-AWS-BEDROCK-AGENTS</code>)</td>
+<td>Custom agents + managed MCP (<code>SRC-DATABRICKS-MCP</code>)</td>
+</tr>
+<tr>
+<td>Retrieval</td>
+<td>Hybrid search + ACL filter</td>
+<td>Azure AI Search — <strong>UNVERIFIED SKU list here; confirm on Learn at Gate 7</strong></td>
+<td>Bedrock Knowledge Bases</td>
+<td>AI Search, formerly Vector Search (<code>SRC-DATABRICKS-AI-SEARCH</code>)</td>
+</tr>
+<tr>
+<td>Guardrails</td>
+<td>Policy + deterministic filters</td>
+<td>Azure AI Content Safety / Purview — confirm current names</td>
+<td>Bedrock Guardrails (<code>SRC-AWS-BEDROCK-GUARDRAILS</code>)</td>
+<td>UC grants + workspace policies</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td>OpenTelemetry GenAI semconv (<strong>Development</strong>) (<code>SRC-OTEL-GENAI-SEMCONV</code>)</td>
+<td>Azure Monitor + OTel</td>
+<td>CloudWatch + OTel</td>
+<td>MLflow tracing (confirm)</td>
+</tr>
+<tr>
+<td>DLP</td>
+<td>Presidio + enterprise DLP</td>
+<td>Presidio + Purview</td>
+<td>Macie / DLP — confirm</td>
+<td>Tags + UC</td>
+</tr>
+</tbody>
+</table>
+<p>Naming note (Learn, 2026-09-07): Azure sketches use <strong>Microsoft Foundry</strong> / <strong>Foundry Agent Service</strong> / <strong>Microsoft Foundry Agent Service</strong>. Previous brand: <strong>Azure AI Studio / Azure AI Foundry</strong>. Docs URL path remains <code>/azure/foundry/</code>. This is not a rename invented here.</p>
+<p>GCP: Google ADK + Vertex AI family (<code>SRC-GOOGLE-ADK</code>). Treat “Gemini Enterprise Agent Platform” marketing renames as <strong>volatile</strong> — confirm on Google Cloud docs before teaching.</p>
+<h2>Five reference architectures (stubs until Gate 7)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Distinctive risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Enterprise RAG</td>
+<td>ACL leakage via chunks; stale indexes</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Enterprise AI agent</td>
+<td>Excessive agency; tool blast radius</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Agentic NL-to-SQL</td>
+<td>Injection, cartesian joins, PII columns</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Data engineering agent</td>
+<td>Write tools against pipelines</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Secure enterprise multi-agent platform</td>
+<td>Confused deputy, A2A trust</td>
+</tr>
+</tbody>
+</table>
+<p>Each later needs: frontend, API, identity, gateway, runtime, LLM, RAG, data, security, evaluation, observability, CI/CD, infra, DR, cost model — vendor-neutral + Azure + AWS (+ Databricks where relevant).</p>
+<h2>Failure-first checklist (every architecture)</h2>
+<p>LLM timeout/unavailable · embedding/search/DB down · tool timeout/wrong data · loops · wrong tool · prompt injection · bad retrieval · wrong SQL · PII/PHI leak · token/cost explosion · context overflow · model regression · index corruption · stale data.</p>
+<p>For each: detect, mitigate, fallback, recover, alert, test.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

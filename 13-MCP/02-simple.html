@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Two servers, two clients (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>13-MCP/02-simple.md</code></p>
+    <h1>Two servers, two clients (simple)</h1>
+<p>Official example pattern: a host connecting to a filesystem-style local server and a remote server creates <strong>two client objects</strong> (<code>SRC-MCP-ARCHITECTURE</code>).</p>
+<pre class="mermaid">sequenceDiagram
+  participant Host
+  participant Cl as MCP client
+  participant Srv as MCP server
+  Host-&gt;&gt;Cl: create client for this server
+  Cl-&gt;&gt;Srv: initialize / handshake
+  Srv--&gt;&gt;Cl: capabilities tools/resources/prompts
+  Host-&gt;&gt;Cl: call tool
+  Cl-&gt;&gt;Srv: tools/call
+  Srv--&gt;&gt;Cl: result
+  Cl--&gt;&gt;Host: context for the LLM
+</pre>
+<p>Wire method names (<code>tools/call</code>, etc.) follow the spec — confirm the current spec version before teaching a wire course. This lab does not pin a spec date beyond “docs as of 2026-09-07.”</p>
+<h2>How it fails</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host == server confusion</td>
+<td>Server provides context; host is the app</td>
+</tr>
+<tr>
+<td>MCP as authz</td>
+<td>Transport may have auth; <strong>data plane grants</strong> are still yours</td>
+</tr>
+<tr>
+<td>Sampling / extra features</td>
+<td>Re-read current spec; do not teach deprecated primitives from memory</td>
+</tr>
+</tbody>
+</table>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

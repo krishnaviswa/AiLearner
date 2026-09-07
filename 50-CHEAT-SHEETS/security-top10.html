@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat-sheet — OWASP LLM Top 10 2026 — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>50-CHEAT-SHEETS/security-top10.md</code></p>
+    <h1>Cheat-sheet — OWASP LLM Top 10 2026</h1>
+<p>Official titles from the 2026 GitHub README (<code>SRC-OWASP-LLM-TOP10-2026-GH</code>, last verified 2026-09-07). This is a <strong>pointer map</strong>, not a new Top 10. Landing HTML date vs README date disagreement: see Gate 6 scorecard.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Official title</th>
+<th>First lab control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM01</td>
+<td>Prompt Injection</td>
+<td>Treat retrieve/tool text as hostile; HITL on writes — <a href="../21-AI-SECURITY/02-simple.html">21</a></td>
+</tr>
+<tr>
+<td>LLM02</td>
+<td>Sensitive Information Disclosure</td>
+<td>Secrets out of prompts; DLP in and out — <a href="../23-PHI-PII-DLP/01-overview.html">23</a></td>
+</tr>
+<tr>
+<td>LLM03</td>
+<td>Excessive Agency</td>
+<td>Tool IAM, capability budget — <a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12</a></td>
+</tr>
+<tr>
+<td>LLM04</td>
+<td>Supply Chain</td>
+<td>Pin MCP servers, models, packages — <a href="../13-MCP/01-overview.html">13</a></td>
+</tr>
+<tr>
+<td>LLM05</td>
+<td>Data and Model Poisoning</td>
+<td>Ingest provenance; eval after corpus change — <a href="../18-EVALUATION/01-overview.html">18</a></td>
+</tr>
+<tr>
+<td>LLM06</td>
+<td>Unbounded Consumption</td>
+<td>Quotas, timeouts, max loops — <a href="../38-AI-COST/01-overview.html">38</a></td>
+</tr>
+<tr>
+<td>LLM07</td>
+<td>Misinformation</td>
+<td>Gold cases; no vibe-ship — <a href="../18-EVALUATION/02-simple.html">18</a></td>
+</tr>
+<tr>
+<td>LLM08</td>
+<td>Hidden Context Exposure</td>
+<td>Prompt is not authz — <a href="../22-GUARDRAILS/01-overview.html">22</a></td>
+</tr>
+<tr>
+<td>LLM09</td>
+<td>Vector and Embedding Weaknesses</td>
+<td>ACL <strong>inside</strong> retrieve — <a href="../08-RAG/19-comparison.html">08 comparison</a></td>
+</tr>
+<tr>
+<td>LLM10</td>
+<td>Improper Output Handling</td>
+<td>Encode for the sink; never <code>exec</code> model text — <a href="../15-NL2SQL/01-overview.html">15</a></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  O[OWASP LLM01-10] --&gt; App[App controls]
+  N[NIST AI RMF + 600-1] --&gt; Org[Govern Map Measure Manage]
+</pre>
+<p>NIST AI 600-1 is the organizational companion, not a second Top 10 (<code>SRC-NIST-AI-600-1</code>). Full map: <a href="../21-AI-SECURITY/03-logical.html">21/03-logical</a>.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

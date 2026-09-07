@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vector databases — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>07-VECTOR-DATABASES/01-overview.md</code></p>
+    <h1>Vector databases</h1>
+<p>Level 1. A vector store is an <strong>index plus metadata</strong>, not a second brain.</p>
+<h2>What is it?</h2>
+<p>You store embeddings and retrieve nearest neighbors, usually with an approximate index for speed. Official <strong>pgvector</strong> is open-source vector similarity search for Postgres (<code>SRC-PGVECTOR</code>, repo page fetched 2026-09-07). Databricks documents <strong>AI Search</strong> (formerly Vector Search) as governed semantic/hybrid retrieval over lakehouse data (<code>SRC-DATABRICKS-AI-SEARCH</code>).</p>
+<p>Index type names, replica SKUs, and Azure AI Search SKU lists are <strong>UNVERIFIED</strong> / deferred (Gate 7).</p>
+<h2>Data / cloud analogy</h2>
+<p>A secondary index on a fact table: great for one access path, dangerous if you skip the row-level security that the warehouse already had.</p>
+<pre class="mermaid">flowchart TB
+  Row[Row: id, tenant, ACL, text, vector] --&gt; Idx[Vector index]
+  Row --&gt; Meta[Metadata / SQL filters]
+  Q[Query vector + principal] --&gt; Meta
+  Meta --&gt; Idx
+  Idx --&gt; Hits[Allowed neighbors]
+</pre>
+<h2>Why it exists</h2>
+<p>You cannot scan a million embeddings in Python every request. The store’s job is <strong>speed + filters</strong>. If it cannot filter by tenant/ACL, it is a toy.</p>
+<h2>When not to use a dedicated vector DB</h2>
+<p>Data already in Postgres and QPS is low — pgvector may be enough (<code>SRC-PGVECTOR</code>). Data already in a governed lakehouse search — do not add a shadow index without a reason (<code>SRC-DATABRICKS-AI-SEARCH</code>).</p>
+<h2>What should I remember?</h2>
+<p>Neighbors without filters are a data leak.</p>
+<h2>What should I learn next?</h2>
+<p><a href="02-simple.html">02-simple.md</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

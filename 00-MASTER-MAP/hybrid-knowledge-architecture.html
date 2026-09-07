@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hybrid knowledge architecture (local / LLM / web) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/hybrid-knowledge-architecture.md</code></p>
+    <h1>Hybrid knowledge architecture (local / LLM / web)</h1>
+<p>Gate 0 item 12. Encoded for agents in <code>.cursor/rules/ai-lab-hybrid-knowledge.mdc</code>.</p>
+<h2>Problem</h2>
+<p>Calling an LLM for every question is expensive, stale, and trains the lab to be a chat wrapper instead of a knowledge system.</p>
+<h2>Four layers</h2>
+<pre><code class="language-text">User question
+  → Layer 1 Baked knowledge (Markdown, HTML, JSON, YAML, diagrams, code)
+      → if insufficient
+  → Layer 2 Local retrieval (this repo)
+      → if reasoning/generation still needed
+  → Layer 3 LLM (adaptive explanation, critique, code, exercises)
+      → if the fact is volatile
+  → Layer 4 Current web research (official docs)
+      → merge: local durable + verified current → answer
+</code></pre>
+<h2>What lives in Layer 1 (durable)</h2>
+<ul>
+<li>Definitions and “why it exists”</li>
+<li>Architect bridges</li>
+<li>Failure-mode catalogs</li>
+<li>Decision criteria (not this week’s SKU)</li>
+<li>Evaluation methodology</li>
+<li>Threat classes (mapped to OWASP/NIST <strong>editions</strong>, with dates)</li>
+</ul>
+<h2>What must stay volatile (Layer 4)</h2>
+<p>SDK methods, model names, cloud product capabilities, pricing, preview/GA flags, deprecations.</p>
+<h2>Cursor/agent realization (now)</h2>
+<p>This lab is used inside Cursor. “Local retrieval” means: read <code>00-MASTER-MAP/</code>, <code>99-META/</code>, then the domain folder. Do not browse the web to redefine “what is an embedding.” Do browse official docs before stating that hosted agents are GA (they were <strong>preview</strong> on 2026-09-07 per <code>SRC-MS-HOSTED-AGENTS</code>).</p>
+<h2>Future learner-app realization (Gate 9+)</h2>
+<p>Optional on-device search over Markdown (for example a static index JSON). LLM optional. Never required for reading Gate 0–2 pages.</p>
+<h2>Token budget rules for authors</h2>
+<ul>
+<li>Edit the page; do not regenerate the domain.</li>
+<li>One concept → few files with content, not 21 empty shells.</li>
+<li>Cite <code>source_id</code> instead of pasting large doc dumps.</li>
+</ul>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

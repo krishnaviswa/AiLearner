@@ -1,0 +1,33 @@
+---
+description: Repository layout, concept template, and where new files belong.
+alwaysApply: true
+---
+
+# Repository structure
+
+Numbered domain folders `00-MASTER-MAP` … `50-CHEAT-SHEETS` plus `99-META`. Map: `00-MASTER-MAP/repository-structure.md`.
+
+## Put things here
+
+| Kind | Location |
+|---|---|
+| Scope / maps / graphs | `00-MASTER-MAP/` |
+| Sources, gates, graph JSON, templates | `99-META/` |
+| Domain curriculum | matching `NN-NAME/` folder |
+| Executable labs | `42-CAPSTONE-PROJECTS/`, `43-EXPERIMENTS/` (from Gate 8) |
+| Cursor rules | `.cursor/rules/` |
+| Agent instructions | `AGENTS.md` |
+
+## Concept template (create a file only with meaningful content)
+
+`01-overview` through `21-cheat-sheet` — see `99-META/templates/concept.md`. Do not mechanically scaffold empty files.
+
+## Knowledge graph
+
+Machine-readable outline: `99-META/knowledge-graph.json`. Keep nodes/edges in sync when adding a major concept.
+
+## HTML
+
+Local-first static app (HTML/CSS/JS/Markdown/JSON/YAML/Mermaid). No backend unless necessary. Reader shell: `index.html`, `app/css/lab.css`, `app/js/`. Markdown is the source; generate views with `python app/tools/render-pages.py`. Browser nav must link `.html`, never raw `.md`. Do not build the full interactive app (depth selector, Why-chains, simulations) until Gate 9.
+
+Do not rename domain folders without updating `00-MASTER-MAP/repository-structure.md`, `AGENTS.md`, and the knowledge graph.

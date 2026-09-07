@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D — Data engineering agent — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>40-REFERENCE-ARCHITECTURES/D-data-engineering-agent.md</code></p>
+    <h1>D — Data engineering agent</h1>
+<p>An agent that <strong>looks at</strong> pipelines (logs, DQ, lineage) and, only if you are reckless, <strong>writes</strong> them. Distinctive risk: <strong>write tools against pipelines</strong> (drop table, overwrite job, widen grant).</p>
+<h2>Sequence</h2>
+<pre class="mermaid">sequenceDiagram
+  participant Ev as Orchestrator event
+  participant A as Agent
+  participant R as Read tools
+  participant H as Human
+  participant W as Write tool
+  Ev-&gt;&gt;A: job failed
+  A-&gt;&gt;R: logs, DQ, last commit
+  R--&gt;&gt;A: evidence
+  A-&gt;&gt;H: proposed patch or rerun
+  H--&gt;&gt;A: approve exact diff
+  A-&gt;&gt;W: apply as CI identity
+</pre>
+<p>Default: <strong>read + propose</strong>. Writes go through the same PR/CI path a human uses. UC functions / SQL MCP are still tools with blast radius (<a href="../30-DATABRICKS-AI/01-overview.html">30</a>).</p>
+<h2>When not architecture D</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Prefer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test is already a dbt / GE assertion</td>
+<td>Run the test</td>
+</tr>
+<tr>
+<td>Pager rule is a threshold</td>
+<td>Alert, no LLM</td>
+</tr>
+<tr>
+<td>Agent can <code>DROP</code> / <code>ALTER</code> prod</td>
+<td>Remove the tool</td>
+</tr>
+<tr>
+<td>Unreviewed overwrite of a streaming job</td>
+<td>HITL + dry-run</td>
+</tr>
+</tbody>
+</table>
+<h2>Failure-first</h2>
+<p>Wrong table in a write → backups and blast-radius IAM. Looping retries → max attempts. Prompt injection in a ticket title → LLM01 on the read surface.</p>
+<h2>What should I learn next?</h2>
+<p><a href="E-multi-agent.html">E</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

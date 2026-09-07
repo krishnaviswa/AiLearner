@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — allow-list + tenant check — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>12-TOOLS-FUNCTION-CALLING/16-hands-on.md</code></p>
+    <h1>DO — allow-list + tenant check</h1>
+<pre><code class="language-python">ALLOWED = {&quot;get_order&quot;}
+
+def invoke(principal_tenant: str, name: str, args: dict) -&gt; str:
+    if name not in ALLOWED:
+        return &quot;forbidden: tool&quot;
+    if args.get(&quot;tenant&quot;) != principal_tenant:
+        return &quot;forbidden: tenant&quot;
+    return f&quot;ok:{args.get('id')}&quot;
+
+print(invoke(&quot;acme&quot;, &quot;get_order&quot;, {&quot;tenant&quot;: &quot;acme&quot;, &quot;id&quot;: &quot;1&quot;}))
+print(invoke(&quot;acme&quot;, &quot;get_order&quot;, {&quot;tenant&quot;: &quot;other&quot;, &quot;id&quot;: &quot;1&quot;}))
+print(invoke(&quot;acme&quot;, &quot;delete_order&quot;, {&quot;tenant&quot;: &quot;acme&quot;, &quot;id&quot;: &quot;1&quot;}))
+</code></pre>
+<p>The model does not get a vote on the second and third lines.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

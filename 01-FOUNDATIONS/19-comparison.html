@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When not to use an agent — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>01-FOUNDATIONS/19-comparison.md</code></p>
+    <h1>When not to use an agent</h1>
+<p>This page is first-class, not a footnote. OWASP LLM Top 10 2026 includes <strong>excessive agency</strong> (<code>SRC-OWASP-LLM-TOP10-2026</code>). Microsoft Learn’s Agent Framework overview tells you to prefer a function when a function is enough (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<h2>Decision table</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Prefer</th>
+<th>Not an agent because</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Known steps, stable order</td>
+<td>Workflow / code / Airflow / Step Functions</td>
+<td>The graph is the spec</td>
+</tr>
+<tr>
+<td>Lookup by key</td>
+<td>API or SQL</td>
+<td>No decision under uncertainty</td>
+</tr>
+<tr>
+<td>Transform rows</td>
+<td>Spark / dbt / stored proc</td>
+<td>Deterministic quality beats fluency</td>
+</tr>
+<tr>
+<td>One classification or extraction</td>
+<td>Structured LLM call</td>
+<td>One hop; validate the object</td>
+</tr>
+<tr>
+<td>Human already has a form</td>
+<td>UI + API</td>
+<td>Agency adds a confused deputy</td>
+</tr>
+<tr>
+<td>Tool can write to prod</td>
+<td>Approval workflow or no LLM</td>
+<td>Blast radius (<code>SRC-OWASP-LLM-TOP10-2026</code>)</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  Q{Are the steps known and stable?}
+  Q --&gt;|yes| F[Write a function / workflow]
+  Q --&gt;|no| T{Does it need tools that mutate?}
+  T --&gt;|no| S[Single structured LLM call]
+  T --&gt;|yes| A[Agent + authz + HITL + eval]
+  F --&gt; E[Evaluate like any job]
+  S --&gt; E
+  A --&gt; E
+</pre>
+<h2>Alternatives</h2>
+<p>Deterministic workflow · REST · SQL · semantic layer · rules engine · human task.</p>
+<h2>What a production architect worries about</h2>
+<p>Loops, tool identity, cost, and “it worked in the demo.” An agent is a <strong>control-plane</strong> decision, not a default runtime.</p>
+<h2>What a principal would challenge</h2>
+<p>“We need an agent” without naming the unknown decision and the tool blast radius.</p>
+<h2>What should I learn next?</h2>
+<p><a href="16-hands-on.html">16-hands-on.md</a>, then LLM apps without agents.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

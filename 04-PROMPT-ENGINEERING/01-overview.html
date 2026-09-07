@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt engineering — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>04-PROMPT-ENGINEERING/01-overview.md</code></p>
+    <h1>Prompt engineering</h1>
+<p>Not folklore. A <strong>prompt is a specification</strong> that must be versioned, tested, and owned like an API schema.</p>
+<h2>What is it?</h2>
+<p>You write the contract: role, inputs, output shape, refusals, and examples. You measure whether the contract holds. “Magic phrases” without eval are not engineering.</p>
+<h2>Data / cloud analogy</h2>
+<p>An OpenAPI spec plus contract tests. Changing the prompt is a <strong>breaking change</strong> if callers depend on field names.</p>
+<pre class="mermaid">flowchart TB
+  Spec[Prompt spec + schema] --&gt; Ver[Version id]
+  Ver --&gt; Run[Model call]
+  Run --&gt; Eval[Golden set]
+  Eval --&gt; Ship{Ship?}
+  Ship --&gt;|no| Spec
+</pre>
+<h2>Why it exists</h2>
+<p>The model is trained to continue text. Without a spec you get a chat. With a spec you get an interface. Confabulation remains a risk even with a good spec (<code>SRC-NIST-AI-600-1</code>).</p>
+<h2>When not to use an agent</h2>
+<p>If the prompt is “decide which of these five APIs to call,” you may want tools later. If the prompt is “extract these fields,” you want <strong>one call</strong> and tests.</p>
+<h2>What should I remember?</h2>
+<p>Prompts are artifacts. No eval, no change.</p>
+<h2>What should I learn next?</h2>
+<p><a href="02-simple.html">02-simple.md</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

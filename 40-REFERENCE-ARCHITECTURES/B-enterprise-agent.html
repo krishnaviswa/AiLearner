@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>B — Enterprise AI agent — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>40-REFERENCE-ARCHITECTURES/B-enterprise-agent.md</code></p>
+    <h1>B — Enterprise AI agent</h1>
+<p>A loop that <strong>may</strong> call tools. Distinctive risks: <strong>excessive agency</strong> and <strong>tool blast radius</strong> (OWASP LLM03). Identity is on the <strong>runtime</strong>, not in the system prompt (LLM08).</p>
+<h2>Sequence</h2>
+<pre class="mermaid">sequenceDiagram
+  participant U as User
+  participant IAM as Identity
+  participant RT as Runtime
+  participant Pol as Policy
+  participant T as Tool
+  participant H as Human
+  U-&gt;&gt;IAM: intent
+  IAM-&gt;&gt;RT: scoped session
+  RT-&gt;&gt;Pol: proposed tool + args
+  Pol--&gt;&gt;RT: deny or allow
+  alt irreversible
+    RT-&gt;&gt;H: exact action
+    H--&gt;&gt;RT: confirm
+  end
+  RT-&gt;&gt;T: invoke as principal
+  T--&gt;&gt;RT: result
+  RT--&gt;&gt;U: encoded output
+</pre>
+<p>Managed runtimes are <strong>optional mappings</strong> (<a href="../27-AZURE-AI/01-overview.html">27</a>, <a href="../28-AWS-AI/01-overview.html">28</a>). Hosted agents are <strong>not treated as GA</strong>.</p>
+<h2>When not architecture B</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Prefer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Steps are enumerated</td>
+<td>Workflow (<code>SRC-MS-AGENT-FRAMEWORK</code>)</td>
+</tr>
+<tr>
+<td>One extract / classify</td>
+<td>Structured LLM app</td>
+</tr>
+<tr>
+<td>Read-only FAQ over a corpus</td>
+<td>Architecture A</td>
+</tr>
+<tr>
+<td>Write tool with <code>*:*</code></td>
+<td>Do not ship</td>
+</tr>
+</tbody>
+</table>
+<h2>Failure-first</h2>
+<p>Wrong tool / loop → max steps + eval. Injection in tool output → treat tool text as LLM01. Cost explosion → quotas (<a href="../38-AI-COST/01-overview.html">38</a>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="C-nl2sql.html">C</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parallel vs hierarchy vs one agent — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>14-MULTI-AGENT-SYSTEMS/19-comparison.md</code></p>
+    <h1>Parallel vs hierarchy vs one agent</h1>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Use when</th>
+<th>Avoid when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One agent</td>
+<td>Tools &lt; ~handful, one identity</td>
+<td>You have not measured failures</td>
+</tr>
+<tr>
+<td>Supervisor / workers</td>
+<td>Fan-out with a merge policy</td>
+<td>Workers share write locks</td>
+</tr>
+<tr>
+<td>Handoff</td>
+<td>Clear specialty + different policy</td>
+<td>You lose the audit trail</td>
+</tr>
+<tr>
+<td>Parallel</td>
+<td>Independent read-only tasks</td>
+<td>Writes race</td>
+</tr>
+<tr>
+<td>Hierarchy</td>
+<td>Nested budgets (manager → team)</td>
+<td>Depth without eval</td>
+</tr>
+</tbody>
+</table>
+<p>Microsoft: multiple agents or functions coordinating → <strong>workflow</strong> is often the right box (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<pre class="mermaid">flowchart TD
+  F{Single-agent eval failing because of...}
+  F --&gt;|too many tools| H[Handoff / specialist]
+  F --&gt;|need merge of independents| P[Parallel + reduce]
+  F --&gt;|need explicit order| W[Workflow]
+  F --&gt;|ego / org chart| X[Do not add agents]
+</pre>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

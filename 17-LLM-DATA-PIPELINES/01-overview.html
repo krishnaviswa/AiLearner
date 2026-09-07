@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Batch / CDC / stream → index (Gate 3 light note) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>17-LLM-DATA-PIPELINES/01-overview.md</code></p>
+    <h1>Batch / CDC / stream → index (Gate 3 light note)</h1>
+<p>RAG dies when the index is stale. Choose an update path like any serving table:</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Batch</td>
+<td>Daily docs, acceptable lag</td>
+</tr>
+<tr>
+<td>CDC / incremental</td>
+<td>Row-level source already CDC</td>
+</tr>
+<tr>
+<td>Stream</td>
+<td>Notifications that must appear in minutes</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart LR
+  SRC[Source change] --&gt; J[Job]
+  J --&gt; E[Re-embed changed ids]
+  E --&gt; I[Upsert / delete in index]
+</pre>
+<p>Delete is part of the contract (forgotten doc, revoked ACL). This is not a streaming product catalog — implement in later gates.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../08-RAG/19-comparison.html">RAG comparison</a> · <a href="../39-AI-PRODUCTION-OPERATIONS/01-overview.html">Ops</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

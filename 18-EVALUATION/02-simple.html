@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ground truth vs LLM-as-judge — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>18-EVALUATION/02-simple.md</code></p>
+    <h1>Ground truth vs LLM-as-judge</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Ground truth</th>
+<th>LLM-as-judge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What it is</td>
+<td>Human-agreed labels / gold SQL / gold chunk ids</td>
+<td>Another model scores or ranks outputs</td>
+</tr>
+<tr>
+<td>Role</td>
+<td><strong>Source of truth</strong> for the task</td>
+<td><strong>Helper</strong> when labels are scarce</td>
+</tr>
+<tr>
+<td>Failure</td>
+<td>Label error, stale gold</td>
+<td>Judge shares the system’s biases; circular if judge ≈ system</td>
+</tr>
+<tr>
+<td>Use</td>
+<td>Classification, retrieve@k, exact extract</td>
+<td>Rubrics for open prose — always sample-audited</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  C[Case] --&gt; S[System]
+  S --&gt; O[Output]
+  O --&gt; G{Gold exists?}
+  G --&gt;|yes| M[Metric vs gold]
+  G --&gt;|no| J[Judge helper]
+  J --&gt; A[Human audit sample]
+  M --&gt; D[Ship decision]
+  A --&gt; D
+</pre>
+<p>NIST generative-AI profile treats confabulation as a risk (<code>SRC-NIST-AI-600-1</code>). A judge model can confabulate a “pass.”</p>
+<p>Do <strong>not</strong> report a judge score as production accuracy. Do not invent percentages here.</p>
+<p>OpenAI Agents SDK mentions evaluation in the tracing/eval suite (<code>SRC-OPENAI-AGENTS-SDK</code>) — that is vendor tooling, not a substitute for gold.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

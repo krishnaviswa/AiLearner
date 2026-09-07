@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Master taxonomy — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>00-MASTER-MAP/master-taxonomy.md</code></p>
+    <h1>Master taxonomy</h1>
+<p>Gate 0 item 1. This is a <strong>map</strong>, not the curriculum. Domain folders exist but are empty of content by design.</p>
+<h2>Disciplines (keep distinct)</h2>
+<ul>
+<li>Data engineering</li>
+<li>ML engineering</li>
+<li>LLM engineering</li>
+<li>AI engineering</li>
+<li>Agent engineering</li>
+<li>Platform engineering</li>
+<li>Cloud engineering</li>
+<li>Security engineering</li>
+<li>MLOps / LLMOps / DevOps</li>
+<li>Data governance / AI governance</li>
+</ul>
+<h2>Learning spine</h2>
+<p>Business problem → Data → Data engineering → Knowledge/semantic layer → Retrieval/search → LLM → Tools → Agents → Orchestration → Guardrails → Evaluation → Observability → Security → Governance → Deployment → Production operations → Continuous improvement</p>
+<h2>Domain catalog (repository)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Domain</th>
+<th>Primary questions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00</td>
+<td>Master map</td>
+<td>Where am I? What depends on what?</td>
+</tr>
+<tr>
+<td>01</td>
+<td>Foundations</td>
+<td>Tokens, context, probability, failure of “just prompt it”</td>
+</tr>
+<tr>
+<td>02</td>
+<td>Python for AI</td>
+<td>Async, typing, HTTP, packaging — AI-shaped, not CS101</td>
+</tr>
+<tr>
+<td>03</td>
+<td>LLM engineering</td>
+<td>Models, decoding, context, routing, structured output</td>
+</tr>
+<tr>
+<td>04</td>
+<td>Prompt engineering</td>
+<td>Specs, contracts, evaluation — not prompt folklore</td>
+</tr>
+<tr>
+<td>05</td>
+<td>LLM application engineering</td>
+<td>Apps that are not agents</td>
+</tr>
+<tr>
+<td>06</td>
+<td>Embeddings</td>
+<td>Representation, similarity, drift</td>
+</tr>
+<tr>
+<td>07</td>
+<td>Vector databases</td>
+<td>Indexes, filters, hybrid, ops</td>
+</tr>
+<tr>
+<td>08</td>
+<td>RAG</td>
+<td>Naive → enterprise permission-aware</td>
+</tr>
+<tr>
+<td>09</td>
+<td>Agentic RAG</td>
+<td>When retrieval becomes a tool loop</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Agents</td>
+<td>Definition, flavors, when <strong>not</strong> to use</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Orchestration</td>
+<td>Graphs, workflows, durability, HITL</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Tools / function calling</td>
+<td>Contracts, authz, blast radius</td>
+</tr>
+<tr>
+<td>13</td>
+<td>MCP</td>
+<td>Host/client/server, trust boundaries</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Multi-agent</td>
+<td>Supervisor, handoff, parallel, hierarchy</td>
+</tr>
+<tr>
+<td>15</td>
+<td>NL-to-SQL</td>
+<td>Semantic layer, AST/security validation</td>
+</tr>
+<tr>
+<td>16</td>
+<td>AI data engineering</td>
+<td>Lakehouse → knowledge</td>
+</tr>
+<tr>
+<td>17</td>
+<td>LLM data pipelines</td>
+<td>Batch/CDC/stream into indexes</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Evaluation</td>
+<td>Ground truth vs LLM-as-judge</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Observability</td>
+<td>OTel, traces, cost, no unnecessary content logs</td>
+</tr>
+<tr>
+<td>20</td>
+<td>LLMOps</td>
+<td>Version prompts/models/indexes/graphs</td>
+</tr>
+<tr>
+<td>21</td>
+<td>AI security</td>
+<td>OWASP GenAI LLM Top 10 2026 mapping</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Guardrails</td>
+<td>Policy vs model-as-filter</td>
+</tr>
+<tr>
+<td>23</td>
+<td>PII/PHI/DLP</td>
+<td>Egress control; LLM classifier is not enough</td>
+</tr>
+<tr>
+<td>24</td>
+<td>AI governance</td>
+<td>NIST AI RMF / 600-1 mapping</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Responsible AI</td>
+<td>Harm, bias, human-AI configuration</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Cloud architecture</td>
+<td>Vendor-neutral canonical</td>
+</tr>
+<tr>
+<td>27–30</td>
+<td>Azure / AWS / GCP / Databricks</td>
+<td>Mappings, not a forced full-stack on every cloud</td>
+</tr>
+<tr>
+<td>31</td>
+<td>Database AI</td>
+<td>pgvector, SQL Server, Snowflake, etc.</td>
+</tr>
+<tr>
+<td>32–39</td>
+<td>App, APIs, infra, CI/CD, testing, perf, cost, ops</td>
+<td>Production realism</td>
+</tr>
+<tr>
+<td>40</td>
+<td>Reference architectures</td>
+<td>A–E</td>
+</tr>
+<tr>
+<td>41–42</td>
+<td>Use cases / capstones</td>
+<td>15 enterprises + ladder</td>
+</tr>
+<tr>
+<td>43–50</td>
+<td>Experiments, interviews, troubleshooting, patterns, anti-patterns, glossary, papers, cheat-sheets</td>
+<td>Support</td>
+</tr>
+</tbody>
+</table>
+<p>Folder slugs in <a href="repository-structure.html">repository-structure.md</a> are not identical to the human names above (11 Orchestration → <code>11-AGENT-ORCHESTRATION</code>; 14 Multi-agent → <code>14-MULTI-AGENT-SYSTEMS</code>; 23 PII/PHI/DLP → <code>23-PHI-PII-DLP</code>; 26 Cloud architecture → <code>26-AI-CLOUD-ARCHITECTURE</code>). Graph node ids in <code>99-META/knowledge-graph.json</code> are kebab-case (<code>nl2sql</code>, <code>rag</code>), not folder names.</p>
+<h2>Agent flavors (must all appear in Gate 4)</h2>
+<p>Simple LLM app · prompt-driven · structured-output · tool/function-calling · ReAct · workflow-based · router · planner/executor · stateful · memory-enabled · HITL · approval-based · long-running · durable · event-driven · background · autonomous/semi-autonomous · agentic RAG · multi-agent · supervisor/worker · handoff · parallel · hierarchical · MCP-based · NL-to-SQL · data-engineering · data-quality · cloud/ops · security · coding/SWE · research · enterprise knowledge · customer-service · decision-support</p>
+<p>Plus the negative space: <strong>deterministic workflow, API, SQL, conventional pipeline</strong>.</p>
+<h2>RAG flavors (Gate 3)</h2>
+<p>Naive · classical · advanced · hybrid · graph · agentic · multimodal · SQL · API · enterprise · multi-tenant · permission-aware</p>
+<h2>Threat taxonomy (Gate 6 mapping, not content)</h2>
+<p>OWASP LLM01–LLM10 2026: prompt injection, sensitive information disclosure, excessive agency, supply chain, data/model poisoning, unbounded consumption, misinformation, hidden context exposure, vector/embedding weaknesses, improper output handling (<code>SRC-OWASP-LLM-TOP10-2026</code>).</p>
+<p>NIST AI 600-1 generative-AI risk profile as governance companion (<code>SRC-NIST-AI-600-1</code>).</p>
+<h2>Knowledge classes</h2>
+<p>Every node is <strong>durable</strong>, <strong>volatile</strong>, or <strong>mixed</strong>. Implementation pages carry <code>last_verified</code>.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

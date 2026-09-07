@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — one client per server — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>13-MCP/16-hands-on.md</code></p>
+    <h1>DO — one client per server</h1>
+<pre><code class="language-python">def clients_for(servers: list[str]) -&gt; dict[str, str]:
+    return {s: f&quot;client[{s}]&quot; for s in servers}
+
+print(clients_for([&quot;fs-stdio&quot;, &quot;sentry-http&quot;]))
+</code></pre>
+<p>Official rule: host creates one client per server (<code>SRC-MCP-ARCHITECTURE</code>). If you built one multiplexed “god client,” you drifted from the architecture.</p>
+<p>No MCP SDK in this lab step.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

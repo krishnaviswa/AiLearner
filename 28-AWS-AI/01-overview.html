@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AWS mapping (not a stack) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>28-AWS-AI/01-overview.md</code></p>
+    <h1>AWS mapping (not a stack)</h1>
+<p>Two official surfaces, do not blur them.</p>
+<h2>Bedrock Agents Classic</h2>
+<p>AWS docs (fetched 2026-09-07, <code>SRC-AWS-BEDROCK-AGENTS</code>): <strong>Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open to new customers.</strong> Existing customers continue; see Classic maintenance mode. Capabilities: action groups, optional Knowledge Bases, optional Guardrails (<code>SRC-AWS-BEDROCK-GUARDRAILS</code>).</p>
+<p>Do not teach Classic as the default green-field path.</p>
+<h2>AgentCore (new-work sketch)</h2>
+<p><code>SRC-AWS-BEDROCK-AGENTCORE</code> (fetched 2026-09-07) describes <strong>Amazon Bedrock AgentCore</strong> as a platform of <strong>modular</strong> services you can use together or independently: Runtime, Memory, Gateway (MCP), Identity, Code Interpreter, Browser, Observability (OTel-compatible), Policy (deterministic tool intercept), Registry, Evaluations, and others.</p>
+<p>This lab maps <strong>concerns</strong>, not the whole catalog:</p>
+<table>
+<thead>
+<tr>
+<th>Neutral concern</th>
+<th>AgentCore family (docs)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run the agent</td>
+<td>Runtime (session isolation, identity)</td>
+</tr>
+<tr>
+<td>Tools as MCP</td>
+<td>Gateway</td>
+</tr>
+<tr>
+<td>Deterministic tool policy</td>
+<td>Policy (Cedar / NL rules — confirm syntax on the page at implement time)</td>
+</tr>
+<tr>
+<td>Identity</td>
+<td>Identity (Cognito, Okta, Entra listed as examples)</td>
+</tr>
+<tr>
+<td>Observe</td>
+<td>Observability → OTel / CloudWatch</td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>Still a retrieve design; Classic used Knowledge Bases — confirm current AgentCore retrieve path on AWS docs (<strong>do not invent</strong>)</td>
+</tr>
+</tbody>
+</table>
+<p>Pricing: AWS says consumption-based with no minimum; <strong>verify</strong> the official AgentCore price page. Dollar amounts <strong>UNVERIFIED</strong> here.</p>
+<pre class="mermaid">flowchart LR
+  App[Your app] --&gt; Id[Identity]
+  Id --&gt; RT[Runtime]
+  RT --&gt; GW[Gateway / MCP]
+  GW --&gt; Pol[Policy]
+  Pol --&gt; API[Your APIs]
+  RT --&gt; Obs[OTel / CloudWatch]
+</pre>
+<h2>Guardrails product ≠ architecture</h2>
+<p>Bedrock Guardrails remains a <strong>vendor filter</strong> (<code>SRC-AWS-BEDROCK-GUARDRAILS-OVERVIEW</code>). Pair with IAM and output encoding (<a href="../22-GUARDRAILS/01-overview.html">22</a>).</p>
+<h2>What should I remember?</h2>
+<p>Classic ≠ AgentCore. New designs start from concerns, then the current AWS page — not last year’s workshop deck.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../30-DATABRICKS-AI/01-overview.html">Databricks map</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

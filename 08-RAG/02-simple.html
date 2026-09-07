@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Naive RAG (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>08-RAG/02-simple.md</code></p>
+    <h1>Naive RAG (simple)</h1>
+<h2>How it works</h2>
+<pre class="mermaid">sequenceDiagram
+  participant U as User
+  participant App
+  participant Idx as Index
+  participant LLM
+  U-&gt;&gt;App: question
+  App-&gt;&gt;Idx: embed + topK
+  Idx--&gt;&gt;App: chunks
+  App-&gt;&gt;LLM: question + chunks
+  LLM--&gt;&gt;App: prose
+  App--&gt;&gt;U: prose
+</pre>
+<p>This is the <strong>toy</strong>. It teaches the hop. It is not enterprise RAG.</p>
+<h2>How it fails (must learn before agentic RAG)</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bad chunking</td>
+<td>Split in the middle of a policy; retrieve half a sentence</td>
+</tr>
+<tr>
+<td>Wrong top-K</td>
+<td>Miss the gold chunk; model confabulates (<code>SRC-NIST-AI-600-1</code>)</td>
+</tr>
+<tr>
+<td>No ACL</td>
+<td>Tenant B’s chunk in Tenant A’s prompt (<code>SRC-OWASP-LLM-TOP10-2026</code>)</td>
+</tr>
+<tr>
+<td>No cite / refuse</td>
+<td>Fluent fiction</td>
+</tr>
+<tr>
+<td>Stale index</td>
+<td>Correct retrieve of last quarter’s number</td>
+</tr>
+</tbody>
+</table>
+<h2>Evaluate</h2>
+<p>Gold questions with <strong>gold chunk ids</strong>. Score retrieve separately from generate.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

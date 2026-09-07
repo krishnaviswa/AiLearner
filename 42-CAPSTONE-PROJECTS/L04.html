@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L4 — Tool-using agent — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>42-CAPSTONE-PROJECTS/L04.md</code></p>
+    <h1>L4 — Tool-using agent</h1>
+<p><strong>Proves:</strong> schema + authz + timeout + a <strong>wrong-tool</strong> test. The runtime invokes; the stub “model” only proposes a name.</p>
+<h2>Runnable</h2>
+<p><code>python 42-CAPSTONE-PROJECTS/labs/l04_tools.py</code></p>
+<h2>Toy vs production-oriented</h2>
+<p>Toy: model runs Python. This lab: <code>cancel_order</code> is registered but <strong>denied</strong> for the caller (LLM03).</p>
+<h2>BREAK</h2>
+<p>The stub proposes <code>cancel_order</code>. Policy must reject. A hang is a timeout, not a retry storm.</p>
+<h2>Security</h2>
+<p>No live payments. Tool args are synthetic order ids <code>SYN-ORD-1</code>.</p>
+<h2>When not an agent</h2>
+<p>If you always call <code>lookup_order</code>, it is just a function (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>
+<h2>What should I learn next?</h2>
+<p><a href="L05.html">L05</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

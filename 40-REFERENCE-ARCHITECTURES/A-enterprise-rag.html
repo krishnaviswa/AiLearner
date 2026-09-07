@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A — Enterprise RAG — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>40-REFERENCE-ARCHITECTURES/A-enterprise-rag.md</code></p>
+    <h1>A — Enterprise RAG</h1>
+<p>Question → retrieve <strong>as the caller</strong> → generate with citations → DLP. Distinctive risks: <strong>ACL leakage through chunks</strong> and <strong>stale indexes</strong> (Gate 0). OWASP LLM09: filter <strong>in</strong> the similarity query, not after (<code>SRC-OWASP-LLM-TOP10-2026-GH</code>).</p>
+<h2>Sequence</h2>
+<pre class="mermaid">sequenceDiagram
+  participant U as User
+  participant IAM as Identity
+  participant R as Retriever
+  participant Idx as Index
+  participant LLM as LLM
+  participant DLP as Egress DLP
+  U-&gt;&gt;IAM: query + principal
+  IAM-&gt;&gt;R: allowed corpus
+  R-&gt;&gt;Idx: hybrid + ACL in query
+  Idx--&gt;&gt;R: chunks
+  R-&gt;&gt;LLM: context + cite
+  LLM-&gt;&gt;DLP: draft
+  DLP--&gt;&gt;U: answer or block
+</pre>
+<p>Toy: PDF → embed → top-K → LLM. Production-oriented adds parse, malware scan, ACL metadata, hybrid retrieve, citation, eval on gold questions (<a href="../08-RAG/19-comparison.html">08</a>).</p>
+<h2>When not architecture A</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Prefer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One known document, one template</td>
+<td>Workflow + SQL/API</td>
+</tr>
+<tr>
+<td>Caller cannot be bound to row/chunk ACL</td>
+<td>Do not index that corpus</td>
+</tr>
+<tr>
+<td>Retrieve is already wrong</td>
+<td>Fix index / hybrid before an agent (<a href="../09-AGENTIC-RAG/01-overview.html">09</a>)</td>
+</tr>
+</tbody>
+</table>
+<h2>Failure-first (this shape)</h2>
+<p>Stale index → freshness SLO + rebuild job. Cross-tenant hit → treat as incident (LLM09). Empty retrieve → refuse to answer, do not confabulate.</p>
+<h2>What should I learn next?</h2>
+<p><a href="B-enterprise-agent.html">B</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparison (no winner SKU) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>07-VECTOR-DATABASES/19-comparison.md</code></p>
+    <h1>Comparison (no winner SKU)</h1>
+<table>
+<thead>
+<tr>
+<th>Store shape</th>
+<th>Use when</th>
+<th>Not when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Postgres + pgvector</td>
+<td>Relational source of truth, modest scale (<code>SRC-PGVECTOR</code>)</td>
+<td>You need undocumented operators — re-read README</td>
+</tr>
+<tr>
+<td>Search engine (hybrid)</td>
+<td>Lexical + vector + facets</td>
+<td>You ignore ACL fields</td>
+</tr>
+<tr>
+<td>Dedicated vector DB</td>
+<td>High QPS ANN, isolation from OLTP</td>
+<td>You duplicate ACL and drift</td>
+</tr>
+<tr>
+<td>Lakehouse AI Search</td>
+<td>Data gravity in UC/lakehouse (<code>SRC-DATABRICKS-AI-SEARCH</code>)</td>
+<td>Non-lakehouse app forced onto it</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  D{Where is the system of record?}
+  D --&gt;|Postgres| P[pgvector or leave it]
+  D --&gt;|Lakehouse| L[Governed search]
+  D --&gt;|Docs dump| V[Vector index + your ACL store]
+</pre>
+<p>Azure AI Search <strong>SKU list: UNVERIFIED</strong> (Gate 1 carry-forward).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

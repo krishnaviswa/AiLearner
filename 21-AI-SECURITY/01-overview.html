@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI security — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>21-AI-SECURITY/01-overview.md</code></p>
+    <h1>AI security</h1>
+<p>Level 1. An LLM app is still an app: identity, least privilege, and output encoding. The new part is that <strong>instructions and data share one token stream</strong>.</p>
+<h2>What is it?</h2>
+<p><strong>AI security</strong> is how you keep an LLM, RAG index, or agent from becoming an attack path. The 2026 awareness list is the OWASP GenAI LLM Top 10 (<code>SRC-OWASP-LLM-TOP10-2026</code>, <code>SRC-OWASP-LLM-TOP10-2026-GH</code>). Canonical titles, verified from the project README on 2026-09-07:</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Title</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM01:2026</td>
+<td>Prompt Injection</td>
+</tr>
+<tr>
+<td>LLM02:2026</td>
+<td>Sensitive Information Disclosure</td>
+</tr>
+<tr>
+<td>LLM03:2026</td>
+<td>Excessive Agency</td>
+</tr>
+<tr>
+<td>LLM04:2026</td>
+<td>Supply Chain</td>
+</tr>
+<tr>
+<td>LLM05:2026</td>
+<td>Data and Model Poisoning</td>
+</tr>
+<tr>
+<td>LLM06:2026</td>
+<td>Unbounded Consumption</td>
+</tr>
+<tr>
+<td>LLM07:2026</td>
+<td>Misinformation</td>
+</tr>
+<tr>
+<td>LLM08:2026</td>
+<td>Hidden Context Exposure</td>
+</tr>
+<tr>
+<td>LLM09:2026</td>
+<td>Vector and Embedding Weaknesses</td>
+</tr>
+<tr>
+<td>LLM10:2026</td>
+<td>Improper Output Handling</td>
+</tr>
+</tbody>
+</table>
+<p>Publication landing: 3 August 2026 (<code>SRC-OWASP-LLM-TOP10-2026</code>). GitHub README: <strong>4 August 2026</strong>. Same list; date disagrees by one day.</p>
+<p>This list is <strong>not</strong> a CVE count and not a compliance certificate. It is a threat map.</p>
+<h2>Data / cloud analogy</h2>
+<p>SQL injection + IAM + XSS, rewritten for a model that cannot tell a query from a comment. You already refuse to concatenate user text into SQL. Here you refuse to treat retrieved tickets, tool dumps, or “hidden” system prompts as a security boundary.</p>
+<pre class="mermaid">flowchart TD
+  In[User or retrieved text] --&gt; Ctx[One context window]
+  Ctx --&gt; M[Model]
+  M --&gt; Out[Tokens]
+  Out --&gt; Sink{Where does output go?}
+  Sink --&gt;|browser / SQL / shell| Enc[Encode and validate first]
+  Sink --&gt;|tool call| IAM[Deterministic authz]
+</pre>
+<h2>Why it exists</h2>
+<p>NIST AI 600-1 treats prompt injection and data poisoning as <strong>information-security</strong> risks of generative AI, and names data privacy as a distinct risk (<code>SRC-NIST-AI-600-1</code>, PDF read 2026-09-07). The model is both a new attack surface and a new attacker assistant.</p>
+<h2>What should I remember?</h2>
+<p>Assume the instruction boundary will be crossed. Design so a successful injection is <strong>not</strong> a successful exploit.</p>
+<h2>What should I learn next?</h2>
+<p><a href="02-simple.html">02-simple.md</a> · <a href="03-logical.html">03-logical.md</a> · <a href="../50-CHEAT-SHEETS/security-top10.html">OWASP pocket</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

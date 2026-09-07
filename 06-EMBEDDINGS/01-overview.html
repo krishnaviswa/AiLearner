@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Embeddings — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>06-EMBEDDINGS/01-overview.md</code></p>
+    <h1>Embeddings</h1>
+<p>Level 1. An embedding is a <strong>numeric representation</strong> of text (or other media) so that <em>nearby vectors mean nearby meaning</em> — for a given model and space.</p>
+<h2>What is it?</h2>
+<p>A function <code>text → vector</code>. Same model + same version ⇒ comparable distances. Different models ⇒ <strong>do not mix</strong> in one index without a migration.</p>
+<p>Official embedding API field names and current model IDs: <strong>UNVERIFIED</strong> this gate (<code>SRC-OPENAI-EMBEDDINGS</code> fetch timed out). The durable idea does not depend on them.</p>
+<h2>Data / cloud analogy</h2>
+<p>A similarity join after a feature hash: you are not looking up a primary key; you are ranking neighbors. Like a fuzzy match, it will retrieve the <em>wrong</em> neighbor if the query and the chunk live in different “languages” (SQL ids vs prose, old vs new model).</p>
+<pre class="mermaid">flowchart LR
+  T[Text] --&gt; E[Embedding model]
+  E --&gt; V[Vector]
+  V --&gt; IDX[Index / store]
+  Q[Query text] --&gt; E2[Same model]
+  E2 --&gt; QV[Query vector]
+  QV --&gt; IDX
+  IDX --&gt; N[Neighbors]
+</pre>
+<h2>Why it exists</h2>
+<p>Lexical search misses paraphrase. Embeddings help recall. They do <strong>not</strong> replace ACLs or exact identifiers.</p>
+<p>OWASP LLM Top 10 2026 includes <strong>vector/embedding weaknesses</strong> (<code>SRC-OWASP-LLM-TOP10-2026</code>) — poisoned or over-privileged vectors leak or mislead.</p>
+<h2>When not to use embeddings</h2>
+<p>Exact SKU, order id, email — use the database. See <a href="19-comparison.html">19-comparison.md</a>.</p>
+<h2>What should I remember?</h2>
+<p>Same model, same space. Similarity is not authorization.</p>
+<h2>What should I learn next?</h2>
+<p><a href="02-simple.html">02-simple.md</a>, then vector stores.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Naive vs hybrid vs permission-aware — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>08-RAG/19-comparison.md</code></p>
+    <h1>Naive vs hybrid vs permission-aware</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Naive</th>
+<th>Hybrid</th>
+<th>Permission-aware</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieve</td>
+<td>Vector top-K</td>
+<td>Lexical + vector</td>
+<td>Same <strong>plus</strong> principal filter</td>
+</tr>
+<tr>
+<td>IDs / codes</td>
+<td>Weak</td>
+<td>Stronger</td>
+<td>Stronger</td>
+</tr>
+<tr>
+<td>Multi-tenant</td>
+<td>Unsafe</td>
+<td>Still unsafe without ACL</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Lakehouse sketch</td>
+<td>—</td>
+<td>AI Search hybrid (<code>SRC-DATABRICKS-AI-SEARCH</code>)</td>
+<td>UC / grants + filter</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  N[Naive RAG] --&gt;|misses keywords, leaks| H[Hybrid]
+  H --&gt;|still leaks| P[Permission-aware]
+  P --&gt;|first retrieve still wrong| A[Agentic RAG — later]
+</pre>
+<h2>Toy vs production-oriented (from the canonical architecture)</h2>
+<p><strong>Toy:</strong> PDF → chunks → embeddings → vector search → LLM.</p>
+<p><strong>Production-oriented:</strong> malware scan, parse, classify, <strong>ACL on the chunk</strong>, permission filter, citation, output DLP, audit, telemetry, evaluation (<a href="../00-MASTER-MAP/reference-architecture.html">reference-architecture.md</a>).</p>
+<h2>When not to use RAG</h2>
+<p>The answer is already in a SQL row the caller can query. Use the API. When not to use <strong>agentic</strong> RAG: <a href="../09-AGENTIC-RAG/19-comparison.html">09 comparison</a>.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

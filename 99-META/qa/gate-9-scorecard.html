@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gate 9 scorecard — AI Engineering Knowledge Lab</title>
+  <script src="../../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>99-META/qa/gate-9-scorecard.md</code></p>
+    <h1>Gate 9 scorecard</h1>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gate</td>
+<td>9 — INTERACTIVE KB</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2026-09-07</td>
+</tr>
+<tr>
+<td>Chair</td>
+<td>Factory orchestrator</td>
+</tr>
+<tr>
+<td>Retry</td>
+<td>0 of 2</td>
+</tr>
+<tr>
+<td>Overall</td>
+<td><strong>PASS</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>Committee</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Notes</th>
+<th>Mark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source verifier</td>
+<td>Why-chains and sims cite existing OWASP/NIST/MS claims; no new SKUs or fake metrics</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Architecture / terminology</td>
+<td>Markdown still source; HTML generated + chrome JS. Workflow-over-agent in Why-chain</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Pedagogy</td>
+<td>Depth L1–L8 hide/show; Simple does not dump Principal</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>Diagram QA</td>
+<td>Existing mermaid retained; rerender on depth change</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td><code>data-level</code> wraps; nav includes content domains; empty folders greyed. HTTP 200 on 8766. IDE browser MCP did not attach a tab; Playwright browsers not installed — <strong>click-through UNVERIFIED</strong></td>
+<td>PASS</td>
+</tr>
+</tbody>
+</table>
+<h2>Criteria</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Mark</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accuracy</td>
+<td>PASS</td>
+<td>Conceptual sims only</td>
+</tr>
+<tr>
+<td>Completeness</td>
+<td>PASS</td>
+<td>Depth, Why-chains (3), four sims, nav tree</td>
+</tr>
+<tr>
+<td>Source quality</td>
+<td>PASS</td>
+<td>JSON beside pages, not a live LLM</td>
+</tr>
+<tr>
+<td>Freshness</td>
+<td>PASS</td>
+<td>App chrome, not volatile SKUs</td>
+</tr>
+<tr>
+<td>Architecture consistency</td>
+<td>PASS</td>
+<td>ACL-in-query / function-over-agent</td>
+</tr>
+<tr>
+<td>Terminology consistency</td>
+<td>PASS</td>
+<td>L1–L8 labels</td>
+</tr>
+<tr>
+<td>Code correctness</td>
+<td>PASS</td>
+<td>Stdlib JS; fetch Why-chains over http</td>
+</tr>
+<tr>
+<td>Security correctness</td>
+<td>PASS</td>
+<td>Synthetic SQL/order ids</td>
+</tr>
+<tr>
+<td>Production realism</td>
+<td>PASS</td>
+<td>No fake p95 / accuracy</td>
+</tr>
+<tr>
+<td>Cross-reference integrity</td>
+<td>PASS</td>
+<td>Graph v1.9.0</td>
+</tr>
+<tr>
+<td>Learning progression</td>
+<td>PASS</td>
+<td>Progressive disclosure</td>
+</tr>
+</tbody>
+</table>
+<h2>Residual UNVERIFIED</h2>
+<ul>
+<li>Live IDE-browser click-through (theme / depth / Why / sim / nav hop) — MCP tab attach failed this run</li>
+<li>Why-chains skip on <code>file://</code> (no backend)</li>
+<li>Mermaid CDN if offline</li>
+<li>Carry-forward vendor/price/preview rows from Gates 6–8</li>
+</ul>
+<h2>Failures to fix before re-score</h2>
+<ul>
+<li>(none)</li>
+</ul>
+<h2>Decision</h2>
+<p><strong>PASS</strong> — Gate 10 may start. This close does not start Gate 10 content.</p>
+  </article>
+  <script src="../../app/js/learn-path.js"></script>
+  <script src="../../app/js/page-index.js"></script>
+  <script src="../../app/js/shell.js"></script>
+  <script src="../../app/js/depth.js"></script>
+  <script src="../../app/js/why-chain.js"></script>
+  <script src="../../app/js/mermaid-boot.js"></script>
+</body>
+</html>

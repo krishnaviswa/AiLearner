@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When not to use agentic RAG — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>09-AGENTIC-RAG/19-comparison.md</code></p>
+    <h1>When not to use agentic RAG</h1>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Prefer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First retrieve already has the gold chunk</td>
+<td>Single-shot RAG</td>
+</tr>
+<tr>
+<td>Query rewrite is a known template</td>
+<td>Workflow (hyphenate SKUs, add synonyms)</td>
+</tr>
+<tr>
+<td>You have not measured retrieve recall</td>
+<td>Fix chunking / hybrid / ACL first</td>
+</tr>
+<tr>
+<td>Tools can write</td>
+<td>Do not</td>
+</tr>
+<tr>
+<td>“It will just figure it out”</td>
+<td>Function (<code>SRC-MS-AGENT-FRAMEWORK</code>)</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  M{Measured miss rate on gold chunks?}
+  M --&gt;|no| F[Fix naive/hybrid RAG]
+  M --&gt;|yes, low| S[Stay single-shot]
+  M --&gt;|yes, high, rewrite is ad hoc| A[Consider agentic retrieve]
+</pre>
+<h2>Principal question</h2>
+<p>Is this a second <strong>search</strong>, or did you just invent an agent because the demo was boring?</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

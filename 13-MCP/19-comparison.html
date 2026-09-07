@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MCP vs function calling vs REST — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>13-MCP/19-comparison.md</code></p>
+    <h1>MCP vs function calling vs REST</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Function calling</th>
+<th>REST</th>
+<th>MCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What it standardizes</td>
+<td>One runtime’s tool schema</td>
+<td>HTTP resource</td>
+<td>How <strong>hosts</strong> get tools/resources/prompts from <strong>servers</strong></td>
+</tr>
+<tr>
+<td>Multi-host reuse</td>
+<td>Poor</td>
+<td>Via your gateway</td>
+<td>Designed for many hosts (<code>SRC-MCP-ARCHITECTURE</code>)</td>
+</tr>
+<tr>
+<td>LLM usage</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Explicitly <strong>out of scope</strong> for the protocol</td>
+</tr>
+<tr>
+<td>Identity</td>
+<td>Your code</td>
+<td>OAuth/IAM</td>
+<td>Still your policy</td>
+</tr>
+</tbody>
+</table>
+<p>OpenAI Agents SDK documents MCP <strong>server tool calling</strong> alongside function tools (<code>SRC-OPENAI-AGENTS-SDK</code>). That is an integration, not a replacement for IAM.</p>
+<pre class="mermaid">flowchart TD
+  Need[Need a tool] --&gt; One{One app only?}
+  One --&gt;|yes| FC[Function calling]
+  One --&gt;|no| Many{Shared catalog across hosts?}
+  Many --&gt;|yes| MCP[MCP]
+  Many --&gt;|no| REST[REST + your gateway]
+</pre>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

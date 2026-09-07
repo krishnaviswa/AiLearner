@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>C — Agentic NL-to-SQL — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>40-REFERENCE-ARCHITECTURES/C-nl2sql.md</code></p>
+    <h1>C — Agentic NL-to-SQL</h1>
+<p>English in, <strong>validated</strong> SQL out. Distinctive risks: <strong>injection</strong>, <strong>cartesian joins</strong>, <strong>PII columns</strong>. The model never gets a raw cursor.</p>
+<h2>Sequence</h2>
+<pre class="mermaid">sequenceDiagram
+  participant U as User
+  participant Sem as Semantic layer
+  participant M as Model
+  participant V as Validator
+  participant DB as Warehouse
+  U-&gt;&gt;Sem: question as principal
+  Sem-&gt;&gt;M: allowed metrics / tables
+  M-&gt;&gt;V: candidate SQL
+  V-&gt;&gt;V: parse AST, LIMIT, no SELECT *
+  V-&gt;&gt;V: column ACL / PII deny
+  alt invalid
+    V--&gt;&gt;U: refuse
+  else valid
+    V-&gt;&gt;DB: execute as principal
+    DB--&gt;&gt;U: rows or aggregate
+  end
+</pre>
+<p>Databricks docs prefer Genie / ontology over freehand SQL against raw tables (<code>SRC-DATABRICKS-MCP</code>). Same idea: <strong>semantic layer first</strong>.</p>
+<h2>When not architecture C</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Prefer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Repeated dashboard question</td>
+<td>BI / scheduled SQL</td>
+</tr>
+<tr>
+<td>Parameterized API already exists</td>
+<td>Call the API</td>
+</tr>
+<tr>
+<td>No column ACL</td>
+<td>Do not expose the warehouse</td>
+</tr>
+<tr>
+<td>“Wow demo” with <code>EXECUTE</code> on model text</td>
+<td>Never</td>
+</tr>
+</tbody>
+</table>
+<h2>Failure-first</h2>
+<p>Cartesian / fan-out → cost and warehouse kill. PII column in SELECT → DLP + schema deny. Injection via comment/union → AST allowlist only.</p>
+<h2>What should I learn next?</h2>
+<p><a href="D-data-engineering-agent.html">D</a> · <a href="../15-NL2SQL/01-overview.html">15</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

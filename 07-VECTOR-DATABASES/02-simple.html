@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Filter then rank (simple) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>07-VECTOR-DATABASES/02-simple.md</code></p>
+    <h1>Filter then rank (simple)</h1>
+<h2>How it works</h2>
+<p>Production-shaped retrieve:</p>
+<ol>
+<li>Resolve the caller’s <strong>principal</strong> (groups, tenant, row grants).</li>
+<li>Restrict the candidate set (SQL <code>WHERE</code>, search filter, UC grants).</li>
+<li>Rank remaining vectors (or hybrid lexical + vector).</li>
+<li>Return <strong>ids + scores + citations</strong>, not raw secrets.</li>
+</ol>
+<p>Databricks AI Search is documented as governed semantic/hybrid search (<code>SRC-DATABRICKS-AI-SEARCH</code>). Treat that as a <strong>vendor sketch</strong>, not a requirement to use Databricks.</p>
+<pre class="mermaid">sequenceDiagram
+  participant U as User
+  participant API
+  participant IAM as Authz
+  participant S as Search / vector index
+  U-&gt;&gt;API: question
+  API-&gt;&gt;IAM: principal
+  IAM--&gt;&gt;API: allow-set
+  API-&gt;&gt;S: knn in allow-set
+  S--&gt;&gt;API: chunks
+</pre>
+<h2>How it fails</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filter after top-K</td>
+<td>Top-K may be <em>all</em> other tenants; you return empty or you cheat</td>
+</tr>
+<tr>
+<td>No embed_version</td>
+<td>Mixed spaces</td>
+</tr>
+<tr>
+<td>Stale index</td>
+<td>Correct ACL, wrong facts</td>
+</tr>
+<tr>
+<td>Logging hits</td>
+<td>PII in chunks (<code>SRC-NIST-AI-600-1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Exact filter syntax is volatile — read the store’s docs at implement time.</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

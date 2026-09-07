@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reference architectures A–E — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>40-REFERENCE-ARCHITECTURES/01-overview.md</code></p>
+    <h1>Reference architectures A–E</h1>
+<p>Five <strong>teaching</strong> shapes from Gate 0. Each page: distinctive risk, one sequence, when-not. Not a full BOM (frontend through DR). Vendor mappings stay in <a href="../26-AI-CLOUD-ARCHITECTURE/01-overview.html">26</a>.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Distinctive risk</th>
+<th>Page</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Enterprise RAG</td>
+<td>ACL leakage via chunks; stale indexes</td>
+<td><a href="A-enterprise-rag.html">A</a></td>
+</tr>
+<tr>
+<td>B</td>
+<td>Enterprise AI agent</td>
+<td>Excessive agency; tool blast radius</td>
+<td><a href="B-enterprise-agent.html">B</a></td>
+</tr>
+<tr>
+<td>C</td>
+<td>Agentic NL-to-SQL</td>
+<td>Injection, cartesian joins, PII columns</td>
+<td><a href="C-nl2sql.html">C</a></td>
+</tr>
+<tr>
+<td>D</td>
+<td>Data engineering agent</td>
+<td>Write tools against pipelines</td>
+<td><a href="D-data-engineering-agent.html">D</a></td>
+</tr>
+<tr>
+<td>E</td>
+<td>Secure multi-agent platform</td>
+<td>Confused deputy; A2A trust</td>
+<td><a href="E-multi-agent.html">E</a></td>
+</tr>
+</tbody>
+</table>
+<h2>Shared failure-first list</h2>
+<p>Timeout / search down / tool wrong / loops / injection / bad retrieve / bad SQL / PII leak / cost explosion / context overflow / model regression / stale index. For each: detect, mitigate, fallback, recover, alert, test — <a href="../39-AI-PRODUCTION-OPERATIONS/01-overview.html">ops</a>.</p>
+<h2>What should I remember?</h2>
+<p>Pick the architecture by <strong>risk</strong>, not by how impressive the demo looks.</p>
+<h2>What should I learn next?</h2>
+<p><a href="A-enterprise-rag.html">A</a> · <a href="../44-ARCHITECTURE-INTERVIEWS/01-overview.html">Architect interviews</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

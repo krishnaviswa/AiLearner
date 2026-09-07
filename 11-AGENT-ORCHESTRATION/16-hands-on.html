@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DO — a four-state machine — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>11-AGENT-ORCHESTRATION/16-hands-on.md</code></p>
+    <h1>DO — a four-state machine</h1>
+<pre><code class="language-python">STATES = (&quot;start&quot;, &quot;await_human&quot;, &quot;write&quot;, &quot;done&quot;)
+
+def step(state: str, event: str) -&gt; str:
+    if state == &quot;start&quot; and event == &quot;needs_write&quot;:
+        return &quot;await_human&quot;
+    if state == &quot;await_human&quot; and event == &quot;approve&quot;:
+        return &quot;write&quot;
+    if state == &quot;await_human&quot; and event == &quot;reject&quot;:
+        return &quot;done&quot;
+    if state == &quot;write&quot; and event == &quot;ok&quot;:
+        return &quot;done&quot;
+    raise ValueError((state, event))
+
+s = &quot;start&quot;
+s = step(s, &quot;needs_write&quot;)
+s = step(s, &quot;approve&quot;)
+print(step(s, &quot;ok&quot;))
+</code></pre>
+<p>No LangGraph import required. When you adopt a framework, map these names to <em>their</em> checkpoint model (<code>SRC-LANGGRAPH-PERSISTENCE</code>).</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When not to start from a SKU — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>26-AI-CLOUD-ARCHITECTURE/19-comparison.md</code></p>
+    <h1>When not to start from a SKU</h1>
+<table>
+<thead>
+<tr>
+<th>Urge</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“Pick Bedrock vs Foundry first”</td>
+<td><strong>Too early</strong> — identity, retrieve ACL, and eval first</td>
+</tr>
+<tr>
+<td>Treat hosted / managed agents as the only runtime</td>
+<td>Optional mapping; self-host a graph if you need portability</td>
+</tr>
+<tr>
+<td>Price a design from memory</td>
+<td><strong>UNVERIFIED</strong> — official price page only</td>
+</tr>
+<tr>
+<td>Agent for a stable 8-step job</td>
+<td>Workflow / function (<code>SRC-MS-AGENT-FRAMEWORK</code>)</td>
+</tr>
+<tr>
+<td>Full GCP/Azure/AWS feature matrix</td>
+<td>Fake parity — map one concern at a time</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  P[Production design] --&gt; I{Identity and ACL exist?}
+  I --&gt;|no| Stop[Do not pick a model SKU]
+  I --&gt;|yes| W{Steps known?}
+  W --&gt;|yes| WF[Workflow]
+  W --&gt;|no| A[Agent + capability budget]
+</pre>
+<h2>What should I learn next?</h2>
+<p><a href="../40-REFERENCE-ARCHITECTURES/01-overview.html">Reference architectures</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

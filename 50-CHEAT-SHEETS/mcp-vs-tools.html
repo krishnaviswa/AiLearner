@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat-sheet — MCP vs tools — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>50-CHEAT-SHEETS/mcp-vs-tools.md</code></p>
+    <h1>Cheat-sheet — MCP vs tools</h1>
+<p>MCP standardizes <strong>how a host talks to servers</strong>. It does not replace IAM, and the protocol puts LLM usage <strong>out of scope</strong> (<code>SRC-MCP-ARCHITECTURE</code>).</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Function calling</th>
+<th>MCP</th>
+<th>REST / your gateway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One app, few in-process functions</td>
+<td><strong>Yes</strong></td>
+<td>Overhead</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>Many hosts need the same catalog</td>
+<td>Weak</td>
+<td><strong>Designed for this</strong></td>
+<td>You build it</td>
+</tr>
+<tr>
+<td>Identity lives in</td>
+<td>Your runtime</td>
+<td>Still <strong>your</strong> policy</td>
+<td>OAuth / IAM</td>
+</tr>
+<tr>
+<td>What the model sees</td>
+<td>Tool schema you register</td>
+<td>Tools/resources/prompts the <strong>host</strong> exposes</td>
+<td>Whatever you wrap</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">flowchart TD
+  T[Need a tool] --&gt; One{One process?}
+  One --&gt;|yes| FC[Function calling]
+  One --&gt;|no| Share{Shared across hosts?}
+  Share --&gt;|yes| MCP[MCP host-client-server]
+  Share --&gt;|no| REST[REST + gateway]
+</pre>
+<h2>When not MCP</h2>
+<p>Three functions in one service — <a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12</a>. MCP servers are supply chain (LLM04): pin and audit them (<a href="../13-MCP/01-overview.html">13</a>).</p>
+<p>OpenAI Agents SDK documents MCP <strong>alongside</strong> function tools (<code>SRC-OPENAI-AGENTS-SDK</code>). That is an integration, not “MCP instead of authz.”</p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

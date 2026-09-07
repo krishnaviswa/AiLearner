@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Databricks mapping (not a stack) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>30-DATABRICKS-AI/01-overview.md</code></p>
+    <h1>Databricks mapping (not a stack)</h1>
+<p>Lakehouse-first sketch: <strong>Unity Catalog</strong> is the grant plane. Agents call <strong>governed</strong> tools; they do not replace UC.</p>
+<h2>Managed MCP — Public Preview</h2>
+<p>Official page last updated 3 Sep 2026 (<code>SRC-DATABRICKS-MCP</code>, re-fetched 2026-09-07): managed MCP servers are <strong>Public Preview</strong>. Ready-made servers (docs table):</p>
+<table>
+<thead>
+<tr>
+<th>Server</th>
+<th>Use (docs)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Genie One / Genie Agent</td>
+<td>NL analytics; Genie Ontology as semantic layer</td>
+</tr>
+<tr>
+<td>AI Search</td>
+<td>Unstructured retrieve</td>
+</tr>
+<tr>
+<td>Databricks SQL</td>
+<td>Queries you already wrote / pipeline authoring</td>
+</tr>
+<tr>
+<td>UC functions</td>
+<td>Predefined SQL as tools</td>
+</tr>
+</tbody>
+</table>
+<p>Docs prefer Genie for analytics over an agent writing SQL against raw tables — same “semantic layer first” rule as <a href="../15-NL2SQL/01-overview.html">NL-to-SQL</a>.</p>
+<h2>AI Search (formerly Vector Search)</h2>
+<p><code>SRC-DATABRICKS-AI-SEARCH</code> (fetched 2026-09-07): MCP retrieve over UC-governed indexes; <code>_meta</code> can pin hybrid vs ANN, filters, rerank columns. Old <code>vector-search</code> URL/scope still works. Also <strong>Public Preview</strong> on the page we fetched.</p>
+<p>Querying an index <strong>requires Databricks managed embeddings</strong> (same page). Do not invent embedding model names.</p>
+<h2>Pricing</h2>
+<p>Docs point at feature-specific price families (serverless compute, SQL, AI Search). <strong>Verify</strong> the official Databricks price pages. Dollars <strong>UNVERIFIED</strong>.</p>
+<pre class="mermaid">flowchart TB
+  Agent[Custom agent] --&gt; MCP[Managed MCP preview]
+  MCP --&gt; UC[Unity Catalog grants]
+  UC --&gt; Search[AI Search index]
+  UC --&gt; SQL[SQL / Genie]
+  UC --&gt; Fn[UC functions]
+</pre>
+<h2>What should I remember?</h2>
+<p>Preview ≠ production SLA. UC grants are the ACL story; MCP is a delivery pipe.</p>
+<h2>What should I learn next?</h2>
+<p><a href="../40-REFERENCE-ARCHITECTURES/A-enterprise-rag.html">Architecture A</a> · <a href="../40-REFERENCE-ARCHITECTURES/D-data-engineering-agent.html">Architecture D</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>
