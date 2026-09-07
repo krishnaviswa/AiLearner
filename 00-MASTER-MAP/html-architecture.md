@@ -1,8 +1,16 @@
 # Proposed interactive HTML architecture
 
-Gate 0 item 11. **Do not build the full app until Gate 9 is approved.**
+Gate 0 item 11. Historical proposal below. **As built:** this lab is a hosted static course, not a file dump and not a depth dropdown.
 
-Current shells: [`../index.html`](../index.html) (lab home) and [`index.html`](index.html) (this folder’s artifact index). Local-first: HTML, CSS, JS, Markdown, JSON, YAML, Mermaid. No backend unless a later gate proves it necessary.
+## As built (hosted static course)
+
+- Serve from **this repo root** on **8766** (`python -m http.server 8766` or `serve-lab.ps1`). Port **8000** is often another API.
+- **Markdown is source.** `app/tools/render-pages.py` strips YAML frontmatter and writes sibling `.html`.
+- **Linear path** with Previous / Next (`app/js/learn-path.js`). Sequence: Map → Foundations → RAG → Agents → Eval → Security → Production → Labs → Reference.
+- **Top modules** open that module’s first lesson. **Sidebar** lists only that module’s lessons.
+- **Concept pills** (Overview / Simple / When not / Do) are **other HTML files**. Clicking changes the URL. There is no L1–L8 `<select>` that hides headings.
+- **Why-chains:** local JSON, only on that domain’s `01-overview.html`. Not a live LLM.
+- Theme: **Dark | Light** buttons (`data-theme` on `<html>`).
 
 ## Goals
 
@@ -29,13 +37,9 @@ Progressive disclosure: do not show production architecture on first view.
 
 No build step required for Gate 9 v1 (marked markdown or pre-rendered HTML). A bundler is optional later.
 
-## Depth selector
+## Depth selector (superseded)
 
-`Simple — Medium — Hard — Engineering — Architect — Production — Expert`
-
-These seven UI labels are **not** a 1:1 rename of curriculum levels L1–L8 (Simple → Logical → Mechanical → Implementation → Engineering → Architect → Production → Principal). Mapping is deferred to Gate 9.
-
-Changing depth must not lose the current concept.
+The Gate 0 sketch used `Simple — Medium — Hard — …` on **one page**. That model is **not** what shipped. Depth is split across files (`01-overview.html`, `02-simple.html`, `19-comparison.html`, `16-hands-on.html`). Changing “depth” must change the URL.
 
 ## “Why?” chains
 

@@ -45,7 +45,7 @@
     var modLabel = (P.modules.filter(function (m) { return m.id === modId; })[0] || {}).label || "";
     crumb.innerHTML = "<a href=\"" + href("index.html") + "\">Home</a>" +
       (modLabel ? " <span>/</span> " + modLabel : "") +
-      (cur ? " <span>/</span> " + cur.title : "");
+      (cur && cur.href !== "index.html" ? " <span>/</span> " + cur.title : "");
 
     var main = document.createElement("div");
     main.id = "lab-main";

@@ -19,6 +19,7 @@
   }
   function apply(theme) {
     document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.style.colorScheme = theme;
   }
   apply(read());
   window.LabTheme = {

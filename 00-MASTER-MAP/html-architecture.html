@@ -12,8 +12,17 @@
   <article class="lab-article">
     <p class="md-source">Source: <code>00-MASTER-MAP/html-architecture.md</code></p>
     <h1>Proposed interactive HTML architecture</h1>
-<p>Gate 0 item 11. <strong>Do not build the full app until Gate 9 is approved.</strong></p>
-<p>Current shells: <a href="../index.html"><code>../index.html</code></a> (lab home) and <a href="index.html"><code>index.html</code></a> (this folder’s artifact index). Local-first: HTML, CSS, JS, Markdown, JSON, YAML, Mermaid. No backend unless a later gate proves it necessary.</p>
+<p>Gate 0 item 11. Historical proposal below. <strong>As built:</strong> this lab is a hosted static course, not a file dump and not a depth dropdown.</p>
+<h2>As built (hosted static course)</h2>
+<ul>
+<li>Serve from <strong>this repo root</strong> on <strong>8766</strong> (<code>python -m http.server 8766</code> or <code>serve-lab.ps1</code>). Port <strong>8000</strong> is often another API.</li>
+<li><strong>Markdown is source.</strong> <code>app/tools/render-pages.py</code> strips YAML frontmatter and writes sibling <code>.html</code>.</li>
+<li><strong>Linear path</strong> with Previous / Next (<code>app/js/learn-path.js</code>). Sequence: Map → Foundations → RAG → Agents → Eval → Security → Production → Labs → Reference.</li>
+<li><strong>Top modules</strong> open that module’s first lesson. <strong>Sidebar</strong> lists only that module’s lessons.</li>
+<li><strong>Concept pills</strong> (Overview / Simple / When not / Do) are <strong>other HTML files</strong>. Clicking changes the URL. There is no L1–L8 <code>&lt;select&gt;</code> that hides headings.</li>
+<li><strong>Why-chains:</strong> local JSON, only on that domain’s <code>01-overview.html</code>. Not a live LLM.</li>
+<li>Theme: <strong>Dark | Light</strong> buttons (<code>data-theme</code> on <code>&lt;html&gt;</code>).</li>
+</ul>
 <h2>Goals</h2>
 <p>Navigation tree · concept pages · depth selector · expand/collapse · diagrams · decision trees · simulations · quizzes · architecture challenges · progress tracking where practical · related-concept links · source references · freshness indicators.</p>
 <p>Progressive disclosure: do not show production architecture on first view.</p>
@@ -32,10 +41,8 @@
   99-META/                   sources + freshness badges
 </code></pre>
 <p>No build step required for Gate 9 v1 (marked markdown or pre-rendered HTML). A bundler is optional later.</p>
-<h2>Depth selector</h2>
-<p><code>Simple — Medium — Hard — Engineering — Architect — Production — Expert</code></p>
-<p>These seven UI labels are <strong>not</strong> a 1:1 rename of curriculum levels L1–L8 (Simple → Logical → Mechanical → Implementation → Engineering → Architect → Production → Principal). Mapping is deferred to Gate 9.</p>
-<p>Changing depth must not lose the current concept.</p>
+<h2>Depth selector (superseded)</h2>
+<p>The Gate 0 sketch used <code>Simple — Medium — Hard — …</code> on <strong>one page</strong>. That model is <strong>not</strong> what shipped. Depth is split across files (<code>01-overview.html</code>, <code>02-simple.html</code>, <code>19-comparison.html</code>, <code>16-hands-on.html</code>). Changing “depth” must change the URL.</p>
 <h2>“Why?” chains</h2>
 <p>Important statements are expandable reasoning chains (example: vector DB → semantic retrieval → keyword gaps → why not only an LLM → why hybrid). Stored as JSON beside the page, not generated live by an LLM.</p>
 <h2>Simulations (small, honest)</h2>

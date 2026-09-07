@@ -65,11 +65,33 @@
     var path = window.location.pathname.replace(/\\/g, "/");
     var parts = path.split("/").filter(Boolean);
     var file = parts[parts.length - 1] || "index.html";
+    if (!/\.html$/i.test(file) && file.indexOf(".") === -1) file = "index.html";
     var parent = parts.length >= 2 ? parts[parts.length - 2] : "";
     if (parent === "00-MASTER-MAP") return "00-MASTER-MAP/" + file;
     if (parent === "99-META") return "99-META/" + file;
     if (/^\d{2}-/.test(parent)) return parent + "/" + file;
     return file;
+  }
+
+  function folderOf(href) {
+    var i = href.lastIndexOf("/");
+    return i === -1 ? "" : href.slice(0, i);
+  }
+
+  function moduleOf(href) {
+    var i;
+    for (i = 0; i < L.length; i++) {
+      if (L[i].href === href) return L[i].module;
+    }
+    if (href === "simulations.html") return "labs";
+    if (href === "progress.html" || href === "index.html") return "start";
+    var folder = folderOf(href);
+    if (!folder) return "start";
+    for (i = 0; i < L.length; i++) {
+      if (folderOf(L[i].href) === folder) return L[i].module;
+    }
+    if (folder === "00-MASTER-MAP") return "map";
+    return "start";
   }
 
   function indexOfHere() {
@@ -80,22 +102,37 @@
     return -1;
   }
 
+  function pageTitle() {
+    var h1 = document.querySelector(".lab-article h1");
+    if (h1 && h1.textContent) return h1.textContent.trim();
+    return document.title.replace(/\s+—\s+AI Engineering Knowledge Lab$/, "") || relPath();
+  }
+
   window.LabPath = {
     lessons: L,
     modules: MODULES,
     relPath: relPath,
     indexOfHere: indexOfHere,
+    moduleOf: moduleOf,
     current: function () {
       var i = indexOfHere();
-      return i >= 0 ? L[i] : null;
+      if (i >= 0) return L[i];
+      var here = relPath();
+      return { href: here, title: pageTitle(), module: moduleOf(here) };
     },
     prev: function () {
       var i = indexOfHere();
-      return i > 0 ? L[i - 1] : null;
+      if (i > 0) return L[i - 1];
+      if (i === 0) return null;
+      var items = window.LabPath.inModule(moduleOf(relPath()));
+      return items.length ? items[0] : L[0];
     },
     next: function () {
       var i = indexOfHere();
-      return i >= 0 && i < L.length - 1 ? L[i + 1] : null;
+      if (i >= 0 && i < L.length - 1) return L[i + 1];
+      if (i === L.length - 1) return null;
+      var items = window.LabPath.inModule(moduleOf(relPath()));
+      return items.length ? items[0] : L[1];
     },
     inModule: function (id) {
       return L.filter(function (x) { return x.module === id; });

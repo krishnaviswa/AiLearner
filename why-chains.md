@@ -21,7 +21,7 @@ Expandable reasoning stored as **JSON beside the page**. The browser fetches it;
 | Why an agent — or not? | [10-AGENTS/why-chain.json](10-AGENTS/why-chain.json) | Agents / when-not |
 | Why ACL on chunks? | [08-RAG/why-chain.json](08-RAG/why-chain.json) | RAG overview / comparison |
 
-Open a listed HTML page over `http://127.0.0.1:8000/` so `fetch` works. On `file://` the chain is skipped (no backend).
+Open a listed **overview** HTML page over `http://127.0.0.1:8766/` so `fetch` works. Why-chains render only on that domain’s `01-overview.html`. On `file://` the chain is skipped (no backend). Port 8000 is often another API — do not use it for this lab.
 
 ## What should I remember?
 

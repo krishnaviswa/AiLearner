@@ -2,8 +2,7 @@
    Markdown is the source of truth. This CSS is the generated-view chrome.
    Tokens: data-theme="dark" | "light" on <html>. Apply theme.js before this paints. */
 
-:root,
-[data-theme="dark"] {
+:root {
   --bg: #0f1419;
   --bg-elev: #121a24;
   --panel: #1a2332;
@@ -20,7 +19,24 @@
   color-scheme: dark;
 }
 
-[data-theme="light"] {
+html[data-theme="dark"] {
+  --bg: #0f1419;
+  --bg-elev: #121a24;
+  --panel: #1a2332;
+  --text: #f3f7fc;
+  --muted: #b4c2d6;
+  --accent: #8ec5ff;
+  --accent-hover: #c5e0ff;
+  --line: #2a3a51;
+  --warn: #f0c35c;
+  --ok: #7ad9a0;
+  --code-bg: #0b1016;
+  --table-stripe: #16202c;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
   --bg: #f6f8fb;
   --bg-elev: #eef2f7;
   --panel: #ffffff;
@@ -54,8 +70,15 @@ body {
   background: var(--bg);
 }
 
-h1, h2, h3, h4, p, li, td, th, label, summary, figcaption {
+h1, h2, h3, h4, p, li, td, th, label, summary, figcaption, span, strong, em, small {
+  color: inherit;
+}
+
+button, input, select, textarea {
+  font: inherit;
   color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
 }
 
 a { color: var(--accent); text-decoration: none; }
@@ -69,6 +92,7 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   padding: 0.85rem 1.25rem;
   border-bottom: 1px solid var(--line);
   background: var(--panel);
+  color: var(--text);
   flex-wrap: wrap;
 }
 
@@ -156,13 +180,18 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   display: grid;
   grid-template-columns: minmax(15rem, 20rem) 1fr;
   min-height: calc(100vh - 8.5rem);
+  background: var(--bg);
+  color: var(--text);
 }
 
 #lab-nav {
   border-right: 1px solid var(--line);
   padding: 1rem 1.15rem 2rem;
   background: var(--bg-elev);
+  color: var(--text);
 }
+
+#lab-nav a { color: var(--accent); }
 
 #lab-nav h2 {
   font-size: 0.72rem;
@@ -180,12 +209,15 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 #lab-nav a.current {
   font-weight: 650;
   text-decoration: underline;
+  color: var(--text);
 }
 #lab-nav .later { color: var(--muted); }
 
 .lab-article {
   padding: 1.25rem 1.75rem 3rem;
   max-width: 54rem;
+  color: var(--text);
+  background: var(--bg);
 }
 
 .lab-article h1 { font-size: 1.7rem; margin: 0 0 0.75rem; }
@@ -395,6 +427,85 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   text-decoration: none !important;
 }
 .lab-path-ol { padding-left: 1.2rem; }
+
+html[data-theme="light"] body,
+html[data-theme="light"] #lab-main,
+html[data-theme="light"] .lab-article,
+html[data-theme="light"] .lab-crumb {
+  background: #f6f8fb;
+  color: #0b1220;
+}
+
+html[data-theme="light"] #lab-header,
+html[data-theme="light"] #lab-footer,
+html[data-theme="light"] #lab-nav,
+html[data-theme="light"] .lab-pager a,
+html[data-theme="light"] .lab-theme-btn,
+html[data-theme="light"] .lab-steps a,
+html[data-theme="light"] .lab-why,
+html[data-theme="light"] .lab-sim {
+  color: #0b1220;
+}
+
+html[data-theme="light"] #lab-header,
+html[data-theme="light"] #lab-footer {
+  background: #ffffff;
+}
+
+html[data-theme="light"] #lab-nav {
+  background: #eef2f7;
+}
+
+html[data-theme="light"] .lab-pager a,
+html[data-theme="light"] .lab-steps a,
+html[data-theme="light"] .lab-theme-btn {
+  background: #ffffff;
+  color: #0b1220;
+  border-color: #c5d0e0;
+}
+
+html[data-theme="light"] .lab-steps a.is-current,
+html[data-theme="light"] .lab-theme-btn[aria-pressed="true"],
+html[data-theme="light"] .lab-cta {
+  background: #0b1220;
+  color: #f6f8fb !important;
+  border-color: #0b1220;
+}
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] #lab-main,
+html[data-theme="dark"] .lab-article,
+html[data-theme="dark"] .lab-crumb {
+  background: #0f1419;
+  color: #f3f7fc;
+}
+
+html[data-theme="dark"] #lab-header,
+html[data-theme="dark"] #lab-footer {
+  background: #1a2332;
+  color: #f3f7fc;
+}
+
+html[data-theme="dark"] #lab-nav {
+  background: #121a24;
+  color: #f3f7fc;
+}
+
+html[data-theme="dark"] .lab-pager a,
+html[data-theme="dark"] .lab-steps a,
+html[data-theme="dark"] .lab-theme-btn {
+  background: #1a2332;
+  color: #f3f7fc;
+  border-color: #2a3a51;
+}
+
+html[data-theme="dark"] .lab-steps a.is-current,
+html[data-theme="dark"] .lab-theme-btn[aria-pressed="true"],
+html[data-theme="dark"] .lab-cta {
+  background: #f3f7fc;
+  color: #0f1419 !important;
+  border-color: #f3f7fc;
+}
 
 .lab-sim select,
 .lab-sim input,

@@ -13,7 +13,7 @@
     <p class="md-source">Source: <code>README.md</code></p>
     <h1>AI Engineering Knowledge Lab</h1>
 <p>Learning laboratory for architect-level AI engineering — not a tutorial dump.</p>
-<p><strong>Current gate:</strong> read <code>99-META/GATE-STATUS.md</code>. Learner surface is <code>index.html</code> (dark/light reader). Markdown is the source of truth.</p>
+<p><strong>Current gate:</strong> read <code>99-META/GATE-STATUS.md</code>. Learner surface is a hosted static course: <code>index.html</code> with a linear path. Markdown is the source of truth; HTML is generated.</p>
 <table>
 <thead>
 <tr>
@@ -40,8 +40,11 @@
 </tr>
 </tbody>
 </table>
-<p>Open the lab from the repo root: <code>python -m http.server 8000</code> then <code>http://127.0.0.1:8000/index.html</code>.</p>
-<p>Domain folders <code>01-FOUNDATIONS</code> … <code>50-CHEAT-SHEETS</code> are placeholders until their gate. Empty concept files are forbidden.</p>
+<p>Open the lab from <strong>this</strong> repo root on port <strong>8766</strong> (port 8000 is often another API):</p>
+<pre><code class="language-text">python -m http.server 8766
+</code></pre>
+<p>Then <code>http://127.0.0.1:8766/index.html</code>. Or run <code>.\serve-lab.ps1</code>. Theme: <strong>Dark | Light</strong>.</p>
+<p>Empty concept files are forbidden. Do not dual-write HTML.</p>
   </article>
   <script src="app/js/learn-path.js"></script>
   <script src="app/js/page-index.js"></script>

@@ -13,7 +13,7 @@
     <h1>Small simulations (conceptual)</h1>
     <p>Honest teaching toys. <strong>No fake production metrics</strong>, no live model, no database. Markdown curriculum stays the source of truth; this page is Gate 9 chrome.</p>
 
-    <section class="lab-sim" data-level="1">
+    <section class="lab-sim">
       <h2>1. Tool picker</h2>
       <p>The runtime chooses a tool. The stub “model” is a dropdown.</p>
       <label>User intent
@@ -27,7 +27,7 @@
       <p id="sim-picker-out" class="lab-sim-out"></p>
     </section>
 
-    <section class="lab-sim" data-level="1">
+    <section class="lab-sim">
       <h2>2. Tool down</h2>
       <p>lookup_order timed out. Pick a control — not a latency percentile.</p>
       <p>
@@ -39,7 +39,7 @@
       <p id="sim-down-out" class="lab-sim-out">Choose a response.</p>
     </section>
 
-    <section class="lab-sim" data-level="2">
+    <section class="lab-sim">
       <h2>3. RAG knobs (qualitative only)</h2>
       <label>Chunk size (relative) <input type="range" id="sim-chunk" min="1" max="5" value="2"></label>
       <label>Top-K <input type="range" id="sim-topk" min="1" max="12" value="4"></label>
@@ -48,7 +48,7 @@
       <p id="sim-rag-out" class="lab-sim-out"></p>
     </section>
 
-    <section class="lab-sim" data-level="1">
+    <section class="lab-sim">
       <h2>4. NL-to-SQL reject</h2>
       <p>Allowlist table <code>orders</code>. No cursor is opened.</p>
       <textarea id="sim-sql" rows="3" cols="60">SELECT status FROM orders LIMIT 10</textarea>

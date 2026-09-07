@@ -40,8 +40,10 @@
       det.appendChild(p);
       box.appendChild(det);
     });
+    var steps = document.getElementById("lab-concept-steps");
     var src = document.querySelector(".lab-article .md-source");
-    if (src && src.nextSibling) article.insertBefore(box, src.nextSibling);
+    if (steps && steps.nextSibling) article.insertBefore(box, steps.nextSibling);
+    else if (src && src.nextSibling) article.insertBefore(box, src.nextSibling);
     else article.appendChild(box);
   }
 

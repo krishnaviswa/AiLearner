@@ -35,4 +35,4 @@ Canonical operating prompt: [`AI_Engineering_Knowledge_Repository_Master_Prompt.
 
 ## Open the lab
 
-From the repo root: `python -m http.server 8000` then open `http://127.0.0.1:8000/index.html`. Theme toggle persists in `localStorage`.
+From the repo root: `python -m http.server 8766` (or `.\serve-lab.ps1`) then open `http://127.0.0.1:8766/index.html`. Do not use port 8000 — that is often another API. Theme is **Dark | Light** (`localStorage` key `lab-theme`).

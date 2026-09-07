@@ -1,14 +1,6 @@
-/* Concept steps = real HTML files in this folder. Clicking changes the page.
+/* Concept steps = real HTML files in this folder. Clicking changes the URL.
    Not a fake L1–L8 dropdown that hides headings on the same file. */
 (function () {
-  function prefix() {
-    var el = document.getElementById("lab-root");
-    if (!el) return "";
-    var r = el.getAttribute("data-root");
-    if (r === null || r === ".") return "";
-    return r;
-  }
-
   function folderAndFile() {
     var path = window.location.pathname.replace(/\\/g, "/");
     var parts = path.split("/").filter(Boolean);
@@ -18,8 +10,13 @@
     };
   }
 
+  function isConceptFolder(name) {
+    return /^(0[1-9]|[1-4]\d|50)-/.test(name);
+  }
+
   function boot() {
     var loc = folderAndFile();
+    if (!isConceptFolder(loc.parent)) return;
     var idx = window.LAB_PAGE_INDEX || {};
     var pages = idx[loc.parent];
     if (!pages || pages.length < 2) return;
@@ -37,7 +34,7 @@
     row.className = "lab-steps";
     pages.forEach(function (p) {
       var a = document.createElement("a");
-      a.href = prefix() + loc.parent + "/" + p.file;
+      a.href = p.file;
       a.textContent = p.label;
       if (p.file === loc.file) {
         a.className = "is-current";
