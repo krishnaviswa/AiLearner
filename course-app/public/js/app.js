@@ -2,6 +2,23 @@
   var NEXT_KEY = "dojo-next";
   var SEEN_KEY = "dojo-seen";
   var FILTER_KEY = "dojo-filter";
+  var THEME_KEY = "dojo-theme";
+
+  function currentTheme() {
+    return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  }
+
+  function applyTheme(t) {
+    var next = t === "dark" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem(THEME_KEY, next); } catch (e) { /* ignore */ }
+  }
+
+  function initTheme() {
+    var saved = "light";
+    try { saved = localStorage.getItem(THEME_KEY) || "light"; } catch (e) { /* ignore */ }
+    applyTheme(saved);
+  }
 
   var state = {
     config: null,
@@ -98,6 +115,9 @@
           '<a href="#/">Home</a>' +
           '<a href="#/catalog">Course path</a>' +
           (signed ? '<a href="#/learn">Portal</a>' : '<a href="#/enroll">Enroll</a>') +
+          '<button type="button" class="td-theme" data-act="theme" aria-label="Toggle light or dark theme">' +
+            (currentTheme() === "dark" ? "☀ Light" : "☾ Dark") +
+          "</button>" +
           (signed
             ? '<button type="button" class="td-btn td-btn-ghost" data-act="logout">Sign out</button>'
             : '<a class="td-btn td-btn-blue" href="#/enroll">Start learning</a>') +
@@ -161,21 +181,74 @@
     );
   }
 
+  var TRACK_ACCENTS = [
+    "#1565c0", "#0f9f96", "#f15a24", "#7b3fe4", "#147a42",
+    "#c2185b", "#0277bd", "#ef6c00", "#4527a0", "#00838f"
+  ];
+
+  function pad2(n) {
+    return ("0" + n).slice(-2);
+  }
+
   function catalog() {
     var preview = state.preview;
     if (!preview) return topbar() + '<div class="td-wrap"><p>Loading path…</p></div>' + footer();
-    var html = topbar() + '<div class="td-wrap"><h1 class="td-section-title">Course path</h1>' +
-      '<p class="td-muted td-section-lead">These are titles only. Open a lesson to enroll or continue.</p>';
+
+    var groups = [];
     preview.modules.forEach(function (m) {
       var items = preview.lessons.filter(function (l) { return l.module === m.id; });
-      if (!items.length) return;
-      html += '<article class="td-card td-path-mod"><h3>' + esc(m.label) + "</h3><ol>";
-      items.forEach(function (l) {
-        html += '<li><a href="' + learnHref(l.id) + '">' + esc(l.title) + "</a></li>";
-      });
-      html += "</ol></article>";
+      if (items.length) groups.push({ mod: m, items: items });
     });
-    return html + "</div>" + footer();
+    var totalLessons = groups.reduce(function (n, g) { return n + g.items.length; }, 0);
+    var priceLabel = (state.config && state.config.priceLabel) || "1 fee";
+
+    var PREVIEW_MAX = 6;
+    var cards = "";
+    groups.forEach(function (g, i) {
+      var accent = TRACK_ACCENTS[i % TRACK_ACCENTS.length];
+      var shown = g.items.slice(0, PREVIEW_MAX);
+      var rest = g.items.length - shown.length;
+      cards +=
+        '<article class="td-track" style="--accent:' + accent + '">' +
+          '<header class="td-track-head">' +
+            '<span class="td-track-num">' + pad2(i + 1) + "</span>" +
+            '<div class="td-track-meta">' +
+              "<h3>" + esc(g.mod.label) + "</h3>" +
+              '<span class="td-track-count">' + g.items.length +
+                (g.items.length === 1 ? " lesson" : " lessons") + "</span>" +
+            "</div>" +
+          "</header>" +
+          '<ol class="td-track-list">';
+      shown.forEach(function (l) {
+        cards += '<li><a href="' + learnHref(l.id) + '">' + esc(l.title) + "</a></li>";
+      });
+      cards += "</ol>";
+      cards +=
+        '<a class="td-track-open" href="' + learnHref(g.items[0].id) + '">' +
+          (rest > 0 ? "Open track · +" + rest + " more" : "Open this track") + " &rarr;" +
+        "</a>" +
+        "</article>";
+    });
+
+    return (
+      topbar() +
+      '<section class="td-subhero">' +
+        '<div class="td-subhero-in">' +
+          '<div class="td-kicker td-kicker-dark">Course path</div>' +
+          "<h1>Every lesson in the AI Engineering path</h1>" +
+          "<p>Titles are public so you know exactly what you are buying. Lesson bodies unlock after you enroll.</p>" +
+          '<div class="td-subhero-stats">' +
+            "<div><strong>" + totalLessons + "</strong><span>lessons</span></div>" +
+            "<div><strong>" + groups.length + "</strong><span>tracks</span></div>" +
+            "<div><strong>" + esc(priceLabel) + "</strong><span>one-time</span></div>" +
+          "</div>" +
+        "</div>" +
+      "</section>" +
+      '<div class="td-wrap td-wrap-wide">' +
+        '<div class="td-track-grid">' + cards + "</div>" +
+      "</div>" +
+      footer()
+    );
   }
 
   function enroll() {
@@ -183,29 +256,45 @@
     var stripe = cfg.stripeEnabled;
     return (
       topbar() +
-      '<div class="td-wrap">' +
-        '<article class="td-card td-enroll td-gate">' +
-          "<h2>Enroll once. Open the portal.</h2>" +
-          '<p class="td-muted">One fee. Full path. Browser only. Your email is the watermark on every lesson.</p>' +
-          (cfg.priceLabel ? "<p><strong>" + esc(cfg.priceLabel) + "</strong> one-time access.</p>" : "") +
-          (state.error ? '<p class="td-error">' + esc(state.error) + "</p>" : "") +
-          (stripe
-            ? '<form data-form="checkout">' +
-                '<label for="pay-email">Email</label>' +
-                '<input id="pay-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">' +
-                '<p><button class="td-btn td-btn-blue td-btn-block" type="submit">Pay and open the portal</button></p>' +
-              "</form>"
-            : '<p class="td-muted">Card checkout turns on when Stripe keys are on the server. Use an access key until then.</p>') +
-          '<div class="td-split">' +
-            "<form data-form=\"unlock\">" +
-              '<label for="key-email">Email for watermark</label>' +
-              '<input id="key-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">' +
-              '<label for="key">Access key</label>' +
-              '<input id="key" name="key" type="password" required autocomplete="off" placeholder="Paste the key">' +
-              '<p><button class="td-btn td-btn-orange td-btn-block" type="submit">Unlock with key</button></p>' +
-            "</form>" +
-          "</div>" +
-        "</article>" +
+      '<div class="td-wrap td-enroll-wrap">' +
+        '<div class="td-enroll-grid">' +
+          '<aside class="td-enroll-aside">' +
+            '<span class="td-kicker td-kicker-solid">Enroll</span>' +
+            "<h1>One fee. The whole path.</h1>" +
+            (cfg.priceLabel
+              ? '<p class="td-enroll-price"><strong>' + esc(cfg.priceLabel) + "</strong> one-time access</p>"
+              : "") +
+            '<ul class="td-perks">' +
+              "<li>" + esc(cfg.lessonCount || "All") + " lessons across " +
+                esc(cfg.moduleCount || "every") + " tracks</li>" +
+              "<li>In-browser reader with outline, pills and progress</li>" +
+              "<li>Simple / Medium / Complex depth on every concept</li>" +
+              "<li>Your email watermarked on each lesson</li>" +
+              "<li>Screenshots allowed &mdash; no zip, no PDF dump</li>" +
+            "</ul>" +
+          "</aside>" +
+          '<article class="td-card td-enroll td-gate">' +
+            "<h2>Enroll once. Open the portal.</h2>" +
+            '<p class="td-muted">Your email is the watermark on every lesson.</p>' +
+            (state.error ? '<p class="td-error">' + esc(state.error) + "</p>" : "") +
+            (stripe
+              ? '<form data-form="checkout">' +
+                  '<label for="pay-email">Email</label>' +
+                  '<input id="pay-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">' +
+                  '<p><button class="td-btn td-btn-blue td-btn-block" type="submit">Pay and open the portal</button></p>' +
+                "</form>"
+              : '<p class="td-muted">Card checkout turns on when Stripe keys are on the server. Use an access key until then.</p>') +
+            '<div class="td-split">' +
+              "<form data-form=\"unlock\">" +
+                '<label for="key-email">Email for watermark</label>' +
+                '<input id="key-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">' +
+                '<label for="key">Access key</label>' +
+                '<input id="key" name="key" type="password" required autocomplete="off" placeholder="Paste the key">' +
+                '<p><button class="td-btn td-btn-orange td-btn-block" type="submit">Unlock with key</button></p>' +
+              "</form>" +
+            "</div>" +
+          "</article>" +
+        "</div>" +
       "</div>" +
       footer()
     );
@@ -337,6 +426,52 @@
     );
   }
 
+  var mermaidScript = null;
+  function loadMermaid() {
+    return new Promise(function (resolve, reject) {
+      function ready(m) {
+        try {
+          m.initialize({
+            startOnLoad: false,
+            theme: currentTheme() === "dark" ? "dark" : "default",
+            securityLevel: "strict",
+            fontFamily: "Plus Jakarta Sans, Segoe UI, system-ui, sans-serif"
+          });
+        } catch (e) { /* ignore */ }
+        resolve(m);
+      }
+      if (window.mermaid) return ready(window.mermaid);
+      if (!mermaidScript) {
+        mermaidScript = new Promise(function (res, rej) {
+          var s = document.createElement("script");
+          s.src = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
+          s.onload = function () { res(window.mermaid); };
+          s.onerror = function () { rej(new Error("mermaid CDN failed")); };
+          document.head.appendChild(s);
+        });
+      }
+      mermaidScript.then(ready, reject);
+    });
+  }
+
+  function renderMermaid() {
+    var nodes = document.querySelectorAll(".td-lesson-body pre.mermaid:not([data-processed])");
+    if (!nodes.length) return;
+    nodes.forEach(function (el) {
+      if (!el.getAttribute("data-src")) el.setAttribute("data-src", el.textContent);
+      else el.textContent = el.getAttribute("data-src");
+      el.removeAttribute("data-processed");
+    });
+    loadMermaid().then(function (mermaid) {
+      try {
+        mermaid.run({
+          nodes: document.querySelectorAll(".td-lesson-body pre.mermaid"),
+          suppressErrors: true
+        });
+      } catch (e) { /* diagrams stay as source text */ }
+    }).catch(function () { /* CDN blocked: leave source text */ });
+  }
+
   function render() {
     var r = route();
     var root = document.getElementById("app");
@@ -347,6 +482,7 @@
     else if (r.name === "learn") root.innerHTML = reader(r.id);
     else root.innerHTML = home();
     bind();
+    if (r.name === "learn") renderMermaid();
   }
 
   function afterUnlock(email) {
@@ -357,6 +493,12 @@
   }
 
   function bind() {
+    document.querySelectorAll("[data-act=theme]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        applyTheme(currentTheme() === "dark" ? "light" : "dark");
+        render();
+      });
+    });
     document.querySelectorAll("[data-act=logout]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         api("/api/logout", { method: "POST" }).then(function () {
@@ -459,6 +601,7 @@
   }
 
   function boot() {
+    initTheme();
     try { state.filter = sessionStorage.getItem(FILTER_KEY) || ""; } catch (e) { state.filter = ""; }
     Promise.all([
       api("/api/config"),
