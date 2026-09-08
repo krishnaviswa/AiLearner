@@ -1,0 +1,20 @@
+{
+  "name": "ai-engineering-dojo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Hosted AI Engineering course portal (Tutorials Dojo-style). Lessons stay on the server.",
+  "scripts": {
+    "pack": "node pack-content.mjs",
+    "start": "node server.mjs",
+    "dev": "node pack-content.mjs && node server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "stripe": "^17.7.0"
+  }
+}
