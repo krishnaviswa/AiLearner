@@ -157,7 +157,6 @@
       '<section class="td-hero">' +
         '<div class="td-kicker">AI engineering path</div>' +
         "<h1>Your one-stop portal from pipelines to production agents</h1>" +
-        "<p>Same curriculum as the lab. Different product: a hosted course. After enroll, every lesson opens here. You can screenshot. You cannot download the files or select the text.</p>" +
         '<div class="td-hero-actions">' +
           heroCta +
           '<a class="td-btn td-btn-orange" href="#/catalog">Browse the path</a>' +
