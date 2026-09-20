@@ -349,7 +349,7 @@
     var cat = state.catalog;
     var cur = lessonMeta(currentId);
     var html =
-      '<aside class="td-side">' +
+      '<aside class="td-side" id="td-side-panel">' +
         '<input class="td-side-search" data-filter="1" type="search" placeholder="Filter outline" value="' + esc(state.filter) + '">' +
         "<h2>Course outline</h2>";
     cat.modules.forEach(function (m) {
@@ -417,7 +417,10 @@
       '<div class="td-shell">' +
         sidebar(id) +
         '<article class="td-lesson">' +
-          '<div class="td-crumb">Portal / ' + esc(modLabel) + (meta ? " / " + esc(meta.title) : "") + "</div>" +
+          '<div class="td-crumb-row">' +
+            '<div class="td-crumb">Portal / ' + esc(modLabel) + (meta ? " / " + esc(meta.title) : "") + "</div>" +
+            '<button type="button" class="td-outline-toggle" data-act="toggle-outline" aria-expanded="false" aria-controls="td-side-panel">&#9776; Outline</button>' +
+          "</div>" +
           '<div class="td-progress-row"><div class="td-progress"><span style="width:' + pct + '%"></span></div>' +
           '<div class="td-progress-lbl">' + done + " / " + total + "</div></div>" +
           pillsFor(id) +
@@ -520,6 +523,15 @@
         });
       });
     });
+    var outlineBtn = document.querySelector("[data-act=toggle-outline]");
+    if (outlineBtn) {
+      outlineBtn.addEventListener("click", function () {
+        var side = document.getElementById("td-side-panel");
+        if (!side) return;
+        var open = side.classList.toggle("is-open");
+        outlineBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
     var filter = document.querySelector("[data-filter]");
     if (filter) {
       filter.addEventListener("input", function () {
@@ -528,7 +540,12 @@
         var r = route();
         if (r.name === "learn") {
           var side = document.querySelector(".td-side");
+          var wasOpen = side && side.classList.contains("is-open");
           if (side) side.outerHTML = sidebar(r.id);
+          if (wasOpen) {
+            var freshSide = document.getElementById("td-side-panel");
+            if (freshSide) freshSide.classList.add("is-open");
+          }
           bind();
           var box = document.querySelector("[data-filter]");
           if (box) {

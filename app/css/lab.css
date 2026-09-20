@@ -130,14 +130,46 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   border: 1px solid var(--line);
 }
 
+.lab-menu-toggle {
+  display: none;
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  color: var(--text);
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+/* Sticky breadcrumb: this is the one nav element guaranteed to stay on
+   screen while reading, so Home is always one click away, no matter how
+   far you have scrolled into a lesson. */
 .lab-crumb {
-  padding: 0.45rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 1.25rem;
   border-bottom: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.85rem;
   background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
-.lab-crumb span { opacity: 0.6; }
+.lab-crumb a { flex: none; }
+.lab-crumb span { opacity: 0.6; flex: none; }
+.lab-crumb-cur {
+  color: var(--text);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .lab-badge {
   display: inline-block;
@@ -370,7 +402,17 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 @media (max-width: 840px) {
   #lab-main { grid-template-columns: 1fr; }
   #lab-nav { border-right: 0; border-bottom: 1px solid var(--line); }
-  #lab-header { flex-direction: column; }
+  #lab-header { flex-direction: column; align-items: stretch; }
+}
+
+/* Narrow screens: the 10-module row plus the subtitle ate half the phone
+   screen before any content appeared. Collapse it behind a toggle so the
+   header stays short; the sticky crumb above still gives one-tap Home. */
+@media (max-width: 640px) {
+  .lab-brand p { display: none; }
+  .lab-menu-toggle { display: block; align-self: flex-start; }
+  .lab-modules { display: none; width: 100%; justify-content: flex-start; }
+  .lab-modules.is-open { display: flex; }
 }
 
 .lab-nav-extra { margin-top: 1.25rem; color: var(--muted); font-size: 0.85rem; }

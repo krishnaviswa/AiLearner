@@ -384,12 +384,33 @@ button, input { font: inherit; }
   font-size: 1.05rem;
 }
 
+.td-crumb-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.65rem;
+}
+
 .td-crumb {
   color: var(--muted);
   font-size: 0.84rem;
-  margin-bottom: 0.65rem;
   font-weight: 600;
 }
+
+.td-outline-toggle {
+  display: none;
+  flex: none;
+  border: 1px solid var(--line);
+  background: var(--rail);
+  color: var(--heading);
+  border-radius: 999px;
+  padding: 0.32rem 0.8rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.td-outline-toggle:hover { border-color: var(--blue); }
 
 .td-progress-row {
   display: flex;
@@ -542,9 +563,16 @@ body.td-lock svg {
   .td-shell { grid-template-columns: 1fr; }
   .td-hero { clip-path: none; padding: 3rem 1.2rem 3.2rem; }
   .td-steps { grid-template-columns: 1fr; }
-  .td-nav { gap: 0.6rem; }
-  .td-nav > a:not(.td-btn) { display: none; }
+  .td-promo { display: none; }
+  .td-nav { gap: 0.5rem; }
+  .td-nav a { font-size: 0.82rem; }
   .td-stats { gap: 1rem; }
+  /* Sidebar is a full accordion of every module; showing it inline pushed
+     the actual lesson below the fold on every single open. Collapse it
+     behind the Outline toggle instead so the reader lands on content. */
+  .td-side { display: none; }
+  .td-side.is-open { display: block; }
+  .td-outline-toggle { display: inline-flex; }
 }
 
 /* ---- Course path (catalog) ---- */
