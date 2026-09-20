@@ -16,19 +16,40 @@
 <h2>What is it?</h2>
 <p>The same logical path already validated in Gate 1: user → API → <strong>identity</strong> → application → runtime (workflow <strong>or</strong> agent) → model router / tools / RAG → <strong>guardrails / DLP</strong> → eval / observability.</p>
 <pre class="mermaid">flowchart TB
-  U[User] --&gt; FE[Web / API]
-  FE --&gt; GW[API gateway]
-  GW --&gt; IAM[Authn / Authz]
-  IAM --&gt; APP[AI application]
-  APP --&gt; RT[Runtime]
-  RT --&gt; WF[Deterministic workflow]
-  RT --&gt; AG[Agent]
-  WF --&gt; OUT[Result]
-  AG --&gt; MR[Model router]
-  AG --&gt; TR[Tool registry]
-  AG --&gt; RAG[RAG]
-  RT --&gt; GR[Guardrails / DLP]
-  GR --&gt; OBS[Eval / observability / audit]
+  subgraph edge [Edge]
+    U[User] --&gt; FE[Web / API]
+    FE --&gt; GW[API gateway]
+    GW --&gt; IAM[Authn / Authz]
+  end
+  subgraph app [Application + runtime]
+    IAM --&gt; APP[AI application]
+    APP --&gt; RT[Runtime]
+    RT --&gt; WF[Deterministic workflow]
+    RT --&gt; AG[Agent]
+    WF --&gt; OUT[Result]
+    AG --&gt; MR[Model router]
+    AG --&gt; TR[Tool registry]
+    AG --&gt; RAG[RAG]
+  end
+  subgraph cross [Cross-cutting]
+    RT --&gt; GR[Guardrails / DLP]
+    GR --&gt; OBS[Eval / observability / audit]
+  end
+
+%% styled
+classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;
+classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;
+classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;
+classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;
+classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;
+classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;
+classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;
+classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;
+class U src
+class FE,GW,APP,RT,AG,TR,RAG,OBS proc
+class IAM,WF,GR guard
+class OUT out
+class MR model
 </pre>
 <p>If steps are known, prefer a <strong>workflow or function</strong> (<code>SRC-MS-AGENT-FRAMEWORK</code>). An agent is optional.</p>
 <h2>Cloud sketches (not BOMs)</h2>

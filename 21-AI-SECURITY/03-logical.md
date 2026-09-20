@@ -39,9 +39,11 @@ Permission-aware RAG you already have: filter **in the query**, not as a polite 
 NIST AI 600-1 §2.9 names prompt injection and data poisoning under **information security**, and lists **data privacy** separately (`SRC-NIST-AI-600-1`). Use OWASP for app threats; use NIST for organizational risk functions ([24](../24-AI-GOVERNANCE/01-overview.md)).
 
 ```mermaid
-flowchart LR
-  O[OWASP LLM01-10] --> App[App and runtime controls]
-  N[NIST AI RMF + 600-1] --> Org[Govern Map Measure Manage]
+flowchart TD
+  Threat[AI threat to handle] --> O[OWASP LLM01-10]
+  Threat --> N[NIST AI RMF + 600-1]
+  O --> App[App and runtime controls]
+  N --> Org[Govern / Map / Measure / Manage]
   App --> Org
 ```
 

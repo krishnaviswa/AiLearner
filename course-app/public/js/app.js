@@ -133,6 +133,11 @@
   function home() {
     var cfg = state.config || {};
     var preview = state.preview;
+    var signed = state.session && state.session.ok;
+    var heroCta = signed
+      ? '<a class="td-btn td-btn-blue" href="#/learn">Resume learning &rarr;</a>'
+      : '<a class="td-btn td-btn-blue" href="#/enroll">Start learning' +
+          (cfg.priceLabel ? " · " + esc(cfg.priceLabel) : "") + "</a>";
     var cards = "";
     if (preview) {
       preview.modules.forEach(function (m) {
@@ -154,9 +159,7 @@
         "<h1>Your one-stop portal from pipelines to production agents</h1>" +
         "<p>Same curriculum as the lab. Different product: a hosted course. After enroll, every lesson opens here. You can screenshot. You cannot download the files or select the text.</p>" +
         '<div class="td-hero-actions">' +
-          '<a class="td-btn td-btn-blue" href="#/enroll">Start learning' +
-            (cfg.priceLabel ? " · " + esc(cfg.priceLabel) : "") +
-          "</a>" +
+          heroCta +
           '<a class="td-btn td-btn-orange" href="#/catalog">Browse the path</a>' +
         "</div>" +
         '<div class="td-stats">' +
@@ -170,12 +173,15 @@
         '<p class="td-muted td-section-lead">Tutorials Dojo pattern: public catalog, pay once, then a locked reader.</p>' +
         '<div class="td-steps">' +
           '<article class="td-card"><div class="td-step-num">1</div><h3>Scan the path</h3><p class="td-muted">Titles are public so you know what you are buying. Bodies stay on the server.</p></article>' +
-          '<article class="td-card"><div class="td-step-num">2</div><h3>Enroll once</h3><p class="td-muted">Pay or use an access key. We watermark every page with your email.</p></article>' +
+          '<article class="td-card"><div class="td-step-num">2</div><h3>Enroll once</h3><p class="td-muted">Pay or use an access key. Every lesson is watermarked and licensed to you.</p></article>' +
           '<article class="td-card"><div class="td-step-num">3</div><h3>Learn in the portal</h3><p class="td-muted">Outline, Simple / Medium / Complex pills, previous / next. No zip.</p></article>' +
         "</div>" +
         '<h2 class="td-section-title" style="margin-top:2.2rem">Tracks</h2>' +
         '<p class="td-muted td-section-lead">Foundations through labs and reference. Missing depths are skipped, not stubbed.</p>' +
         '<div class="td-grid">' + cards + "</div>" +
+        (signed
+          ? ""
+          : '<p class="td-muted td-section-lead" style="margin-top:1rem">Enrolling opens any track at the lesson you picked.</p>') +
       "</div>" +
       footer()
     );
@@ -269,13 +275,13 @@
                 esc(cfg.moduleCount || "every") + " tracks</li>" +
               "<li>In-browser reader with outline, pills and progress</li>" +
               "<li>Simple / Medium / Complex depth on every concept</li>" +
-              "<li>Your email watermarked on each lesson</li>" +
+              "<li>Every lesson watermarked and licensed to you</li>" +
               "<li>Screenshots allowed &mdash; no zip, no PDF dump</li>" +
             "</ul>" +
           "</aside>" +
           '<article class="td-card td-enroll td-gate">' +
             "<h2>Enroll once. Open the portal.</h2>" +
-            '<p class="td-muted">Your email is the watermark on every lesson.</p>' +
+            '<p class="td-muted">Your email is your license. Every lesson is watermarked and access is tied to it.</p>' +
             (state.error ? '<p class="td-error">' + esc(state.error) + "</p>" : "") +
             (stripe
               ? '<form data-form="checkout">' +
@@ -286,7 +292,7 @@
               : '<p class="td-muted">Card checkout turns on when Stripe keys are on the server. Use an access key until then.</p>') +
             '<div class="td-split">' +
               "<form data-form=\"unlock\">" +
-                '<label for="key-email">Email for watermark</label>' +
+                '<label for="key-email">Email for your license</label>' +
                 '<input id="key-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">' +
                 '<label for="key">Access key</label>' +
                 '<input id="key" name="key" type="password" required autocomplete="off" placeholder="Paste the key">' +
@@ -343,7 +349,7 @@
     var cat = state.catalog;
     var cur = lessonMeta(currentId);
     var html =
-      '<aside class="td-side">' +
+      '<aside class="td-side" id="td-side-panel">' +
         '<input class="td-side-search" data-filter="1" type="search" placeholder="Filter outline" value="' + esc(state.filter) + '">' +
         "<h2>Course outline</h2>";
     cat.modules.forEach(function (m) {
@@ -375,8 +381,8 @@
 
   function watermarkUrl(text) {
     var svg =
-      '<svg xmlns="http://www.w3.org/2000/svg" width="340" height="180">' +
-      '<text x="16" y="96" fill="#0c2340" font-size="15" font-family="Segoe UI, sans-serif" transform="rotate(-24 16 96)">' +
+      '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200">' +
+      '<text x="18" y="108" fill="#0c2340" font-size="15" font-family="Segoe UI, sans-serif" transform="rotate(-24 18 108)">' +
       esc(text) + " · licensed</text></svg>";
     return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
   }
@@ -403,7 +409,7 @@
       });
     }
     var body = lesson && lesson.id === id ? lesson.html : skeleton();
-    var wm = (lesson && lesson.watermark) || (state.session && state.session.email) || "";
+    var wm = (lesson && lesson.watermark) || "AI Engineering Dojo";
     return (
       topbar() +
       '<div class="td-print-block">Printing and Save-as are turned off. Use a screenshot if you need a still.</div>' +
@@ -411,7 +417,10 @@
       '<div class="td-shell">' +
         sidebar(id) +
         '<article class="td-lesson">' +
-          '<div class="td-crumb">Portal / ' + esc(modLabel) + (meta ? " / " + esc(meta.title) : "") + "</div>" +
+          '<div class="td-crumb-row">' +
+            '<div class="td-crumb">Portal / ' + esc(modLabel) + (meta ? " / " + esc(meta.title) : "") + "</div>" +
+            '<button type="button" class="td-outline-toggle" data-act="toggle-outline" aria-expanded="false" aria-controls="td-side-panel">&#9776; Outline</button>' +
+          "</div>" +
           '<div class="td-progress-row"><div class="td-progress"><span style="width:' + pct + '%"></span></div>' +
           '<div class="td-progress-lbl">' + done + " / " + total + "</div></div>" +
           pillsFor(id) +
@@ -474,6 +483,10 @@
 
   function render() {
     var r = route();
+    if (r.name === "enroll" && state.session && state.session.ok) {
+      go("#/learn");
+      return;
+    }
     var root = document.getElementById("app");
     var lock = r.name === "learn" && state.session && state.session.ok;
     document.body.classList.toggle("td-lock", Boolean(lock));
@@ -510,6 +523,15 @@
         });
       });
     });
+    var outlineBtn = document.querySelector("[data-act=toggle-outline]");
+    if (outlineBtn) {
+      outlineBtn.addEventListener("click", function () {
+        var side = document.getElementById("td-side-panel");
+        if (!side) return;
+        var open = side.classList.toggle("is-open");
+        outlineBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
     var filter = document.querySelector("[data-filter]");
     if (filter) {
       filter.addEventListener("input", function () {
@@ -518,7 +540,12 @@
         var r = route();
         if (r.name === "learn") {
           var side = document.querySelector(".td-side");
+          var wasOpen = side && side.classList.contains("is-open");
           if (side) side.outerHTML = sidebar(r.id);
+          if (wasOpen) {
+            var freshSide = document.getElementById("td-side-panel");
+            if (freshSide) freshSide.classList.add("is-open");
+          }
           bind();
           var box = document.querySelector("[data-filter]");
           if (box) {

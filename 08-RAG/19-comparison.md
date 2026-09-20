@@ -22,9 +22,15 @@ related_nodes: [rag, search, identity, dlp]
 
 ```mermaid
 flowchart TD
-  N[Naive RAG] -->|misses keywords, leaks| H[Hybrid]
-  H -->|still leaks| P[Permission-aware]
-  P -->|first retrieve still wrong| A[Agentic RAG — later]
+  Start[Retrieval need] --> MT{Multi-tenant or ACL'd data?}
+  MT -->|yes| PA[Permission-aware: principal filter IN the query]
+  MT -->|no| KW{Misses on IDs, codes, exact keywords?}
+  KW -->|yes| HY[Hybrid: lexical + vector]
+  KW -->|no| NV[Naive vector top-K]
+  PA --> M{Measured miss rate on gold chunks still high?}
+  HY --> M
+  M -->|yes, and rewrites are ad hoc| AG[Agentic RAG — later]
+  M -->|no| Done[Ship and keep scoring retrieve]
 ```
 
 ## Toy vs production-oriented (from the canonical architecture)

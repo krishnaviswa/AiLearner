@@ -34,7 +34,8 @@
       "<a class=\"lab-home\" href=\"" + href("index.html") + "\">AI Engineering Lab</a>" +
       "<p>A course path, not a file dump.</p>" +
       "</div>" +
-      "<nav class=\"lab-modules\" aria-label=\"Course modules\">" + mods + "</nav>" +
+      "<button type=\"button\" class=\"lab-menu-toggle\" id=\"lab-menu-toggle\" aria-expanded=\"false\" aria-controls=\"lab-modules-nav\">Modules ▾</button>" +
+      "<nav class=\"lab-modules\" id=\"lab-modules-nav\" aria-label=\"Course modules\">" + mods + "</nav>" +
       "<div class=\"lab-controls\" role=\"group\" aria-label=\"Color theme\">" +
       "<button type=\"button\" class=\"lab-theme-btn\" data-theme-set=\"dark\">Dark</button>" +
       "<button type=\"button\" class=\"lab-theme-btn\" data-theme-set=\"light\">Light</button>" +
@@ -42,10 +43,17 @@
 
     var crumb = document.createElement("div");
     crumb.className = "lab-crumb";
-    var modLabel = (P.modules.filter(function (m) { return m.id === modId; })[0] || {}).label || "";
-    crumb.innerHTML = "<a href=\"" + href("index.html") + "\">Home</a>" +
-      (modLabel ? " <span>/</span> " + modLabel : "") +
-      (cur && cur.href !== "index.html" ? " <span>/</span> " + cur.title : "");
+    var modEntry = P.modules.filter(function (m) { return m.id === modId; })[0];
+    var modLabel = modEntry ? modEntry.label : "";
+    var modFirst = modEntry ? P.inModule(modEntry.id)[0] : null;
+    var modHref = modFirst ? href(modFirst.href) : href("index.html");
+    crumb.innerHTML =
+      "<span class=\"lab-crumb-path\">" +
+        "<a href=\"" + href("index.html") + "\">Home</a>" +
+        (modLabel ? " <span>/</span> <a href=\"" + modHref + "\">" + modLabel + "</a>" : "") +
+        (cur && cur.href !== "index.html" ? " <span>/</span> <span class=\"lab-crumb-cur\">" + cur.title + "</span>" : "") +
+      "</span>" +
+      "<button type=\"button\" class=\"lab-outline-toggle\" id=\"lab-outline-toggle\" aria-expanded=\"false\" aria-controls=\"lab-nav\">Outline ▾</button>";
 
     var main = document.createElement("div");
     main.id = "lab-main";
@@ -111,6 +119,23 @@
       });
     });
     paintThemeBtns();
+
+    var menuToggle = document.getElementById("lab-menu-toggle");
+    var modulesNav = document.getElementById("lab-modules-nav");
+    if (menuToggle && modulesNav) {
+      menuToggle.addEventListener("click", function () {
+        var open = modulesNav.classList.toggle("is-open");
+        menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+    var outlineToggle = document.getElementById("lab-outline-toggle");
+    var outlineNav = document.getElementById("lab-nav");
+    if (outlineToggle && outlineNav) {
+      outlineToggle.addEventListener("click", function () {
+        var open = outlineNav.classList.toggle("is-open");
+        outlineToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
   }
 
   if (document.readyState === "loading") {

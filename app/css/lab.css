@@ -130,14 +130,62 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   border: 1px solid var(--line);
 }
 
+.lab-menu-toggle {
+  display: none;
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  color: var(--text);
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+/* Sticky breadcrumb: this is the one nav element guaranteed to stay on
+   screen while reading, so Home is always one click away, no matter how
+   far you have scrolled into a lesson. */
 .lab-crumb {
-  padding: 0.45rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.5rem 1.25rem;
   border-bottom: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.85rem;
   background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
-.lab-crumb span { opacity: 0.6; }
+.lab-crumb-path {
+  min-width: 0;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.lab-crumb-path a { flex: none; }
+.lab-crumb-path span { opacity: 0.6; }
+.lab-crumb-cur {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.lab-outline-toggle {
+  display: none;
+  flex: none;
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  color: var(--text);
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+}
 
 .lab-badge {
   display: inline-block;
@@ -291,6 +339,19 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 
 .lab-article .mermaid svg { max-width: 100%; height: auto; }
 
+/* Small screens: let a wide diagram or table scroll instead of blowing out the page. */
+@media (max-width: 640px) {
+  .lab-article pre.mermaid[data-processed] { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .lab-article pre.mermaid[data-processed] svg { min-width: 440px; max-width: none; }
+  .lab-article table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 #lab-footer {
   padding: 0.7rem 1.5rem;
   border-top: 1px solid var(--line);
@@ -357,7 +418,23 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 @media (max-width: 840px) {
   #lab-main { grid-template-columns: 1fr; }
   #lab-nav { border-right: 0; border-bottom: 1px solid var(--line); }
-  #lab-header { flex-direction: column; }
+  #lab-header { flex-direction: column; align-items: stretch; }
+}
+
+/* Narrow screens: the 10-module row plus the subtitle ate half the phone
+   screen before any content appeared. Collapse it behind a toggle so the
+   header stays short; the sticky crumb above still gives one-tap Home. */
+@media (max-width: 640px) {
+  .lab-brand p { display: none; }
+  .lab-menu-toggle { display: block; align-self: flex-start; }
+  .lab-modules { display: none; width: 100%; justify-content: flex-start; }
+  .lab-modules.is-open { display: flex; }
+  /* The per-module page list is a full list of every lesson in this
+     module; showing it inline buried lesson content below the fold on
+     every phone open. Collapse it behind the Outline toggle instead. */
+  .lab-outline-toggle { display: inline-flex; }
+  #lab-nav { display: none; }
+  #lab-nav.is-open { display: block; }
 }
 
 .lab-nav-extra { margin-top: 1.25rem; color: var(--muted); font-size: 0.85rem; }

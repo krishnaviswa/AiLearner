@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-lab",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8766", "--bind", "127.0.0.1"],
+      "port": 8766
+    },
+    {
+      "name": "course-app",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["course-app/server.mjs"],
+      "port": 8767
+    }
+  ]
+}

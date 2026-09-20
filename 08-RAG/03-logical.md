@@ -19,16 +19,22 @@ Same topic as [Naive RAG](02-simple.md). This page is **why retrieve is a system
 
 ```mermaid
 flowchart TB
-  S[Source] --> P[Parse + malware scan]
-  P --> C[Chunk + ACL metadata]
-  C --> E[Embed]
-  E --> I[Index]
-  Q[Question + principal] --> R[Hybrid retrieve IN the query]
+  subgraph ingest [Ingest — offline]
+    S[Source] --> P[Parse + malware scan]
+    P --> C[Chunk + ACL metadata]
+    C --> E[Embed]
+    E --> I[(Index)]
+  end
+  subgraph serve [Retrieve + generate — per request]
+    Q[Question + principal] --> R[Hybrid retrieve IN the query]
+    R --> RR[Optional rerank]
+    RR --> G[Generate + cite]
+  end
+  subgraph egress [Egress]
+    G --> D[Output DLP]
+    D --> O[Answer or refuse]
+  end
   I --> R
-  R --> RR[Optional rerank]
-  RR --> G[Generate + cite]
-  G --> D[Output DLP]
-  D --> O[Answer or refuse]
 ```
 
 | Stage | What goes wrong | Durable control |

@@ -40,23 +40,31 @@ cost management, governance, CI/CD.
 
 ```mermaid
 flowchart TB
-  U[User] --> FE[Web / API]
-  FE --> GW[API gateway]
-  GW --> IAM[Authn / Authz]
-  IAM --> APP[AI application]
-  APP --> RT[Agent runtime]
-  RT --> PR[Planner / router]
-  PR --> MR[Model router]
-  MR --> LLM[LLM]
-  RT --> TR[Tool registry]
-  TR --> API[APIs]
-  TR --> MCP[MCP]
-  TR --> DB[Databases]
-  TR --> SRCH[Search]
-  RT --> RAG[RAG / knowledge]
-  RAG --> DATA[Data layer]
-  RT --> GR[Guardrails / DLP]
-  GR --> OBS[Observability / eval / audit]
+  subgraph edge [Edge]
+    U[User] --> FE[Web / API]
+    FE --> GW[API gateway]
+    GW --> IAM[Authn / Authz]
+  end
+  subgraph app [Application + runtime]
+    IAM --> APP[AI application]
+    APP --> RT[Agent runtime]
+    RT --> PR[Planner / router]
+    PR --> MR[Model router]
+    MR --> LLM[LLM]
+  end
+  subgraph tools [Tools + knowledge]
+    RT --> TR[Tool registry]
+    TR --> API[APIs]
+    TR --> MCP[MCP]
+    TR --> DB[(Databases)]
+    TR --> SRCH[(Search)]
+    RT --> RAG[RAG / knowledge]
+    RAG --> DATA[(Data layer)]
+  end
+  subgraph cross [Cross-cutting]
+    RT --> GR[Guardrails / DLP]
+    GR --> OBS[Observability / eval / audit]
+  end
 ```
 
 ## Architect rule (durable)

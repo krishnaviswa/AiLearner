@@ -55,6 +55,19 @@
   One --&gt;|no| Share{Shared across hosts?}
   Share --&gt;|yes| MCP[MCP host-client-server]
   Share --&gt;|no| REST[REST + gateway]
+
+%% styled
+classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;
+classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;
+classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;
+classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;
+classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;
+classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;
+classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;
+classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;
+class T src
+class One,Share decision
+class FC,MCP,REST proc
 </pre>
 <h2>When not MCP</h2>
 <p>Three functions in one service — <a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12</a>. MCP servers are supply chain (LLM04): pin and audit them (<a href="../13-MCP/01-overview.html">13</a>).</p>

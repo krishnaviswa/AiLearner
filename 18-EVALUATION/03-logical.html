@@ -72,6 +72,21 @@
   Art[Prompt/index/model ids] --&gt; H
   H --&gt; R[Report]
   R --&gt; CI[Pass / fail gate]
+
+%% styled
+classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;
+classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;
+classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;
+classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;
+classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;
+classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;
+classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;
+classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;
+class Gold src
+class H proc
+class Art model
+class R out
+class CI risk
 </pre>
 <h2>Dataset methodology (minimum)</h2>
 <p>Split: <strong>train/dev must not leak into gold</strong>. Record who labeled, when, and the policy. Measure <strong>retrieve</strong> separately from <strong>generate</strong> for RAG (<a href="../08-RAG/02-simple.html">08</a>).</p>

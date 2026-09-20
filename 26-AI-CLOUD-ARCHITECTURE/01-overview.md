@@ -21,19 +21,25 @@ The same logical path already validated in Gate 1: user → API → **identity**
 
 ```mermaid
 flowchart TB
-  U[User] --> FE[Web / API]
-  FE --> GW[API gateway]
-  GW --> IAM[Authn / Authz]
-  IAM --> APP[AI application]
-  APP --> RT[Runtime]
-  RT --> WF[Deterministic workflow]
-  RT --> AG[Agent]
-  WF --> OUT[Result]
-  AG --> MR[Model router]
-  AG --> TR[Tool registry]
-  AG --> RAG[RAG]
-  RT --> GR[Guardrails / DLP]
-  GR --> OBS[Eval / observability / audit]
+  subgraph edge [Edge]
+    U[User] --> FE[Web / API]
+    FE --> GW[API gateway]
+    GW --> IAM[Authn / Authz]
+  end
+  subgraph app [Application + runtime]
+    IAM --> APP[AI application]
+    APP --> RT[Runtime]
+    RT --> WF[Deterministic workflow]
+    RT --> AG[Agent]
+    WF --> OUT[Result]
+    AG --> MR[Model router]
+    AG --> TR[Tool registry]
+    AG --> RAG[RAG]
+  end
+  subgraph cross [Cross-cutting]
+    RT --> GR[Guardrails / DLP]
+    GR --> OBS[Eval / observability / audit]
+  end
 ```
 
 If steps are known, prefer a **workflow or function** (`SRC-MS-AGENT-FRAMEWORK`). An agent is optional.

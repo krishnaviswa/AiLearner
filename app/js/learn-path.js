@@ -247,6 +247,20 @@
     "section": "Vector databases"
   },
   {
+    "href": "07-VECTOR-DATABASES/03-logical.html",
+    "title": "Vector search (Medium) \u2014 getting warehouse, database, and object-store data into an index",
+    "module": "rag",
+    "folder": "07-VECTOR-DATABASES",
+    "section": "Vector databases"
+  },
+  {
+    "href": "07-VECTOR-DATABASES/15-real-world-example.html",
+    "title": "Vector search (Complex) \u2014 official products, same pipeline",
+    "module": "rag",
+    "folder": "07-VECTOR-DATABASES",
+    "section": "Vector databases"
+  },
+  {
     "href": "07-VECTOR-DATABASES/19-comparison.html",
     "title": "Comparison (no winner SKU)",
     "module": "rag",

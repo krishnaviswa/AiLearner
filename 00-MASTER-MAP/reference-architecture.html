@@ -47,23 +47,46 @@ PII/PHI detection, secrets, audit, evaluation, observability,
 cost management, governance, CI/CD.
 </code></pre>
 <pre class="mermaid">flowchart TB
-  U[User] --&gt; FE[Web / API]
-  FE --&gt; GW[API gateway]
-  GW --&gt; IAM[Authn / Authz]
-  IAM --&gt; APP[AI application]
-  APP --&gt; RT[Agent runtime]
-  RT --&gt; PR[Planner / router]
-  PR --&gt; MR[Model router]
-  MR --&gt; LLM[LLM]
-  RT --&gt; TR[Tool registry]
-  TR --&gt; API[APIs]
-  TR --&gt; MCP[MCP]
-  TR --&gt; DB[Databases]
-  TR --&gt; SRCH[Search]
-  RT --&gt; RAG[RAG / knowledge]
-  RAG --&gt; DATA[Data layer]
-  RT --&gt; GR[Guardrails / DLP]
-  GR --&gt; OBS[Observability / eval / audit]
+  subgraph edge [Edge]
+    U[User] --&gt; FE[Web / API]
+    FE --&gt; GW[API gateway]
+    GW --&gt; IAM[Authn / Authz]
+  end
+  subgraph app [Application + runtime]
+    IAM --&gt; APP[AI application]
+    APP --&gt; RT[Agent runtime]
+    RT --&gt; PR[Planner / router]
+    PR --&gt; MR[Model router]
+    MR --&gt; LLM[LLM]
+  end
+  subgraph tools [Tools + knowledge]
+    RT --&gt; TR[Tool registry]
+    TR --&gt; API[APIs]
+    TR --&gt; MCP[MCP]
+    TR --&gt; DB[(Databases)]
+    TR --&gt; SRCH[(Search)]
+    RT --&gt; RAG[RAG / knowledge]
+    RAG --&gt; DATA[(Data layer)]
+  end
+  subgraph cross [Cross-cutting]
+    RT --&gt; GR[Guardrails / DLP]
+    GR --&gt; OBS[Observability / eval / audit]
+  end
+
+%% styled
+classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;
+classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;
+classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;
+classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;
+classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;
+classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;
+classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;
+classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;
+class U src
+class FE,GW,APP,RT,PR,TR,API,MCP,RAG,OBS proc
+class IAM,GR guard
+class MR,LLM model
+class DB,SRCH,DATA store
 </pre>
 <h2>Architect rule (durable)</h2>
 <p>If the steps are known and stable, prefer a <strong>workflow</strong> (or plain code) over an agent. Microsoft Agent Framework’s own overview states: if you can write a function to handle the task, do that instead of using an AI agent (<code>SRC-MS-AGENT-FRAMEWORK</code>).</p>

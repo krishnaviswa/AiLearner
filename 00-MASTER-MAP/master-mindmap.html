@@ -33,22 +33,44 @@
 </code></pre>
 <h2>Same idea as a relationship map</h2>
 <pre class="mermaid">flowchart TB
-  BP[Business problem] --&gt; D[Data]
-  D --&gt; DE[Data engineering]
-  DE --&gt; KL[Knowledge / semantic layer]
-  KL --&gt; RS[Retrieval / search]
-  RS --&gt; LLM[LLM]
-  LLM --&gt; T[Tools]
-  T --&gt; A[Agents]
-  A --&gt; O[Orchestration]
-  O --&gt; G[Guardrails]
-  G --&gt; E[Evaluation]
-  E --&gt; OBS[Observability]
-  OBS --&gt; SEC[Security]
-  SEC --&gt; GOV[Governance]
-  GOV --&gt; DEP[Deployment]
-  DEP --&gt; OPS[Production operations]
-  OPS --&gt; CI[Continuous improvement]
+  subgraph data [Data foundation]
+    BP[Business problem] --&gt; D[Data]
+    D --&gt; DE[Data engineering]
+    DE --&gt; KL[Knowledge / semantic layer]
+    KL --&gt; RS[Retrieval / search]
+  end
+  subgraph reason [Reasoning layer]
+    RS --&gt; LLM[LLM]
+    LLM --&gt; T[Tools]
+    T --&gt; A[Agents]
+    A --&gt; O[Orchestration]
+  end
+  subgraph safe [Safety + evidence]
+    O --&gt; G[Guardrails]
+    G --&gt; E[Evaluation]
+    E --&gt; OBS[Observability]
+    OBS --&gt; SEC[Security]
+    SEC --&gt; GOV[Governance]
+  end
+  subgraph run [Delivery]
+    GOV --&gt; DEP[Deployment]
+    DEP --&gt; OPS[Production operations]
+    OPS --&gt; CI[Continuous improvement]
+  end
+
+%% styled
+classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;
+classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;
+classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;
+classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;
+classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;
+classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;
+classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;
+classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;
+class BP src
+class D,DE,KL,RS,T,A,O,E,OBS,SEC,GOV,DEP,OPS,CI proc
+class LLM model
+class G guard
 </pre>
 <h2>Discipline overlaps (do not collapse these)</h2>
 <table>

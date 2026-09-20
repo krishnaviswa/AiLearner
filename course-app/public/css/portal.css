@@ -33,8 +33,8 @@
   --rail: #1a2434;
   --th-bg: #1b2536;
   --shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
-  --wm-filter: invert(1) brightness(1.7);
-  --wm-opacity: 0.16;
+  --wm-filter: invert(1) brightness(1.35);
+  --wm-opacity: 0.06;
   color-scheme: dark;
 }
 
@@ -310,9 +310,14 @@ button, input { font: inherit; }
 
 .td-shell {
   display: grid;
-  grid-template-columns: minmax(16rem, 20rem) 1fr;
+  grid-template-columns: minmax(16rem, 20rem) minmax(0, 1fr);
   min-height: calc(100vh - 7rem);
 }
+
+/* grid/flex children must be allowed to shrink below their content width,
+   or a wide diagram or code block pushes the whole page sideways */
+.td-lesson { min-width: 0; }
+.td-lesson-body { min-width: 0; }
 
 .td-side {
   background: var(--navy);
@@ -379,12 +384,33 @@ button, input { font: inherit; }
   font-size: 1.05rem;
 }
 
+.td-crumb-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.65rem;
+}
+
 .td-crumb {
   color: var(--muted);
   font-size: 0.84rem;
-  margin-bottom: 0.65rem;
   font-weight: 600;
 }
+
+.td-outline-toggle {
+  display: none;
+  flex: none;
+  border: 1px solid var(--line);
+  background: var(--rail);
+  color: var(--heading);
+  border-radius: 999px;
+  padding: 0.32rem 0.8rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.td-outline-toggle:hover { border-color: var(--blue); }
 
 .td-progress-row {
   display: flex;
@@ -537,9 +563,16 @@ body.td-lock svg {
   .td-shell { grid-template-columns: 1fr; }
   .td-hero { clip-path: none; padding: 3rem 1.2rem 3.2rem; }
   .td-steps { grid-template-columns: 1fr; }
-  .td-nav { gap: 0.6rem; }
-  .td-nav > a:not(.td-btn) { display: none; }
+  .td-promo { display: none; }
+  .td-nav { gap: 0.5rem; }
+  .td-nav a { font-size: 0.82rem; }
   .td-stats { gap: 1rem; }
+  /* Sidebar is a full accordion of every module; showing it inline pushed
+     the actual lesson below the fold on every single open. Collapse it
+     behind the Outline toggle instead so the reader lands on content. */
+  .td-side { display: none; }
+  .td-side.is-open { display: block; }
+  .td-outline-toggle { display: inline-flex; }
 }
 
 /* ---- Course path (catalog) ---- */
@@ -726,3 +759,20 @@ body.td-lock svg {
 }
 .td-lesson pre.mermaid[data-processed] { font-family: inherit; }
 .td-lesson pre.mermaid svg { max-width: 100%; height: auto; }
+
+/* Small screens: let a wide diagram or table scroll instead of blowing out the page. */
+@media (max-width: 640px) {
+  .td-lesson pre.mermaid[data-processed] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    text-align: left;
+  }
+  .td-lesson pre.mermaid[data-processed] svg { min-width: 440px; max-width: none; }
+  .td-lesson-body table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

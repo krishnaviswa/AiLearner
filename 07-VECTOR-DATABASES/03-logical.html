@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vector search (Medium) — getting warehouse, database, and object-store data into an index — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>07-VECTOR-DATABASES/03-logical.md</code></p>
+    <h1>Vector search (Medium) — getting warehouse, database, and object-store data into an index</h1>
+<p>Same topic as <a href="02-simple.html">Filter then rank</a>. This page is about the <strong>other half</strong> of vector search: how rows in a SQL warehouse, tables in an OLTP database, or files in S3/blob storage actually become vectors in an index — and how that stays current.</p>
+<h2>The shape is always: source → change signal → embed → upsert</h2>
+<pre class="mermaid">flowchart TB
+  subgraph sources [System of record]
+    DB[(OLTP database)]
+    WH[(SQL warehouse / lakehouse table)]
+    OBJ[(S3 / blob objects)]
+  end
+  subgraph change [Change signal]
+    CDC[CDC log reader]
+    CT[Change tracking / change data feed]
+    EVT[Object-created event or crawl]
+  end
+  subgraph pipeline [Ingestion pipeline]
+    CH[Chunk + extract text]
+    EM[Embed]
+    UP[Upsert: id, vector, metadata, embed_version]
+  end
+  IDX[(Vector index)]
+  DB --&gt; CDC --&gt; CH
+  WH --&gt; CT --&gt; CH
+  OBJ --&gt; EVT --&gt; CH
+  CH --&gt; EM --&gt; UP --&gt; IDX
+
+%% styled
+classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;
+classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;
+classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;
+classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;
+classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;
+classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;
+classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;
+classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;
+class DB,WH,OBJ,IDX store
+class CDC,CH proc
+class CT,EVT src
+class EM,UP model
+</pre>
+<p>Whatever the vendor calls it — indexer, Delta Sync Index, dynamic table refresh, knowledge base sync job — the pipeline is the same four steps. The variable that actually changes per vendor is <strong>how the change signal is produced</strong> and <strong>how much lag you tolerate</strong>.</p>
+<h2>How each source type actually feeds a vector index</h2>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Change signal</th>
+<th>Typical freshness</th>
+<th>Vendor examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OLTP database (Postgres, MySQL, SQL Server)</td>
+<td>Log-based CDC reading the transaction log (<code>SRC-DEBEZIUM-FAQ</code>)</td>
+<td>Seconds, event-driven</td>
+<td>Debezium → Kafka → embed worker → upsert; or skip the hop entirely and store vectors in the same database with pgvector (<code>SRC-PGVECTOR-README</code>)</td>
+</tr>
+<tr>
+<td>SQL warehouse / lakehouse table</td>
+<td>Change tracking on the source table, consumed by a scheduled or continuous refresh</td>
+<td>Minutes (target-lag) to near-real-time</td>
+<td>Databricks Delta Sync Index requires Change Data Feed on the source Delta/streaming/Iceberg table, then runs <strong>continuous sync</strong> (standard endpoints) or <strong>triggered sync</strong> via REST call (<code>SRC-DATABRICKS-VECTOR-SEARCH</code>); Snowflake Cortex Search refreshes incrementally against a <code>TARGET_LAG</code> SLA when the base table has a primary key (<code>SRC-SNOWFLAKE-CORTEX-SEARCH</code>)</td>
+</tr>
+<tr>
+<td>Object storage (S3, Blob, ADLS, OneLake)</td>
+<td>Indexer crawl (scheduled) or an object-created event</td>
+<td>Minutes to hours for crawl; near-real-time if event-driven</td>
+<td>Azure AI Search indexers pull from Blob Storage, Cosmos DB for NoSQL, ADLS Gen2, Table Storage, and OneLake, with <strong>integrated vectorization</strong> doing chunk+embed inside the indexer pipeline (<code>SRC-AZURE-VECTOR-SEARCH-OVERVIEW</code>); Bedrock Knowledge Bases sync an S3 data source into whichever vector store is attached — OpenSearch, S3 Vectors, Aurora/pgvector, Pinecone, MongoDB Atlas, Redis, or Neptune Analytics (<code>SRC-AWS-BEDROCK-KB-SETUP</code>)</td>
+</tr>
+<tr>
+<td>Managed analytics store already the source of truth</td>
+<td>Batch import or streamed upsert</td>
+<td>Batch by default, streaming available for near-real-time</td>
+<td>Vertex AI Vector Search imports embeddings computed from BigQuery, or accepts streamed upserts directly (<code>SRC-GCP-VERTEX-VECTOR-SEARCH</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2>Why "real-time" almost always means near-real-time</h2>
+<p>None of these systems re-embed the world on every write. They separate the <strong>write path</strong> (rows change) from the <strong>index path</strong> (vectors get replaced), and the gap between them is a design knob, not a bug:</p>
+<ul>
+<li><strong>Event-driven CDC</strong> (Debezium-style) gets seconds of lag, but you own the embed worker, the queue, and idempotent upserts keyed by row id + <code>embed_version</code>.</li>
+<li><strong>Vendor-managed continuous/triggered sync</strong> (Databricks, Snowflake) trades control for a documented SLA — set <code>TARGET_LAG</code> or enable Change Data Feed and the platform does the diffing.</li>
+<li><strong>Crawl/indexer</strong> (Azure indexers, S3 data sources in Bedrock KB) is batch by nature; schedule it as tight as the source's write rate justifies, not tighter.</li>
+</ul>
+<p>An index that claims "real-time" with no visible change-signal mechanism is a <strong>toy</strong> — assume poll-and-rebuild until the docs say otherwise.</p>
+<h2>How it fails</h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No <code>embed_version</code> on upsert</td>
+<td>A model swap silently mixes two vector spaces in one index; neighbors stop meaning anything — this is exactly why Databricks' managed and self-managed embedding modes are <strong>not interconvertible</strong> (<code>SRC-DATABRICKS-VECTOR-SEARCH</code>)</td>
+</tr>
+<tr>
+<td>CDC consumer lag unmonitored</td>
+<td>Index looks healthy, answers are stale; correct ACL, wrong facts</td>
+</tr>
+<tr>
+<td>Crawl schedule shorter than the data actually changes</td>
+<td>Wasted embedding spend re-processing unchanged rows</td>
+</tr>
+<tr>
+<td>No idempotency key on upsert</td>
+<td>Reprocessing a Kafka partition after a crash duplicates vectors</td>
+</tr>
+<tr>
+<td>Metadata not marked filterable at index-create time</td>
+<td>Filters added later can require a full reindex (<code>SRC-AWS-BEDROCK-KB-SETUP</code>: filterable vs non-filterable metadata is set when the index is created)</td>
+</tr>
+</tbody>
+</table>
+<h2>Architect bridge</h2>
+<p>This is the same problem as keeping a materialized view or a search-engine replica in sync with a system of record — CDC, change-tracking columns, and event-driven crawls are the same three tools a data engineer already reaches for. A vector index is a specialized read replica; treat freshness as an SLO, not an afterthought.</p>
+<h2>What should I remember?</h2>
+<p>"Real-time" vector search means near-real-time change propagation, not instant re-embedding — the freshness knob is the sync mechanism, not the query.</p>
+<h2>What should I learn next?</h2>
+<p><a href="15-real-world-example.html">Complex — Azure / AWS / Google / Databricks / Snowflake / open-source products</a> · <a href="19-comparison.html">When not</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

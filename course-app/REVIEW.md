@@ -23,7 +23,7 @@ The authoring lab on **8766** is unchanged. This portal is **8767**. Do not use 
 1. Home — hero, how it works, tracks. Verified.
 2. Course path — titles only (public). Verified.
 3. Enroll — email + key `dev-local-unlock`. After unlock, you land on the lesson you clicked.
-4. Portal — navy outline, pills, previous/next, progress, email watermark.
+4. Portal — navy outline, pills, previous/next, progress, brand watermark ("AI Engineering Dojo · licensed").
 5. Try select / copy / right-click / Ctrl+P on a lesson. Those are blocked. Screenshot still works.
 6. Sign out.
 
@@ -32,6 +32,8 @@ Lesson API without a session returns `Sign in to open lessons.` Verified. I did 
 ## Honest limit
 
 A paid session can still use DevTools. This is the same class of protection as other hosted course sites. The real control is: **do not publish the numbered HTML folders**. Keep this repo private or deploy only `course-app/` after pack.
+
+The lesson watermark is brand-only (`AI Engineering Dojo · licensed`), not the buyer's email — it is a licensing mark, not a per-buyer screenshot trace. Access is still tied to the enrolled email server-side (`entitlements.json` + signed `dojo_session`).
 
 ## Your fee
 

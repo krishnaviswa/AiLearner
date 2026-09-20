@@ -39,9 +39,26 @@
 </tr>
 </tbody>
 </table>
-<pre class="mermaid">flowchart LR
-  U[Unit tests] --&gt; G[Gates parsers]
-  H[Eval harness] --&gt; B[Gates behavior]
+<pre class="mermaid">flowchart TD
+  Change[Change] --&gt; U[Unit tests]
+  Change --&gt; H[Eval harness]
+  U --&gt; G[Gate: parsers and tool I/O]
+  H --&gt; B[Gate: model behavior vs gold]
+  G --&gt; Ship[Ship only if both pass]
+  B --&gt; Ship
+
+%% styled
+classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;
+classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;
+classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;
+classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;
+classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;
+classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;
+classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;
+classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;
+class Change src
+class U,H,G,Ship proc
+class B model
 </pre>
 <p>If you only have unit tests, you can still ship a fluent wrong answer. If you only have a harness, you can still ship <code>DROP TABLE</code> through an untested parser (<a href="../15-NL2SQL/16-hands-on.html">15</a>).</p>
 <p>Full test-strategy pages wait for later gates.</p>
