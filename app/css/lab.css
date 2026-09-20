@@ -149,7 +149,8 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 .lab-crumb {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  justify-content: space-between;
+  gap: 0.6rem;
   padding: 0.5rem 1.25rem;
   border-bottom: 1px solid var(--line);
   color: var(--muted);
@@ -158,17 +159,32 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   position: sticky;
   top: 0;
   z-index: 20;
+}
+.lab-crumb-path {
+  min-width: 0;
   white-space: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
-.lab-crumb a { flex: none; }
-.lab-crumb span { opacity: 0.6; flex: none; }
+.lab-crumb-path a { flex: none; }
+.lab-crumb-path span { opacity: 0.6; }
 .lab-crumb-cur {
   color: var(--text);
   font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.lab-outline-toggle {
+  display: none;
+  flex: none;
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  color: var(--text);
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
 }
 
 .lab-badge {
@@ -413,6 +429,12 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   .lab-menu-toggle { display: block; align-self: flex-start; }
   .lab-modules { display: none; width: 100%; justify-content: flex-start; }
   .lab-modules.is-open { display: flex; }
+  /* The per-module page list is a full list of every lesson in this
+     module; showing it inline buried lesson content below the fold on
+     every phone open. Collapse it behind the Outline toggle instead. */
+  .lab-outline-toggle { display: inline-flex; }
+  #lab-nav { display: none; }
+  #lab-nav.is-open { display: block; }
 }
 
 .lab-nav-extra { margin-top: 1.25rem; color: var(--muted); font-size: 0.85rem; }
