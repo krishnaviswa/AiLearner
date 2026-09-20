@@ -299,7 +299,7 @@ app.get("/api/lesson", requireSession, rateLimitLesson, (req, res) => {
     folder: lesson.folder,
     section: lesson.section,
     html: lesson.html,
-    watermark: req.session.email,
+    watermark: "AI Engineering Dojo",
   });
 });
 

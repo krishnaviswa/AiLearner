@@ -673,3 +673,185 @@ sources:
       HTTP fetch timed out 2026-09-07. Search snippet indicates they found SWE-bench Verified
       contamination and later retracted recommending SWE-Bench Pro. Do not teach that argument
       beyond “eval harnesses rot; re-read the page.” Re-fetch before quoting numbers.
+
+  - source_id: SRC-AZURE-VECTOR-SEARCH-OVERVIEW
+    title: Vector search overview — Azure AI Search
+    URL: https://learn.microsoft.com/en-us/azure/search/vector-search-overview
+    publisher: Microsoft Learn
+    date: 2026-08-05
+    technology: azure-ai-search
+    version: "page-as-of-2026-08-05"
+    trust_level: 1
+    last_verified: 2026-09-20
+    topics: [vector-search, hybrid-search, indexers, integrated-vectorization, azure-sql, blob-storage, cosmos-db, onelake]
+    fetch_note: >
+      Fetched 2026-09-20. Two ingestion paths: (1) push prevectorized content via SDK/REST,
+      (2) integrated data chunking + vectorization inside an indexer pipeline (needs indexer +
+      supported data source + skillset). Indexers automate ingestion from Azure Blob Storage,
+      Azure Cosmos DB for NoSQL, Azure Data Lake Storage Gen2, Azure Table Storage, and
+      Microsoft OneLake — Azure SQL is a supported indexer data source per the linked
+      indexer-overview page but was not re-verified in this fetch, treat as UNVERIFIED. Hybrid
+      search runs vector + keyword in parallel over the same index and merges ranks.
+
+  - source_id: SRC-AWS-OPENSEARCH-KNN
+    title: k-Nearest Neighbor (k-NN) search in Amazon OpenSearch Service
+    URL: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html
+    publisher: Amazon Web Services
+    date: null
+    technology: aws-opensearch
+    version: "page-as-of-2026-09-20"
+    trust_level: 1
+    last_verified: 2026-09-20
+    topics: [vector-search, knn, hnsw, faiss, open-source]
+    fetch_note: >
+      Fetched 2026-09-20. k-NN is a plugin on OpenSearch (open-source, Apache-2.0 engine)
+      exposed as a managed service. Index with index.knn:true + a knn_vector field; query with
+      the knn query clause; filters via post_filter or the newer efficient-filter path (not
+      re-verified here). Graph files persist to S3 for UltraWarm/cold tiers and reload on first
+      query — treat exact eviction/TTL mechanics as implementation detail, not a stable contract.
+
+  - source_id: SRC-AWS-S3-VECTORS
+    title: Amazon S3 Vectors
+    URL: https://aws.amazon.com/s3/features/vectors/
+    publisher: Amazon Web Services
+    date: null
+    technology: aws-s3-vectors
+    version: "page-as-of-2026-09-20"
+    trust_level: 1
+    last_verified: 2026-09-20
+    topics: [vector-search, s3, object-storage, bedrock-knowledge-bases, opensearch]
+    fetch_note: >
+      Fetched 2026-09-20. S3 Vectors stores/queries vector embeddings natively inside S3 vector
+      buckets — up to ~2B vectors/index, 10k indexes/bucket. Positioned as the cold/cheap tier;
+      AWS's own docs describe a tiered pattern where S3 Vectors handles infrequent-access vector
+      workloads and OpenSearch Service handles high-throughput low-latency ones. Vendor cost
+      claims ("up to 90% cheaper") are marketing figures — do not repeat as a benchmark.
+
+  - source_id: SRC-AWS-BEDROCK-KB-SETUP
+    title: Prerequisites for using a vector store you created for a knowledge base — Amazon Bedrock Knowledge Bases
+    URL: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html
+    publisher: Amazon Web Services
+    date: null
+    technology: aws-bedrock-knowledge-bases
+    version: "page-as-of-2026-09-20"
+    trust_level: 1
+    last_verified: 2026-09-20
+    topics: [rag, vector-search, s3, aurora, opensearch, pinecone, mongodb, redis, ingestion]
+    fetch_note: >
+      Fetched 2026-09-20. Enumerates supported vector stores for a Knowledge Base: OpenSearch
+      Serverless, OpenSearch Managed Clusters, Amazon S3 Vectors, Amazon Aurora (pgvector —
+      requires an HNSW index via CREATE INDEX ... USING hnsw), Neptune Analytics (GraphRAG),
+      plus third-party Pinecone / Redis Enterprise Cloud / MongoDB Atlas via Secrets Manager
+      credentials. Amazon Bedrock itself chunks source text and writes chunks + vectors +
+      managed metadata into whichever store is chosen — the KB is the ingestion pipeline, the
+      store is a pluggable backend. Data-source sync/ingest mechanics (S3 sync jobs, crawler
+      schedules) referenced but not re-fetched here.
+
+  - source_id: SRC-GCP-VERTEX-VECTOR-SEARCH
+    title: Vector Search overview — Vertex AI
+    URL: https://cloud.google.com/vertex-ai/docs/vector-search/overview
+    publisher: Google Cloud
+    date: null
+    technology: gcp-vertex-vector-search
+    version: "page-as-of-2026-09-20"
+    trust_level: 1
+    last_verified: 2026-09-20
+    topics: [vector-search, scann, streaming-ingestion, bigquery]
+    fetch_note: >
+      Fetched 2026-09-20 (redirected to docs.cloud.google.com). Built on Google's ScaNN
+      algorithm. Supports both batch index rebuilds and streaming ingestion for near-real-time
+      updates. Can import embeddings computed elsewhere, including directly from BigQuery
+      datasets, alongside the platform's own embedding APIs.
+
+  - source_id: SRC-DATABRICKS-VECTOR-SEARCH
+    title: Vector search — Databricks (generative-ai docs)
+    URL: https://docs.databricks.com/en/generative-ai/vector-search.html
+    publisher: Databricks
+    date: null
+    technology: databricks-vector-search
+    version: "page-as-of-2026-09-20"
+    trust_level: 1
+    last_verified: 2026-09-20
+    topics: [vector-search, delta-sync-index, unity-catalog, change-data-feed, continuous-sync]
+    fetch_note: >
+      Fetched 2026-09-20. Delta Sync Index reads from a Unity Catalog Delta table (streaming
+      table or managed Iceberg v3+ table also accepted); standard endpoints require Change Data
+      Feed enabled on the source table. Two embedding modes: Databricks-managed (computed
+      automatically, optionally materialized back to a table) or self-managed (caller supplies
+      vectors) — the two are not interconvertible; switching means creating a new index.
+      Standard endpoints support continuous sync (near-real-time) or triggered sync (manual
+      REST call); storage-optimized endpoints currently support triggered sync only. Distinct
+      page from SRC-DATABRICKS-AI-SEARCH (the MCP retrieval surface built on this index).
+
+  - source_id: SRC-SNOWFLAKE-CORTEX-SEARCH
+    title: Cortex Search overview — Snowflake
+    URL: https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-search/cortex-search-overview
+    publisher: Snowflake
+    date: null
+    technology: snowflake-cortex-search
+    version: "page-as-of-2026-09-20"
+    trust_level: 1
+    last_verified: 2026-09-20
+    topics: [vector-search, hybrid-search, sql-warehouse, target-lag, change-tracking]
+    fetch_note: >
+      Fetched 2026-09-20. Indexes a base table defined by a source query inside the warehouse;
+      generates embeddings with hosted models (e.g. Arctic Embed family) and builds a hybrid
+      (vector + keyword + rerank) index. Freshness controlled by a TARGET_LAG parameter, same
+      mechanism as Snowflake Dynamic Tables; with a primary key defined, refreshes are
+      incremental over rows flagged by change tracking rather than a full re-embed.
+
+  - source_id: SRC-PGVECTOR-README
+    title: pgvector — open-source vector similarity search for Postgres (README)
+    URL: https://github.com/pgvector/pgvector
+    publisher: pgvector project
+    date: null
+    technology: pgvector
+    version: "README-as-of-2026-09-20"
+    trust_level: 1
+    last_verified: 2026-09-20
+    topics: [vector-search, postgres, hnsw, ivfflat, open-source]
+    fetch_note: >
+      Fetched 2026-09-20 (earlier SRC-PGVECTOR entry timed out per 07-VECTOR-DATABASES/01-overview
+      fetch note — this is the re-fetch). Confirms HNSW (no training phase, higher build
+      cost/memory, better query recall/speed) and IVFFlat (needs data present before index build,
+      cheaper to build, lower recall) as the two ANN index types; exact + approximate search;
+      L2/inner-product/cosine/L1/Hamming/Jaccard distance operators; bulk load via COPY; ACID,
+      point-in-time recovery, and JOINs against relational columns in the same table.
+
+  - source_id: SRC-MILVUS-OVERVIEW
+    title: Milvus overview
+    URL: https://milvus.io/docs/overview.md
+    publisher: Zilliz / Milvus project
+    date: null
+    technology: milvus
+    version: "page-as-of-2026-09-20"
+    trust_level: 1
+    last_verified: 2026-09-20
+    topics: [vector-search, open-source, cdc, distributed]
+    fetch_note: >
+      Fetched 2026-09-20. Open-source vector database (Apache-2.0) with three deployment shapes
+      — Milvus Lite (embedded/Python), Standalone (single Docker host), Distributed
+      (Kubernetes, compute/storage separated into query/data/index node roles). Milvus CDC
+      replicates changes between Milvus clusters for primary-standby DR; Vector Transmission
+      Service (VTS) moves data between Milvus and external systems (Elasticsearch, Postgres,
+      Zilliz Cloud) for both real-time replication and batch transfer — this is Milvus's own
+      sync tooling, not a generic warehouse connector.
+
+  - source_id: SRC-DEBEZIUM-FAQ
+    title: Debezium FAQ
+    URL: https://debezium.io/documentation/faq/
+    publisher: Debezium (Red Hat)
+    date: null
+    technology: debezium
+    version: "page-as-of-2026-09-20"
+    trust_level: 2
+    last_verified: 2026-09-20
+    topics: [cdc, change-data-capture, kafka, streaming]
+    fetch_note: >
+      Fetched 2026-09-20. Debezium reads database transaction logs and emits a per-table Kafka
+      topic of ordered row-level change events; self-describing events carry schema alongside
+      payload so consumers survive schema drift; connectors auto-restart on failure. Supports
+      MySQL, Postgres, MongoDB, Oracle, SQL Server, Db2, Cassandra as sources. Generic CDC
+      infrastructure, not vector-search-specific — the point of citing it here is the mechanism
+      (log-based CDC) that any "real-time DB to vector index" pipeline not already offered by a
+      vendor's managed sync would have to build.

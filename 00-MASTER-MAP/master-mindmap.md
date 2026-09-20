@@ -26,22 +26,30 @@ Business problem
 
 ```mermaid
 flowchart TB
-  BP[Business problem] --> D[Data]
-  D --> DE[Data engineering]
-  DE --> KL[Knowledge / semantic layer]
-  KL --> RS[Retrieval / search]
-  RS --> LLM[LLM]
-  LLM --> T[Tools]
-  T --> A[Agents]
-  A --> O[Orchestration]
-  O --> G[Guardrails]
-  G --> E[Evaluation]
-  E --> OBS[Observability]
-  OBS --> SEC[Security]
-  SEC --> GOV[Governance]
-  GOV --> DEP[Deployment]
-  DEP --> OPS[Production operations]
-  OPS --> CI[Continuous improvement]
+  subgraph data [Data foundation]
+    BP[Business problem] --> D[Data]
+    D --> DE[Data engineering]
+    DE --> KL[Knowledge / semantic layer]
+    KL --> RS[Retrieval / search]
+  end
+  subgraph reason [Reasoning layer]
+    RS --> LLM[LLM]
+    LLM --> T[Tools]
+    T --> A[Agents]
+    A --> O[Orchestration]
+  end
+  subgraph safe [Safety + evidence]
+    O --> G[Guardrails]
+    G --> E[Evaluation]
+    E --> OBS[Observability]
+    OBS --> SEC[Security]
+    SEC --> GOV[Governance]
+  end
+  subgraph run [Delivery]
+    GOV --> DEP[Deployment]
+    DEP --> OPS[Production operations]
+    OPS --> CI[Continuous improvement]
+  end
 ```
 
 ## Discipline overlaps (do not collapse these)

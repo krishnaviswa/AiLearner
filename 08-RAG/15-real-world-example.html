@@ -56,13 +56,7 @@
 </tr>
 </tbody>
 </table>
-<pre class="mermaid">flowchart TB
-  Dur[Durable RAG: ingest chunk embed retrieve generate cite] --&gt; MS[Azure: knowledge base + ranker]
-  Dur --&gt; AWS[Bedrock: Retrieve or RetrieveAndGenerate]
-  Dur --&gt; GCP[Google: RAG corpus]
-  Dur --&gt; DBX[Databricks: AI Search + UC]
-  Dur --&gt; DIY[pgvector: you own ACL]
-</pre>
+<p>Every row is the <strong>same durable pipeline</strong> — ingest → chunk → embed → index → retrieve → generate → cite — behind a different product name.</p>
 <h2>What maps to <em>this</em> lab’s flavors</h2>
 <table>
 <thead>

@@ -27,9 +27,14 @@ Microservices. Two services need a contract and tracing. Ten services without a 
 
 ```mermaid
 flowchart TB
-  S[Supervisor] --> W1[Worker A]
+  U[User goal] --> P{Pattern}
+  P -->|supervisor keeps control| S[Supervisor]
+  S --> W1[Worker A]
   S --> W2[Worker B]
-  H[Handoff] --> W3[Specialist]
+  W1 --> S
+  W2 --> S
+  P -->|full transfer| H[Handoff]
+  H --> Sp[Specialist owns the rest]
 ```
 
 ## When not

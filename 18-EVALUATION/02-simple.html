@@ -52,6 +52,22 @@
   J --&gt; A[Human audit sample]
   M --&gt; D[Ship decision]
   A --&gt; D
+
+%% styled
+classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;
+classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;
+classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;
+classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;
+classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;
+classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;
+classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;
+classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;
+class C src
+class S,M,D proc
+class O out
+class G decision
+class J model
+class A guard
 </pre>
 <p>NIST generative-AI profile treats confabulation as a risk (<code>SRC-NIST-AI-600-1</code>). A judge model can confabulate a “pass.”</p>
 <p>Do <strong>not</strong> report a judge score as production accuracy. Do not invent percentages here.</p>

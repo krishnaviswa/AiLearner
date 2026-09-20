@@ -291,6 +291,19 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 
 .lab-article .mermaid svg { max-width: 100%; height: auto; }
 
+/* Small screens: let a wide diagram or table scroll instead of blowing out the page. */
+@media (max-width: 640px) {
+  .lab-article pre.mermaid[data-processed] { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .lab-article pre.mermaid[data-processed] svg { min-width: 440px; max-width: none; }
+  .lab-article table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 #lab-footer {
   padding: 0.7rem 1.5rem;
   border-top: 1px solid var(--line);

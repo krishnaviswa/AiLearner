@@ -29,14 +29,6 @@ We do **not** invent “Netflix / Uber / Meta internally does X.” If there is 
 | Eval is a registry + harness, not vibes | OpenAI `evals` GitHub | `SRC-OPENAI-EVALS` |
 | Confabulation and privacy are named risks | NIST AI 600-1 generative profile | `SRC-NIST-AI-600-1` |
 
-```mermaid
-flowchart LR
-  D[Durable: one call + contract] --> OAI[OpenAI: tokens + schema]
-  D --> MS[Microsoft: function over agent]
-  D --> G[Google ADK: only if agency is required]
-  D --> N[NIST: refuse / measure risk]
-```
-
 ## What a production architect actually copies
 
 **Toy:** paste a prompt in a chat UI.

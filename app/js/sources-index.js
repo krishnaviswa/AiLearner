@@ -628,6 +628,140 @@ window.LAB_SOURCES = {
         "swe-bench",
         "contamination"
       ]
+    },
+    "SRC-AZURE-VECTOR-SEARCH-OVERVIEW": {
+      "id": "SRC-AZURE-VECTOR-SEARCH-OVERVIEW",
+      "title": "Vector search overview \u2014 Azure AI Search",
+      "url": "https://learn.microsoft.com/en-us/azure/search/vector-search-overview",
+      "publisher": "Microsoft Learn",
+      "topics": [
+        "vector-search",
+        "hybrid-search",
+        "indexers",
+        "integrated-vectorization",
+        "azure-sql",
+        "blob-storage",
+        "cosmos-db",
+        "onelake"
+      ]
+    },
+    "SRC-AWS-OPENSEARCH-KNN": {
+      "id": "SRC-AWS-OPENSEARCH-KNN",
+      "title": "k-Nearest Neighbor (k-NN) search in Amazon OpenSearch Service",
+      "url": "https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html",
+      "publisher": "Amazon Web Services",
+      "topics": [
+        "vector-search",
+        "knn",
+        "hnsw",
+        "faiss",
+        "open-source"
+      ]
+    },
+    "SRC-AWS-S3-VECTORS": {
+      "id": "SRC-AWS-S3-VECTORS",
+      "title": "Amazon S3 Vectors",
+      "url": "https://aws.amazon.com/s3/features/vectors/",
+      "publisher": "Amazon Web Services",
+      "topics": [
+        "vector-search",
+        "s3",
+        "object-storage",
+        "bedrock-knowledge-bases",
+        "opensearch"
+      ]
+    },
+    "SRC-AWS-BEDROCK-KB-SETUP": {
+      "id": "SRC-AWS-BEDROCK-KB-SETUP",
+      "title": "Prerequisites for using a vector store you created for a knowledge base \u2014 Amazon Bedrock Knowledge Bases",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html",
+      "publisher": "Amazon Web Services",
+      "topics": [
+        "rag",
+        "vector-search",
+        "s3",
+        "aurora",
+        "opensearch",
+        "pinecone",
+        "mongodb",
+        "redis",
+        "ingestion"
+      ]
+    },
+    "SRC-GCP-VERTEX-VECTOR-SEARCH": {
+      "id": "SRC-GCP-VERTEX-VECTOR-SEARCH",
+      "title": "Vector Search overview \u2014 Vertex AI",
+      "url": "https://cloud.google.com/vertex-ai/docs/vector-search/overview",
+      "publisher": "Google Cloud",
+      "topics": [
+        "vector-search",
+        "scann",
+        "streaming-ingestion",
+        "bigquery"
+      ]
+    },
+    "SRC-DATABRICKS-VECTOR-SEARCH": {
+      "id": "SRC-DATABRICKS-VECTOR-SEARCH",
+      "title": "Vector search \u2014 Databricks (generative-ai docs)",
+      "url": "https://docs.databricks.com/en/generative-ai/vector-search.html",
+      "publisher": "Databricks",
+      "topics": [
+        "vector-search",
+        "delta-sync-index",
+        "unity-catalog",
+        "change-data-feed",
+        "continuous-sync"
+      ]
+    },
+    "SRC-SNOWFLAKE-CORTEX-SEARCH": {
+      "id": "SRC-SNOWFLAKE-CORTEX-SEARCH",
+      "title": "Cortex Search overview \u2014 Snowflake",
+      "url": "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-search/cortex-search-overview",
+      "publisher": "Snowflake",
+      "topics": [
+        "vector-search",
+        "hybrid-search",
+        "sql-warehouse",
+        "target-lag",
+        "change-tracking"
+      ]
+    },
+    "SRC-PGVECTOR-README": {
+      "id": "SRC-PGVECTOR-README",
+      "title": "pgvector \u2014 open-source vector similarity search for Postgres (README)",
+      "url": "https://github.com/pgvector/pgvector",
+      "publisher": "pgvector project",
+      "topics": [
+        "vector-search",
+        "postgres",
+        "hnsw",
+        "ivfflat",
+        "open-source"
+      ]
+    },
+    "SRC-MILVUS-OVERVIEW": {
+      "id": "SRC-MILVUS-OVERVIEW",
+      "title": "Milvus overview",
+      "url": "https://milvus.io/docs/overview.md",
+      "publisher": "Zilliz / Milvus project",
+      "topics": [
+        "vector-search",
+        "open-source",
+        "cdc",
+        "distributed"
+      ]
+    },
+    "SRC-DEBEZIUM-FAQ": {
+      "id": "SRC-DEBEZIUM-FAQ",
+      "title": "Debezium FAQ",
+      "url": "https://debezium.io/documentation/faq/",
+      "publisher": "Debezium (Red Hat)",
+      "topics": [
+        "cdc",
+        "change-data-capture",
+        "kafka",
+        "streaming"
+      ]
     }
   },
   "folder_topics": {

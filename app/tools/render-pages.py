@@ -151,12 +151,112 @@ def rewrite_md_hrefs(content: str) -> str:
     return content
 
 
+# Shared node palette for every flowchart. Defined once here so the whole course
+# stays consistent; see app/tools/DIAGRAM-STYLE.md. Light fills + dark text read on
+# both the light and the mermaid "dark" theme (node interior stays light).
+MERMAID_CLASSDEFS = [
+    "classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;",
+    "classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;",
+    "classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;",
+    "classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;",
+    "classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;",
+    "classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;",
+    "classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;",
+    "classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;",
+]
+
+# label keyword -> class. First match in this order wins (shape checks run first).
+_MERMAID_KEYWORDS = [
+    ("src", ("user", "caller", "question", "request", "goal", "source", "event",
+             "attacker", "use case", "prompt spec", "claim", "need ", "need a",
+             "smell", "term ", "hard assignment", "want to ship", "change",
+             "intent", "pattern name")),
+    ("out", ("answer", "result", "output", "response", "rows", "ship the",
+             "release", "report", "recover", "aggregate", "200 or", "credible",
+             "signal")),
+    ("risk", ("refuse", "reject", " deny", "denied", "block", "leak", "fail",
+              "stop", "do not", "don't", "forbidden", "attack", "gaming",
+              "unsafe", "not governance", "circular", "vanity", "fiction")),
+    ("guard", ("authz", "authn", "iam", "identity", "acl", "policy", "guardrail",
+               "dlp", "filter", "grant", "hitl", "human", "redact", "sanitiz",
+               "principal", "authoriz", "confirm", "approve", " role", "validat",
+               "ast", "deterministic")),
+    ("model", ("model", "llm", " judge", "judge ", "embed", "rerank", "ranker",
+               "decode", "decoding", "inference")),
+    ("store", ("index", "store", "vector", "corpus", "warehouse", "catalog",
+               "lakehouse", "pgvector", "database", " db", "db ", "logs",
+               "cache", "rag corpus", "knowledge base")),
+]
+
+
+def _mermaid_nodes(body: str, skip_ids):
+    """Yield (node_id, shape_open, label) for each first-seen flowchart node."""
+    seen = set()
+    pat = re.compile(
+        r'(?<![\w.])(subgraph\s+)?([A-Za-z][\w]*)'
+        r'(\[\(.*?\)\]|\[\[.*?\]\]|\(\(.*?\)\)|\[.*?\]|\(.*?\)|\{\{.*?\}\}|\{.*?\}|>.*?\])'
+    )
+    for m in pat.finditer(body):
+        is_sg, nid, raw = m.group(1), m.group(2), m.group(3)
+        if is_sg or nid in seen or nid in skip_ids or nid.lower() in ("subgraph", "end"):
+            continue
+        seen.add(nid)
+        label = re.sub(r'^[\[\(\{>]+|[\]\)\}]+$', "", raw).strip()
+        yield nid, raw[:2], label
+
+
+def _classify(shape: str, label: str) -> str:
+    if shape.startswith("{"):
+        return "decision"
+    if shape.startswith("[("):
+        return "store"
+    low = " " + label.lower() + " "
+    for cls, keys in _MERMAID_KEYWORDS:
+        if any(k in low for k in keys):
+            return cls
+    return "proc"
+
+
+def style_mermaid(src: str) -> str:
+    """Inject the shared palette + a semantic class per node into a flowchart."""
+    lines = src.split("\n")
+    header_idx = next((i for i, l in enumerate(lines) if l.strip()), None)
+    if header_idx is None:
+        return src
+    header = lines[header_idx].strip().lower()
+    if not (header.startswith("flowchart") or header.startswith("graph")):
+        return src  # sequence / state / mindmap: leave alone
+    if "classdef" in src.lower() or ":::" in src or "%% styled" in src:
+        return src  # author already styled this one
+
+    body = "\n".join(lines[header_idx + 1 :])
+    subgraph_ids = set(re.findall(r'subgraph\s+([A-Za-z][\w]*)', body))
+    rhs = set(re.findall(
+        r'(?:--+[>xo]?|-\.-+>?|==+>?)\s*(?:\|[^|]*\|)?\s*([A-Za-z][\w]*)', body))
+    lhs = set(re.findall(r'(?:^|\n)\s*([A-Za-z][\w]*)\s*(?:[\[(\{>]|--)', body))
+
+    buckets: dict[str, list[str]] = {}
+    for nid, shape, label in _mermaid_nodes(body, subgraph_ids):
+        cls = _classify(shape, label)
+        if cls == "proc" and nid in lhs and nid not in rhs:
+            cls = "src"  # unfed entry node
+        buckets.setdefault(cls, []).append(nid)
+
+    if not buckets:
+        return src
+
+    inject = ["", "%% styled"] + list(MERMAID_CLASSDEFS)
+    for cls, ids in buckets.items():
+        inject.append(f"class {','.join(ids)} {cls}")
+    return src.rstrip() + "\n" + "\n".join(inject) + "\n"
+
+
 def postprocess_code_blocks(html_body: str) -> str:
     """Turn language-mermaid code blocks into pre.mermaid for mermaid-boot.js."""
 
     def mermaid_pre(match: re.Match[str]) -> str:
-        inner = match.group(1)
-        inner = html.unescape(inner)
+        inner = html.unescape(match.group(1))
+        inner = style_mermaid(inner)
         return f'<pre class="mermaid">{html.escape(inner)}</pre>'
 
     html_body = re.sub(

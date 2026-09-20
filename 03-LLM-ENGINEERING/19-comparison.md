@@ -20,10 +20,11 @@ related_nodes: [llm-app, agent, structured-output]
 | Tool-calling agent | Side effects | Authz, HITL, eval | Only if steps unknown |
 
 ```mermaid
-flowchart LR
-  Need[Need a decision from text] --> S[Structured LLM call]
-  Need2[Need a known API] --> W[Workflow]
-  Need3[Need unknown tool sequence] --> A[Agent later]
+flowchart TD
+  Need[Need a decision from text] --> Q1{Known API or step sequence?}
+  Q1 -->|no| S[Structured LLM call]
+  Q1 -->|yes, fixed| W[Workflow]
+  Q1 -->|yes, but order is unknown| A[Agent later]
 ```
 
 If the “tools” list has one function you always call, you wanted a workflow (`SRC-MS-AGENT-FRAMEWORK`).

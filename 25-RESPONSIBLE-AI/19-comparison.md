@@ -21,11 +21,11 @@ related_nodes: [responsible-ai, security, governance, dlp]
 | **Governance** | Owners + Measure + Manage (NIST RMF) | A brochure that lists all of the above |
 
 ```mermaid
-flowchart LR
+flowchart TD
   S[Security] --> G[Governance]
   R[Responsible AI] --> G
   D[DLP / privacy] --> G
-  G --> M[Measure]
+  G --> M[Measure can fail a release]
 ```
 
 ## When not to use a chatbot as the ethicist

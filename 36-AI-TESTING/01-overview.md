@@ -22,9 +22,13 @@ Not the full testing domain.
 | CI | Every commit | Every commit for **small gold**; nightly for large |
 
 ```mermaid
-flowchart LR
-  U[Unit tests] --> G[Gates parsers]
-  H[Eval harness] --> B[Gates behavior]
+flowchart TD
+  Change[Change] --> U[Unit tests]
+  Change --> H[Eval harness]
+  U --> G[Gate: parsers and tool I/O]
+  H --> B[Gate: model behavior vs gold]
+  G --> Ship[Ship only if both pass]
+  B --> Ship
 ```
 
 If you only have unit tests, you can still ship a fluent wrong answer. If you only have a harness, you can still ship `DROP TABLE` through an untested parser ([15](../15-NL2SQL/16-hands-on.md)).

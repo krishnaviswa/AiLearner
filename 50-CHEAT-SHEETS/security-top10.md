@@ -29,9 +29,12 @@ Official titles from the 2026 GitHub README (`SRC-OWASP-LLM-TOP10-2026-GH`, last
 | LLM10 | Improper Output Handling | Encode for the sink; never `exec` model text — [15](../15-NL2SQL/01-overview.md) |
 
 ```mermaid
-flowchart LR
-  O[OWASP LLM01-10] --> App[App controls]
-  N[NIST AI RMF + 600-1] --> Org[Govern Map Measure Manage]
+flowchart TD
+  Threat[AI threat to handle] --> O[OWASP LLM01-10]
+  Threat --> N[NIST AI RMF + 600-1]
+  O --> App[App + runtime controls]
+  N --> Org[Govern / Map / Measure / Manage]
+  App --> Org
 ```
 
 NIST AI 600-1 is the organizational companion, not a second Top 10 (`SRC-NIST-AI-600-1`). Full map: [21/03-logical](../21-AI-SECURITY/03-logical.md).

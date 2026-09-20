@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vector search (Complex) — official products, same pipeline — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>07-VECTOR-DATABASES/15-real-world-example.md</code></p>
+    <h1>Vector search (Complex) — official products, same pipeline</h1>
+<p>Same topic as <a href="02-simple.html">Filter then rank</a> and <a href="03-logical.html">Medium — ingestion logic</a>. These are <strong>documented vendor products</strong>, not unofficial internal-architecture stories. Prices, SKU lists, and dimension limits are <strong>volatile</strong> — read the vendor page before you build.</p>
+<h2>Vendor map (fetched 2026-09-20)</h2>
+<table>
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Official object</th>
+<th>What the docs actually say</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Microsoft</strong></td>
+<td>Azure AI Search vector fields + indexers</td>
+<td>kNN vector fields live alongside text fields in one index. Two ingestion paths: push prevectorized content, or let an indexer do <strong>integrated data chunking + vectorization</strong>. Indexers pull from Blob Storage, Cosmos DB for NoSQL, ADLS Gen2, Table Storage, and OneLake. Underpins Foundry IQ.</td>
+<td><code>SRC-AZURE-VECTOR-SEARCH-OVERVIEW</code>, <code>SRC-AZURE-AI-SEARCH-SKU</code></td>
+</tr>
+<tr>
+<td><strong>Amazon</strong></td>
+<td>OpenSearch Service k-NN + S3 Vectors + Bedrock Knowledge Bases</td>
+<td>k-NN is an open-source plugin (Apache-2.0 OpenSearch) exposed as a managed service; index with <code>index.knn</code> + a <code>knn_vector</code> field. <strong>S3 Vectors</strong> stores/queries vectors natively inside S3 buckets, positioned as the cold/cheap tier behind OpenSearch for hot queries. <strong>Bedrock Knowledge Bases</strong> is the managed ingestion pipeline: it chunks source data and writes chunks + vectors + metadata into whichever store is chosen — OpenSearch Serverless/Managed, S3 Vectors, Aurora (pgvector, HNSW index), Neptune Analytics, or third-party Pinecone / MongoDB Atlas / Redis Enterprise Cloud.</td>
+<td><code>SRC-AWS-OPENSEARCH-KNN</code>, <code>SRC-AWS-S3-VECTORS</code>, <code>SRC-AWS-BEDROCK-KB-SETUP</code></td>
+</tr>
+<tr>
+<td><strong>Google</strong></td>
+<td>Vertex AI Vector Search</td>
+<td>Built on Google's ScaNN algorithm. Supports batch index rebuilds and <strong>streaming ingestion</strong> for near-real-time updates; can import embeddings straight from BigQuery.</td>
+<td><code>SRC-GCP-VERTEX-VECTOR-SEARCH</code></td>
+</tr>
+<tr>
+<td><strong>Databricks</strong></td>
+<td>Vector Search (Delta Sync Index)</td>
+<td>Reads a Unity Catalog Delta table (or streaming table / Iceberg v3+); standard endpoints require Change Data Feed on the source. Managed embeddings (computed automatically) or self-managed (caller supplies vectors) — <strong>not interconvertible</strong>. <strong>Continuous sync</strong> (near-real-time) or <strong>triggered sync</strong> (manual REST call) depending on endpoint type.</td>
+<td><code>SRC-DATABRICKS-VECTOR-SEARCH</code>, <code>SRC-DATABRICKS-AI-SEARCH</code></td>
+</tr>
+<tr>
+<td><strong>Snowflake</strong></td>
+<td>Cortex Search</td>
+<td>Indexes a base table defined by a source query directly in the warehouse; hosted embedding models (Arctic Embed family) build a hybrid vector + keyword + rerank index. Freshness controlled by <code>TARGET_LAG</code>, the same mechanism as Dynamic Tables; incremental refresh when a primary key is defined.</td>
+<td><code>SRC-SNOWFLAKE-CORTEX-SEARCH</code></td>
+</tr>
+<tr>
+<td><strong>Open source / DIY</strong></td>
+<td>pgvector on Postgres; Milvus</td>
+<td>pgvector: HNSW (no training phase, better recall/speed, higher build cost) and IVFFlat (needs data present before build, cheaper, lower recall) index types; L2 / inner-product / cosine / L1 / Hamming / Jaccard distances; bulk load via <code>COPY</code>; full ACID + JOINs since it's Postgres. Milvus: open source (Apache-2.0), three deployment shapes (Lite / Standalone / Distributed-on-Kubernetes) with compute and storage separated into query/data/index node roles; Milvus CDC replicates between Milvus clusters for DR, and Vector Transmission Service (VTS) moves data between Milvus and external systems like Postgres or Elasticsearch.</td>
+<td><code>SRC-PGVECTOR-README</code>, <code>SRC-MILVUS-OVERVIEW</code></td>
+</tr>
+</tbody>
+</table>
+<p>Every row is the <strong>same durable pipeline</strong> from <a href="03-logical.html">Medium</a> — source → change signal → chunk → embed → upsert → index → filter → rank — behind a different product name and a different freshness contract.</p>
+<h2>Where "SQL warehouse / database / S3" actually plugs in</h2>
+<table>
+<thead>
+<tr>
+<th>Your data lives in…</th>
+<th>Closest official on-ramp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Postgres / MySQL (OLTP)</td>
+<td>Add pgvector in-place (no separate index) <strong>or</strong> log-based CDC (<code>SRC-DEBEZIUM-FAQ</code>) into a managed store; Bedrock KB's Aurora option is the managed version of the former</td>
+</tr>
+<tr>
+<td>Snowflake / Databricks SQL warehouse</td>
+<td>Cortex Search or Delta Sync Index — both read the warehouse table directly, no separate ETL hop</td>
+</tr>
+<tr>
+<td>S3 / Blob / ADLS</td>
+<td>Azure indexers, a Bedrock KB S3 data source, or S3 Vectors querying the bucket in place</td>
+</tr>
+<tr>
+<td>BigQuery</td>
+<td>Vertex AI Vector Search batch import or streaming ingestion</td>
+</tr>
+</tbody>
+</table>
+<p>If your system of record is already one of these, the fastest path is the vendor's <strong>native</strong> sync (Delta Sync Index, Cortex Search, an indexer, a KB data source) before reaching for a standalone vector DB plus hand-rolled CDC.</p>
+<h2>What we are not claiming</h2>
+<ul>
+<li>Internal query-time ANN algorithm internals beyond what each vendor names (ScaNN, HNSW/IVFFlat, the faiss engine inside OpenSearch's k-NN plugin).</li>
+<li>Dollar costs, vector-count ceilings, or dimension limits as stable numbers — AWS's own "up to 90% cheaper" S3 Vectors claim is a marketing figure, not a benchmark (<code>SRC-AWS-S3-VECTORS</code>).</li>
+<li>That any of these managed syncs implement row-level ACL for you. Filtering by tenant/permission is still <strong>your</strong> metadata design — see <a href="02-simple.html">Filter then rank</a> and OWASP LLM09 (<code>SRC-OWASP-LLM-TOP10-2026-GH</code>).</li>
+</ul>
+<h2>Architect challenge</h2>
+<p>Pick your actual system of record — a Postgres OLTP table, a Snowflake/Databricks warehouse table, or an S3 bucket of documents. Name the vendor's <strong>native</strong> sync mechanism for that source (not a generic "call an API in a loop"), and say what happens to the index if that sync job is paused for an hour. If you can't answer with the specific object (Delta Sync Index, Cortex Search, an indexer, a KB data source), you don't yet have a real ingestion pipeline — you have a script.</p>
+<h2>What should I learn next?</h2>
+<p><a href="03-logical.html">Medium — ingestion logic</a> · <a href="19-comparison.html">When not</a> · <a href="../00-MASTER-MAP/sources-and-reading.html">Sources catalog</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

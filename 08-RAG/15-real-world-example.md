@@ -25,14 +25,7 @@ Same topic as Simple / Medium. These are **documented cloud products**, not unof
 | **Databricks** | AI Search (formerly Vector Search) MCP | Hybrid search as a managed retrieve surface; Unity Catalog / grants for lakehouse identity. Feature status is **Public Preview** on the MCP page we registered. | `SRC-DATABRICKS-AI-SEARCH`, `SRC-DATABRICKS-MCP` |
 | **DIY** | pgvector on Postgres | Open-source vector similarity in Postgres. Operator/index names **UNVERIFIED** (README fetch timed out). | `SRC-PGVECTOR` |
 
-```mermaid
-flowchart TB
-  Dur[Durable RAG: ingest chunk embed retrieve generate cite] --> MS[Azure: knowledge base + ranker]
-  Dur --> AWS[Bedrock: Retrieve or RetrieveAndGenerate]
-  Dur --> GCP[Google: RAG corpus]
-  Dur --> DBX[Databricks: AI Search + UC]
-  Dur --> DIY[pgvector: you own ACL]
-```
+Every row is the **same durable pipeline** — ingest → chunk → embed → index → retrieve → generate → cite — behind a different product name.
 
 ## What maps to *this* lab’s flavors
 

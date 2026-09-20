@@ -182,6 +182,18 @@ window.LAB_PAGE_INDEX = {
       "stem": "02-simple"
     },
     {
+      "file": "03-logical.html",
+      "level": 3,
+      "label": "Medium",
+      "stem": "03-logical"
+    },
+    {
+      "file": "15-real-world-example.html",
+      "level": 6,
+      "label": "Complex",
+      "stem": "15-real-world-example"
+    },
+    {
       "file": "19-comparison.html",
       "level": 2,
       "label": "When not",

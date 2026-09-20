@@ -76,6 +76,21 @@
   Out --&gt; Sink{Where does output go?}
   Sink --&gt;|browser / SQL / shell| Enc[Encode and validate first]
   Sink --&gt;|tool call| IAM[Deterministic authz]
+
+%% styled
+classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;
+classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;
+classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;
+classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;
+classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;
+classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;
+classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;
+classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;
+class In src
+class Ctx,Out proc
+class M model
+class Sink decision
+class Enc,IAM guard
 </pre>
 <h2>Why it exists</h2>
 <p>NIST AI 600-1 treats prompt injection and data poisoning as <strong>information-security</strong> risks of generative AI, and names data privacy as a distinct risk (<code>SRC-NIST-AI-600-1</code>, PDF read 2026-09-07). The model is both a new attack surface and a new attacker assistant.</p>
