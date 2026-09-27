@@ -751,6 +751,41 @@ window.LAB_SOURCES = {
         "distributed"
       ]
     },
+    "SRC-INTERVIEWING-IO-AI-SURVEY-2026": {
+      "id": "SRC-INTERVIEWING-IO-AI-SURVEY-2026",
+      "title": "\"How is AI changing interview processes? Not much and a whole lot.\"",
+      "url": "https://interviewing.io/blog/how-is-ai-changing-interview-processes-not-much-and-a-whole-lot",
+      "publisher": "interviewing.io",
+      "topics": [
+        "technical-interviews",
+        "ai-cheating",
+        "faang",
+        "interview-format"
+      ]
+    },
+    "SRC-FORMATION-FAANG-AI-2026": {
+      "id": "SRC-FORMATION-FAANG-AI-2026",
+      "title": "3 ways AI has changed FAANG interviews in 2026",
+      "url": "https://formation.dev/blog/3-ways-ai-has-changed-faang-interviews-in-2026",
+      "publisher": "Formation (interview-coaching vendor)",
+      "topics": [
+        "technical-interviews",
+        "system-design",
+        "behavioral-interview",
+        "ai-assisted-coding"
+      ]
+    },
+    "SRC-INTERVIEWMAN-AI-POLICY-2026": {
+      "id": "SRC-INTERVIEWMAN-AI-POLICY-2026",
+      "title": "Which Companies Allow or Ban AI in Interviews in 2026",
+      "url": "https://interviewman.com/blog/companies-allow-ban-ai-interviews-2026",
+      "publisher": "InterviewMan (interview-prep vendor)",
+      "topics": [
+        "ai-cheating",
+        "hiring-policy",
+        "technical-interviews"
+      ]
+    },
     "SRC-DEBEZIUM-FAQ": {
       "id": "SRC-DEBEZIUM-FAQ",
       "title": "Debezium FAQ",

@@ -197,3 +197,10 @@ Restart-safe human log. Machine resume: [`factory-state.json`](factory-state.jso
 - **Files:** `app/tools/render-pages.py` `write_learn_path()` generates `learn-path.js` from Markdown/HTML that exists; sidebar is one topic per folder; no empty Advanced/Architecture stubs
 - **UNVERIFIED:** none
 - **Next if interrupted:** run `python app/tools/render-pages.py`
+
+## 2026-09-27T00:00Z — post-gate-10 — ai-era-interview-prep
+
+- **Status:** authored
+- **Files:** `44-ARCHITECTURE-INTERVIEWS/02-ai-era-interview-landscape.md`, `44-ARCHITECTURE-INTERVIEWS/03-prep-plan-30-60-90.md`, `44-ARCHITECTURE-INTERVIEWS/04-reusable-prep-prompt.md`, `44-ARCHITECTURE-INTERVIEWS/01-overview.md` (learn-next links added), `99-META/sources.yaml` rows SRC-INTERVIEWING-IO-AI-SURVEY-2026, SRC-FORMATION-FAANG-AI-2026, SRC-INTERVIEWMAN-AI-POLICY-2026
+- **UNVERIFIED:** all company-specific AI-interview-policy claims (Meta/Google/Amazon/Netflix/Shopify/Canva/Microsoft/Goldman Sachs/Anthropic/Scale AI/OpenAI) and all cited percentages — every claim traces to a Tier 3/4 interview-prep vendor blog, none to an official company source; pages are marked volatile and flagged for re-verification
+- **Next if interrupted:** run `python app/tools/render-pages.py`; branch `feat/ai-era-interview-prep-2026`

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reusable prompt — personalize the prep plan and run mocks — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>44-ARCHITECTURE-INTERVIEWS/04-reusable-prep-prompt.md</code></p>
+    <h1>Reusable prompt — personalize the prep plan and run mocks</h1>
+<p>Paste the block below into any capable LLM chat, fill the bracketed fields, and reuse it
+weekly (update "current gaps" each time). It turns
+<a href="03-prep-plan-30-60-90.html">the 30/60/90 plan</a> into a personalized week-by-week plan and then
+runs mock rounds against you using the same rubric as
+<a href="02-ai-era-interview-landscape.html">02-ai-era-interview-landscape.md</a>.</p>
+<pre><code class="language-text">You are acting as my interview prep coach for the current AI-era hiring loop. Context on
+what &quot;AI-era loop&quot; means:
+
+- The DSA/algorithms round still happens, but questions are longer, more custom, and graded
+  on narrated trade-offs, not silent speed.
+- System design is now up to three separate tracks: (1) classic distributed systems,
+  (2) ML system design (data -&gt; features -&gt; model -&gt; eval -&gt; deploy -&gt; monitor -&gt; retrain),
+  and (3) GenAI/LLM system design (RAG, agents, multi-agent orchestration, inference
+  platforms). Evaluation methodology (golden sets, LLM-as-judge, regression gates) is treated
+  as a first-class part of tracks 2 and 3, not an afterthought.
+- Some loops add a distinct AI-assisted coding round where I code alongside a model and am
+  graded on prompt quality, verification discipline, and catching wrong model output.
+- Behavioral rounds increasingly include &quot;how do you actually use AI day-to-day&quot; -- I should
+  answer with a specific task and a specific caught error, not generic productivity claims.
+- Company policy on whether AI tools are allowed varies and must be confirmed per loop --
+  don't assume either way.
+
+My situation:
+- Target company/role/level: [e.g., &quot;Senior Software Engineer, Series C startup&quot; or
+  &quot;L5 Applied AI Engineer, big tech&quot;]
+- Timeline until my interview(s): [e.g., &quot;18 days&quot; / &quot;no fixed date, actively interviewing&quot; /
+  &quot;90 days, career-changing into AI engineering&quot;]
+- Current DSA fluency (be honest): [e.g., &quot;solid on trees/graphs, weak on DP&quot;]
+- System design tracks I need: [classic / ML / GenAI -- name which ones apply to this role]
+- AI-specific topics I already know vs don't: [e.g., &quot;know RAG basics, never designed a
+  multi-agent system, shaky on evaluation methodology&quot;]
+- Whether an AI-assisted coding round is confirmed, likely, or unknown for this loop:
+  [state which, and how you'll confirm with the recruiter if unknown]
+
+Do the following:
+
+1. Pick the matching track -- 30-day fast loop, 60-day standard, or 90-day comprehensive --
+   based on my timeline and starting point, and say which one and why.
+2. Produce a week-by-week plan (table format) covering DSA, the relevant system-design
+   track(s), AI-specific topics, and behavioral/mock prep, sized to my actual gaps rather than
+   a generic template.
+3. Give me today's concrete task: one DSA problem matched to my weakest pattern, one system
+   design prompt from my relevant track(s), and one AI-usage story to draft or refine.
+4. Then run a mock round with me, one at a time, in whichever order I ask for:
+   - DSA mock: give me a problem, let me talk through it, and grade my narration and
+     complexity analysis, not just correctness.
+   - System design mock: give me a prompt from a track I named above, then mid-answer change
+     one constraint (traffic 10x, a new compliance requirement, a latency cut) and grade
+     whether I adapt or just restate my first answer.
+   - AI-assisted-coding mock: give me a subtask, &quot;generate&quot; a plausible but subtly wrong
+     solution, and grade whether I catch the flaw and explain it before accepting it.
+   - Evaluation mock: ask me to design a golden set and judge method for a system I just
+     designed, and grade whether I name a concrete regression gate.
+   - Behavioral mock: ask the &quot;how do you use AI day-to-day&quot; question and grade whether my
+     answer is specific (task + caught error + verification) or generic.
+5. After each mock, score me against this rubric and tell me the single most important thing
+   to fix before the next attempt:
+   | Signal | Weak | Strong |
+   |---|---|---|
+   | DSA narration | Silent until code is done | Talks through approach/complexity/edge cases live |
+   | Design-track discipline | Mixes concerns across tracks | States the track, reasons inside it |
+   | AI-assisted round | Accepts model output at face value | Catches and explains a wrong suggestion |
+   | Evaluation fluency | &quot;We'd write some tests&quot; | Names a golden set, judge method, regression gate |
+   | AI-usage story | &quot;AI makes me faster&quot; | Specific task, specific caught error, verification step |
+
+Keep every response scoped to what I asked for this turn -- don't dump the whole plan again
+unless I ask you to regenerate it. Flag anything you are not certain reflects current company
+policy as &quot;confirm this with the recruiter&quot; rather than stating it as fact.
+</code></pre>
+<h2>How to keep this current</h2>
+<p>This prompt encodes the trend summary from
+<a href="02-ai-era-interview-landscape.html">02-ai-era-interview-landscape.md</a>, which is a <strong>volatile</strong>,
+vendor-reported page. Re-read that page before a real loop and edit the prompt's bulleted
+context if something has clearly shifted — do not let the prompt calcify into stale advice.</p>
+<h2>What should I learn next?</h2>
+<p><a href="03-prep-plan-30-60-90.html">30/60/90-day prep plan</a> · <a href="02-ai-era-interview-landscape.html">The AI-era interview landscape</a> · <a href="01-overview.html">Architect / principal interviews</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>
