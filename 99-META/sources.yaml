@@ -837,6 +837,70 @@ sources:
       Zilliz Cloud) for both real-time replication and batch transfer — this is Milvus's own
       sync tooling, not a generic warehouse connector.
 
+  - source_id: SRC-INTERVIEWING-IO-AI-SURVEY-2026
+    title: "How is AI changing interview processes? Not much and a whole lot."
+    URL: https://interviewing.io/blog/how-is-ai-changing-interview-processes-not-much-and-a-whole-lot
+    publisher: interviewing.io
+    date: null
+    technology: hiring-process
+    version: "page-as-of-2026-09-27"
+    trust_level: 3
+    last_verified: 2026-09-27
+    topics: [technical-interviews, ai-cheating, faang, interview-format]
+    fetch_note: >
+      Fetched 2026-09-27. Self-reported survey of 67 interviewer respondents (52 FAANG /
+      FAANG-adjacent, rest startup), run by an interview-prep vendor — small, self-selected
+      sample, not a peer-reviewed study. Headline numbers: 0 of 52 FAANG respondents said their
+      company dropped algorithmic questions; 58% retooled the types of algorithmic questions
+      asked; 81% suspected AI-assisted cheating; ~33% reported actually catching it; 75%
+      believed AI assistance lets weaker candidates pass; only 11% work somewhere using
+      dedicated cheating-detection software; 67% of startup respondents (vs 0% FAANG) said AI
+      meaningfully changed their process. Meta reported testing AI-assisted interviews with a
+      planned rollout to real candidates. Treat as directional vendor-reported signal, not an
+      official company policy statement — no Tier 1 source confirms these figures.
+
+  - source_id: SRC-FORMATION-FAANG-AI-2026
+    title: 3 ways AI has changed FAANG interviews in 2026
+    URL: https://formation.dev/blog/3-ways-ai-has-changed-faang-interviews-in-2026
+    publisher: Formation (interview-coaching vendor)
+    date: null
+    technology: hiring-process
+    version: "page-as-of-2026-09-27"
+    trust_level: 3
+    last_verified: 2026-09-27
+    topics: [technical-interviews, system-design, behavioral-interview, ai-assisted-coding]
+    fetch_note: >
+      Fetched 2026-09-27. Coaching-vendor blog, not an official company source — claims are
+      UNVERIFIED against Tier 1. States system design loops now commonly split into three
+      tracks (classic distributed systems, ML system design, GenAI/LLM system design covering
+      RAG and multi-agent workflows), citing an OpenAI prompt example ("design the OpenAI
+      Playground"). Claims behavioral-round share of the loop grew from roughly 10-15% to
+      30-40%, with a new staple question on how candidates use AI day to day (cites "58% of
+      reports from 45 of 69 companies" — source of that underlying dataset not disclosed on
+      the page, so treat the percentage itself as UNVERIFIED). States Meta, Netflix, Shopify,
+      and Scale AI run dedicated AI-assisted coding rounds. Reports typical FAANG-loop prep
+      timeline of 8-12 weeks, plus 2-3 weeks more for AI-round-specific prep — vendor's own
+      coaching-timeline claim, not an independently verified benchmark.
+
+  - source_id: SRC-INTERVIEWMAN-AI-POLICY-2026
+    title: Which Companies Allow or Ban AI in Interviews in 2026
+    URL: https://interviewman.com/blog/companies-allow-ban-ai-interviews-2026
+    publisher: InterviewMan (interview-prep vendor)
+    date: null
+    technology: hiring-process
+    version: "page-as-of-2026-09-27"
+    trust_level: 4
+    last_verified: 2026-09-27
+    topics: [ai-cheating, hiring-policy, technical-interviews]
+    fetch_note: >
+      Fetched 2026-09-27 via search snippet only (not a full-page fetch) — Tier 4, community
+      /vendor-blog color, not proof of any named company's actual policy. Claims Amazon,
+      Goldman Sachs, and Anthropic prohibit AI-assist during interviews (Amazon disqualifies on
+      detection); claims Canva expects candidates to use Copilot/Cursor/Claude during coding
+      interviews and that Microsoft SDE candidates report AI-assisted rounds. Every company-name
+      claim on this page is UNVERIFIED absent that company's own careers/engineering-blog
+      statement — do not present as confirmed policy, only as reported-trend color.
+
   - source_id: SRC-DEBEZIUM-FAQ
     title: Debezium FAQ
     URL: https://debezium.io/documentation/faq/

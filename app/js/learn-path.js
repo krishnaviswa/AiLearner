@@ -966,6 +966,27 @@
     "module": "reference",
     "folder": "44-ARCHITECTURE-INTERVIEWS",
     "section": "Architect / principal interviews"
+  },
+  {
+    "href": "44-ARCHITECTURE-INTERVIEWS/02-ai-era-interview-landscape.html",
+    "title": "The AI-era interview landscape (last two to three quarters)",
+    "module": "reference",
+    "folder": "44-ARCHITECTURE-INTERVIEWS",
+    "section": "Architect / principal interviews"
+  },
+  {
+    "href": "44-ARCHITECTURE-INTERVIEWS/03-prep-plan-30-60-90.html",
+    "title": "30/60/90-day prep plan for the AI-era loop",
+    "module": "reference",
+    "folder": "44-ARCHITECTURE-INTERVIEWS",
+    "section": "Architect / principal interviews"
+  },
+  {
+    "href": "44-ARCHITECTURE-INTERVIEWS/04-reusable-prep-prompt.html",
+    "title": "Reusable prompt \u2014 personalize the prep plan and run mocks",
+    "module": "reference",
+    "folder": "44-ARCHITECTURE-INTERVIEWS",
+    "section": "Architect / principal interviews"
   }
 ];
   var MODULES = [

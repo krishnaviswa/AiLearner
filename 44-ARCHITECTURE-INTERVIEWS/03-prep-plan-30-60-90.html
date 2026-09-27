@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>30/60/90-day prep plan for the AI-era loop — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>44-ARCHITECTURE-INTERVIEWS/03-prep-plan-30-60-90.md</code></p>
+    <h1>30/60/90-day prep plan for the AI-era loop</h1>
+<p>Three tracks, not three difficulty levels. Pick the one that matches your situation — do not
+default to 90 days out of caution, and do not compress into 30 days without the fundamentals
+this plan assumes.</p>
+<table>
+<thead>
+<tr>
+<th>Track</th>
+<th>Pick this if</th>
+<th>Assumes going in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>30-day — Fast loop</strong></td>
+<td>You have a scheduled onsite/virtual loop inside four weeks</td>
+<td>Solid existing DSA fluency and at least one system-design track; you need calibration, not construction</td>
+</tr>
+<tr>
+<td><strong>60-day — Standard</strong></td>
+<td>You are actively interviewing without a fixed date</td>
+<td>Some DSA rust, one system-design track shaky, little to no AI-round exposure</td>
+</tr>
+<tr>
+<td><strong>90-day — Comprehensive</strong></td>
+<td>You are moving into an AI/applied-AI track from a different background, or targeting senior/staff+</td>
+<td>Need to build DSA fluency, all three system-design tracks, and AI-specific depth from scratch</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="02-ai-era-interview-landscape.html">02-ai-era-interview-landscape.md</a> for what each column
+below is calibrated against.</p>
+<pre class="mermaid">gantt
+  title Where each track spends its time
+  dateFormat  X
+  axisFormat %s
+  section 30-day (fast)
+  DSA calibration + narration drill   :a1, 0, 10
+  One system-design track, mock-heavy :a2, 5, 15
+  AI-round + behavioral polish        :a3, 20, 10
+  section 60-day (standard)
+  DSA pattern rebuild                 :b1, 0, 20
+  Two system-design tracks            :b2, 15, 30
+  AI-track fundamentals + mocks       :b3, 35, 25
+  section 90-day (comprehensive)
+  DSA fundamentals to fluency         :c1, 0, 30
+  All three system-design tracks      :c2, 20, 45
+  AI-track depth + full mock loop     :c3, 55, 35
+</pre>
+<h2>30-day — Fast loop</h2>
+<table>
+<thead>
+<tr>
+<th>Week</th>
+<th>DSA / algorithms</th>
+<th>System design</th>
+<th>AI-specific</th>
+<th>Behavioral / mocks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Diagnostic set (10 mixed problems); triage weak patterns</td>
+<td>Pick your most-likely track (classic, ML, or GenAI); redo one reference design</td>
+<td>Skim <a href="02-ai-era-interview-landscape.html">02-ai-era-interview-landscape.md</a>; confirm the target company's AI-round policy with your recruiter</td>
+<td>Draft 3 "how I use AI day-to-day" stories with a concrete catch-the-error example</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2 problems/day from weak patterns, narrated out loud, timed</td>
+<td>2 mock design sessions on the chosen track, explicit failure-mode naming</td>
+<td>If a GenAI-track or AI-assisted round is confirmed: read the linked RAG/agent/evaluation pages once each</td>
+<td>1 mock behavioral round; tighten stories to STAR + explicit trade-off</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Mixed timed set simulating the real round length; drill debugging-given-broken-code</td>
+<td>1 more mock, now with the interviewer changing a constraint mid-answer</td>
+<td>1 mock AI-assisted-coding round if applicable: prompt, verify, catch a planted bug</td>
+<td>Second behavioral mock; record and review your own narration</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Light maintenance only (1 problem/day); rest before the loop</td>
+<td>Final review of your reference architecture diagrams</td>
+<td>Final review of the eval-methodology checklist (golden set, judge choice, regression gate)</td>
+<td>Logistics: confirm tools allowed/banned per round, test your environment</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ready check:</strong> you can solve a medium problem while narrating trade-offs without going
+silent, you can defend one system design under a changed constraint, and you have a
+specific (not generic) AI-usage story.</p>
+<h2>60-day — Standard</h2>
+<table>
+<thead>
+<tr>
+<th>Weeks</th>
+<th>DSA / algorithms</th>
+<th>System design</th>
+<th>AI-specific</th>
+<th>Behavioral / mocks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1–2</td>
+<td>Rebuild pattern coverage (arrays/strings, trees/graphs, DP, two pointers/sliding window) — untimed first pass</td>
+<td>Study the three-track split; read one reference architecture per track</td>
+<td>Read <a href="02-ai-era-interview-landscape.html">02-ai-era-interview-landscape.md</a> fully; skim <a href="../18-EVALUATION/01-overview.html">18-EVALUATION</a></td>
+<td>Write your career narrative and 5 core stories</td>
+</tr>
+<tr>
+<td>3–4</td>
+<td>Timed practice, narrated; start mixing in debug-given-code problems</td>
+<td>Pick two tracks (classic + one of ML/GenAI based on target role); 2 mocks total</td>
+<td>Work through <a href="../08-RAG/01-overview.html">08-RAG</a> and <a href="../10-AGENTS/19-comparison.html">10-AGENTS</a> "when not to" pages</td>
+<td>1 mock behavioral, focused on the AI-usage question</td>
+</tr>
+<tr>
+<td>5–6</td>
+<td>Full-length timed sets; target your weakest pattern specifically</td>
+<td>2 more mocks across your two tracks; require yourself to name a failure mode unprompted</td>
+<td>If applicable, 1 mock AI-assisted coding round; practice reading and correcting model output live</td>
+<td>1 mock combining behavioral + a short AI-usage follow-up</td>
+</tr>
+<tr>
+<td>7–8</td>
+<td>Maintenance pace; add company-tagged practice if known</td>
+<td>Final mock per track under time pressure</td>
+<td>Review <a href="../21-AI-SECURITY/01-overview.html">21-AI-SECURITY</a> / <a href="../22-GUARDRAILS/01-overview.html">22-GUARDRAILS</a> if the target role touches agents or tools</td>
+<td>Full dry-run loop, back to back, same length as the real thing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ready check:</strong> you can pass a cold mock in each of your two chosen system-design tracks
+without your own coaching notes, and you can complete an AI-assisted-round mock without
+accepting a model's wrong output silently.</p>
+<h2>90-day — Comprehensive</h2>
+<table>
+<thead>
+<tr>
+<th>Weeks</th>
+<th>DSA / algorithms</th>
+<th>System design</th>
+<th>AI-specific</th>
+<th>Behavioral / mocks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1–3</td>
+<td>Learn/relearn every core pattern from fundamentals; untimed, focus on correctness and explanation</td>
+<td>Learn the vocabulary of all three tracks (scaling primitives; ML lifecycle; RAG/agent/inference basics)</td>
+<td>Work this lab's spine in order: <a href="../01-FOUNDATIONS/01-overview.html">01-FOUNDATIONS</a> → <a href="../03-LLM-ENGINEERING/01-overview.html">03-LLM-ENGINEERING</a> → <a href="../08-RAG/01-overview.html">08-RAG</a></td>
+<td>Draft full career narrative; collect raw stories, don't polish yet</td>
+</tr>
+<tr>
+<td>4–6</td>
+<td>Timed practice begins; narrate every solution out loud even alone</td>
+<td>First mock in each of the three tracks; expect to fail some — that's the diagnostic</td>
+<td>Continue the spine: <a href="../10-AGENTS/01-overview.html">10-AGENTS</a> → <a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14-MULTI-AGENT-SYSTEMS</a> → <a href="../18-EVALUATION/01-overview.html">18-EVALUATION</a></td>
+<td>Polish stories into STAR with an explicit trade-off named in each</td>
+</tr>
+<tr>
+<td>7–9</td>
+<td>Timed, mixed sets; add debug-given-broken-code and "extend this snippet" formats weekly</td>
+<td>Second mock per track, now defending under a changed constraint; study <a href="../40-REFERENCE-ARCHITECTURES/01-overview.html">40-REFERENCE-ARCHITECTURES</a> A–E</td>
+<td><a href="../21-AI-SECURITY/01-overview.html">21-AI-SECURITY</a>, <a href="../22-GUARDRAILS/01-overview.html">22-GUARDRAILS</a>, <a href="../50-CHEAT-SHEETS/01-overview.html">50-CHEAT-SHEETS</a>; build your own golden-set example for a toy RAG app</td>
+<td>Mock AI-usage question weekly until answers are specific and varied</td>
+</tr>
+<tr>
+<td>10–12</td>
+<td>Full-length, full-difficulty timed sets; target only remaining weak patterns</td>
+<td>Final mock per track, cold, interviewer-style; review <a href="01-overview.html">01-overview.md</a> principal-level questions</td>
+<td>Full mock AI-assisted-coding round; full mock AI-system-design round grounded in a real product constraint</td>
+<td>Full dry-run loop(s), back to back, at real length; debrief and iterate</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ready check:</strong> you can be handed any of the three system-design tracks cold and produce a
+defensible design with named failure modes; you can complete a full mock loop (DSA + design +
+AI round + behavioral) back to back without fatigue-driven mistakes on the last stage.</p>
+<h2>Daily rhythm (all tracks)</h2>
+<ul>
+<li>One DSA problem narrated out loud, even on light days — silence is graded down in the
+  current landscape (<code>02-ai-era-interview-landscape.md</code>, section 1).</li>
+<li>One short read from the topic checklist rather than a fresh blog post each day — this lab's
+  pages are durable; most interview-prep blogs churn.</li>
+<li>Log every mock's specific feedback in one place and re-test the same weakness within a
+  week, not "eventually."</li>
+</ul>
+<h2>Self-assessment rubric</h2>
+<p>Map directly onto what interviewers are reported to weight now:</p>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Weak</th>
+<th>Strong</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DSA narration</td>
+<td>Silent until code is done</td>
+<td>Talks through approach, complexity, and edge cases while coding</td>
+</tr>
+<tr>
+<td>System design track discipline</td>
+<td>Mixes classic/ML/GenAI concerns without naming which track you're in</td>
+<td>States the track, then reasons inside it</td>
+</tr>
+<tr>
+<td>AI-assisted round</td>
+<td>Accepts model output at face value</td>
+<td>Catches a wrong suggestion and explains why it's wrong before fixing it</td>
+</tr>
+<tr>
+<td>Evaluation fluency</td>
+<td>Says "we'd write some tests"</td>
+<td>Names a golden set, a judge method, and a regression gate</td>
+</tr>
+<tr>
+<td>Behavioral AI-usage story</td>
+<td>"AI makes me faster"</td>
+<td>Names a specific task, a specific model error caught, and how it was verified</td>
+</tr>
+</tbody>
+</table>
+<h2>What should I learn next?</h2>
+<p><a href="04-reusable-prep-prompt.html">Reusable prep prompt</a> · <a href="02-ai-era-interview-landscape.html">The AI-era interview landscape</a> · <a href="01-overview.html">Architect / principal interviews</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>

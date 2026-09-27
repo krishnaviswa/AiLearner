@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The AI-era interview landscape (last two to three quarters) — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>44-ARCHITECTURE-INTERVIEWS/02-ai-era-interview-landscape.md</code></p>
+    <h1>The AI-era interview landscape (last two to three quarters)</h1>
+<blockquote>
+<p><strong>Volatile page.</strong> Everything below is reported by interview-prep vendors and coaching
+blogs (Tier 3/4 — see <code>source-strategy.md</code>), not by an official company careers page or
+engineering blog. No named company's policy here is Tier 1-confirmed. Use this as a radar
+for what to prepare for, not as a fact you repeat to a candidate as company policy. Loops
+vary by team, level, and region even within one company. Re-verify before relying on it.</p>
+</blockquote>
+<h2>1. The DSA/algorithms round did not go away — it got retooled</h2>
+<p>Zero of 52 surveyed FAANG interviewer-respondents said their company dropped algorithmic
+questions. What changed is the shape of the question and what earns credit:</p>
+<ul>
+<li>Longer, multi-part prompts instead of single-shot LeetCode clones; custom problems written
+  to resist a pasted solution.</li>
+<li>Credit shifts from "solved it fast" to "narrated the trade-off while solving it" — silent
+  correct code on a hard problem now rates below narrated correct code on a medium one.</li>
+<li>More debugging-given-partially-wrong-code and "extend this snippet" formats, because those
+  resist copy-paste more than blank-page coding.</li>
+<li>Deeper fundamentals follow-ups (why this complexity, what if the input 10x's, what if it
+  must run mid-stream) rather than accepting a working answer at face value.</li>
+</ul>
+<p><strong>What to change in practice:</strong> drill pattern recognition (two pointers, sliding window,
+graph traversal, DP shapes) over memorized solutions, and rehearse thinking out loud —
+silence is now a negative signal, not a neutral one. (<code>SRC-INTERVIEWING-IO-AI-SURVEY-2026</code>)</p>
+<h2>2. System design split into three tracks</h2>
+<p>"System design" used to mean one thing. It is now commonly asked as up to three separate
+conversations, and candidates are expected to know which one they are in.</p>
+<table>
+<thead>
+<tr>
+<th>Track</th>
+<th>What it tests</th>
+<th>Durable core</th>
+<th>Volatile edge</th>
+<th>Example prompt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Classic distributed systems</td>
+<td>Scaling, storage, queues, caching, consistency, failure domains</td>
+<td>Yes — CAP, partitioning, idempotency, backpressure do not change</td>
+<td>Which managed service names come up</td>
+<td>Design a URL shortener / rate limiter / news feed</td>
+</tr>
+<tr>
+<td>ML system design</td>
+<td>Data → features → model → eval → deploy → monitor → retrain lifecycle</td>
+<td>Yes — the lifecycle and its failure modes are stable</td>
+<td>Which model family, which feature store</td>
+<td>Design a fraud-detection or recommendation pipeline</td>
+</tr>
+<tr>
+<td>GenAI / LLM system design</td>
+<td>RAG pipelines, agent/tool loops, multi-agent orchestration, LLM inference platforms</td>
+<td>Partially — retrieval, grounding, and evaluation-before-ship are durable</td>
+<td>Model names, context-window sizes, framework choices</td>
+<td>Design an LLM inference platform, a document-QA assistant, or a multi-agent workflow</td>
+</tr>
+</tbody>
+</table>
+<p>Reported framing: "evaluation methodology is the new system design" for the ML and GenAI
+tracks — interviewers weight cost, latency, guardrails, and monitoring over the architecture
+diagram itself. (<code>SRC-FORMATION-FAANG-AI-2026</code>)</p>
+<pre class="mermaid">flowchart TD
+  Q[System design prompt] --&gt; T{Which track?}
+  T --&gt;|classic| C[Storage, scaling, consistency]
+  T --&gt;|ML| M[Data, features, eval, deploy, monitor]
+  T --&gt;|GenAI/LLM| G[Retrieval, agent loop, guardrails, eval]
+  C --&gt; R[Name the failure mode, not just the box]
+  M --&gt; R
+  G --&gt; R
+
+%% styled
+classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;
+classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;
+classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;
+classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;
+classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;
+classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;
+classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;
+classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;
+class Q src
+class T decision
+class C,M proc
+class G guard
+class R risk
+</pre>
+<p>This lab already teaches the durable core of the GenAI track — do not re-derive it from a
+blog. See <a href="../08-RAG/01-overview.html">08-RAG</a>, <a href="../10-AGENTS/01-overview.html">10-AGENTS</a>,
+<a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14-MULTI-AGENT-SYSTEMS</a>, and the
+<a href="../40-REFERENCE-ARCHITECTURES/01-overview.html">reference architectures A–E</a>.</p>
+<h2>3. The new "AI-assisted coding round"</h2>
+<p>Distinct from both the classic DSA round and take-home work: the candidate codes <em>with</em> a
+model in the room, and the model's output is part of the artifact being graded.</p>
+<ul>
+<li>Reported at Meta (a discrete "AI-Enabled" slot in E4–E6 loops, and reportedly the <em>only</em>
+  coding round at E7+), piloted at Google (an AI-assisted "code comprehension" format), and
+  run at Netflix, Shopify, Scale AI, and OpenAI in similar shapes.</li>
+<li>Typically CodeSignal/CoderPad-style, with a model (GPT-4o-class, Claude, or Gemini) wired
+  into the editor.</li>
+<li>Graded differently from DSA: prompt quality, task decomposition, whether the candidate
+  catches a wrong or subtly-broken model suggestion, and verification discipline — not typing
+  speed. (<code>SRC-INTERVIEWING-IO-AI-SURVEY-2026</code>, <code>SRC-FORMATION-FAANG-AI-2026</code>)</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+  participant Cand as Candidate
+  participant Model as In-editor model
+  participant Interviewer
+  Cand-&gt;&gt;Model: Prompt for a subtask
+  Model--&gt;&gt;Cand: Draft code
+  Cand-&gt;&gt;Cand: Read, test, spot the bug
+  Cand-&gt;&gt;Interviewer: Explain what was wrong and why
+  Cand-&gt;&gt;Model: Re-prompt with the fix constraint
+  Interviewer--&gt;&gt;Cand: Changes a requirement mid-stream
+</pre>
+<h2>4. Companies split on AI-allowed vs AI-banned, and detection is an arms race</h2>
+<table>
+<thead>
+<tr>
+<th>Reported stance</th>
+<th>Companies named</th>
+<th>Consequence if violated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bans covert AI use</td>
+<td>Amazon, Goldman Sachs, Anthropic</td>
+<td>Amazon: disqualification; general risk of a do-not-hire flag</td>
+</tr>
+<tr>
+<td>Expects/allows AI use</td>
+<td>Canva (Copilot/Cursor/Claude expected), Meta (dedicated AI round), Microsoft (AI-assisted SDE rounds reported)</td>
+<td>N/A — it is the point of the round</td>
+</tr>
+</tbody>
+</table>
+<p>Every company name in that table is a vendor-blog claim
+(<code>SRC-INTERVIEWMAN-AI-POLICY-2026</code>) — <strong>UNVERIFIED</strong> absent that company's own statement.
+Confirm the specific loop's rules with the recruiter before the interview; do not assume.</p>
+<p>Detection methods reported in the wild: full-screen-share requirements, disabled background
+filters, proctoring for tab/focus loss and paste bursts, and keystroke/paste-pattern logging.
+The one signal every source agrees resists AI assistance: a human asking the candidate to
+explain or modify their own code live. Reported cheating-prevalence figures (a vendor's own
+sample, self-selected and not independently audited) range widely — treat any specific
+percentage as a lower or upper bound from one dataset, not an industry constant.</p>
+<h2>5. Behavioral rounds reportedly gained scope — and a new staple question</h2>
+<p>One vendor's estimate: behavioral share of the loop grew from roughly 10–15% to 30–40%
+(<code>SRC-FORMATION-FAANG-AI-2026</code> — the underlying percentage itself is unverified; treat the
+direction, "behavioral got bigger," as the more durable part of the claim). The new staple
+question is some form of <em>"how do you actually use AI in your day-to-day work?"</em> Evaluators
+report weighting:</p>
+<ul>
+<li>Specific tasks delegated to a model vs kept manual, and why.</li>
+<li>A concrete case of catching and correcting a model's wrong output.</li>
+<li>How the candidate verifies AI-assisted work before it ships.</li>
+</ul>
+<p>Generic "AI makes me more productive" answers are reported to fall flat; specific
+catch-the-error stories are reported to land well.</p>
+<h2>6. A distinct AI / applied-AI engineering interview track</h2>
+<p>Separate from "SWE interview with an AI round bolted on": roles titled AI engineer, applied
+AI engineer, or LLM engineer are reported to run their own loop shape:</p>
+<ol>
+<li><strong>Narrative round</strong> (~45 min) — one system the candidate built end to end: what broke,
+   what they measured, what they'd change.</li>
+<li><strong>Engineering-signal round</strong> (~60–90 min) — real code in a realistic setting: extend a
+   small existing codebase, debug a failing pipeline, work with intentionally imperfect data.</li>
+<li><strong>AI system-design round</strong> (~60 min) — grounded in the interviewer's own product, with
+   real constraints: latency budget, cost ceiling, data-sensitivity limits, a quality bar.</li>
+<li><strong>Evaluation round</strong> — how would you build a golden set, run an LLM-as-judge, and catch a
+   regression before it reaches production. Reported as increasingly load-bearing: "eval
+   methodology is the new system design" shows up again here, not only in ML system design.</li>
+</ol>
+<p><strong>Topic checklist</strong> (each already has a home in this lab — do not re-teach it here, follow
+the link):</p>
+<ul>
+<li>LLM fundamentals, tokenization, decoding/sampling → <a href="../03-LLM-ENGINEERING/01-overview.html">03-LLM-ENGINEERING</a></li>
+<li>Context management, structured output → <a href="../04-PROMPT-ENGINEERING/01-overview.html">04-PROMPT-ENGINEERING</a>, <a href="../05-LLM-APPLICATION-ENGINEERING/01-overview.html">05-LLM-APPLICATION-ENGINEERING</a></li>
+<li>Embeddings and vector search trade-offs → <a href="../06-EMBEDDINGS/01-overview.html">06-EMBEDDINGS</a>, <a href="../07-VECTOR-DATABASES/01-overview.html">07-VECTOR-DATABASES</a></li>
+<li>RAG pipeline design, when RAG beats fine-tuning → <a href="../08-RAG/01-overview.html">08-RAG</a>, <a href="../09-AGENTIC-RAG/01-overview.html">09-AGENTIC-RAG</a></li>
+<li>Agent and tool-calling design, when <em>not</em> to use an agent → <a href="../10-AGENTS/19-comparison.html">10-AGENTS</a>, <a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12-TOOLS-FUNCTION-CALLING</a></li>
+<li>Multi-agent patterns (supervisor, handoff, parallel, hierarchy) → <a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14-MULTI-AGENT-SYSTEMS</a></li>
+<li>Evaluation methodology, golden sets, LLM-as-judge pitfalls → <a href="../18-EVALUATION/01-overview.html">18-EVALUATION</a></li>
+<li>Prompt injection, guardrails, the OWASP GenAI LLM Top 10 → <a href="../21-AI-SECURITY/01-overview.html">21-AI-SECURITY</a>, <a href="../22-GUARDRAILS/01-overview.html">22-GUARDRAILS</a>, <a href="../50-CHEAT-SHEETS/security-top10.html">security cheat sheet</a></li>
+<li>Observability, cost, and latency at inference time → <a href="../19-OBSERVABILITY/01-overview.html">19-OBSERVABILITY</a>, <a href="../38-AI-COST/01-overview.html">38-AI-COST</a></li>
+<li>Reference architectures to defend under a changed constraint → <a href="../40-REFERENCE-ARCHITECTURES/01-overview.html">40-REFERENCE-ARCHITECTURES</a></li>
+</ul>
+<h2>What this page is deliberately silent on</h2>
+<p>This lab teaches <strong>AI engineering</strong>, not general computer-science fundamentals. DSA/algorithm
+<em>content</em> (arrays, trees, graphs, DP) is out of scope here the same way basic Python/SQL is
+out of scope elsewhere in this repo (<code>contribute-concept</code> skill, "do not reteach basics") —
+practice that against a general DSA judge. What this lab adds is everything AI-specific: the
+GenAI system-design track, the AI-assisted-round mental model, and the evaluation-first
+framing above.</p>
+<h2>What should I learn next?</h2>
+<p><a href="03-prep-plan-30-60-90.html">30/60/90-day prep plan</a> · <a href="04-reusable-prep-prompt.html">Reusable prep prompt</a> · <a href="01-overview.html">Architect / principal interviews</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>
