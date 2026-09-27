@@ -94,4 +94,4 @@ context if something has clearly shifted — do not let the prompt calcify into 
 
 ## What should I learn next?
 
-[30/60/90-day prep plan](03-prep-plan-30-60-90.md) · [The AI-era interview landscape](02-ai-era-interview-landscape.md) · [Architect / principal interviews](01-overview.md)
+[Practice drill library](05-practice-drill-library.md) · [30/60/90-day prep plan](03-prep-plan-30-60-90.md) · [The AI-era interview landscape](02-ai-era-interview-landscape.md) · [Architect / principal interviews](01-overview.md)

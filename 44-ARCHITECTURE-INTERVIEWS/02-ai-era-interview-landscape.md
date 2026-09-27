@@ -168,4 +168,4 @@ framing above.
 
 ## What should I learn next?
 
-[30/60/90-day prep plan](03-prep-plan-30-60-90.md) · [Reusable prep prompt](04-reusable-prep-prompt.md) · [Architect / principal interviews](01-overview.md)
+[30/60/90-day prep plan](03-prep-plan-30-60-90.md) · [Practice drill library](05-practice-drill-library.md) · [Reusable prep prompt](04-reusable-prep-prompt.md) · [Architect / principal interviews](01-overview.md)

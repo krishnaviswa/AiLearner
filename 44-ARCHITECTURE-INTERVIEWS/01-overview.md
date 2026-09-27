@@ -105,4 +105,4 @@ An interview answer that names a vendor SKU but cannot name the failure mode on 
 
 ## What should I learn next?
 
-[Anti-patterns](../47-ANTI-PATTERNS/01-overview.md) · [Glossary](../48-GLOSSARY/01-overview.md) · [The AI-era interview landscape](02-ai-era-interview-landscape.md) · [30/60/90-day prep plan](03-prep-plan-30-60-90.md)
+[Anti-patterns](../47-ANTI-PATTERNS/01-overview.md) · [Glossary](../48-GLOSSARY/01-overview.md) · [The AI-era interview landscape](02-ai-era-interview-landscape.md) · [30/60/90-day prep plan](03-prep-plan-30-60-90.md) · [Practice drill library](05-practice-drill-library.md)

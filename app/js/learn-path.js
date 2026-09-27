@@ -987,6 +987,13 @@
     "module": "reference",
     "folder": "44-ARCHITECTURE-INTERVIEWS",
     "section": "Architect / principal interviews"
+  },
+  {
+    "href": "44-ARCHITECTURE-INTERVIEWS/05-practice-drill-library.html",
+    "title": "Practice drill library \u2014 prompts by topic",
+    "module": "reference",
+    "folder": "44-ARCHITECTURE-INTERVIEWS",
+    "section": "Architect / principal interviews"
   }
 ];
   var MODULES = [

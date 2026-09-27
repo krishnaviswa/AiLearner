@@ -204,3 +204,10 @@ Restart-safe human log. Machine resume: [`factory-state.json`](factory-state.jso
 - **Files:** `44-ARCHITECTURE-INTERVIEWS/02-ai-era-interview-landscape.md`, `44-ARCHITECTURE-INTERVIEWS/03-prep-plan-30-60-90.md`, `44-ARCHITECTURE-INTERVIEWS/04-reusable-prep-prompt.md`, `44-ARCHITECTURE-INTERVIEWS/01-overview.md` (learn-next links added), `99-META/sources.yaml` rows SRC-INTERVIEWING-IO-AI-SURVEY-2026, SRC-FORMATION-FAANG-AI-2026, SRC-INTERVIEWMAN-AI-POLICY-2026
 - **UNVERIFIED:** all company-specific AI-interview-policy claims (Meta/Google/Amazon/Netflix/Shopify/Canva/Microsoft/Goldman Sachs/Anthropic/Scale AI/OpenAI) and all cited percentages — every claim traces to a Tier 3/4 interview-prep vendor blog, none to an official company source; pages are marked volatile and flagged for re-verification
 - **Next if interrupted:** run `python app/tools/render-pages.py`; branch `feat/ai-era-interview-prep-2026`
+
+## 2026-09-27T00:00:00Z — post-gate-10 — ai-era-interview-prep-practice-drills
+
+- **Status:** authored
+- **Files:** `44-ARCHITECTURE-INTERVIEWS/05-practice-drill-library.md` (new — 15 topic drills + master prompt template + skill-area map, adapted from a learner-supplied `docs/ai-interview-prep-topics-prompts.md`); `44-ARCHITECTURE-INTERVIEWS/{01-overview,02-ai-era-interview-landscape,03-prep-plan-30-60-90,04-reusable-prep-prompt}.md` (learn-next cross-links added)
+- **UNVERIFIED:** every quantitative/company-specific claim carried over from the source doc (e.g. level at which classic system design first appears, GenAI system-design question growth rate) — none traces to a Tier 1/2 source in `sources.yaml`; each is flagged inline and cross-linked to the sourced `02-ai-era-interview-landscape.md` instead of restating as fact. DSA and classic-distributed-systems concept content stays out of this lab's teaching scope by design (general CS, not AI engineering) — only practice-generator prompts are added for those two topics.
+- **Next if interrupted:** run `python app/tools/render-pages.py`; branch `feat/ai-era-interview-prep-2026` (PR #7 already open — push updates it)

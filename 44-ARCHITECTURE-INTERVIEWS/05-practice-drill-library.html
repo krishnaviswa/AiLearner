@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Practice drill library — prompts by topic — AI Engineering Knowledge Lab</title>
+  <script src="../app/js/theme.js"></script>
+  <link rel="stylesheet" href="../app/css/lab.css">
+</head>
+<body>
+  <div id="lab-root" data-root="../"></div>
+  <article class="lab-article">
+    <p class="md-source">Source: <code>44-ARCHITECTURE-INTERVIEWS/05-practice-drill-library.md</code></p>
+    <h1>Practice drill library — prompts by topic</h1>
+<blockquote>
+<p><strong>Volatile framing, durable prompts.</strong> The "why it's tested now" line under each topic is
+reported interview-market color (Tier 3/4 sources plus learner-compiled trend notes) — mark
+any specific number or company claim <strong>UNVERIFIED</strong> unless a source is cited. The prompts and
+question patterns themselves are durable: they work as practice-generator seeds regardless of
+whether this quarter's trend numbers hold. See
+<a href="02-ai-era-interview-landscape.html">02-ai-era-interview-landscape.md</a> for the sourced version
+of the trend claims and <a href="../99-META/source-strategy.html">source-strategy.md</a> for tier rules.</p>
+</blockquote>
+<h2>How to use this library</h2>
+<p>Each of the 15 topics below has four parts:</p>
+<ol>
+<li><strong>Why it's tested now</strong> — one line of market color, cross-linked to the sourced landscape
+   page instead of repeating unsourced numbers here.</li>
+<li><strong>Concept checklist</strong> — the minimum you should recognize by name; links to this lab's own
+   pages for the depth, so this file stays a drill list, not a re-teach.</li>
+<li><strong>Ready-to-use prompts</strong> — paste directly into an LLM chat, a practice-question generator,
+   or <a href="04-reusable-prep-prompt.html">the reusable coaching prompt</a>, as-is.</li>
+<li><strong>Real question pattern</strong> — the shape interviewers reportedly use, so you recognize it live
+   instead of pattern-matching to a memorized answer.</li>
+</ol>
+<p>Pair this file with <a href="03-prep-plan-30-60-90.html">the 30/60/90-day plan</a> for scheduling (which
+weeks to drill which topics) and with the <a href="#master-prompt-template">master prompt template</a> at
+the end to generate a fresh drill for any topic/level combination on demand.</p>
+<pre class="mermaid">flowchart LR
+  L[&quot;02: landscape\n(why + sources)&quot;] --&gt; P[&quot;05: this file\n(drills by topic)&quot;]
+  P --&gt; S[&quot;03: 30/60/90 plan\n(when to drill what)&quot;]
+  P --&gt; C[&quot;04: reusable prompt\n(run it as a mock)&quot;]
+  P --&gt; D[&quot;This lab&#x27;s own domains\n(01-50, the depth)&quot;]
+
+%% styled
+classDef src fill:#e8f0fe,stroke:#1565c0,color:#14203a;
+classDef proc fill:#e7f3ea,stroke:#2e7d32,color:#14203a;
+classDef store fill:#fff3e0,stroke:#e65100,color:#14203a;
+classDef model fill:#ede7f6,stroke:#5e35b1,color:#14203a;
+classDef guard fill:#e0f2f1,stroke:#00796b,color:#14203a;
+classDef risk fill:#fdecea,stroke:#c62828,color:#14203a;
+classDef out fill:#eceff1,stroke:#455a64,stroke-width:1.5px,color:#14203a;
+classDef decision fill:#fff8e1,stroke:#f9a825,color:#14203a;
+class L src
+class P,S,C,D proc
+</pre>
+<hr />
+<h2>1. DSA (data structures &amp; algorithms) and coding fundamentals</h2>
+<p><strong>Why it's tested now:</strong> Reported as still one of the most common interview components at
+large tech companies even with AI coding tools in wide use — heavier weight early-career,
+lighter but still present at senior level. See
+<a href="02-ai-era-interview-landscape.md#1-the-dsaalgorithms-round-did-not-go-away--it-got-retooled">02-ai-era-interview-landscape.md §1</a>
+for the sourced version of how the <em>format</em> changed. <strong>Out of this lab's scope by design</strong>:
+DSA content itself (arrays, trees, DP) is general computer science, not AI engineering — this
+lab gives you prompts to <em>practice</em> it elsewhere, not the lessons themselves.</p>
+<p><strong>Concept checklist:</strong>
+- Arrays, strings, hashing (hash map — key/value lookup with near-instant average lookup)
+- Two pointers, sliding window (moving a fixed- or variable-size window to avoid re-scanning)
+- Trees and graphs (traversal; breadth-first vs depth-first search)
+- Dynamic programming (overlapping sub-problems with cached results)
+- Heaps/priority queues, tries, union-find (disjoint set)
+- Time/space complexity (Big-O) trade-off reasoning
+- Pattern recognition over memorized solutions</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Give me a medium-difficulty problem that uses [pattern], with no solution yet — let me attempt it first."
+- "I solved this in O(n²). Ask me guiding questions (don't give the answer) to help me find an O(n log n) approach."
+- "Review my code for this problem and point out edge cases I likely missed, without rewriting my solution."
+- "Generate 5 problems on [pattern] in increasing difficulty, each one line, no solutions."</p>
+<p><strong>Real question pattern:</strong> company-tagged variations of classic patterns (sliding window, DP,
+graph traversal), graded as much on communication and edge-case handling as on the answer.</p>
+<hr />
+<h2>2. Classic system design (distributed systems)</h2>
+<p><strong>Why it's tested now:</strong> Reported as no longer senior-only — this lab's landscape page cites
+the three-track split (classic / ML / GenAI) now common at large companies; see
+<a href="02-ai-era-interview-landscape.md#2-system-design-split-into-three-tracks">02-ai-era-interview-landscape.md §2</a>.
+Which specific level first sees it (e.g. "as early as L4") is a per-company, per-source claim —
+<strong>UNVERIFIED</strong> here; confirm against the target company's own leveling guide.</p>
+<p><strong>Concept checklist</strong> — this lab's durable core lives in
+<a href="../40-REFERENCE-ARCHITECTURES/01-overview.html">40-REFERENCE-ARCHITECTURES</a>; the classic-systems
+vocabulary itself (load balancing, consistent hashing, CAP theorem, sharding, replication) is
+general distributed-systems knowledge, not AI-specific, so treat it the same way as DSA above —
+practice it broadly, use this lab for the AI-specific tracks.
+- Requirements gathering (functional vs non-functional) before designing anything
+- Load balancing, consistent hashing
+- Caching strategies (cache eviction, e.g. LRU — least recently used)
+- Database indexing (B-trees), SQL vs NoSQL trade-offs, sharding
+- Data pipelines (batch vs streaming) — see <a href="../16-AI-DATA-ENGINEERING/01-overview.html">16-AI-DATA-ENGINEERING</a> for the AI-adjacent version
+- Fault tolerance, replication, consistency models (CAP theorem)
+- API design and rate limiting</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Act as an interviewer. Ask me to design [system, e.g. a URL shortener], then push back on my first answer the way a real interviewer would."
+- "I designed [system] this way — what's the biggest scalability weakness a staff engineer would flag?"
+- "Compare SQL vs NoSQL for [scenario] and make me defend my choice out loud."
+- "Give me a system design prompt reportedly used at [company] recently, without the sample answer."</p>
+<p><strong>Real question pattern:</strong> design a scalable, reliable system for a real-world scenario (e.g.
+notification system, ride-sharing dispatch), graded on trade-off reasoning across the stack,
+not just the diagram.</p>
+<hr />
+<h2>3. GenAI / LLM system design</h2>
+<p><strong>Why it's tested now:</strong> This lab's landscape page documents this as a distinct third track
+alongside classic and ML system design; see
+<a href="02-ai-era-interview-landscape.md#2-system-design-split-into-three-tracks">02-ai-era-interview-landscape.md §2</a>.
+Any specific growth-rate claim (e.g. "roughly tripled since 2023") is <strong>UNVERIFIED</strong> — no Tier
+1/2 source in this lab's registry confirms a number; treat only the direction as durable.</p>
+<p><strong>Concept checklist</strong> — full depth in
+<a href="../08-RAG/01-overview.html">08-RAG</a>, <a href="../10-AGENTS/01-overview.html">10-AGENTS</a>, and
+<a href="../40-REFERENCE-ARCHITECTURES/B-enterprise-agent.html">40-REFERENCE-ARCHITECTURES B</a>:
+- End-to-end architecture: user request → gateway → retrieval/context → model inference → response
+- Latency and streaming (token-by-token delivery) trade-offs
+- Token cost management at scale — see <a href="../38-AI-COST/01-overview.html">38-AI-COST</a>
+- Grounding (tying output to real data) to reduce hallucination
+- Choosing fine-tune vs RAG vs prompt engineering
+- Multi-modal considerations (text, image, audio) where relevant</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Ask me to design an LLM-powered [customer support bot / document search / coding assistant], and interrupt me if I skip a requirement a real interviewer would probe."
+- "I said I'd reduce token costs by [approach] — what's the trade-off I'm not accounting for?"
+- "Give me 3 recently-reported GenAI system design questions from large AI-native companies, without answers."</p>
+<p><strong>Real question pattern:</strong> "Design a high-level system for an LLM responding to a user query,"
+"design a customer-support chatbot on top of a third-party LLM platform," "design safeguards
+for an AI system that can take actions on a user's behalf."</p>
+<hr />
+<h2>4. Context &amp; RAG (retrieval-augmented generation)</h2>
+<p><strong>Why it's tested now:</strong> RAG is a standard system-design sub-topic and a common standalone
+question set for AI/ML/prompt engineer roles — durable, not a 2026-only fad; this lab teaches
+the full mechanism in <a href="../08-RAG/01-overview.html">08-RAG</a> and
+<a href="../09-AGENTIC-RAG/01-overview.html">09-AGENTIC-RAG</a>.</p>
+<p><strong>Concept checklist:</strong>
+- Chunking strategy and its effect on retrieval quality
+- Embeddings (text → numeric vectors for similarity search) and vector databases — <a href="../06-EMBEDDINGS/01-overview.html">06-EMBEDDINGS</a>, <a href="../07-VECTOR-DATABASES/01-overview.html">07-VECTOR-DATABASES</a>
+- Retrieval vs reranking
+- Hybrid search (keyword + vector/semantic)
+- Context-window limits when many chunks are retrieved
+- Permission-aware retrieval — <a href="../08-RAG/19-comparison.html">08-RAG comparison</a>
+- Evaluating retrieval quality separately from the final generated answer — <a href="../18-EVALUATION/01-overview.html">18-EVALUATION</a></p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Walk me through designing a RAG pipeline for [internal documentation search], and challenge my chunking strategy."
+- "A RAG system retrieves 20 chunks but the context window only fits 5 — ask me how I'd decide which to keep."
+- "Give me a scenario where two retrieved documents conflict — how should the system handle it?"
+- "Quiz me on the difference between retrieval evaluation metrics and generation evaluation metrics."</p>
+<p><strong>Real question pattern:</strong> "Design a retrieval-augmented chatbot for enterprise search," plus
+deep-dive follow-ups on chunking, reranking, and how to evaluate the system once it's live.</p>
+<hr />
+<h2>5. Agent loops &amp; frameworks</h2>
+<p><strong>Why it's tested now:</strong> As AI systems take actions rather than only answer questions,
+interviewers reportedly probe how an agent plans, acts, and monitors its own progress. Durable
+core in <a href="../10-AGENTS/01-overview.html">10-AGENTS</a>, including the <a href="../10-AGENTS/19-comparison.html">when-not-an-agent
+comparison</a> — the strongest answers in this topic often start by
+refusing the agent framing when a workflow would do.</p>
+<p><strong>Concept checklist:</strong>
+- The agent loop: plan → execute → observe → adjust
+- Task decomposition (breaking a goal into smaller steps)
+- State management across multi-step tasks
+- Error handling and recovery when a step fails
+- When to use an agent vs a simple, direct tool call</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Ask me to design the control loop for an agent that [books a meeting across calendars], including failure handling."
+- "I designed my agent loop without a retry mechanism — what breaks in production?"
+- "Compare a single-shot tool call vs a full agent loop for [task] and have me justify which fits better."</p>
+<p><strong>Real question pattern:</strong> "Describe how you'd architect an AI agent system, including the
+loop, tools, memory, and safety considerations."</p>
+<hr />
+<h2>6. ReAct-style reasoning (reason + act)</h2>
+<p><strong>Why it's tested now:</strong> Underpins most production agent frameworks, so interviewers use it to
+check whether a candidate understands <em>why</em> agents interleave reasoning and action rather than
+planning everything up front. See <a href="../10-AGENTS/01-overview.html">10-AGENTS</a> for where this sits
+relative to the other agent flavors in the <a href="../00-MASTER-MAP/master-taxonomy.html">master taxonomy</a>.</p>
+<p><strong>Concept checklist:</strong>
+- The think → act → observe → repeat cycle
+- Why interleaving reasoning with actions reduces compounding errors
+- Structured prompting (a consistent, parseable output format at each step) — <a href="../04-PROMPT-ENGINEERING/01-overview.html">04-PROMPT-ENGINEERING</a>
+- Where this pattern breaks down: long tasks, costly actions, ambiguous observations</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Explain a case where a plan-first agent would fail but a reason-and-act-style agent would succeed."
+- "Trace a reason-act loop step-by-step for [task] and ask me to predict what happens if step 2's observation is wrong."</p>
+<p><strong>Real question pattern:</strong> usually embedded inside an agent system-design question rather than
+asked standalone — expect a follow-up like "how does the agent know when to stop or ask for
+help?"</p>
+<hr />
+<h2>7. MCP &amp; tool integration</h2>
+<p><strong>Why it's tested now:</strong> As agents need to reach real data and APIs, interviewers probe secure,
+standardized tool access rather than hard-coded one-off integrations. Full mechanism (host,
+client, server; trust boundaries) in <a href="../13-MCP/01-overview.html">13-MCP</a> and
+<a href="../12-TOOLS-FUNCTION-CALLING/01-overview.html">12-TOOLS-FUNCTION-CALLING</a>; the
+<a href="../50-CHEAT-SHEETS/mcp-vs-tools.html">MCP-vs-tools cheat sheet</a> is the fast version of the
+trade-off.</p>
+<p><strong>Concept checklist:</strong>
+- Model Context Protocol (MCP) — a standard way for an agent to discover and call tools
+- Standardized tool schemas vs ad-hoc API glue
+- Authentication and scoping (limiting what a tool call can access)
+- Tool selection (how the agent picks the right tool from many)</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Ask me to design a tool-integration layer for an agent that needs access to [databases, APIs, internal docs], focusing on security boundaries."
+- "What's the risk of giving an agent an unscoped API key, and how would you fix it?"</p>
+<p><strong>Real question pattern:</strong> folded into agent or GenAI system-design answers — expect to be
+asked how the model knows which tools exist and how calls are authorized.</p>
+<hr />
+<h2>8. Multi-agent systems</h2>
+<p><strong>Why it's tested now:</strong> As single-agent systems hit limits on complex tasks, interviewers
+reportedly ask how candidates coordinate multiple specialized agents. Durable patterns
+(supervisor, handoff, parallel, hierarchy) in
+<a href="../14-MULTI-AGENT-SYSTEMS/01-overview.html">14-MULTI-AGENT-SYSTEMS</a> and
+<a href="../40-REFERENCE-ARCHITECTURES/E-multi-agent.html">reference architecture E</a>.</p>
+<p><strong>Concept checklist:</strong>
+- Task decomposition across specialized agents (planner + retrieval + coding, for example)
+- Inter-agent communication and shared state/memory
+- Orchestration (who decides which agent runs next) — <a href="../11-AGENT-ORCHESTRATION/01-overview.html">11-AGENT-ORCHESTRATION</a>
+- Failure isolation (one agent failing shouldn't crash the whole system)</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Design a multi-agent system for [research and report generation] and challenge me on how the agents avoid duplicating work."
+- "What happens if two agents in your system disagree on the next action? Ask me to design the resolution."</p>
+<p><strong>Real question pattern:</strong> increasingly a deep-dive follow-up within GenAI system design rather
+than its own question — "how would this change if you needed three specialized agents instead
+of one?"</p>
+<hr />
+<h2>9. AI gateway (cost, routing, inference economics)</h2>
+<p><strong>Why it's tested now:</strong> As AI spend becomes a real budget line, interviewers reportedly expect
+engineers to design for cost, not just correctness. See
+<a href="../38-AI-COST/01-overview.html">38-AI-COST</a> for the durable cost model and
+<a href="../20-LLMOPS/01-overview.html">20-LLMOPS</a> for the versioning/routing operational side.</p>
+<p><strong>Concept checklist:</strong>
+- Model routing (simple requests to a cheaper/smaller model, complex ones to a larger model)
+- Rate limiting and usage monitoring
+- Caching model responses (semantic caching — caching by meaning, not exact text match)
+- Inference cost drivers: token count, model size, request volume</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "I need to cut LLM costs by 40% without hurting quality — ask me to justify three approaches."
+- "Design a gateway that routes requests between two models by cost and complexity, and quiz me on the routing logic."</p>
+<p><strong>Real question pattern:</strong> "How would you reduce token costs in an LLM-powered product at
+scale?"</p>
+<hr />
+<h2>10. Evaluation</h2>
+<p><strong>Why it's tested now:</strong> AI systems are non-deterministic (the same input can produce different
+outputs), so interviewers test whether candidates can measure quality before shipping. This
+lab's landscape page calls this out twice — for ML system design and for GenAI system design —
+as "evaluation methodology is the new system design"; see
+<a href="02-ai-era-interview-landscape.html">02-ai-era-interview-landscape.md §2 and §6</a>. Full mechanism
+in <a href="../18-EVALUATION/01-overview.html">18-EVALUATION</a>, including its
+<a href="../18-EVALUATION/14-failure-modes.html">failure modes</a> and the
+<a href="../50-CHEAT-SHEETS/eval.html">eval cheat sheet</a>.</p>
+<p><strong>Concept checklist:</strong>
+- Offline evaluation (test sets, benchmarks) vs online evaluation (live user feedback)
+- LLM-as-judge (a model grading another model's output) and its limits
+- Regression testing for AI systems (catching quality drops after a change)
+- Human-in-the-loop review for ambiguous cases
+- Retrieval evaluation vs generation evaluation (for RAG specifically)</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "How would you evaluate a RAG system? Ask me to separate retrieval metrics from generation metrics."
+- "Design an evaluation pipeline for an agent that completes multi-step tasks — what does 'success' even mean here?"
+- "Critique my evaluation plan for gaps that would let a bad model pass."</p>
+<p><strong>Real question pattern:</strong> "How do you evaluate a RAG system?" and "how would you detect
+quality regressions after a model or prompt change?"</p>
+<hr />
+<h2>11. Observability</h2>
+<p><strong>Why it's tested now:</strong> Once an AI system is in production, interviewers reportedly want to
+know how you'd notice something going wrong. Durable mechanism (traces, GenAI-specific
+telemetry, cost/latency dashboards) in
+<a href="../19-OBSERVABILITY/01-overview.html">19-OBSERVABILITY</a>.</p>
+<p><strong>Concept checklist:</strong>
+- Traces (following one request through every step of the system)
+- Cost and token dashboards
+- Drift detection (model behavior quietly changing over time)
+- Alerting thresholds for latency, error rate, and cost spikes</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Design the observability layer for the RAG system we discussed — what would you track, and why those metrics specifically?"
+- "My dashboard only shows latency. What's missing for an AI-specific system, and why does it matter?"</p>
+<p><strong>Real question pattern:</strong> usually a deep-dive question after a system design answer: "how
+would you know if this degraded in production?"</p>
+<hr />
+<h2>12. Safety harnesses (guardrails &amp; responsible AI)</h2>
+<p><strong>Why it's tested now:</strong> As AI systems take real actions and handle real data, interviewers
+reportedly test whether protections are built in by default. Durable mechanism in
+<a href="../22-GUARDRAILS/01-overview.html">22-GUARDRAILS</a> and
+<a href="../21-AI-SECURITY/01-overview.html">21-AI-SECURITY</a> (OWASP GenAI LLM Top 10 mapping); the
+<a href="../50-CHEAT-SHEETS/security-top10.html">security cheat sheet</a> is the fast version.</p>
+<p><strong>Concept checklist:</strong>
+- Prompt filtering and output monitoring (catching unsafe or leaking outputs before the user sees them)
+- Guardrails against prompt injection (malicious instructions hidden in retrieved content)
+- Compliance-by-design (e.g. data-handling rules baked into architecture) — <a href="../23-PHI-PII-DLP/01-overview.html">23-PHI-PII-DLP</a>, <a href="../24-AI-GOVERNANCE/01-overview.html">24-AI-GOVERNANCE</a>
+- Human approval gates for high-stakes agent actions</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Design safeguards for an AI system that can take actions on a user's behalf — ask me what happens when it's about to do something irreversible."
+- "How would you prevent a RAG system from leaking private data it retrieved? Push me for a concrete mechanism, not a general principle."</p>
+<p><strong>Real question pattern:</strong> "Design safeguards for an AI system that can take actions on behalf
+of a user" — reported as a standalone question at several companies now, not just a footnote.</p>
+<hr />
+<h2>13. Deployment &amp; scale</h2>
+<p><strong>Why it's tested now:</strong> Companies reportedly want to know a candidate can take a prototype
+into reliable production infrastructure. Durable operational content in
+<a href="../39-AI-PRODUCTION-OPERATIONS/01-overview.html">39-AI-PRODUCTION-OPERATIONS</a>,
+<a href="../20-LLMOPS/01-overview.html">20-LLMOPS</a> (versioning prompts/models/indexes), and
+<a href="../37-AI-PERFORMANCE/01-overview.html">37-AI-PERFORMANCE</a>.</p>
+<p><strong>Concept checklist:</strong>
+- CI/CD for AI systems (prompts, models, and data all version separately from code)
+- Scaling inference (horizontal scaling, batching requests)
+- Security and governance for AI infrastructure
+- Cost optimization at scale (infrastructure-level, distinct from per-request routing in topic 9)</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Take the RAG system we designed and ask me how I'd deploy and scale it to 10x current traffic."
+- "What's different about CI/CD for a system that includes an LLM, versus a normal backend service?"</p>
+<p><strong>Real question pattern:</strong> usually the final deep-dive in a GenAI system-design interview —
+"this works for 100 users, how does it change at 100,000?"</p>
+<hr />
+<h2>14. The AI-era behavioral / process round</h2>
+<p><strong>Why it's tested now:</strong> This lab's landscape page documents "how do you use AI day-to-day" as
+a reported new staple behavioral question, and a live "defend your decisions" follow-up after
+take-homes; see
+<a href="02-ai-era-interview-landscape.md#5-behavioral-rounds-reportedly-gained-scope--and-a-new-staple-question">02-ai-era-interview-landscape.md §5</a>.</p>
+<p><strong>Concept checklist:</strong>
+- Explaining <em>how</em> and <em>why</em> you used AI tools on a task, not just that you did
+- Defending every line of a take-home submission out loud, including parts you didn't write yourself
+- Being explicit about what you'd double-check before trusting AI-generated code or output</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Ask me how I used AI tools to solve [this problem], and push back until I can defend every decision without relying on 'the AI suggested it.'"
+- "Simulate a live code-review follow-up to my take-home submission — ask me why I made three specific choices."</p>
+<p><strong>Real question pattern:</strong> a direct question about AI tool use in your workflow, plus an
+in-person "walk me through your code and your decisions" round following any take-home.</p>
+<hr />
+<h2>15. Principal / staff / architect track</h2>
+<p><strong>Why it's tested this way:</strong> There is no single template at this level — loop shape varies by
+company — but the components that repeat form a predictable pattern. This overlaps directly
+with <a href="01-overview.html">01-overview.md</a> (architect/principal interviews) in this same folder; use
+that page's ten open-ended design questions alongside the drills below.</p>
+<p><strong>Typical loop (4–6 rounds over 1–2 days) — reported shape, confirm against the specific
+company's own process:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Round</th>
+<th>Format</th>
+<th>What it's really checking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coding (1–2 rounds, ~60 min each)</td>
+<td>Still present, but a gate, not a differentiator</td>
+<td>Correctness and reasoning, not cleverness</td>
+</tr>
+<tr>
+<td>System design / architecture (~60 min)</td>
+<td>Open-ended, often spanning multiple domains</td>
+<td>Whether you scope the problem yourself and weigh cross-team trade-offs</td>
+</tr>
+<tr>
+<td>Technical/domain deep dive</td>
+<td>Discussion of a system you actually built</td>
+<td>Your real decisions and their second-order consequences</td>
+</tr>
+<tr>
+<td>Leadership &amp; influence round</td>
+<td>Behavioral, structured around past initiatives</td>
+<td>Whether you can align stakeholders without direct authority</td>
+</tr>
+<tr>
+<td>Strategy/business case</td>
+<td>Scenario-based</td>
+<td>How you diagnose, prioritize, and sequence work at portfolio level</td>
+</tr>
+<tr>
+<td>Values/culture (~45 min)</td>
+<td>Standard behavioral</td>
+<td>Fit and conduct</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What reportedly shifts vs. mid-level loops:</strong>
+- Coding drops in weight, not out entirely — system design and leadership rounds are where the
+  loop is reportedly won or lost.
+- System design becomes about judgment, not knowledge — you are expected to define scope
+  yourself rather than solve a handed-down question.
+- Behavioral rounds test organizational reach, not task execution: direction-setting at org
+  scale, influence without formal authority, converting ambiguity into strategy, and resolving
+  "right vs. right" trade-offs (both options defensible, no clean answer).
+- The expected scope of every answer is bigger: the decision weight shifts from "did you solve
+  the assigned problem" to "did you choose which problems deserved the team's capacity."</p>
+<p><strong>Ready-to-use prompts:</strong>
+- "Act as a Principal Engineer interviewer. Give me an ambiguous architecture problem with no clear scope, and make me define the boundaries myself before I design anything."
+- "I'm about to answer a system design question — interrupt me and ask how this decision affects budget, legacy systems, or compliance, not just technical correctness."
+- "Give me a 'right vs. right' scenario (two valid but conflicting priorities) and push me to resolve it, then critique whether my resolution actually required organizational influence or was just a technical call."
+- "Ask me to describe a past initiative where I had to influence a team I didn't manage. Push back on vague claims and demand a concrete mechanism I used."
+- "Simulate a strategy/business case round: give me a vague business goal and make me turn it into a sequenced technical roadmap, questioning my prioritization at each step."</p>
+<p><strong>Real question pattern:</strong> "Walk me through a technical decision you made that had significant
+organizational impact, including where you were wrong" / "How would you prioritize between
+three conflicting infrastructure investments with a fixed budget?" / open-ended architecture
+prompts with no stated constraints, where defining constraints is part of the evaluation. Cross
+into <a href="01-overview.md#questions-no-single-answer">01-overview.md's ten questions</a> for the
+design-page-linked version of this same drill.</p>
+<hr />
+<h2>Master prompt template</h2>
+<p>Parameterize this for any topic above (or any topic this lab covers) and any experience level:</p>
+<pre><code class="language-text">You are an interview coach for the topic: {TOPIC}.
+Context: this topic is reportedly tested at {COMPANY_TYPE} companies as of {YEAR}, mainly as
+{ROUND_TYPE} (e.g. system design deep-dive, standalone coding question, behavioral follow-up).
+Candidate experience level: {EXPERIENCE_LEVEL} (e.g. 0-2 yrs, mid-level, senior, principal/staff).
+
+1. Ask me ONE question in the real style companies currently use for this topic and level
+   (use the &quot;Real question pattern&quot; for {TOPIC} in this drill library as your model).
+2. Do NOT give the answer yet -- wait for my attempt.
+3. After I answer, tell me which items from the {TOPIC} concept checklist I covered well and
+   which I missed. At principal/staff level, also flag whether my answer showed organizational
+   judgment and scope-ownership, not just technical correctness.
+4. Ask one follow-up that a real interviewer would use to probe the gap.
+5. Keep explanations in plain language, with any technical term defined inline in brackets the
+   first time it's used.
+6. If I ask for background rather than a drill, point me to this lab's own page for {TOPIC}
+   instead of re-teaching it from scratch.
+</code></pre>
+<p>This composes with <a href="04-reusable-prep-prompt.html">the reusable coaching prompt</a>: use that one to
+plan and run a full mock loop, and pull individual topic drills from here when you want to
+go deep on one weak area between mocks.</p>
+<h2>Skill-area map</h2>
+<table>
+<thead>
+<tr>
+<th>Topics (# above)</th>
+<th>Skill area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3, 13</td>
+<td>Deployment &amp; scale</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Context &amp; RAG</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Agent loops &amp; frameworks</td>
+</tr>
+<tr>
+<td>6</td>
+<td>ReAct-style reasoning</td>
+</tr>
+<tr>
+<td>7</td>
+<td>MCP &amp; tool integration</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Multi-agent systems</td>
+</tr>
+<tr>
+<td>9</td>
+<td>AI gateway / inference economics</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Evaluation</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Observability</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Safety harnesses / guardrails</td>
+</tr>
+<tr>
+<td>1, 2, 14, 15</td>
+<td>Cross-cutting — DSA, classic system design, the AI-era process round, and the principal track all draw on multiple skill areas at once</td>
+</tr>
+</tbody>
+</table>
+<h2>What should I learn next?</h2>
+<p><a href="03-prep-plan-30-60-90.html">30/60/90-day prep plan</a> · <a href="02-ai-era-interview-landscape.html">The AI-era interview landscape</a> · <a href="04-reusable-prep-prompt.html">Reusable prep prompt</a> · <a href="01-overview.html">Architect / principal interviews</a></p>
+  </article>
+  <script src="../app/js/learn-path.js"></script>
+  <script src="../app/js/page-index.js"></script>
+  <script src="../app/js/sources-index.js"></script>
+  <script src="../app/js/shell.js"></script>
+  <script src="../app/js/depth.js"></script>
+  <script src="../app/js/why-chain.js"></script>
+  <script src="../app/js/refs.js"></script>
+  <script src="../app/js/mermaid-boot.js"></script>
+</body>
+</html>
