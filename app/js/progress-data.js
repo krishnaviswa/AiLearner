@@ -6,7 +6,7 @@ window.FACTORY_STATE = {
   "status": "complete",
   "last_completed_step": "gate10-chair-scorecard",
   "resume_from": "factory-complete",
-  "last_updated": "2026-09-27T07:17:57Z",
+  "last_updated": "2026-09-27T07:57:03Z",
   "html_progress_path": "progress.html",
   "pipeline": [
     {
@@ -83,6 +83,7 @@ window.FACTORY_STATE = {
     "Gate 10 final integration PASS",
     "Glossary, cheat-sheets, interviews, patterns, anti-patterns",
     "Graph v1.10.0 — 0 orphans; factory-complete",
-    "Post-gate-10: AI-era interview landscape + 30/60/90 prep plan + reusable prompt added to 44-ARCHITECTURE-INTERVIEWS (vendor-sourced, marked volatile)"
+    "Post-gate-10: AI-era interview landscape + 30/60/90 prep plan + reusable prompt added to 44-ARCHITECTURE-INTERVIEWS (vendor-sourced, marked volatile)",
+    "Post-gate-10: 15-topic practice drill library + master prompt template added to 44-ARCHITECTURE-INTERVIEWS"
   ]
 };
