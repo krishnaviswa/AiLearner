@@ -24,6 +24,22 @@ Do not reteach programming. Use pipeline, state-machine, API, and governance ana
 16. **Project ladder L1–L10** and selected enterprise use cases
 17. **Principal challenges** — interviews, anti-patterns, “would I choose either?”
 
+## Deep-dive companions
+
+Standalone HTML in [`../companions/`](../companions/ai-engineer-guide.html), outside the Previous / Next path:
+
+| When you reach | Read alongside |
+|---|---|
+| Step 3 (Foundations) | [AI engineer guide](../companions/ai-engineer-guide.html) modules 01–03 and [CME295](../companions/cme295.html) lectures 1–3: tokens, attention, decoding |
+| Steps 6–8 (RAG, tools, agents) | Guide modules 04–06 |
+| After step 10 (multi-agent) | [CS329A](../companions/cs329a.html) and guide module 14: verifiers, test-time compute, long-horizon agents |
+| Step 12 (Evaluation) | Guide module 07 and CME295 lecture 8 |
+| Step 14 (Observability, cost, performance) | Guide module 08 (KV cache, serving, quantization) and module 10 |
+| Step 15 (Reference architectures) | Guide module 15 (architect's playbook) |
+| Step 17 (Principal challenges) | Guide module 16 (interview playbook) |
+
+Model internals (pretraining, fine-tuning, RLHF/DPO, reasoning) live only in the companions: guide modules 09, 11–13 and CME295 lectures 4–6.
+
 ## Depth at each step
 
 Simple → logical → mechanical → implement → engineer → architect → production → principal. Do not dump all eight in one page.
