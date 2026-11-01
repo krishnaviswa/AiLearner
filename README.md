@@ -7,6 +7,7 @@ Learning laboratory for architect-level AI engineering — not a tutorial dump.
 | Start | Link |
 |---|---|
 | Lab home | [index.html](index.html) |
+| Deep-dive companions | [companions/ai-engineer-guide.html](companions/ai-engineer-guide.html) · [CME295](companions/cme295.html) · [CS329A](companions/cs329a.html) |
 | Agent instructions | [AGENTS.md](AGENTS.md) |
 | Gate status | [99-META/GATE-STATUS.md](99-META/GATE-STATUS.md) |
 | Operating prompt | [AI_Engineering_Knowledge_Repository_Master_Prompt.md](AI_Engineering_Knowledge_Repository_Master_Prompt.md) |
